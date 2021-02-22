@@ -231,9 +231,11 @@ def register():
     bpy.utils.register_class(BOORU_mesh_delete)
     bpy.utils.register_class(BOORU_clear_all)
 
-    bpy.utils.register_class(settings.UI_OT_i18n_settings_load)
-    bpy.utils.register_class(settings.UI_OT_i18n_settings_save)
-    bpy.utils.register_class(settings.UI_AP_i18n_settings)
+    # bpy.utils.register_class(settings.BooruAddonPreferences)
+
+    bpy.utils.register_class(settings.OBJECT_OT_addon_prefs_example)
+    bpy.utils.register_class(settings.ExampleAddonPreferences)
+
     print("reg")
 
 
@@ -243,8 +245,9 @@ def unregister():
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
 
-    bpy.utils.unregister_class(settings.UI_OT_i18n_settings_load)
-    bpy.utils.unregister_class(settings.UI_OT_i18n_settings_save)
-    bpy.utils.unregister_class(settings.UI_AP_i18n_settings)
+    # bpy.utils.unregister_class(settings.BooruAddonPreferences)
+
+    bpy.utils.unregister_class(settings.OBJECT_OT_addon_prefs_example)
+    bpy.utils.unregister_class(settings.ExampleAddonPreferences)
     print("un")
 

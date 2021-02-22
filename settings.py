@@ -1,206 +1,108 @@
 # <pep8 compliant>
 
 import os
+import bpy
 
-if "bpy" in locals():
-    import importlib
-    importlib.reload(settings_i18n)
-else:
-    import bpy
-    from bpy.types import (
-        Operator,
-        AddonPreferences,
-    )
-    from bpy.props import (
-        BoolProperty,
-        StringProperty,
-    )
-    from bl_i18n_utils import settings as settings_i18n
-
-
-settings = settings_i18n.I18nSettings()
-
-
-# Operators ###################################################################
-
-class UI_OT_i18n_settings_load(Operator):
-    """Load translations' settings from a persistent JSon file"""
-    bl_idname = "ui.i18n_settings_load"
-    bl_label = "I18n Load Settings"
-    bl_option = {'REGISTER'}
-
-    # Operator Arguments
-    filepath: StringProperty(
-        subtype='FILE_PATH',
-        description="Path to the saved settings file",
-    )
-
-    filter_glob: StringProperty(
-        default="*.json",
-        options={'HIDDEN'}
-    )
-    # /End Operator Arguments
-
-    def invoke(self, context, event):
-        if not self.properties.is_property_set("filepath"):
-            context.window_manager.fileselect_add(self)
-            return {'RUNNING_MODAL'}
-        else:
-            return self.execute(context)
-
-    def execute(self, context):
-        if not (self.filepath and settings):
-            return {'CANCELLED'}
-        settings.load(self.filepath, reset=True)
-        return {'FINISHED'}
-
-
-class UI_OT_i18n_settings_save(Operator):
-    """Save translations' settings in a persistent JSon file"""
-    bl_idname = "ui.i18n_settings_save"
-    bl_label = "I18n Save Settings"
-    bl_option = {'REGISTER'}
-
-    # Operator Arguments
-    filepath: StringProperty(
-        description="Path to the saved settings file",
-        subtype='FILE_PATH',
-    )
-
-    filter_glob: StringProperty(
-        default="*.json",
-        options={'HIDDEN'},
-    )
-    # /End Operator Arguments
-
-    def invoke(self, context, event):
-        if not self.properties.is_property_set("filepath"):
-            context.window_manager.fileselect_add(self)
-            return {'RUNNING_MODAL'}
-        else:
-            return self.execute(context)
-
-    def execute(self, context):
-        if not (self.filepath and settings):
-            return {'CANCELLED'}
-        settings.save(self.filepath)
-        return {'FINISHED'}
-
-
-# Addon Preferences ###########################################################
 
 def _setattr(self, name, val):
     print(self, name, val)
     setattr(self, name, val)
 
 
-class UI_AP_i18n_settings(AddonPreferences):
-    bl_idname = __name__.split(".")[0]  # We want "top" module name!
+def default_global_dict():
+    from os.path import expanduser
+    home = expanduser("~")
+    return home + os.sep + 'blenderkit_data'
+
+
+def save_prefs(self, context):
+    # first check context, so we don't do this on registration or blender startup
+    if not bpy.app.background:  # (hasattr kills blender)
+        user_preferences = bpy.context.preferences.addons['booru'].preferences
+        # we test the api key for length, so not a random accidentally typed sequence gets saved.
+        lk = len(user_preferences.api_key)
+        if 0 < lk < 25:
+            # reset the api key in case the user writes some nonsense, e.g. a search string instead of the Key
+            user_preferences.api_key = ''
+            props = get_search_props()
+            props.report = 'Login failed. Please paste a correct API Key.'
+
+        prefs = {
+            'API_key': user_preferences.api_key,
+            'API_key_refresh': user_preferences.api_key_refresh,
+            'global_dir': user_preferences.global_dir,
+        }
+        try:
+            fpath = paths.BLENDERKIT_SETTINGS_FILENAME
+            if not os.path.exists(paths._presets):
+                os.makedirs(paths._presets)
+            f = open(fpath, 'w')
+            with open(fpath, 'w') as s:
+                json.dump(prefs, s)
+        except Exception as e:
+            print(e)
+
+
+class BooruAddonPreferences(bpy.types.AddonPreferences):
+    bl_idname = "booru"
     bl_option = {'REGISTER'}
 
-    _settings = settings
-
-    WARN_MSGID_NOT_CAPITALIZED: BoolProperty(
-        name="Warn Msgid Not Capitalized",
-        description="Warn about messages not starting by a capitalized letter (with a few allowed exceptions!)",
-        default=True,
-        get=lambda self: self._settings.WARN_MSGID_NOT_CAPITALIZED,
-        set=lambda self, val: _setattr(
-            self._settings, "WARN_MSGID_NOT_CAPITALIZED", val),
+    image_root: bpy.props.StringProperty(
+        name="Root Image Folder",
+        description="Location of your image collection.",
+        subtype='DIR_PATH',
+        default=default_global_dict,
+        update=save_prefs
     )
-
-    GETTEXT_MSGFMT_EXECUTABLE: StringProperty(
-        name="Gettext 'msgfmt' executable",
-        description="The gettext msgfmt 'compiler'. You’ll likely have to edit it if you’re under Windows",
-        subtype='FILE_PATH',
-        default="msgfmt",
-        get=lambda self: self._settings.GETTEXT_MSGFMT_EXECUTABLE,
-        set=lambda self, val: setattr(
-            self._settings, "GETTEXT_MSGFMT_EXECUTABLE", val),
-    )
-
-    FRIBIDI_LIB: StringProperty(
-        name="Fribidi Library",
-        description="The FriBidi C compiled library (.so under Linux, .dll under windows...), you’ll likely have "
-                    "to edit it if you’re under Windows, e.g. using the one included in svn's libraries repository",
-        subtype='FILE_PATH',
-        default="libfribidi.so.0",
-        get=lambda self: self._settings.FRIBIDI_LIB,
-        set=lambda self, val: setattr(self._settings, "FRIBIDI_LIB", val),
-    )
-
-    SOURCE_DIR: StringProperty(
-        name="Source Root",
-        description="The Blender source root path",
-        subtype='FILE_PATH',
-        default="blender",
-        get=lambda self: self._settings.SOURCE_DIR,
-        set=lambda self, val: setattr(self._settings, "SOURCE_DIR", val),
-    )
-
-    I18N_DIR: StringProperty(
-        name="Translation Root",
-        description="The bf-translation repository",
-        subtype='FILE_PATH',
-        default="i18n",
-        get=lambda self: self._settings.I18N_DIR,
-        set=lambda self, val: setattr(self._settings, "I18N_DIR", val),
-    )
-
-    SPELL_CACHE: StringProperty(
-        name="Spell Cache",
-        description="A cache storing validated msgids, to avoid re-spellchecking them",
-        subtype='FILE_PATH',
-        default=os.path.join("/tmp", ".spell_cache"),
-        get=lambda self: self._settings.SPELL_CACHE,
-        set=lambda self, val: setattr(self._settings, "SPELL_CACHE", val),
-    )
-
-    PY_SYS_PATHS: StringProperty(
-        name="Import Paths",
-        description="Additional paths to add to sys.path (';' separated)",
-        default="",
-        get=lambda self: self._settings.PY_SYS_PATHS,
-        set=lambda self, val: setattr(self._settings, "PY_SYS_PATHS", val),
-    )
-
-    persistent_data_path: StringProperty(
-        name="Persistent Data Path",
-        description="The name of a json file storing those settings (unfortunately, Blender's system "
-                    "does not work here)",
-        subtype='FILE_PATH',
-        default=os.path.join("ui_translate_settings.json"),
-    )
-    _is_init = False
 
     def draw(self, context):
         layout = self.layout
         layout.label(text="WARNING: preferences are lost when add-on is disabled, be sure to use \"Save Persistent\" "
                           "if you want to keep your settings!")
-        layout.prop(self, "WARN_MSGID_NOT_CAPITALIZED")
-        layout.prop(self, "GETTEXT_MSGFMT_EXECUTABLE")
-        layout.prop(self, "FRIBIDI_LIB")
-        layout.prop(self, "SOURCE_DIR")
-        layout.prop(self, "I18N_DIR")
-        layout.prop(self, "SPELL_CACHE")
-        layout.prop(self, "PY_SYS_PATHS")
-
-        layout.separator()
-        split = layout.split(factor=0.75)
-        col = split.column()
-        col.prop(self, "persistent_data_path")
-        row = col.row()
-        row.operator("ui.i18n_settings_save",
-                     text="Save").filepath = self.persistent_data_path
-        row.operator("ui.i18n_settings_load",
-                     text="Load").filepath = self.persistent_data_path
-        col = split.column()
-        col.operator("ui.i18n_settings_save", text="Save Persistent To...")
-        col.operator("ui.i18n_settings_load", text="Load Persistent From...")
+        layout.prop(self, "image_root")
 
 
-classes = (
-    UI_OT_i18n_settings_load,
-    UI_OT_i18n_settings_save,
-    UI_AP_i18n_settings,
-)
+class ExampleAddonPreferences(bpy.types.AddonPreferences):
+    # this must match the add-on name, use '__package__'
+    # when defining this in a submodule of a python package.
+    bl_idname = __name__
+
+    filepath: bpy.props.StringProperty(
+        name="Example File Path",
+        subtype='FILE_PATH',
+    )
+    number: bpy.props.IntProperty(
+        name="Example Number",
+        default=4,
+    )
+    boolean: bpy.props.BoolProperty(
+        name="Example Boolean",
+        default=False,
+    )
+
+    def draw(self, context):
+        layout = self.layout
+        layout.label(text="This is a preferences view for our add-on")
+        layout.prop(self, "filepath")
+        layout.prop(self, "number")
+        layout.prop(self, "boolean")
+
+
+class OBJECT_OT_addon_prefs_example(bpy.types.Operator):
+    """Display example preferences"""
+    bl_idname = "object.addon_prefs_example"
+    bl_label = "Add-on Preferences Example"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    def execute(self, context):
+        preferences = context.preferences
+        addon_prefs = preferences.addons[__name__].preferences
+
+        info = ("Path: %s, Number: %d, Boolean %r" %
+                (addon_prefs.filepath, addon_prefs.number, addon_prefs.boolean))
+
+        self.report({'INFO'}, info)
+        print(info)
+        print(__name__)
+
+        return {'FINISHED'}
