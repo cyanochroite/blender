@@ -222,13 +222,19 @@ class BOORU_PT_main(bpy.types.Panel):
         # row.prop(collection, "instance_offset", text="")
 
 
+from . import settings
+
+
 def register():
     bpy.utils.register_class(BOORU_PT_main)
     bpy.utils.register_class(BOORU_mesh_make)
     bpy.utils.register_class(BOORU_mesh_delete)
     bpy.utils.register_class(BOORU_clear_all)
-    import os
-    print(os.getcwd())
+
+    bpy.utils.register_class(settings.UI_OT_i18n_settings_load)
+    bpy.utils.register_class(settings.UI_OT_i18n_settings_save)
+    bpy.utils.register_class(settings.UI_AP_i18n_settings)
+    print("reg")
 
 
 def unregister():
@@ -237,4 +243,8 @@ def unregister():
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
 
+    bpy.utils.unregister_class(settings.UI_OT_i18n_settings_load)
+    bpy.utils.unregister_class(settings.UI_OT_i18n_settings_save)
+    bpy.utils.unregister_class(settings.UI_AP_i18n_settings)
+    print("un")
 
