@@ -220,57 +220,54 @@ class BOORU_PT_main(bpy.types.Panel):
         # row.menu("COLLECTION_MT_context_menu", icon='DOWNARROW_HLT', text="")
         # row = col.box().row()
         # row.prop(collection, "instance_offset", text="")
+        return
+        user_preferences = context.user_preferences
+        addon_prefs = user_preferences.addons[__name__].preferences
+
+        layout.prop(addon_prefs, "boolean")
+
+        if addon_prefs.boolean:
+            layout.label(text="checkbox is on")
+        else:
+            layout.label(text="checkbox is off")
+
+            import bpy
 
 
-from . import settings
-
-
-import bpy
-
-
-class aExampleAddonPreferences(bpy.types.AddonPreferences):
-    # this must match the add-on name, use '__package__'
-    # when defining this in a submodule of a python package.
+class BooruAddonPreferences(bpy.types.AddonPreferences):
     bl_idname = __name__
+
+    fluffypath: bpy.props.StringProperty(
+        name="Root Image Folder",
+        description="Location of your image collection.",
+        subtype='DIR_PATH'
+    )
 
     filepath: bpy.props.StringProperty(
         name="Example File Path",
+        description="Location of your image collection.",
         subtype='FILE_PATH',
     )
+
     number: bpy.props.IntProperty(
         name="Example Number",
-        default=4,
+        description="Location of your image collection.",
+        default=4
     )
+
     boolean: bpy.props.BoolProperty(
         name="Example Boolean",
-        default=False,
+        description="Location of your image collection.",
+        default=False
     )
 
     def draw(self, context):
         layout = self.layout
         layout.label(text="This is a preferences view for our add-on")
+        layout.prop(self, "fluffypath")
         layout.prop(self, "filepath")
         layout.prop(self, "number")
         layout.prop(self, "boolean")
-
-
-class aOBJECT_OT_addon_prefs_example(bpy.types.Operator):
-    """Display example preferences"""
-    bl_idname = "object.addon_prefs_example"
-    bl_label = "Add-on Preferences Example"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        preferences = context.preferences
-        addon_prefs = preferences.addons[__name__].preferences
-
-        info = ("Path: %s, Number: %d, Boolean %r" %
-                (addon_prefs.filepath, addon_prefs.number, addon_prefs.boolean))
-
-        self.report({'INFO'}, info)
-        print(info)
-
-        return {'FINISHED'}
 
 
 def register():
@@ -278,12 +275,7 @@ def register():
     bpy.utils.register_class(BOORU_mesh_make)
     bpy.utils.register_class(BOORU_mesh_delete)
     bpy.utils.register_class(BOORU_clear_all)
-
-    bpy.utils.register_class(aOBJECT_OT_addon_prefs_example)
-    bpy.utils.register_class(aExampleAddonPreferences)
-    print("reg")
-    print(__name__)
-    print("WO")
+    bpy.utils.register_class(BooruAddonPreferences)
 
 
 def unregister():
@@ -291,8 +283,5 @@ def unregister():
     bpy.utils.unregister_class(BOORU_mesh_make)
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
-
-    bpy.utils.unregister_class(aOBJECT_OT_addon_prefs_example)
-    bpy.utils.unregister_class(aExampleAddonPreferences)
-    print("un")
+    bpy.utils.unregister_class(BooruAddonPreferences)
 
