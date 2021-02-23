@@ -220,18 +220,15 @@ class BOORU_PT_main(bpy.types.Panel):
         # row.menu("COLLECTION_MT_context_menu", icon='DOWNARROW_HLT', text="")
         # row = col.box().row()
         # row.prop(collection, "instance_offset", text="")
-        return
-        user_preferences = context.user_preferences
-        addon_prefs = user_preferences.addons[__name__].preferences
-
-        layout.prop(addon_prefs, "boolean")
-
+        print("test")
+        addon_prefs = bpy.context.preferences.addons[__name__].preferences
+        print(addon_prefs)
+        self.layout.prop(addon_prefs, "boolean")
         if addon_prefs.boolean:
-            layout.label(text="checkbox is on")
+            self.layout.label(text="checkbox is on")
         else:
-            layout.label(text="checkbox is off")
-
-            import bpy
+            self.layout.label(text="checkbox is off")
+        print("done")
 
 
 class BooruAddonPreferences(bpy.types.AddonPreferences):
