@@ -47,13 +47,13 @@ class BooruAddonPreferences(bpy.types.AddonPreferences):
     bl_idname = "booru"
     bl_option = {'REGISTER'}
 
-    image_root: bpy.props.StringProperty(
-        name="Root Image Folder",
-        description="Location of your image collection.",
-        subtype='DIR_PATH',
-        default=default_global_dict,
-        update=save_prefs
-    )
+    # image_root: bpy.props.StringProperty(
+    #    name="Root Image Folder",
+    #    description="Location of your image collection.",
+    #    subtype='DIR_PATH',
+    #    default=default_global_dict,
+    #    update=save_prefs
+    # )
 
     def draw(self, context):
         layout = self.layout

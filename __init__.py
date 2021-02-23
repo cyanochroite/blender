@@ -225,18 +225,65 @@ class BOORU_PT_main(bpy.types.Panel):
 from . import settings
 
 
+import bpy
+
+
+class aExampleAddonPreferences(bpy.types.AddonPreferences):
+    # this must match the add-on name, use '__package__'
+    # when defining this in a submodule of a python package.
+    bl_idname = __name__
+
+    filepath: bpy.props.StringProperty(
+        name="Example File Path",
+        subtype='FILE_PATH',
+    )
+    number: bpy.props.IntProperty(
+        name="Example Number",
+        default=4,
+    )
+    boolean: bpy.props.BoolProperty(
+        name="Example Boolean",
+        default=False,
+    )
+
+    def draw(self, context):
+        layout = self.layout
+        layout.label(text="This is a preferences view for our add-on")
+        layout.prop(self, "filepath")
+        layout.prop(self, "number")
+        layout.prop(self, "boolean")
+
+
+class aOBJECT_OT_addon_prefs_example(bpy.types.Operator):
+    """Display example preferences"""
+    bl_idname = "object.addon_prefs_example"
+    bl_label = "Add-on Preferences Example"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    def execute(self, context):
+        preferences = context.preferences
+        addon_prefs = preferences.addons[__name__].preferences
+
+        info = ("Path: %s, Number: %d, Boolean %r" %
+                (addon_prefs.filepath, addon_prefs.number, addon_prefs.boolean))
+
+        self.report({'INFO'}, info)
+        print(info)
+
+        return {'FINISHED'}
+
+
 def register():
     bpy.utils.register_class(BOORU_PT_main)
     bpy.utils.register_class(BOORU_mesh_make)
     bpy.utils.register_class(BOORU_mesh_delete)
     bpy.utils.register_class(BOORU_clear_all)
 
-    # bpy.utils.register_class(settings.BooruAddonPreferences)
-
-    bpy.utils.register_class(settings.OBJECT_OT_addon_prefs_example)
-    bpy.utils.register_class(settings.ExampleAddonPreferences)
-
+    bpy.utils.register_class(aOBJECT_OT_addon_prefs_example)
+    bpy.utils.register_class(aExampleAddonPreferences)
     print("reg")
+    print(__name__)
+    print("WO")
 
 
 def unregister():
@@ -245,9 +292,7 @@ def unregister():
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
 
-    # bpy.utils.unregister_class(settings.BooruAddonPreferences)
-
-    bpy.utils.unregister_class(settings.OBJECT_OT_addon_prefs_example)
-    bpy.utils.unregister_class(settings.ExampleAddonPreferences)
+    bpy.utils.unregister_class(aOBJECT_OT_addon_prefs_example)
+    bpy.utils.unregister_class(aExampleAddonPreferences)
     print("un")
 
