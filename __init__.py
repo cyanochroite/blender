@@ -162,6 +162,9 @@ class BOORU_clear_all(bpy.types.Operator):
             remove.image(image)
         for texture in bpy.data.textures:
             remove.texture(texture)
+        for object in bpy.data.objects:
+            # needed because delete image objects don't delete the objects
+            remove.object(object)
         camera = new.camera("cool cat")
         camera.location = (0, 0, 10)
         light = new.sun_light("lili")
@@ -209,26 +212,12 @@ class BOORU_PT_main(bpy.types.Panel):
         self.layout.operator("blenderbooru.mesh_delete")
         self.layout.operator("blenderbooru.clear_all")
 
-        ob = context.object
-
-        col = self.layout.column(align=True)
-        # col.context_pointer_set("collection", collection)
-        row = col.box().row()
-        row.prop(ob, "scale")
-        # row.prop(collection, "name", text="")
-        # row.operator("object.collection_remove", text="", icon='X', emboss=False)
-        # row.menu("COLLECTION_MT_context_menu", icon='DOWNARROW_HLT', text="")
-        # row = col.box().row()
-        # row.prop(collection, "instance_offset", text="")
-        print("test")
         addon_prefs = bpy.context.preferences.addons[__name__].preferences
-        print(addon_prefs)
         self.layout.prop(addon_prefs, "boolean")
         if addon_prefs.boolean:
             self.layout.label(text="checkbox is on")
         else:
             self.layout.label(text="checkbox is off")
-        print("done")
 
 
 class BooruAddonPreferences(bpy.types.AddonPreferences):
@@ -281,4 +270,3 @@ def unregister():
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
     bpy.utils.unregister_class(BooruAddonPreferences)
-
