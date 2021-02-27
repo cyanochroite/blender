@@ -4,7 +4,7 @@ bl_info = {
     "name": "Blender Booru Builder",
     "description": "Add, tag, and browse images on your computer.",
     "author": "Mem Dixy",
-    "version": (0, 0, 0),
+    "version": (0, 0, 1),
     "blender": (2, 91, 0),
     "location": "View 3D > Sidebar > Viewer",
     "warning": "Does not work. Work in progress. Not ready for publication.",
@@ -165,9 +165,6 @@ class BOORU_clear_all(bpy.types.Operator):
             remove.image(image)
         for texture in bpy.data.textures:
             remove.texture(texture)
-        for object in bpy.data.objects:
-            # needed because delete image objects don't delete the objects
-            remove.object(object)
         camera = new.camera("cool cat")
         camera.location = (0, 0, 10)
         light = new.sun_light("lili")
