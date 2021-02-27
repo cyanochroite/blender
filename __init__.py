@@ -89,8 +89,11 @@ class BOORU_mesh_make(bpy.types.Operator):
         return node
 
     def execute(self, context):
+        preferences = bpy.context.preferences.addons[__name__].preferences
+        path = preferences.fluffypath
+        file = path + "test.jpg"
         object = self._new_object(context)
-        image = new.image_load("test.jpg")
+        image = new.image_load(file)
         material = new.material("pretty")
         material.use_nodes = True
 
@@ -162,6 +165,9 @@ class BOORU_clear_all(bpy.types.Operator):
             remove.image(image)
         for texture in bpy.data.textures:
             remove.texture(texture)
+        for object in bpy.data.objects:
+            # needed because delete image objects don't delete the objects
+            remove.object(object)
         camera = new.camera("cool cat")
         camera.location = (0, 0, 10)
         light = new.sun_light("lili")
@@ -209,17 +215,48 @@ class BOORU_PT_main(bpy.types.Panel):
         self.layout.operator("blenderbooru.mesh_delete")
         self.layout.operator("blenderbooru.clear_all")
 
-        ob = context.object
+        addon_prefs = bpy.context.preferences.addons[__name__].preferences
+        self.layout.prop(addon_prefs, "boolean")
+        if addon_prefs.boolean:
+            self.layout.label(text="checkbox is on")
+        else:
+            self.layout.label(text="checkbox is off")
 
-        col = self.layout.column(align=True)
-        # col.context_pointer_set("collection", collection)
-        row = col.box().row()
-        row.prop(ob, "scale")
-        # row.prop(collection, "name", text="")
-        # row.operator("object.collection_remove", text="", icon='X', emboss=False)
-        # row.menu("COLLECTION_MT_context_menu", icon='DOWNARROW_HLT', text="")
-        # row = col.box().row()
-        # row.prop(collection, "instance_offset", text="")
+
+class BooruAddonPreferences(bpy.types.AddonPreferences):
+    bl_idname = __name__
+
+    fluffypath: bpy.props.StringProperty(
+        name="Root Image Folder",
+        description="Location of your image collection.",
+        subtype='DIR_PATH'
+    )
+
+    filepath: bpy.props.StringProperty(
+        name="Example File Path",
+        description="Location of your image collection.",
+        subtype='FILE_PATH',
+    )
+
+    number: bpy.props.IntProperty(
+        name="Example Number",
+        description="Location of your image collection.",
+        default=4
+    )
+
+    boolean: bpy.props.BoolProperty(
+        name="Example Boolean",
+        description="Location of your image collection.",
+        default=False
+    )
+
+    def draw(self, context):
+        layout = self.layout
+        layout.label(text="This is a preferences view for our add-on")
+        layout.prop(self, "fluffypath")
+        layout.prop(self, "filepath")
+        layout.prop(self, "number")
+        layout.prop(self, "boolean")
 
 
 def register():
@@ -227,8 +264,7 @@ def register():
     bpy.utils.register_class(BOORU_mesh_make)
     bpy.utils.register_class(BOORU_mesh_delete)
     bpy.utils.register_class(BOORU_clear_all)
-    import os
-    print(os.getcwd())
+    bpy.utils.register_class(BooruAddonPreferences)
 
 
 def unregister():
@@ -236,5 +272,4 @@ def unregister():
     bpy.utils.unregister_class(BOORU_mesh_make)
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
-
-
+    bpy.utils.unregister_class(BooruAddonPreferences)
