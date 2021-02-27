@@ -4,7 +4,7 @@ bl_info = {
     "name": "Blender Booru Builder",
     "description": "Add, tag, and browse images on your computer.",
     "author": "Mem Dixy",
-    "version": (0, 0, 0),
+    "version": (0, 0, 1),
     "blender": (2, 91, 0),
     "location": "View 3D > Sidebar > Viewer",
     "warning": "Does not work. Work in progress. Not ready for publication.",
@@ -21,6 +21,7 @@ import bpy
 import bmesh
 from . import new
 from . import remove
+from . import preferences
 
 
 class BOORU_mesh_make(bpy.types.Operator):
@@ -89,8 +90,8 @@ class BOORU_mesh_make(bpy.types.Operator):
         return node
 
     def execute(self, context):
-        preferences = bpy.context.preferences.addons[__name__].preferences
-        path = preferences.fluffypath
+        content = preferences.content()
+        path = content.fluffypath
         file = path + "test.jpg"
         object = self._new_object(context)
         image = new.image_load(file)
@@ -165,9 +166,6 @@ class BOORU_clear_all(bpy.types.Operator):
             remove.image(image)
         for texture in bpy.data.textures:
             remove.texture(texture)
-        for object in bpy.data.objects:
-            # needed because delete image objects don't delete the objects
-            remove.object(object)
         camera = new.camera("cool cat")
         camera.location = (0, 0, 10)
         light = new.sun_light("lili")
@@ -215,7 +213,7 @@ class BOORU_PT_main(bpy.types.Panel):
         self.layout.operator("blenderbooru.mesh_delete")
         self.layout.operator("blenderbooru.clear_all")
 
-        addon_prefs = bpy.context.preferences.addons[__name__].preferences
+        addon_prefs = bpy.context.preferences.addons[__package__].preferences
         self.layout.prop(addon_prefs, "boolean")
         if addon_prefs.boolean:
             self.layout.label(text="checkbox is on")
@@ -223,48 +221,12 @@ class BOORU_PT_main(bpy.types.Panel):
             self.layout.label(text="checkbox is off")
 
 
-class BooruAddonPreferences(bpy.types.AddonPreferences):
-    bl_idname = __name__
-
-    fluffypath: bpy.props.StringProperty(
-        name="Root Image Folder",
-        description="Location of your image collection.",
-        subtype='DIR_PATH'
-    )
-
-    filepath: bpy.props.StringProperty(
-        name="Example File Path",
-        description="Location of your image collection.",
-        subtype='FILE_PATH',
-    )
-
-    number: bpy.props.IntProperty(
-        name="Example Number",
-        description="Location of your image collection.",
-        default=4
-    )
-
-    boolean: bpy.props.BoolProperty(
-        name="Example Boolean",
-        description="Location of your image collection.",
-        default=False
-    )
-
-    def draw(self, context):
-        layout = self.layout
-        layout.label(text="This is a preferences view for our add-on")
-        layout.prop(self, "fluffypath")
-        layout.prop(self, "filepath")
-        layout.prop(self, "number")
-        layout.prop(self, "boolean")
-
-
 def register():
     bpy.utils.register_class(BOORU_PT_main)
     bpy.utils.register_class(BOORU_mesh_make)
     bpy.utils.register_class(BOORU_mesh_delete)
     bpy.utils.register_class(BOORU_clear_all)
-    bpy.utils.register_class(BooruAddonPreferences)
+    preferences.register()
 
 
 def unregister():
@@ -272,4 +234,4 @@ def unregister():
     bpy.utils.unregister_class(BOORU_mesh_make)
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
-    bpy.utils.unregister_class(BooruAddonPreferences)
+    preferences.unregister()
