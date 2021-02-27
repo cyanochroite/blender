@@ -89,8 +89,11 @@ class BOORU_mesh_make(bpy.types.Operator):
         return node
 
     def execute(self, context):
+        preferences = bpy.context.preferences.addons[__name__].preferences
+        path = preferences.fluffypath
+        file = path + "test.jpg"
         object = self._new_object(context)
-        image = new.image_load("test.jpg")
+        image = new.image_load(file)
         material = new.material("pretty")
         material.use_nodes = True
 
