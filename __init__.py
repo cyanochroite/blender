@@ -22,6 +22,7 @@ import bmesh
 from . import new
 from . import remove
 from . import preferences
+from . import UV
 
 
 class BOORU_mesh_make(bpy.types.Operator):
@@ -38,97 +39,39 @@ class BOORU_mesh_make(bpy.types.Operator):
         object = bpy.data.objects[-1]
         return object
 
-    def _uv_offset(self, numerator, denominator):
-        ratio = numerator / denominator
-        unit = 1
-        maximum = max(ratio, unit)
-        normalization = maximum - unit
-        half = 1 / 2
-        halving = normalization * half
-        return halving
-
-    def _uv_image_offset(self, image):
-        size = image.size
-        x = size[0]
-        y = size[1]
-        y_to_x = self._uv_offset(y, x)
-        x_to_y = self._uv_offset(x, y)
-        offset = (y_to_x, x_to_y)
-        return offset
-
-    def _shader_image(self, nodes, image):
-        # inputs
-        # "Vector"
-        # outputs
-        # "Color"
-        # "Alpha"
-        node = nodes.new('ShaderNodeTexImage')
-        node.image = image
-        node.interpolation = 'Cubic'
-        node.projection = 'FLAT'
-        node.extension = 'CLIP'
-        return node
-
-    def _shader_diffuse(self, nodes):
-        # inputs
-        # "Color"
-        # "Roughness"
-        # "Normal"
-        # outputs
-        # "BSDF"
-        node = nodes.new('ShaderNodeBsdfDiffuse')
-        return node
-
-    def _shader_output(self, nodes):
-        # inputs
-        # "Surface"
-        # "Volume"
-        # "Displacement"
-        # outputs
-        node = nodes.new('ShaderNodeOutputMaterial')
-        node.target = 'ALL'
-        return node
-
-    def execute(self, context):
-        content = preferences.content()
-        path = content.root
-        file = path + "test.jpg"
-        object = self._new_object(context)
-        image = new.image_load(file)
-        material = new.material("pretty")
-        material.use_nodes = True
-
-        tree = material.node_tree
-        nodes = tree.nodes
-        nodes.clear()
-
-        aa = self._shader_image(nodes, image)
-        aa.location = (000, 000)
-
-        bb = self._shader_diffuse(nodes)
-        bb.location = (300, 000)
-
-        cc = self._shader_output(nodes)
-        cc.location = (500, 000)
-
-        tree.links.new(aa.outputs["Color"], bb.inputs["Color"])
-        tree.links.new(bb.outputs["BSDF"], cc.inputs["Surface"])
-
-        # material
-        object.data.materials.append(material)
-
+    def _bmesh_magic(self, object, image):
         mesh = bmesh.new()
         mesh.from_mesh(object.data)
         mesh.faces.ensure_lookup_table()
-        loops = mesh.faces[0].loops
-        uv = mesh.loops.layers.uv.verify()
-        (x, y) = self._uv_image_offset(image)
-        loops[0][uv].uv = (0 - x, 0 - y)
-        loops[1][uv].uv = (1 + x, 0 - y)
-        loops[2][uv].uv = (1 + x, 1 + y)
-        loops[3][uv].uv = (0 - x, 1 + y)
+        UV.image_offset(image, mesh)
         mesh.to_mesh(object.data)
         mesh.free()
+
+    def execute(self, context):
+        ##
+        print("start")
+        from . import OS
+        content = preferences.content()
+        (path, file) = OS.walk_directory(content.root)
+        images = []
+        for (filenames) in file:
+            (dirpath, name) = filenames
+            ext = OS.file_extension(name)
+            if ext in Image_Formats:
+                merge = OS.join(dirpath, name)
+                images.append(merge)
+        for item in images:
+            print("convert " + item)
+        print("done")
+
+        ##
+
+        for file in images:
+            object = self._new_object(context)
+            image = new.image_load(file)
+            material = UV.material("pretty", image)
+            object.data.materials.append(material)
+            self._bmesh_magic(object, image)
 
         # finish
         return {'FINISHED'}
@@ -177,25 +120,6 @@ class BOORU_clear_all(bpy.types.Operator):
         new.spot_light("h")
         new.sun_light("i")
         new.area_light("a")
-
-        ##
-        print("start")
-        from . import OS
-        content = preferences.content()
-        (path, file) = OS.walk_directory(content.root)
-        images = []
-        for (filenames) in file:
-            (dirpath, name) = filenames
-            ext = OS.file_extension(name)
-            if ext in Image_Formats:
-                merge = OS.join(dirpath, name)
-                images.append(merge)
-        for item in images:
-            print("convert " + item)
-        print("done")
-
-        ##
-
         return {'FINISHED'}
 
 
