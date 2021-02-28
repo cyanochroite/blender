@@ -13,7 +13,7 @@ def offset(numerator, denominator):
     half = 1 / 2
     halving = normalization * half
     return halving
-    # return (max(numerator / denominator, 1) - 1) / 2
+    #  return (max(numerator / denominator, 1) - 1) / 2
 
 
 def image_offset(image, mesh):

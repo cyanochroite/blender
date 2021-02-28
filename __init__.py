@@ -4,7 +4,7 @@ bl_info = {
     "name": "Blender Booru Builder",
     "description": "Add, tag, and browse images on your computer.",
     "author": "Mem Dixy",
-    "version": (0, 0, 1),
+    "version": (0, 0, 2),
     "blender": (2, 91, 0),
     "location": "View 3D > Sidebar > Viewer",
     "warning": "Does not work. Work in progress. Not ready for publication.",
@@ -24,18 +24,22 @@ from . import remove
 from . import preferences
 from . import UV
 
+spot = 0
+
 
 class BOORU_mesh_make(bpy.types.Operator):
     bl_label = "Plane"
     bl_idname = "blenderbooru.mesh_make"
 
     def _new_object(self, context):
+        global spot
         bpy.ops.mesh.primitive_plane_add(
             enter_editmode=False,
             align='WORLD',
-            location=(0, 0, 0),
+            location=(spot, 0, 0),
             scale=(1, 1, 1)
         )
+        spot += 2.5
         object = bpy.data.objects[-1]
         return object
 
