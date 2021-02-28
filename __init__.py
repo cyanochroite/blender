@@ -91,7 +91,7 @@ class BOORU_mesh_make(bpy.types.Operator):
 
     def execute(self, context):
         content = preferences.content()
-        path = content.fluffypath
+        path = content.root
         file = path + "test.jpg"
         object = self._new_object(context)
         image = new.image_load(file)
@@ -177,6 +177,25 @@ class BOORU_clear_all(bpy.types.Operator):
         new.spot_light("h")
         new.sun_light("i")
         new.area_light("a")
+
+        ##
+        print("start")
+        from . import OS
+        content = preferences.content()
+        (path, file) = OS.walk_directory(content.root)
+        images = []
+        for (filenames) in file:
+            (dirpath, name) = filenames
+            ext = OS.file_extension(name)
+            if ext in Image_Formats:
+                merge = OS.join(dirpath, name)
+                images.append(merge)
+        for item in images:
+            print("convert " + item)
+        print("done")
+
+        ##
+
         return {'FINISHED'}
 
 
@@ -213,9 +232,9 @@ class BOORU_PT_main(bpy.types.Panel):
         self.layout.operator("blenderbooru.mesh_delete")
         self.layout.operator("blenderbooru.clear_all")
 
-        addon_prefs = bpy.context.preferences.addons[__package__].preferences
-        self.layout.prop(addon_prefs, "boolean")
-        if addon_prefs.boolean:
+        content = preferences.content()
+        self.layout.prop(content, "boolean")
+        if content.boolean:
             self.layout.label(text="checkbox is on")
         else:
             self.layout.label(text="checkbox is off")
@@ -235,3 +254,24 @@ def unregister():
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
     preferences.unregister()
+
+
+Image_Formats = [
+    ".bmp",
+    ".sgi",
+    ".rgb",
+    ".bw",
+    ".png",
+    ".jpg",
+    "jpeg",
+    ".jp2",
+    ".jp2",
+    ".j2c",
+    ".tga",
+    ".cin",
+    ".dpx",
+    ".exr",
+    ".hdr",
+    ".tif",
+    ".tiff"
+]

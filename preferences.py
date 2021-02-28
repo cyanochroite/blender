@@ -11,7 +11,7 @@ def content():
 class BooruAddonPreferences(bpy.types.AddonPreferences):
     bl_idname = __package__
 
-    fluffypath: bpy.props.StringProperty(
+    root: bpy.props.StringProperty(
         name="Root Image Folder",
         description="Location of your image collection.",
         subtype='DIR_PATH'
@@ -51,7 +51,8 @@ class BooruAddonPreferences(bpy.types.AddonPreferences):
     def draw(self, context):
         layout = self.layout
         layout.label(text="This is a preferences view for our add-on")
-        layout.prop(self, "fluffypath")
+        layout.prop(self, "root")
+        # unused
         layout.prop(self, "filepath")
         layout.prop(self, "change")
         layout.prop(self, "number")
