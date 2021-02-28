@@ -4,7 +4,7 @@ bl_info = {
     "name": "Blender Booru Builder",
     "description": "Add, tag, and browse images on your computer.",
     "author": "Mem Dixy",
-    "version": (0, 0, 1),
+    "version": (0, 0, 2),
     "blender": (2, 91, 0),
     "location": "View 3D > Sidebar > Viewer",
     "warning": "Does not work. Work in progress. Not ready for publication.",
@@ -21,6 +21,10 @@ import bpy
 import bmesh
 from . import new
 from . import remove
+from . import preferences
+from . import UV
+
+spot = 0
 
 
 class BOORU_mesh_make(bpy.types.Operator):
@@ -28,106 +32,50 @@ class BOORU_mesh_make(bpy.types.Operator):
     bl_idname = "blenderbooru.mesh_make"
 
     def _new_object(self, context):
+        global spot
         bpy.ops.mesh.primitive_plane_add(
             enter_editmode=False,
             align='WORLD',
-            location=(0, 0, 0),
+            location=(spot, 0, 0),
             scale=(1, 1, 1)
         )
+        spot += 2.5
         object = bpy.data.objects[-1]
         return object
 
-    def _uv_offset(self, numerator, denominator):
-        ratio = numerator / denominator
-        unit = 1
-        maximum = max(ratio, unit)
-        normalization = maximum - unit
-        half = 1 / 2
-        halving = normalization * half
-        return halving
-
-    def _uv_image_offset(self, image):
-        size = image.size
-        x = size[0]
-        y = size[1]
-        y_to_x = self._uv_offset(y, x)
-        x_to_y = self._uv_offset(x, y)
-        offset = (y_to_x, x_to_y)
-        return offset
-
-    def _shader_image(self, nodes, image):
-        # inputs
-        # "Vector"
-        # outputs
-        # "Color"
-        # "Alpha"
-        node = nodes.new('ShaderNodeTexImage')
-        node.image = image
-        node.interpolation = 'Cubic'
-        node.projection = 'FLAT'
-        node.extension = 'CLIP'
-        return node
-
-    def _shader_diffuse(self, nodes):
-        # inputs
-        # "Color"
-        # "Roughness"
-        # "Normal"
-        # outputs
-        # "BSDF"
-        node = nodes.new('ShaderNodeBsdfDiffuse')
-        return node
-
-    def _shader_output(self, nodes):
-        # inputs
-        # "Surface"
-        # "Volume"
-        # "Displacement"
-        # outputs
-        node = nodes.new('ShaderNodeOutputMaterial')
-        node.target = 'ALL'
-        return node
-
-    def execute(self, context):
-        preferences = bpy.context.preferences.addons[__name__].preferences
-        path = preferences.fluffypath
-        file = path + "test.jpg"
-        object = self._new_object(context)
-        image = new.image_load(file)
-        material = new.material("pretty")
-        material.use_nodes = True
-
-        tree = material.node_tree
-        nodes = tree.nodes
-        nodes.clear()
-
-        aa = self._shader_image(nodes, image)
-        aa.location = (000, 000)
-
-        bb = self._shader_diffuse(nodes)
-        bb.location = (300, 000)
-
-        cc = self._shader_output(nodes)
-        cc.location = (500, 000)
-
-        tree.links.new(aa.outputs["Color"], bb.inputs["Color"])
-        tree.links.new(bb.outputs["BSDF"], cc.inputs["Surface"])
-
-        # material
-        object.data.materials.append(material)
-
+    def _bmesh_magic(self, object, image):
         mesh = bmesh.new()
         mesh.from_mesh(object.data)
         mesh.faces.ensure_lookup_table()
-        loops = mesh.faces[0].loops
-        uv = mesh.loops.layers.uv.verify()
-        (x, y) = self._uv_image_offset(image)
-        loops[0][uv].uv = (0 - x, 0 - y)
-        loops[1][uv].uv = (1 + x, 0 - y)
-        loops[2][uv].uv = (1 + x, 1 + y)
-        loops[3][uv].uv = (0 - x, 1 + y)
+        UV.image_offset(image, mesh)
         mesh.to_mesh(object.data)
         mesh.free()
+
+    def execute(self, context):
+        ##
+        print("start")
+        from . import OS
+        content = preferences.content()
+        (path, file) = OS.walk_directory(content.root)
+        images = []
+        for (filenames) in file:
+            (dirpath, name) = filenames
+            ext = OS.file_extension(name)
+            if ext in Image_Formats:
+                merge = OS.join(dirpath, name)
+                images.append(merge)
+        for item in images:
+            print("convert " + item)
+        print("done")
+
+        ##
+
+        for file in images:
+            object = self._new_object(context)
+            image = new.image_load(file)
+            material = UV.material("pretty", image)
+            object.data.materials.append(material)
+            self._bmesh_magic(object, image)
 
         # finish
         return {'FINISHED'}
@@ -212,48 +160,12 @@ class BOORU_PT_main(bpy.types.Panel):
         self.layout.operator("blenderbooru.mesh_delete")
         self.layout.operator("blenderbooru.clear_all")
 
-        addon_prefs = bpy.context.preferences.addons[__name__].preferences
-        self.layout.prop(addon_prefs, "boolean")
-        if addon_prefs.boolean:
+        content = preferences.content()
+        self.layout.prop(content, "boolean")
+        if content.boolean:
             self.layout.label(text="checkbox is on")
         else:
             self.layout.label(text="checkbox is off")
-
-
-class BooruAddonPreferences(bpy.types.AddonPreferences):
-    bl_idname = __name__
-
-    fluffypath: bpy.props.StringProperty(
-        name="Root Image Folder",
-        description="Location of your image collection.",
-        subtype='DIR_PATH'
-    )
-
-    filepath: bpy.props.StringProperty(
-        name="Example File Path",
-        description="Location of your image collection.",
-        subtype='FILE_PATH',
-    )
-
-    number: bpy.props.IntProperty(
-        name="Example Number",
-        description="Location of your image collection.",
-        default=4
-    )
-
-    boolean: bpy.props.BoolProperty(
-        name="Example Boolean",
-        description="Location of your image collection.",
-        default=False
-    )
-
-    def draw(self, context):
-        layout = self.layout
-        layout.label(text="This is a preferences view for our add-on")
-        layout.prop(self, "fluffypath")
-        layout.prop(self, "filepath")
-        layout.prop(self, "number")
-        layout.prop(self, "boolean")
 
 
 def register():
@@ -261,7 +173,7 @@ def register():
     bpy.utils.register_class(BOORU_mesh_make)
     bpy.utils.register_class(BOORU_mesh_delete)
     bpy.utils.register_class(BOORU_clear_all)
-    bpy.utils.register_class(BooruAddonPreferences)
+    preferences.register()
 
 
 def unregister():
@@ -269,4 +181,25 @@ def unregister():
     bpy.utils.unregister_class(BOORU_mesh_make)
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
-    bpy.utils.unregister_class(BooruAddonPreferences)
+    preferences.unregister()
+
+
+Image_Formats = [
+    ".bmp",
+    ".sgi",
+    ".rgb",
+    ".bw",
+    ".png",
+    ".jpg",
+    "jpeg",
+    ".jp2",
+    ".jp2",
+    ".j2c",
+    ".tga",
+    ".cin",
+    ".dpx",
+    ".exr",
+    ".hdr",
+    ".tif",
+    ".tiff"
+]
