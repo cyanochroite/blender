@@ -40,40 +40,111 @@ print(len(bpy.data.workspaces), "workspaces")
 print(len(bpy.data.worlds), "worlds")
 
 
+name = 'cow'
+image = bpy.data.images[0]
+vertices = [
+    (+1, +1, 0),
+    (-1, +1, 0),
+    (-1, -1, 0),
+    (+1, -1, 0)
+]
+edges = [
+    (0, 1),
+    (1, 2),
+    (2, 3),
+    (3, 0)
+]
+faces = [
+    (0, 1, 2, 3)
+]
+uv = [
+    (1, 1),
+    (0, 1),
+    (0, 0),
+    (1, 0)
+]
+
+
+import bmesh
+
+
+def QQ(bmesh, indexes):
+    list = []
+    for index in indexes:
+        vert = bmesh.verts[index]
+        list.append(vert)
+    return tuple(list)
+
+
+def QQ(bmesh, indexes):
+    list = []
+    for index in indexes:
+        list.append(bmesh.verts[index])
+    return tuple(list)
+
+
+def AA(bmesh, verts):
+    for co in verts:
+        bmesh.verts.new(co)
+    bmesh.verts.ensure_lookup_table()
+
+
+def BB(bmesh, edges):
+    for edge in edges:
+        verts = QQ(bmesh, edge)
+        bmesh.edges.new(verts)
+    bmesh.edges.ensure_lookup_table()
+
+
+def BB(bmesh, edges):
+    for edge in edges:
+        bmesh.edges.new(QQ(bmesh, edge))
+    bmesh.edges.ensure_lookup_table()
+
+
+def CC(bmesh, faces):
+    bmesh_verts = bmesh.verts
+    bmesh_faces = bmesh.faces
+    for face in faces:
+        (a, b, c, d) = face
+        A = bmesh_verts[a]
+        B = bmesh_verts[b]
+        C = bmesh_verts[c]
+        D = bmesh_verts[d]
+
+        verts = (A, B, C, D)
+        bmesh.faces.new(verts)
+    bmesh.faces.ensure_lookup_table()
+
+
+def CC(bmesh, faces):
+    for face in faces:
+        bmesh.faces.new(QQ(bmesh, face))
+    bmesh.faces.ensure_lookup_table()
+
+
+def DD(bmesh, faces):
+    bmesh_faces = bmesh.faces
+    for face in faces:
+        (a, b, c, d) = face
+        A = bmesh_verts[a]
+        B = bmesh_verts[b]
+        C = bmesh_verts[c]
+        D = bmesh_verts[d]
+        face = (A, B, C, D)
+        bmesh_faces.new(face)
+    bmesh_faces.ensure_lookup_table()
+
+
 # mesh
 mesh = bpy.data.meshes.new(name)
 # bmesh
 bmesh = bmesh.new(use_operators=False)
 
 
-bmesh_verts = bmesh.verts
-for vertex in vertices:
-    bmesh_verts.new(vertex)
-
-bmesh_verts.ensure_lookup_table()
-
-bmesh_edges = bmesh.edges
-for edge in edges:
-    (a, b) = edge
-    A = bmesh_verts[a]
-    B = bmesh_verts[b]
-    edge = (A, B)
-    bmesh_edges.new(edge)
-
-bmesh_edges.ensure_lookup_table()
-
-
-bmesh_faces = bmesh.faces
-for face in faces:
-    (a, b, c, d) = face
-    A = bmesh_verts[a]
-    B = bmesh_verts[b]
-    C = bmesh_verts[c]
-    D = bmesh_verts[d]
-    face = (A, B, C, D)
-    bmesh_faces.new(face)
-
-bmesh_faces.ensure_lookup_table()
+AA(bmesh, vertices)
+BB(bmesh, edges)
+CC(bmesh, faces)
 
 
 loops = bmesh.faces[0].loops
