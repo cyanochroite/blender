@@ -38,3 +38,64 @@ print(len(bpy.data.volumes), "volumes")
 print(len(bpy.data.window_managers), "window_managers")
 print(len(bpy.data.workspaces), "workspaces")
 print(len(bpy.data.worlds), "worlds")
+
+
+# mesh
+mesh = bpy.data.meshes.new(name)
+# bmesh
+bmesh = bmesh.new(use_operators=False)
+
+
+bmesh_verts = bmesh.verts
+for vertex in vertices:
+    bmesh_verts.new(vertex)
+
+bmesh_verts.ensure_lookup_table()
+
+bmesh_edges = bmesh.edges
+for edge in edges:
+    (a, b) = edge
+    A = bmesh_verts[a]
+    B = bmesh_verts[b]
+    edge = (A, B)
+    bmesh_edges.new(edge)
+
+bmesh_edges.ensure_lookup_table()
+
+
+bmesh_faces = bmesh.faces
+for face in faces:
+    (a, b, c, d) = face
+    A = bmesh_verts[a]
+    B = bmesh_verts[b]
+    C = bmesh_verts[c]
+    D = bmesh_verts[d]
+    face = (A, B, C, D)
+    bmesh_faces.new(face)
+
+bmesh_faces.ensure_lookup_table()
+
+
+loops = bmesh.faces[0].loops
+uv = bmesh.loops.layers.uv.verify()
+
+
+loops[0][uv].uv = (0, 0)
+loops[1][uv].uv = (1, 0)
+loops[2][uv].uv = (1, 1)
+loops[3][uv].uv = (0, 1)
+
+loops[0][uv].uv = (+1, +1)
+loops[1][uv].uv = (+0, +1)
+loops[2][uv].uv = (+0, +0)
+loops[3][uv].uv = (+1, +0)
+
+
+bmesh.to_mesh(mesh)
+bmesh.free()
+
+
+# object
+object = bpy.data.objects.new(name, mesh)
+bpy.context.scene.collection.objects.link(object)
+

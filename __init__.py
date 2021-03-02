@@ -33,15 +33,68 @@ class BOORU_mesh_make(bpy.types.Operator):
 
     def _new_object(self, context):
         global spot
-        bpy.ops.mesh.primitive_plane_add(
-            enter_editmode=False,
-            align='WORLD',
-            location=(spot, 0, 0),
-            scale=(1, 1, 1)
-        )
+        vertices = [
+            (+1, +1, +0),
+            (-1, +1, +0),
+            (-1, -1, +0),
+            (+1, -1, +0),
+        ]
+        edges = [
+            (0, 1),
+            (1, 2),
+            (2, 3),
+            (3, 0),
+        ]
+        faces = [
+            (0, 1, 2, 3)
+        ]
+        ##
+
+        # mesh
+        mesh = bpy.data.meshes.new(name)
+        # bmesh
+        bmesh = bmesh.new(use_operators=False)
+
+        bmesh_verts = bmesh.verts
+        for vertex in vertices:
+            bmesh_verts.new(vertex)
+
+        bmesh_verts.ensure_lookup_table()
+
+        bmesh_edges = bmesh.edges
+        for edge in edges:
+            (a, b) = edge
+            A = bmesh_verts[a]
+            B = bmesh_verts[b]
+            edge = (A, B)
+            bmesh_edges.new(edge)
+
+        bmesh_edges.ensure_lookup_table()
+
+        bmesh_faces = bmesh.faces
+        for face in faces:
+            (a, b, c, d) = face
+            A = bmesh_verts[a]
+            B = bmesh_verts[b]
+            C = bmesh_verts[c]
+            D = bmesh_verts[d]
+            face = (A, B, C, D)
+            bmesh_faces.new(face)
+
+        bmesh_faces.ensure_lookup_table()
+
+        bmesh.to_mesh(mesh)
+        bmesh.free()
+
+        ##
+
+        # object
+        object = bpy.data.objects.new(name, mesh)
+        bpy.context.scene.collection.objects.link(object)
+        mesh = new.mesh('name', vertices, edges, faces)
+        mesh.location = (spot, 0, 0)
         spot += 2.5
-        object = bpy.data.objects[-1]
-        return object
+        return mesh
 
     def _bmesh_magic(self, object, image):
         mesh = bmesh.new()

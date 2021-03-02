@@ -66,12 +66,26 @@ def none_texture(name):
     return texture(name, 'NONE')
 
 
-def mesh(name):
+def empty_mesh(name):
     return object(bpy.data.meshes, name)
 
 
+def mesh(name, vertices, edges, faces):
+    mesh = object_data(bpy.data.meshes, name)
+    mesh.from_pydata(vertices, edges, faces)
+    return empty_object(name, mesh)
+
+
 def object(data, name, type=None):
+    # got to rethink the idea of not returning the sub item generated
+    # maybe make a seperate spawning class for scenes
     item = object_data(data, name, type)
+    object = empty_object(name, item)
+    link(object)
+    return object
+
+
+def empty_object(name, item):
     object = object_data(bpy.data.objects, name, item)
     link(object)
     return object
