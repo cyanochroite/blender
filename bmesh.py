@@ -184,3 +184,80 @@ bmesh.free()
 object = bpy.data.objects.new(name, mesh)
 bpy.context.scene.collection.objects.link(object)
 
+
+class bbmesh():
+    def __init__(self, name):
+        self.name = name
+        self.mesh = bpy.data.meshes.new(name)
+        self.bmesh = bmesh.new(use_operators=False)
+        self.verts = self.bmesh.verts
+        self.edges = self.bmesh.edges
+        self.faces = self.bmesh.faces
+
+    def verts_new(self, x, y, z):
+        co = (x, y, z)
+        self.verts.new(co)
+
+    def verts_set(self):
+        self.verts.ensure_lookup_table()
+
+    def edges_new(self, a, b,):
+        A = self.verts[a]
+        B = self.verts[b]
+        verts = (A, B)
+        self.edges.new(verts)
+
+    def edges_set(self):
+        self.edges.ensure_lookup_table()
+
+    def faces_new(self, a, b, c, d):
+        A = self.verts[a]
+        B = self.verts[b]
+        C = self.verts[c]
+        D = self.verts[d]
+        verts = (A, B, C, D)
+        self.faces.new(verts)
+
+    def faces_set(self):
+        self.faces.ensure_lookup_table()
+
+    def uv_new(self, vertex, x, y):
+        A = vertex[a]
+        B = vertex[b]
+        C = vertex[c]
+        D = vertex[d]
+        verts = (A, B, C, D)
+        self.faces.new(verts)
+
+    def uv_new(self, face, loop, x, y):
+        uv = self.bmesh.loops.layers.uv.verify()
+        self.faces[face].loops[loop][uv].uv = (x, y)
+
+    def uv_set(self):
+        self.bmesh.to_mesh(self.mesh)
+        self.bmesh.free()
+        object = bpy.data.objects.new(self.name, self.mesh)
+        bpy.context.scene.collection.objects.link(object)
+
+
+cow = bbmesh('cat')
+cow.verts_new(+1, +1, +0)
+cow.verts_new(-1, +1, +0)
+cow.verts_new(-1, -1, +0)
+cow.verts_new(+1, -1, +0)
+cow.verts_set()
+
+cow.edges_new(0, 1)
+cow.edges_new(1, 2)
+cow.edges_new(2, 3)
+cow.edges_new(3, 0)
+cow.edges_set()
+
+cow.faces_new(0, 1, 2, 3)
+cow.faces_set()
+
+cow.uv_new(0, 0, 1, 1)
+cow.uv_new(0, 1, 0, 1)
+cow.uv_new(0, 2, 0, 0)
+cow.uv_new(0, 3, 1, 0)
+cow.uv_set()
