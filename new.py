@@ -35,41 +35,53 @@ def object_data(data, name, type=None):
     return data.new(name)
 
 
-###
+# new data
 def camera(name):
-    return object(bpy.data.cameras, name)
+    return data.camera(name)
 
 
-def data(data, name, type=None):
-    if type:
-        return data.new(name, type)
-    return data.new(name)
+class data():
+    @staticmethod
+    def camera(name):
+        return bpy.data.cameras.new(name)
+
+    @staticmethod
+    def light(name, type):
+        return bpy.data.lights.new(name, type)
+
+    @staticmethod
+    def material(name):
+        return bpy.data.materials.new(name)
+
+    @staticmethod
+    def mesh(name):
+        return bpy.data.meshes.new(name)
+
+    @staticmethod
+    def texture(name, type):
+        return bpy.data.textures.new(name, type)
 
 
-class light():  # invalid data
+class light():
     @staticmethod
     def area(name):
-        return light.data(name, 'AREA')
-
-    @staticmethod
-    def data(name, type):
-        return object(bpy.data.lights, name, type)
+        return data.light(name, 'AREA')
 
     @staticmethod
     def point(name):
-        return light.data(name, 'POINT')
+        return data.light(name, 'POINT')
 
     @staticmethod
     def spot(name):
-        return light.data(name, 'SPOT')
+        return data.light(name, 'SPOT')
 
     @staticmethod
     def sun(name):
-        return light.data(name, 'SUN')
+        return data.light(name, 'SUN')
 
 
 def material(name):
-    return data(bpy.data.materials, name)
+    return data.material(name)
 
 
 class mesh():  # invalid data
@@ -86,51 +98,82 @@ class mesh():  # invalid data
 class texture():
     @staticmethod
     def blend(name):
-        return texture.data(name, 'BLEND')
+        return data.texture(name, 'BLEND')
 
     @staticmethod
     def clouds(name):
-        return texture.data(name, 'CLOUDS')
-
-    @staticmethod
-    def data(name, type):
-        return data(bpy.data.textures, name, type)
+        return data.texture(name, 'CLOUDS')
 
     @staticmethod
     def distorted_noise(name):
-        return texture.data(name, 'DISTORTED_NOISE')
+        return data.texture(name, 'DISTORTED_NOISE')
 
     @staticmethod
     def image(name):
-        return texture.data(name, 'IMAGE')
+        return data.texture(name, 'IMAGE')
 
     @staticmethod
     def magic(name):
-        return texture.data(name, 'MAGIC')
+        return data.texture(name, 'MAGIC')
 
     @staticmethod
     def marble(name):
-        return texture.data(name, 'MARBLE')
+        return data.texture(name, 'MARBLE')
 
     @staticmethod
     def musgrave(name):
-        return texture.data(name, 'MUSGRAVE')
+        return data.texture(name, 'MUSGRAVE')
 
     def noise(name):
-        return texture.data(name, 'NOISE')
+        return data.texture(name, 'NOISE')
 
     @staticmethod
     def none(name):
-        return texture.data(name, 'NONE')
+        return data.texture(name, 'NONE')
 
     @staticmethod
     def stucci(name):
-        return texture.data(name, 'STUCCI')
+        return data.texture(name, 'STUCCI')
 
     @staticmethod
     def voronoi(name):
-        return texture.data(name, 'VORONOI')
+        return data.texture(name, 'VORONOI')
 
     @staticmethod
     def wood(name):
-        return texture.data(name, 'WOOD')
+        return data.texture(name, 'WOOD')
+
+
+# new spawn
+def camera(name):
+    return data.camera(name)
+
+
+class light():
+    @staticmethod
+    def area(name):
+        return data.light(name, 'AREA')
+
+    @staticmethod
+    def point(name):
+        return data.light(name, 'POINT')
+
+    @staticmethod
+    def spot(name):
+        return data.light(name, 'SPOT')
+
+    @staticmethod
+    def sun(name):
+        return data.light(name, 'SUN')
+
+
+class mesh():  # invalid data
+    @staticmethod
+    def data(name):
+        return object(bpy.data.meshes, name)
+
+    def mesh(name, vertices, edges, faces):
+        mesh = data(bpy.data.meshes, name)
+        mesh.from_pydata(vertices, edges, faces)
+        return empty_object(name, mesh)
+
