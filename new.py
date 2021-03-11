@@ -1,26 +1,6 @@
 import bpy
 
 
-def area_light(name):
-    return light(name, 'AREA')
-
-
-def blend_texture(name):
-    return texture(name, 'BLEND')
-
-
-def camera(name):
-    return object(bpy.data.cameras, name)
-
-
-def clouds_texture(name):
-    return texture(name, 'CLOUDS')
-
-
-def distorted_noise_texture(name):
-    return texture(name, 'DISTORTED_NOISE')
-
-
 def image(name):
     # width
     return bpy.data.images.new(name, 64, 64)
@@ -30,50 +10,8 @@ def image_load(filepath, check_existing=False):
     return bpy.data.images.load(filepath, check_existing=check_existing)
 
 
-def image_texture(name):
-    return texture(name, 'IMAGE')
-
-
-def light(name, type):
-    return object(bpy.data.lights, name, type)
-
-
 def link(object):
     bpy.context.scene.collection.objects.link(object)
-
-
-def magic_texture(name):
-    return texture(name, 'MAGIC')
-
-
-def marble_texture(name):
-    return texture(name, 'MARBLE')
-
-
-def material(name):
-    return object_data(bpy.data.materials, name)
-
-
-def musgrave_texture(name):
-    return texture(name, 'MUSGRAVE')
-
-
-def noise_texture(name):
-    return texture(name, 'NOISE')
-
-
-def none_texture(name):
-    return texture(name, 'NONE')
-
-
-def empty_mesh(name):
-    return object(bpy.data.meshes, name)
-
-
-def mesh(name, vertices, edges, faces):
-    mesh = object_data(bpy.data.meshes, name)
-    mesh.from_pydata(vertices, edges, faces)
-    return empty_object(name, mesh)
 
 
 def object(data, name, type=None):
@@ -97,29 +35,102 @@ def object_data(data, name, type=None):
     return data.new(name)
 
 
-def point_light(name):
-    return light(name, 'POINT')
+###
+def camera(name):
+    return object(bpy.data.cameras, name)
 
 
-def spot_light(name):
-    return light(name, 'SPOT')
+def data(data, name, type=None):
+    if type:
+        return data.new(name, type)
+    return data.new(name)
 
 
-def stucci_texture(name):
-    return texture(name, 'STUCCI')
+class light():  # invalid data
+    @staticmethod
+    def area(name):
+        return light.data(name, 'AREA')
+
+    @staticmethod
+    def data(name, type):
+        return object(bpy.data.lights, name, type)
+
+    @staticmethod
+    def point(name):
+        return light.data(name, 'POINT')
+
+    @staticmethod
+    def spot(name):
+        return light.data(name, 'SPOT')
+
+    @staticmethod
+    def sun(name):
+        return light.data(name, 'SUN')
 
 
-def sun_light(name):
-    return light(name, 'SUN')
+def material(name):
+    return data(bpy.data.materials, name)
 
 
-def texture(name, type):
-    return object_data(bpy.data.textures, name, type)
+class mesh():  # invalid data
+    @staticmethod
+    def data(name):
+        return object(bpy.data.meshes, name)
+
+    def mesh(name, vertices, edges, faces):
+        mesh = data(bpy.data.meshes, name)
+        mesh.from_pydata(vertices, edges, faces)
+        return empty_object(name, mesh)
 
 
-def voronoi_texture(name):
-    return texture(name, 'VORONOI')
+class texture():
+    @staticmethod
+    def blend(name):
+        return texture.data(name, 'BLEND')
 
+    @staticmethod
+    def clouds(name):
+        return texture.data(name, 'CLOUDS')
 
-def wood_texture(name):
-    return texture(name, 'WOOD')
+    @staticmethod
+    def data(name, type):
+        return data(bpy.data.textures, name, type)
+
+    @staticmethod
+    def distorted_noise(name):
+        return texture.data(name, 'DISTORTED_NOISE')
+
+    @staticmethod
+    def image(name):
+        return texture.data(name, 'IMAGE')
+
+    @staticmethod
+    def magic(name):
+        return texture.data(name, 'MAGIC')
+
+    @staticmethod
+    def marble(name):
+        return texture.data(name, 'MARBLE')
+
+    @staticmethod
+    def musgrave(name):
+        return texture.data(name, 'MUSGRAVE')
+
+    def noise(name):
+        return texture.data(name, 'NOISE')
+
+    @staticmethod
+    def none(name):
+        return texture.data(name, 'NONE')
+
+    @staticmethod
+    def stucci(name):
+        return texture.data(name, 'STUCCI')
+
+    @staticmethod
+    def voronoi(name):
+        return texture.data(name, 'VORONOI')
+
+    @staticmethod
+    def wood(name):
+        return texture.data(name, 'WOOD')

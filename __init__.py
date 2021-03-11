@@ -25,6 +25,7 @@ from . import preferences
 from . import UV
 from . import mesh
 
+
 spot = 0
 
 
@@ -110,10 +111,10 @@ class BOORU_clear_all(bpy.types.Operator):
             remove.image(image)
         for texture in bpy.data.textures:
             remove.texture(texture)
+        light = new.light.sun("lili")
+        light.location = (0, 0, 1)
         camera = new.camera("cool cat")
         camera.location = (0, 0, 10)
-        light = new.sun_light("lili")
-        light.location = (0, 0, 1)
         moo = _new_object()
         return {'FINISHED'}
 
