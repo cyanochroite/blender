@@ -20,6 +20,7 @@ bl_info = {
 import bpy
 import bmesh
 from . import new
+from . import make
 from . import remove
 from . import preferences
 from . import UV
@@ -34,20 +35,19 @@ class BOORU_mesh_make(bpy.types.Operator):
     bl_idname = "blenderbooru.mesh_make"
 
     def _new_object(self, context):
-        object = mesh.plane()
-
-        mesh = new.mesh('name', vertices, edges, faces)
-        mesh.location = (spot, 0, 0)
+        global spot
+        mush = mesh.plane()
+        mush.location = (spot, 0, 0)
         spot += 2.5
-        return mesh
+        return mush
 
     def _bmesh_magic(self, object, image):
-        mesh = bmesh.new()
-        mesh.from_mesh(object.data)
-        mesh.faces.ensure_lookup_table()
-        UV.image_offset(image, mesh)
-        mesh.to_mesh(object.data)
-        mesh.free()
+        mush = bmesh.new()
+        mush.from_mesh(object.data)
+        mush.faces.ensure_lookup_table()
+        UV.image_offset(image, mush)
+        mush.to_mesh(object.data)
+        mush.free()
 
     def execute(self, context):
         ##
@@ -111,11 +111,10 @@ class BOORU_clear_all(bpy.types.Operator):
             remove.image(image)
         for texture in bpy.data.textures:
             remove.texture(texture)
-        light = new.light.sun("lili")
+        light = make.light.sun("lili")
         light.location = (0, 0, 1)
-        camera = new.camera("cool cat")
+        camera = make.camera("cool cat")
         camera.location = (0, 0, 10)
-        moo = _new_object()
         return {'FINISHED'}
 
 

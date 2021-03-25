@@ -10,31 +10,6 @@ def image_load(filepath, check_existing=False):
     return bpy.data.images.load(filepath, check_existing=check_existing)
 
 
-def link(object):
-    bpy.context.scene.collection.objects.link(object)
-
-
-def object(data, name, type=None):
-    # got to rethink the idea of not returning the sub item generated
-    # maybe make a seperate spawning class for scenes
-    item = object_data(data, name, type)
-    object = empty_object(name, item)
-    link(object)
-    return object
-
-
-def empty_object(name, item):
-    object = object_data(bpy.data.objects, name, item)
-    link(object)
-    return object
-
-
-def object_data(data, name, type=None):
-    if type:
-        return data.new(name, type)
-    return data.new(name)
-
-
 # new data
 def camera(name):
     return data.camera(name)
@@ -55,6 +30,10 @@ class data():
 
     @staticmethod
     def mesh(name):
+        return bpy.data.meshes.new(name)
+
+    @staticmethod
+    def mesh(object):
         return bpy.data.meshes.new(name)
 
     @staticmethod
@@ -84,15 +63,8 @@ def material(name):
     return data.material(name)
 
 
-class mesh():  # invalid data
-    @staticmethod
-    def data(name):
-        return object(bpy.data.meshes, name)
-
-    def mesh(name, vertices, edges, faces):
-        mesh = data(bpy.data.meshes, name)
-        mesh.from_pydata(vertices, edges, faces)
-        return empty_object(name, mesh)
+def mesh(name):
+    return data.mesh(name)
 
 
 class texture():
@@ -168,12 +140,38 @@ class light():
 
 
 class mesh():  # invalid data
-    @staticmethod
-    def data(name):
-        return object(bpy.data.meshes, name)
-
     def mesh(name, vertices, edges, faces):
         mesh = data(bpy.data.meshes, name)
         mesh.from_pydata(vertices, edges, faces)
         return empty_object(name, mesh)
 
+
+class data():
+    @staticmethod
+    def camera(name):
+
+        return bpy.data.cameras.new(name)
+
+    @staticmethod
+    def light(name, type):
+        return bpy.data.lights.new(name, type)
+
+    @staticmethod
+    def material(name):
+        return bpy.data.materials.new(name)
+
+    @staticmethod
+    def mesh(name):
+        return bpy.data.meshes.new(name)
+
+    @staticmethod
+    def mesh(object):
+        return bpy.data.meshes.new(name)
+
+    @staticmethod
+    def object(name, item):
+        return bpy.data.objects(name)
+
+    @staticmethod
+    def texture(name, type):
+        return bpy.data.textures.new(name, type)

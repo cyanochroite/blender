@@ -1,3 +1,7 @@
+import bpy
+import bmesh
+
+
 class mesh():
     def __init__(self):
         self.bmesh = bmesh.new(use_operators=False)
