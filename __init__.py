@@ -4,7 +4,7 @@ bl_info = {
     "name": "Blender Booru Builder",
     "description": "Add, tag, and browse images on your computer.",
     "author": "Mem Dixy",
-    "version": (0, 0, 2),
+    "version": (0, 0, 3),
     "blender": (2, 91, 0),
     "location": "View 3D > Sidebar > Viewer",
     "warning": "Does not work. Work in progress. Not ready for publication.",
