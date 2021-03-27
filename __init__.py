@@ -20,9 +20,12 @@ bl_info = {
 import bpy
 import bmesh
 from . import new
+from . import make
 from . import remove
 from . import preferences
 from . import UV
+from . import mesh
+
 
 spot = 0
 
@@ -33,23 +36,18 @@ class BOORU_mesh_make(bpy.types.Operator):
 
     def _new_object(self, context):
         global spot
-        bpy.ops.mesh.primitive_plane_add(
-            enter_editmode=False,
-            align='WORLD',
-            location=(spot, 0, 0),
-            scale=(1, 1, 1)
-        )
+        mush = mesh.plane()
+        mush.location = (spot, 0, 0)
         spot += 2.5
-        object = bpy.data.objects[-1]
-        return object
+        return mush
 
     def _bmesh_magic(self, object, image):
-        mesh = bmesh.new()
-        mesh.from_mesh(object.data)
-        mesh.faces.ensure_lookup_table()
-        UV.image_offset(image, mesh)
-        mesh.to_mesh(object.data)
-        mesh.free()
+        mush = bmesh.new()
+        mush.from_mesh(object.data)
+        mush.faces.ensure_lookup_table()
+        UV.image_offset(image, mush)
+        mush.to_mesh(object.data)
+        mush.free()
 
     def execute(self, context):
         ##
@@ -113,17 +111,10 @@ class BOORU_clear_all(bpy.types.Operator):
             remove.image(image)
         for texture in bpy.data.textures:
             remove.texture(texture)
-        camera = new.camera("cool cat")
-        camera.location = (0, 0, 10)
-        light = new.sun_light("lili")
+        light = make.light.sun("lili")
         light.location = (0, 0, 1)
-        new.camera("b")
-        new.mesh("e")
-        #bpy_data.make(new.object, "f")
-        new.point_light("g")
-        new.spot_light("h")
-        new.sun_light("i")
-        new.area_light("a")
+        camera = make.camera("cool cat")
+        camera.location = (0, 0, 10)
         return {'FINISHED'}
 
 
