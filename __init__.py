@@ -19,9 +19,8 @@ bl_info = {
 # {'RUNNING_MODAL', 'CANCELLED', 'FINISHED', 'PASS_THROUGH'}
 import bpy
 import bmesh
-from . import new
+from .bbpy import data
 from . import make
-from . import remove
 from . import preferences
 from . import UV
 from . import mesh
@@ -70,7 +69,7 @@ class BOORU_mesh_make(bpy.types.Operator):
 
         for file in images:
             object = self._new_object(context)
-            image = new.image_load(file)
+            image = data.image.load(file)
             material = UV.material("pretty", image)
             object.data.materials.append(material)
             self._bmesh_magic(object, image)
@@ -87,8 +86,8 @@ class BOORU_mesh_delete(bpy.types.Operator):
         # currently selected at the momnet
         object = bpy.context.object
         if object:
-            remove.material(object.active_material)
-        remove.object(object)
+            data.material.remove(object.active_material)
+        data.object.remove(object)
         return {'FINISHED'}
 
 
@@ -100,17 +99,17 @@ class BOORU_clear_all(bpy.types.Operator):
         # this probably highly unoptimized.
         # try doing this backwarks
         for camera in bpy.data.cameras:
-            remove.camera(camera)
+            data.camera.remove(camera)
         for light in bpy.data.lights:
-            remove.light(light)
+            data.light.remove(light)
         for material in bpy.data.materials:
-            remove.material(material)
+            data.material.remove(material)
         for mesh in bpy.data.meshes:
-            remove.mesh(mesh)
+            data.mesh.remove(mesh)
         for image in bpy.data.images:
-            remove.image(image)
+            data.image.remove(image)
         for texture in bpy.data.textures:
-            remove.texture(texture)
+            data.texture.remove(texture)
         light = make.light.sun("lili")
         light.location = (0, 0, 1)
         camera = make.camera("cool cat")
@@ -160,6 +159,7 @@ class BOORU_PT_main(bpy.types.Panel):
 
 
 def register():
+    data.register()
     bpy.utils.register_class(BOORU_PT_main)
     bpy.utils.register_class(BOORU_mesh_make)
     bpy.utils.register_class(BOORU_mesh_delete)
@@ -168,6 +168,7 @@ def register():
 
 
 def unregister():
+    data.unregister()
     bpy.utils.unregister_class(BOORU_mesh_delete)
     bpy.utils.unregister_class(BOORU_mesh_make)
     bpy.utils.unregister_class(BOORU_clear_all)
