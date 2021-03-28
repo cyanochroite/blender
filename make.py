@@ -37,4 +37,3 @@ def object(name, object_data):
     object = bpy.data.objects.new(name, object_data)
     bpy.context.scene.collection.objects.link(object)
     return object
-

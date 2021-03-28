@@ -1,66 +1,30 @@
-import bpy
+from .bbpy import data
 
 
-def image(name):
-    # width
-    return bpy.data.images.new(name, 64, 64)
-
-
-def image_load(filepath, check_existing=False):
-    return bpy.data.images.load(filepath, check_existing=check_existing)
-
-
-# new data
 def camera(name):
-    return data.camera(name)
-
-
-class data():
-    @staticmethod
-    def camera(name):
-        return bpy.data.cameras.new(name)
-
-    @staticmethod
-    def light(name, type):
-        return bpy.data.lights.new(name, type)
-
-    @staticmethod
-    def material(name):
-        return bpy.data.materials.new(name)
-
-    @staticmethod
-    def mesh(name):
-        return bpy.data.meshes.new(name)
-
-    @staticmethod
-    def mesh(object):
-        return bpy.data.meshes.new(name)
-
-    @staticmethod
-    def texture(name, type):
-        return bpy.data.textures.new(name, type)
+    return data.camera.new(name)
 
 
 class light():
     @staticmethod
     def area(name):
-        return data.light(name, 'AREA')
+        return data.light.new(name, 'AREA')
 
     @staticmethod
     def point(name):
-        return data.light(name, 'POINT')
+        return data.light.new(name, 'POINT')
 
     @staticmethod
     def spot(name):
-        return data.light(name, 'SPOT')
+        return data.light.new(name, 'SPOT')
 
     @staticmethod
     def sun(name):
-        return data.light(name, 'SUN')
+        return data.light.new(name, 'SUN')
 
 
 def material(name):
-    return data.material(name)
+    return data.material.new(name)
 
 
 def mesh(name):
@@ -70,108 +34,47 @@ def mesh(name):
 class texture():
     @staticmethod
     def blend(name):
-        return data.texture(name, 'BLEND')
+        return data.texture.new(name, 'BLEND')
 
     @staticmethod
     def clouds(name):
-        return data.texture(name, 'CLOUDS')
+        return data.texture.new(name, 'CLOUDS')
 
     @staticmethod
     def distorted_noise(name):
-        return data.texture(name, 'DISTORTED_NOISE')
+        return data.texture.new(name, 'DISTORTED_NOISE')
 
     @staticmethod
     def image(name):
-        return data.texture(name, 'IMAGE')
+        return data.texture.new(name, 'IMAGE')
 
     @staticmethod
     def magic(name):
-        return data.texture(name, 'MAGIC')
+        return data.texture.new(name, 'MAGIC')
 
     @staticmethod
     def marble(name):
-        return data.texture(name, 'MARBLE')
+        return data.texture.new(name, 'MARBLE')
 
     @staticmethod
     def musgrave(name):
-        return data.texture(name, 'MUSGRAVE')
+        return data.texture.new(name, 'MUSGRAVE')
 
     def noise(name):
-        return data.texture(name, 'NOISE')
+        return data.texture.new(name, 'NOISE')
 
     @staticmethod
     def none(name):
-        return data.texture(name, 'NONE')
+        return data.texture.new(name, 'NONE')
 
     @staticmethod
     def stucci(name):
-        return data.texture(name, 'STUCCI')
+        return data.texture.new(name, 'STUCCI')
 
     @staticmethod
     def voronoi(name):
-        return data.texture(name, 'VORONOI')
+        return data.texture.new(name, 'VORONOI')
 
     @staticmethod
     def wood(name):
-        return data.texture(name, 'WOOD')
-
-
-# new spawn
-def camera(name):
-    return data.camera(name)
-
-
-class light():
-    @staticmethod
-    def area(name):
-        return data.light(name, 'AREA')
-
-    @staticmethod
-    def point(name):
-        return data.light(name, 'POINT')
-
-    @staticmethod
-    def spot(name):
-        return data.light(name, 'SPOT')
-
-    @staticmethod
-    def sun(name):
-        return data.light(name, 'SUN')
-
-
-class mesh():  # invalid data
-    def mesh(name, vertices, edges, faces):
-        mesh = data(bpy.data.meshes, name)
-        mesh.from_pydata(vertices, edges, faces)
-        return empty_object(name, mesh)
-
-
-class data():
-    @staticmethod
-    def camera(name):
-
-        return bpy.data.cameras.new(name)
-
-    @staticmethod
-    def light(name, type):
-        return bpy.data.lights.new(name, type)
-
-    @staticmethod
-    def material(name):
-        return bpy.data.materials.new(name)
-
-    @staticmethod
-    def mesh(name):
-        return bpy.data.meshes.new(name)
-
-    @staticmethod
-    def mesh(object):
-        return bpy.data.meshes.new(name)
-
-    @staticmethod
-    def object(name, item):
-        return bpy.data.objects(name)
-
-    @staticmethod
-    def texture(name, type):
-        return bpy.data.textures.new(name, type)
+        return data.texture.new(name, 'WOOD')
