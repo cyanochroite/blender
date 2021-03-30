@@ -19,11 +19,11 @@ bl_info = {
 # {'RUNNING_MODAL', 'CANCELLED', 'FINISHED', 'PASS_THROUGH'}
 import bpy
 import bmesh
-from .bbpy import data
-from . import make
+#from . import data
+#from . import make
 from . import preferences
-from . import UV
-from . import mesh
+#from . import UV
+#from . import mesh
 
 
 spot = 0
@@ -159,7 +159,7 @@ class BOORU_PT_main(bpy.types.Panel):
 
 
 def register():
-    data.register()
+    # data.register()
     bpy.utils.register_class(BOORU_PT_main)
     bpy.utils.register_class(BOORU_mesh_make)
     bpy.utils.register_class(BOORU_mesh_delete)
@@ -168,7 +168,7 @@ def register():
 
 
 def unregister():
-    data.unregister()
+    # data.unregister()
     bpy.utils.unregister_class(BOORU_mesh_delete)
     bpy.utils.unregister_class(BOORU_mesh_make)
     bpy.utils.unregister_class(BOORU_clear_all)
