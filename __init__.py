@@ -19,11 +19,11 @@ bl_info = {
 # {'RUNNING_MODAL', 'CANCELLED', 'FINISHED', 'PASS_THROUGH'}
 import bpy
 import bmesh
-#from . import data
-#from . import make
+from . import data
+from . import make
 from . import preferences
 #from . import UV
-#from . import mesh
+from . import mesh
 
 
 spot = 0
@@ -117,6 +117,27 @@ class BOORU_clear_all(bpy.types.Operator):
         return {'FINISHED'}
 
 
+class BOORU_checkers(bpy.types.Operator):
+    bl_label = "Spawn Checkers"
+    bl_idname = "blenderbooru.checkers"
+
+    def _red(self, x, y, z):
+        mush = mesh.plane()
+        mush.location = (x, y, z)
+        return mush
+
+    def _green(self, x, y, z):
+        mush = mesh.plane()
+        mush.location = (x, y, z)
+        return mush
+
+    def execute(self, context):
+        self._red(0, 0, 0)
+        self._green(0, 10, 0)
+        self._red(0, 0, 10)
+        return {'FINISHED'}
+
+
 class BOORU_PT_main(bpy.types.Panel):
     bl_category = "Tab Name"
     bl_context = ""
@@ -149,6 +170,9 @@ class BOORU_PT_main(bpy.types.Panel):
         self.layout.operator("blenderbooru.mesh_make")
         self.layout.operator("blenderbooru.mesh_delete")
         self.layout.operator("blenderbooru.clear_all")
+        self.layout.operator("blenderbooru.checkers")
+        self.layout.operator("blenderbooru.register")
+        self.layout.operator("blenderbooru.unregister")
 
         content = preferences.content()
         self.layout.prop(content, "boolean")
@@ -159,21 +183,49 @@ class BOORU_PT_main(bpy.types.Panel):
 
 
 def register():
-    # data.register()
     bpy.utils.register_class(BOORU_PT_main)
     bpy.utils.register_class(BOORU_mesh_make)
     bpy.utils.register_class(BOORU_mesh_delete)
     bpy.utils.register_class(BOORU_clear_all)
+    bpy.utils.register_class(BOORU_checkers)
+    #
+    bpy.utils.register_class(BOORU_register)
+    bpy.utils.register_class(BOORU_unregister)
     preferences.register()
 
 
 def unregister():
-    # data.unregister()
+    bpy.utils.unregister_class(BOORU_checkers)
     bpy.utils.unregister_class(BOORU_mesh_delete)
     bpy.utils.unregister_class(BOORU_mesh_make)
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
+    #
+    bpy.utils.unregister_class(BOORU_register)
+    bpy.utils.unregister_class(BOORU_unregister)
     preferences.unregister()
+
+
+class BOORU_register(bpy.types.Operator):
+    bl_label = "register"
+    bl_idname = "blenderbooru.register"
+
+    def execute(self, context):
+        data.register()
+        print("info")
+        print(bpy.data.cameras)
+        print("I did it")
+        print(data.camera.data)
+        return {'FINISHED'}
+
+
+class BOORU_unregister(bpy.types.Operator):
+    bl_label = "unregister"
+    bl_idname = "blenderbooru.unregister"
+
+    def execute(self, context):
+        data.register()
+        return {'FINISHED'}
 
 
 Image_Formats = [

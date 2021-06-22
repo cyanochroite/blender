@@ -1,14 +1,13 @@
 import bpy
+# blend data
 
 
 class all():
     data = None
 
     @classmethod
-    def new(cls, name, type=None):
-        if type:
-            return cls.data.new(name, type)
-        return cls.data.new(name)
+    def new(cls, *args):
+        return cls.data.new(*args)
 
     @classmethod
     def remove(cls, item):
@@ -18,6 +17,11 @@ class all():
             do_id_user=True,
             do_ui_user=True
         )
+
+    @classmethod
+    def tag(cls, value):
+        # no idea what this does
+        return cls.data.tag(value)
 
     @classmethod
     def unregister(cls):
@@ -32,17 +36,16 @@ class camera(all):
 
 class image(all):  # incomplete
     @classmethod
+    def new(cls, name, width, height, alpha=False, float_buffer=False, stereo3d=False, is_data=False, tiled=False):
+        pass
+
+    @classmethod
+    def load(filepath, check_existing=False):
+        pass
+
+    @classmethod
     def register(cls):
         cls.data = bpy.data.images
-
-    @staticmethod
-    def new(name, width, height):
-        return bpy.data.images.new(name, width, height)
-
-    @staticmethod
-    def load(name, width, height):
-        return bpy.data.images.load(filepath, check_existing)
-#    return bpy.data.images.load(filepath, check_existing=check_existing)
 
 
 class light(all):
@@ -50,24 +53,16 @@ class light(all):
     def register(cls):
         cls.data = bpy.data.lights
 
-    @classmethod
-    def area(cls, name):
-        return cls.new(name, 'AREA')
-
-    @classmethod
-    def point(cls, name):
-        return cls.new(name, 'POINT')
-
-    @classmethod
-    def spot(cls, name):
-        return cls.new(name, 'SPOT')
-
-    @classmethod
-    def sun(cls, name):
-        return cls.new(name, 'SUN')
-
 
 class material(all):
+    @classmethod
+    def create_gpencil_data(material):
+        pass
+
+    @classmethod
+    def remove_gpencil_data(material):
+        pass
+
     @classmethod
     def register(cls):
         cls.data = bpy.data.materials
@@ -75,16 +70,21 @@ class material(all):
 
 class mesh(all):
     @classmethod
+    def new_from_object(object, preserve_all_data_layers=False, depsgraph=None):
+        pass
+
+    @classmethod
     def register(cls):
         cls.data = bpy.data.meshes
 
-    def mesh(name, vertices, edges, faces):
-        mesh = data(bpy.data.meshes, name)
-        mesh.from_pydata(vertices, edges, faces)
-        return empty_object(name, mesh)
-
 
 class object(all):
+    @classmethod
+    def new(cls, name, object_data):
+        object = super().new(name, object_data)
+        bpy.context.scene.collection.objects.link(object)
+        return object
+
     @classmethod
     def register(cls):
         cls.data = bpy.data.objects
@@ -95,58 +95,11 @@ class texture(all):
     def register(cls):
         cls.data = bpy.data.textures
 
-    @classmethod
-    def blend(cls, name):
-        return cls.new(name, 'BLEND')
-
-    @classmethod
-    def clouds(cls, name):
-        return cls.new(name, 'CLOUDS')
-
-    @classmethod
-    def distorted_noise(cls, name):
-        return cls.new(name, 'DISTORTED_NOISE')
-
-    @classmethod
-    def image(cls, name):
-        return cls.new(name, 'IMAGE')
-
-    @classmethod
-    def magic(cls, name):
-        return cls.new(name, 'MAGIC')
-
-    @classmethod
-    def marble(cls, name):
-        return cls.new(name, 'MARBLE')
-
-    @classmethod
-    def musgrave(cls, name):
-        return cls.new(name, 'MUSGRAVE')
-
-    @classmethod
-    def noise(cls, name):
-        return cls.new(name, 'NOISE')
-
-    @classmethod
-    def none(cls, name):
-        return cls.new(name, 'NONE')
-
-    @classmethod
-    def stucci(cls, name):
-        return cls.new(name, 'STUCCI')
-
-    @classmethod
-    def voronoi(cls, name):
-        return cls.new(name, 'VORONOI')
-
-    @classmethod
-    def wood(cls, name):
-        return cls.new(name, 'WOOD')
-
 
 def register():
     camera.register()
     image.register()
+    light.register()
     material.register()
     mesh.register()
     object.register()
@@ -156,11 +109,8 @@ def register():
 def unregister():
     camera.unregister()
     image.unregister()
+    light.unregister()
     material.unregister()
     mesh.unregister()
     object.unregister()
     texture.unregister()
-
-
-
-
