@@ -189,8 +189,9 @@ def register():
     bpy.utils.register_class(BOORU_clear_all)
     bpy.utils.register_class(BOORU_checkers)
     #
-    bpy.utils.register_class(BOORU_register)
-    bpy.utils.register_class(BOORU_unregister)
+    bpy.app.timers.register(data.register)
+    #bpy.app.timers.register(function, first_interval=0, persistent=False)
+    #
     preferences.register()
 
 
@@ -201,31 +202,10 @@ def unregister():
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
     #
-    bpy.utils.unregister_class(BOORU_register)
-    bpy.utils.unregister_class(BOORU_unregister)
+    if bpy.app.timers.is_registered(data.register):
+        bpy.app.timers.unregister(data.register)
+    #
     preferences.unregister()
-
-
-class BOORU_register(bpy.types.Operator):
-    bl_label = "register"
-    bl_idname = "blenderbooru.register"
-
-    def execute(self, context):
-        data.register()
-        print("info")
-        print(bpy.data.cameras)
-        print("I did it")
-        print(data.camera.data)
-        return {'FINISHED'}
-
-
-class BOORU_unregister(bpy.types.Operator):
-    bl_label = "unregister"
-    bl_idname = "blenderbooru.unregister"
-
-    def execute(self, context):
-        data.register()
-        return {'FINISHED'}
 
 
 Image_Formats = [
