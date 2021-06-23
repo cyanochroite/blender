@@ -1,10 +1,11 @@
 # <pep8-80 compliant>
-
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789
+# 23456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
 bl_info = {
     "name": "Blender Booru Builder",
     "description": "Add, tag, and browse images on your computer.",
     "author": "Mem Dixy",
-    "version": (0, 0, 3),
+    "version": (0, 0, 4),
     "blender": (2, 91, 0),
     "location": "View 3D > Sidebar > Viewer",
     "warning": "Does not work. Work in progress. Not ready for publication.",
@@ -14,19 +15,18 @@ bl_info = {
     "category": "3D View",
 }
 
-# 234567890123456789012345678901234567890123456789012345678901234567890123456789
 
-# {'RUNNING_MODAL', 'CANCELLED', 'FINISHED', 'PASS_THROUGH'}
 import bpy
 import bmesh
 from . import data
 from . import make
 from . import preferences
-#from . import UV
+from . import UV
 from . import mesh
 
 
 spot = 0
+ready = False
 
 
 class BOORU_mesh_make(bpy.types.Operator):
@@ -86,8 +86,10 @@ class BOORU_mesh_delete(bpy.types.Operator):
         # currently selected at the momnet
         object = bpy.context.object
         if object:
-            data.material.remove(object.active_material)
-        data.object.remove(object)
+            # what about the other materials?
+            if object.active_material:
+                data.material.remove(object.active_material)
+            data.object.remove(object)
         return {'FINISHED'}
 
 
@@ -166,20 +168,24 @@ class BOORU_PT_main(bpy.types.Panel):
     bl_options = {'DEFAULT_CLOSED'}
 
     def draw(self, context):
-        self.layout.label(text="Hello World")
-        self.layout.operator("blenderbooru.mesh_make")
-        self.layout.operator("blenderbooru.mesh_delete")
-        self.layout.operator("blenderbooru.clear_all")
-        self.layout.operator("blenderbooru.checkers")
-        self.layout.operator("blenderbooru.register")
-        self.layout.operator("blenderbooru.unregister")
-
-        content = preferences.content()
-        self.layout.prop(content, "boolean")
-        if content.boolean:
-            self.layout.label(text="checkbox is on")
+        global ready
+        if not ready:
+            self.layout.operator("blenderbooru.register")
         else:
-            self.layout.label(text="checkbox is off")
+            self.layout.operator("blenderbooru.unregister")
+            #
+            self.layout.label(text="Hello World")
+            self.layout.operator("blenderbooru.mesh_make")
+            self.layout.operator("blenderbooru.mesh_delete")
+            self.layout.operator("blenderbooru.clear_all")
+            self.layout.operator("blenderbooru.checkers")
+            #
+            content = preferences.content()
+            self.layout.prop(content, "boolean")
+            if content.boolean:
+                self.layout.label(text="checkbox is on")
+            else:
+                self.layout.label(text="checkbox is off")
 
 
 def register():
@@ -189,8 +195,8 @@ def register():
     bpy.utils.register_class(BOORU_clear_all)
     bpy.utils.register_class(BOORU_checkers)
     #
-    bpy.app.timers.register(data.register)
-    #bpy.app.timers.register(function, first_interval=0, persistent=False)
+    bpy.utils.register_class(BOORU_unregister)
+    bpy.utils.register_class(BOORU_register)
     #
     preferences.register()
 
@@ -202,10 +208,32 @@ def unregister():
     bpy.utils.unregister_class(BOORU_clear_all)
     bpy.utils.unregister_class(BOORU_PT_main)
     #
-    if bpy.app.timers.is_registered(data.register):
-        bpy.app.timers.unregister(data.register)
+    bpy.utils.unregister_class(BOORU_register)
+    bpy.utils.unregister_class(BOORU_unregister)
     #
     preferences.unregister()
+
+
+class BOORU_register(bpy.types.Operator):
+    bl_label = "Startup"
+    bl_idname = "blenderbooru.register"
+
+    def execute(self, context):
+        global ready
+        data.register()
+        ready = True
+        return {'FINISHED'}
+
+
+class BOORU_unregister(bpy.types.Operator):
+    bl_label = "Shutdown"
+    bl_idname = "blenderbooru.unregister"
+
+    def execute(self, context):
+        global ready
+        data.unregister()
+        ready = False
+        return {'FINISHED'}
 
 
 Image_Formats = [

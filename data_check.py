@@ -1,3 +1,6 @@
+# <pep8-80 compliant>
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789
+# 23456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
 import bpy
 
 print(len(bpy.data.actions), "actions")
@@ -38,3 +41,5 @@ print(len(bpy.data.volumes), "volumes")
 print(len(bpy.data.window_managers), "window_managers")
 print(len(bpy.data.workspaces), "workspaces")
 print(len(bpy.data.worlds), "worlds")
+
+# {'RUNNING_MODAL', 'CANCELLED', 'FINISHED', 'PASS_THROUGH'}

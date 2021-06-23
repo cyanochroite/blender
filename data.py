@@ -1,3 +1,6 @@
+# <pep8-80 compliant>
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789
+# 23456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
 import bpy
 # blend data
 
@@ -36,7 +39,8 @@ class camera(all):
 
 class image(all):  # incomplete
     @classmethod
-    def new(cls, name, width, height, alpha=False, float_buffer=False, stereo3d=False, is_data=False, tiled=False):
+    def new(cls, name, width, height, alpha=False, float_buffer=False,
+            stereo3d=False, is_data=False, tiled=False):
         pass
 
     @classmethod
