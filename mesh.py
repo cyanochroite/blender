@@ -1,8 +1,10 @@
 # <pep8-80 compliant>
 # 234567890123456789012345678901234567890123456789012345678901234567890123456789
 # 23456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
-import bpy
 import bmesh
+
+from . import new
+from . import make
 
 
 class mesh():
@@ -44,18 +46,13 @@ class mesh():
         self.faces[face].loops[loop][uv].uv = (x, y)
 
     def uv_finalize(self):
-        self.bmesh.to_mesh(self.mesh)
-        self.bmesh.free()
-        object = bpy.data.objects.new(self.name, self.mesh)
-        bpy.context.scene.collection.objects.link(object)
+        pass
 
     def finalize(self, name):
-        mesh = bpy.data.meshes.new(name)
+        mesh = new.mesh(name)
         self.bmesh.to_mesh(mesh)
         self.bmesh.free()
-        object = bpy.data.objects.new(name, mesh)
-        bpy.context.scene.collection.objects.link(object)
-        return object
+        return make.mesh(name, mesh)
 
 
 def plane():
@@ -80,4 +77,51 @@ def plane():
     box.uv_add(0, 1, 0, 1)
     box.uv_add(0, 2, 0, 0)
     box.uv_add(0, 3, 1, 0)
+    box.uv_finalize()
+
+    return box.finalize("plane")
+
+
+def _offset(numerator, denominator):
+    ratio = numerator / denominator
+    unit = 1
+    maximum = max(ratio, unit)
+    normalization = maximum - unit
+    half = 1 / 2
+    halving = normalization * half
+    return halving
+    #  return (max(numerator / denominator, 1) - 1) / 2
+
+
+def image(image):
+    box = mesh()
+
+    box.vertex_add(+1, +1, +0)
+    box.vertex_add(-1, +1, +0)
+    box.vertex_add(-1, -1, +0)
+    box.vertex_add(+1, -1, +0)
+    box.vertex_finalize()
+
+    box.edge_add(0, 1)
+    box.edge_add(1, 2)
+    box.edge_add(2, 3)
+    box.edge_add(3, 0)
+    box.edge_finalize()
+
+    box.face_add(0, 1, 2, 3)
+    box.face_finalize()
+
+    size = image.size
+    x = size[0]
+    y = size[1]
+    y_to_x = _offset(y, x)
+    x_to_y = _offset(x, y)
+    (x, y) = (y_to_x, x_to_y)
+
+    box.uv_add(0, 0, 1 + x, 1 + y)
+    box.uv_add(0, 1, 0 - x, 1 + y)
+    box.uv_add(0, 2, 0 - x, 0 - y)
+    box.uv_add(0, 3, 1 + x, 0 - y)
+    box.uv_finalize()
+
     return box.finalize("plane")

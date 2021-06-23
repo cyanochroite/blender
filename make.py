@@ -41,20 +41,7 @@ class light():
         return new.object(name, new.light.sun(name))
 
 
-class mesh():  # invalid data
-    def mesh(name, vertices, edges, faces):
-        mesh = data(bpy.data.meshes, name)
-        mesh.from_pydata(vertices, edges, faces)
-        return empty_object(name, mesh)
-
-
-class mesh():  # not valid
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.meshes
-
-    def mesh(name, vertices, edges, faces):
-        mesh = data(bpy.data.meshes, name)
-        mesh.from_pydata(vertices, edges, faces)
-        return empty_object(name, mesh)
-
+def mesh(name, mesh=None):
+    if not mesh:
+        mesh = new.mesh(name)
+    return new.object(name, mesh)

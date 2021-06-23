@@ -44,8 +44,8 @@ class image(all):  # incomplete
         pass
 
     @classmethod
-    def load(filepath, check_existing=False):
-        pass
+    def load(cls, filepath, check_existing=False):
+        return cls.data.load(filepath, check_existing=False)
 
     @classmethod
     def register(cls):

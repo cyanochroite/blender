@@ -4,33 +4,7 @@
 import bpy
 from . import new
 
-
-def offset(numerator, denominator):
-    ratio = numerator / denominator
-    unit = 1
-    maximum = max(ratio, unit)
-    normalization = maximum - unit
-    half = 1 / 2
-    halving = normalization * half
-    return halving
-    #  return (max(numerator / denominator, 1) - 1) / 2
-
-
-def image_offset(image, mesh):
-    loops = mesh.faces[0].loops
-    uv = mesh.loops.layers.uv.verify()
-
-    size = image.size
-    x = size[0]
-    y = size[1]
-    y_to_x = offset(y, x)
-    x_to_y = offset(x, y)
-    (x, y) = (y_to_x, x_to_y)
-
-    loops[0][uv].uv = (0 - x, 0 - y)
-    loops[1][uv].uv = (1 + x, 0 - y)
-    loops[2][uv].uv = (1 + x, 1 + y)
-    loops[3][uv].uv = (0 - x, 1 + y)
+# shader
 
 
 def shader_image(nodes, image):
@@ -67,6 +41,8 @@ def shader_output(nodes):
     node = nodes.new('ShaderNodeOutputMaterial')
     node.target = 'ALL'
     return node
+
+# material
 
 
 def material(name, image):

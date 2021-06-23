@@ -33,23 +33,14 @@ class BOORU_mesh_make(bpy.types.Operator):
     bl_label = "Plane"
     bl_idname = "blenderbooru.mesh_make"
 
-    def _new_object(self, context):
+    def _new_object(self, context, image):
         global spot
-        mush = mesh.plane()
+        mush = mesh.image(image)
         mush.location = (spot, 0, 0)
         spot += 2.5
         return mush
 
-    def _bmesh_magic(self, object, image):
-        mush = bmesh.new()
-        mush.from_mesh(object.data)
-        mush.faces.ensure_lookup_table()
-        UV.image_offset(image, mush)
-        mush.to_mesh(object.data)
-        mush.free()
-
     def execute(self, context):
-        ##
         print("start")
         from . import OS
         content = preferences.content()
@@ -57,24 +48,17 @@ class BOORU_mesh_make(bpy.types.Operator):
         images = []
         for (filenames) in file:
             (dirpath, name) = filenames
-            ext = OS.file_extension(name)
+            ext = OS.file_extension(name).lower()
             if ext in Image_Formats:
                 merge = OS.join(dirpath, name)
                 images.append(merge)
-        for item in images:
-            print("convert " + item)
-        print("done")
-
-        ##
-
         for file in images:
-            object = self._new_object(context)
+            print("convert " + file)
             image = data.image.load(file)
             material = UV.material("pretty", image)
+            object = self._new_object(context, image)
             object.data.materials.append(material)
-            self._bmesh_magic(object, image)
-
-        # finish
+        print("done")
         return {'FINISHED'}
 
 
@@ -140,7 +124,7 @@ class BOORU_checkers(bpy.types.Operator):
         return {'FINISHED'}
 
 
-class BOORU_PT_main(bpy.types.Panel):
+class BOORU_main(bpy.types.Panel):
     bl_category = "Tab Name"
     bl_context = ""
     bl_idname = "BOORU_PT_main_panel2"
@@ -189,7 +173,7 @@ class BOORU_PT_main(bpy.types.Panel):
 
 
 def register():
-    bpy.utils.register_class(BOORU_PT_main)
+    bpy.utils.register_class(BOORU_main)
     bpy.utils.register_class(BOORU_mesh_make)
     bpy.utils.register_class(BOORU_mesh_delete)
     bpy.utils.register_class(BOORU_clear_all)
@@ -206,7 +190,7 @@ def unregister():
     bpy.utils.unregister_class(BOORU_mesh_delete)
     bpy.utils.unregister_class(BOORU_mesh_make)
     bpy.utils.unregister_class(BOORU_clear_all)
-    bpy.utils.unregister_class(BOORU_PT_main)
+    bpy.utils.unregister_class(BOORU_main)
     #
     bpy.utils.unregister_class(BOORU_register)
     bpy.utils.unregister_class(BOORU_unregister)
