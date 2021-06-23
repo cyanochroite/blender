@@ -37,7 +37,7 @@ def material(name):
 
 
 def mesh(name):
-    return data.mesh(name)
+    return data.mesh.new(name)
 
 
 def object(name, object_data):
