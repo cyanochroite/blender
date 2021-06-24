@@ -16,32 +16,26 @@ bD = 0b0010000000000000
 bE = 0b0100000000000000
 bF = 0b1000000000000000
 
-
 book = {}
-for x in range(limit):
-    book[x] = []
 
-if book[0]:
-    print("hi")
+if False:
+    for x in range(limit):
+        book[x] = []
 
+    if book[0]:
+        print("hi")
 
-book[1].append(5)
-book[1].append(3)
-book[4].append(54)
+    book[1].append(5)
+    book[1].append(3)
+    book[4].append(54)
 
-if book[1]:
-    print("hooi")
-print(book)
+    if book[1]:
+        print("hooi")
+    print(book)
 
-
-for index in range(limit):
-    if book[index]:
-        print(book[index])
-
-
-print("ass")
-
-print(bF)
+    for index in range(limit):
+        if book[index]:
+            print(book[index])
 
 
 def moo0(bit):
@@ -347,7 +341,6 @@ def moo7(bit):
 
 
 test = False
-test = True
 if test:
     for index in range(limit):
         assert(moo0(index) == index)
@@ -372,3 +365,115 @@ if test:
 
     for index in range(limit):
         assert(moo7(index) == moo4(moo3(index)))
+
+
+if False:
+    # find all super symetry objects
+    cool = []
+    for index in range(limit):
+        if moo0(index) == moo1(index) == moo2(index) == moo3(index) == moo4(index) == moo5(index) == moo6(index) == moo7(index):
+            cool.append(index)
+    print(cool)
+
+
+# setup
+grid2d = []
+X = 8 * 4
+Y = 8 * 4
+for y in range(Y):
+    grid1d = []
+    for x in range(X):
+        grid1d.append(0)
+    grid2d.append(grid1d)
+
+
+# prestuff
+def output(z):
+    if z > 0:
+        return 'X'
+    else:
+        return 'O'
+
+
+def make_block(z, b):
+    return ((((z & b) > 0) * 2) - 1)
+
+
+def can_insert_block(x, y, z, b):
+    return grid2d[y][x] == make_block(z, b)
+
+
+def can_insert_tile(x, y, z):
+    w = True
+    w &= can_insert_block(x + 0, y + 0, z, b0)
+    w &= can_insert_block(x + 1, y + 0, z, b1)
+    w &= can_insert_block(x + 2, y + 0, z, b2)
+    w &= can_insert_block(x + 3, y + 0, z, b3)
+    w &= can_insert_block(x + 0, y + 1, z, b4)
+    w &= can_insert_block(x + 1, y + 1, z, b5)
+    w &= can_insert_block(x + 2, y + 1, z, b6)
+    w &= can_insert_block(x + 3, y + 1, z, b7)
+    w &= can_insert_block(x + 0, y + 2, z, b8)
+    w &= can_insert_block(x + 1, y + 2, z, b9)
+    w &= can_insert_block(x + 2, y + 2, z, bA)
+    w &= can_insert_block(x + 3, y + 2, z, bB)
+    w &= can_insert_block(x + 0, y + 3, z, bC)
+    w &= can_insert_block(x + 1, y + 3, z, bD)
+    w &= can_insert_block(x + 2, y + 3, z, bE)
+    w &= can_insert_block(x + 3, y + 3, z, bF)
+    return w
+
+
+def insert_block(x, y, z, b):
+    grid2d[y][x] = make_block(z, b)
+
+
+def insert_tile(x, y, z):
+    insert_block(x + 0, y + 0, z, b0)
+    insert_block(x + 1, y + 0, z, b1)
+    insert_block(x + 2, y + 0, z, b2)
+    insert_block(x + 3, y + 0, z, b3)
+    insert_block(x + 0, y + 1, z, b4)
+    insert_block(x + 1, y + 1, z, b5)
+    insert_block(x + 2, y + 1, z, b6)
+    insert_block(x + 3, y + 1, z, b7)
+    insert_block(x + 0, y + 2, z, b8)
+    insert_block(x + 1, y + 2, z, b9)
+    insert_block(x + 2, y + 2, z, bA)
+    insert_block(x + 3, y + 2, z, bB)
+    insert_block(x + 0, y + 3, z, bC)
+    insert_block(x + 1, y + 3, z, bD)
+    insert_block(x + 2, y + 3, z, bE)
+    insert_block(x + 3, y + 3, z, bF)
+
+
+def count_blanks():
+    count = 0
+    for y in range(Y):
+        for x in range(X):
+            if grid2d[y][x] == ' ':
+                count += 1
+    return count
+
+
+# work
+insert_tile(1, 2, 38505)
+# display
+for y in range(Y - 1, -1, -1):
+    print('|', end='')
+    for x in range(X):
+        z = grid2d[y][x]
+        o = '.'
+        if z > 0:
+            o = 'X'
+        if z < 0:
+            o = 'O'
+        print(o, end='')
+    print('|')
+
+print(count_blanks())
+print(can_insert_tile(1, 2, 0))
+print(can_insert_tile(1, 2, 38505))
+
+print((15 > 1) * 2 - 1)
+# w |= grid2d[y + 0][x + 0] == (z & b0) > 0
