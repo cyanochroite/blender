@@ -18,6 +18,7 @@ bF = 0b1000000000000000
 
 book = {}
 
+
 if False:
     for x in range(limit):
         book[x] = []
@@ -369,6 +370,7 @@ if test:
 
 if False:
     # find all super symetry objects
+    #[0, 1632, 27030, 28662, 36873, 38505, 63903, 65535]
     cool = []
     for index in range(limit):
         if moo0(index) == moo1(index) == moo2(index) == moo3(index) == moo4(index) == moo5(index) == moo6(index) == moo7(index):
@@ -388,19 +390,12 @@ for y in range(Y):
 
 
 # prestuff
-def output(z):
-    if z > 0:
-        return 'X'
-    else:
-        return 'O'
-
-
 def make_block(z, b):
-    return ((((z & b) > 0) * 2) - 1)
+    return 1 if z & b > 0 else -1
 
 
 def can_insert_block(x, y, z, b):
-    return grid2d[y][x] == make_block(z, b)
+    return grid2d[y][x] == 0 or grid2d[y][x] == make_block(z, b)
 
 
 def can_insert_tile(x, y, z):
@@ -425,7 +420,7 @@ def can_insert_tile(x, y, z):
 
 
 def insert_block(x, y, z, b):
-    grid2d[y][x] = make_block(z, b)
+    grid2d[y][x] += make_block(z, b)
 
 
 def insert_tile(x, y, z):
@@ -447,33 +442,118 @@ def insert_tile(x, y, z):
     insert_block(x + 3, y + 3, z, bF)
 
 
+def remove_block(x, y, z, b):
+    grid2d[y][x] -= make_block(z, b)
+
+
+def remove_tile(x, y, z):
+    remove_block(x + 0, y + 0, z, b0)
+    remove_block(x + 1, y + 0, z, b1)
+    remove_block(x + 2, y + 0, z, b2)
+    remove_block(x + 3, y + 0, z, b3)
+    remove_block(x + 0, y + 1, z, b4)
+    remove_block(x + 1, y + 1, z, b5)
+    remove_block(x + 2, y + 1, z, b6)
+    remove_block(x + 3, y + 1, z, b7)
+    remove_block(x + 0, y + 2, z, b8)
+    remove_block(x + 1, y + 2, z, b9)
+    remove_block(x + 2, y + 2, z, bA)
+    remove_block(x + 3, y + 2, z, bB)
+    remove_block(x + 0, y + 3, z, bC)
+    remove_block(x + 1, y + 3, z, bD)
+    remove_block(x + 2, y + 3, z, bE)
+    remove_block(x + 3, y + 3, z, bF)
+
+
 def count_blanks():
     count = 0
     for y in range(Y):
         for x in range(X):
-            if grid2d[y][x] == ' ':
+            if grid2d[y][x] == 0:
                 count += 1
     return count
 
 
 # work
-insert_tile(1, 2, 38505)
+sym = [0, 1632, 27030, 28662, 36873, 38505, 63903, 65535]
+X = 8 * 4
+Y = 8 * 4
+Z = len(sym)
+W = len(sym)
+sim = 0
+x = 0
+y = 0
+z = 0
+w = 0
+one = True
+two = True
+three = True
+#
+y = 0
+one = False
+while one:
+    x = 0
+    two = True
+    while two:
+        z = 0
+        W = len(sym)
+        three = W > 0
+        while three:
+            if can_insert_tile(x, y, sym[z]):
+                print(sym[z])
+                insert_tile(x, y, sym[z])
+                del sym[z]
+                three = False
+            z += 1
+            if z >= W:
+                three = False
+        x += 1
+        if x >= X - 3:
+            two = False
+    y += 1
+    if y >= Y - 3:
+        one = False
+
+
+print('start')
+best = 9999999999999999999
+
+
 # display
-for y in range(Y - 1, -1, -1):
-    print('|', end='')
-    for x in range(X):
-        z = grid2d[y][x]
-        o = '.'
-        if z > 0:
-            o = 'X'
-        if z < 0:
-            o = 'O'
-        print(o, end='')
-    print('|')
+def display():
+    for y in range(Y - 1, -1, -1):
+        print(grid2d[y])
+    for y in range(Y - 1, -1, -1):
+        print('|', end='')
+        for x in range(X):
+            z = grid2d[y][x]
+            o = '.'
+            if z > 0:
+                o = 'X'
+            if z < 0:
+                o = 'O'
+            print(o, end='')
+        print('|')
 
-print(count_blanks())
-print(can_insert_tile(1, 2, 0))
-print(can_insert_tile(1, 2, 38505))
 
-print((15 > 1) * 2 - 1)
-# w |= grid2d[y + 0][x + 0] == (z & b0) > 0
+def place_tiles(tiles):
+    global best
+    if tiles:
+        tile = tiles.pop()
+        for y in range(Y - 3):
+            for x in range(X - 3):
+                if can_insert_tile(x, y, tile):
+                    insert_tile(x, y, tile)
+                    place_tiles(tiles)
+                    remove_tile(x, y, tile)
+    else:
+        blank = count_blanks()
+        if blank <= best:
+            best = blank
+            print(best)
+            display()
+
+
+tiles = [0, 1632, 27030, 28662, 36873, 38505, 63903, 65535]
+tiles.reverse()
+place_tiles(tiles)
