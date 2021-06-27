@@ -39,6 +39,66 @@ if False:
             print(book[index])
 
 
+class tile():
+    size_x = 1
+    sizy_y = 1
+    data = [[]]
+
+    def __init__(self, size):
+        self.size_x = size
+        self.size_y = size
+        self.make()
+
+    def _loop(self, prefix, infix, suffix):
+        for y in range(self.size_y - 1, -1, -1):
+            prefix()
+            for x in range(self.size_x - 1, -1, -1):
+                infix()
+            suffix()
+
+    def make(self):
+        size = 4
+        a = []
+        for y in size:
+            b = []
+            for x in size:
+                b.append(0)
+            a.append(b)
+        self.data = a
+
+    def shrink(self):
+        for y in range(self.size_y - 1, -1, -1):
+            empty = True
+            for x in range(self.size_x - 1, -1, -1):
+                empty &= self.data[y][x] == 0
+            if empty:
+                self.size.y -= 1
+                del self.data[y]
+        for x in range(self.size_x - 1, -1, -1):
+            empty = True
+            for y in range(self.size_y - 1, -1, -1):
+                empty &= self.data[y][x] == 0
+            if empty:
+                self.size.x -= 1
+                for y in range(self.size_y - 1, -1, -1):
+                    del self.data[y][x]
+
+    def display(self):
+        for y in range(self.sizy_y - 1, -1, -1):
+            print(self.data[y])
+        for y in range(self.size_y - 1, -1, -1):
+            print('|', end='')
+            for x in range(self.size_x):
+                z = self.data[y][x]
+                o = '.'
+                if z > 0:
+                    o = 'X'
+                if z < 0:
+                    o = 'O'
+                print(o, end='')
+            print('|')
+
+
 def moo0(bit):
     # do nothing
     new = 0
@@ -370,7 +430,7 @@ if test:
 
 if False:
     # find all super symetry objects
-    #[0, 1632, 27030, 28662, 36873, 38505, 63903, 65535]
+    # [0, 1632, 27030, 28662, 36873, 38505, 63903, 65535]
     cool = []
     for index in range(limit):
         if moo0(index) == moo1(index) == moo2(index) == moo3(index) == moo4(index) == moo5(index) == moo6(index) == moo7(index):
@@ -539,13 +599,13 @@ def display():
 def place_tiles(tiles):
     global best
     if tiles:
-        tile = tiles.pop()
+        tilea = tiles.pop()
         for y in range(Y - 3):
             for x in range(X - 3):
-                if can_insert_tile(x, y, tile):
+                if can_insert_tile(x, y, tilea):
                     insert_tile(x, y, tile)
                     place_tiles(tiles)
-                    remove_tile(x, y, tile)
+                    remove_tile(x, y, tilea)
     else:
         blank = count_blanks()
         if blank <= best:
@@ -556,4 +616,39 @@ def place_tiles(tiles):
 
 tiles = [0, 1632, 27030, 28662, 36873, 38505, 63903, 65535]
 tiles.reverse()
-place_tiles(tiles)
+# place_tiles(tiles)
+print("done")
+
+tiles = []
+for a in range(1):  # 65535):
+    tiles.append([])
+
+for index in range(1):  # 65535):
+    a0 = moo0(index)
+    a1 = moo1(index)
+    a2 = moo2(index)
+    a3 = moo3(index)
+    a4 = moo4(index)
+    a5 = moo5(index)
+    a6 = moo6(index)
+    a7 = moo7(index)
+    small = min([a0, a1, a2, a3, a4, a5, a6, a7])
+    tiles[small].append(index)
+
+
+tiles = list(filter(None, tiles))
+
+
+import timeit
+
+
+def a():
+    return 1 + 1
+
+
+print(">>")
+print(timeit.timeit(a, number=100000))
+print("<<")
+
+a = tile(7)
+a.display()
