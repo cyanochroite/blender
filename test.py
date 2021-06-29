@@ -40,14 +40,12 @@ if False:
 
 
 class tile():
-    size_x = 1
-    sizy_y = 1
-    data = [[]]
+    size_x = 0
+    sizy_y = 0
+    data = []
 
     def __init__(self, size):
-        self.size_x = size
-        self.size_y = size
-        self.make()
+        self.make(size)
 
     def _loop(self, prefix, infix, suffix):
         for y in range(self.size_y - 1, -1, -1):
@@ -56,17 +54,20 @@ class tile():
                 infix()
             suffix()
 
-    def make(self):
-        size = 4
-        a = []
-        for y in size:
-            b = []
-            for x in size:
-                b.append(0)
-            a.append(b)
-        self.data = a
+    def make(self, size):
+        self.data = []
+        self.size_x = size
+        self.size_y = size
+        for y in range(self.size_y):
+            for x in range(self.size_x):
+                self.data.append(0)
 
     def shrink(self):
+        self.data = [data for data in self.data]
+        for y in range(self.size_y):
+            for x in range(self.size_x):
+                self.data.append[0]
+
         for y in range(self.size_y - 1, -1, -1):
             empty = True
             for x in range(self.size_x - 1, -1, -1):
@@ -89,7 +90,7 @@ class tile():
         for y in range(self.size_y - 1, -1, -1):
             print('|', end='')
             for x in range(self.size_x):
-                z = self.data[y][x]
+                z = self.data[y]
                 o = '.'
                 if z > 0:
                     o = 'X'
@@ -652,3 +653,161 @@ print("<<")
 
 a = tile(7)
 a.display()
+
+
+box = ['a', 'b', 'c', 'd', 'e', 'f']
+box = [1, 1, 1, 0, 1, 0, 0, 0, 0]
+
+dog = enumerate(box, start=0)
+bark = list(dog)
+print(dog)
+print(bark)
+
+
+# row
+def row(index):
+    size = 3
+    row = [a[1] for a in bark if a[0] // size == index]
+    return row
+
+
+dirt = [d[1] for d in bark if d[0] // 2 == 0]
+
+
+dirt = [d[1] for d in bark if d[0] // 2 == 0]
+print(dirt)
+
+print(row(0))
+
+
+def delete_row(index):
+    size_x = 3
+    grid = bark
+    indexindexindexindexindexindexindexindex = 4
+    row = [cell[1] for cell in grid if cell[0] //
+           size == indexindexindexindexindexindexindexindex]
+    if not any(row):
+        rowo = [a[1] for a in bark if a[0] // size != index]
+        print(rowo)
+
+
+# delete_row(2)
+
+
+size_x = 3
+size_y = 3
+data = [1, 1, 1, 0, 1, 0, 0, 0, 0]
+
+
+bat = [item[1] for y in range(size_y)
+       for item in enumerate(data) if item[0] // size_y == y]
+print (bat)
+
+
+bat = [item[1] for item in enumerate(data) if item[0] // size_y == y]
+
+lat = []
+for y in range(size_y):
+    pass
+
+bat = [[item[1] for item in enumerate(
+    data) if item[0] // size_y == y] for y in range(size_y)]
+
+rows = [0, 1]
+cols = [0, 1, 2]
+size = 3
+
+c = cols
+e = enumerate(data)
+i = index
+r = rows
+w = size
+# i // w in r and i % w in c
+
+map(lambda x: x, data)
+
+print("cow")
+col0 = [[a for a in range(x, size_x * size_y, size_x)]
+        for x in range(size_x)]
+print(col0)
+row0 = [[a for a in range(size_x * y, size_x * (y + 1), 1)]
+        for y in range(size_y)]
+print(row0)
+
+
+col1 = [item[1] for item in enumerate(data) if item[0] in col0]
+print(col1)
+row1 = [item[1] for item in enumerate(data) if item[0] in col1]
+print(row1)
+
+
+col1 = col0
+row1 = row0
+col2 = [x for x in range(size_x) if any(col1[x])]
+print(col2)
+row2 = [y for y in range(size_y) if any(row1[y])]
+print(row2)
+
+
+bat = [item[1] for item in enumerate(
+    data) if item[0] // size in rows and item[0] % size in cols]
+size_x = len(cols)
+size_y = len(rows)
+size_a = size_x * size_y
+print("moo")
+print (bat)
+
+# faster?
+print("faster")
+size_x = 3
+size_y = 3
+
+col0 = [[data[a] for a in range(x, size_x * size_y, size_x)]
+        for x in range(size_x)]
+print(col0)
+row0 = [[data[a] for a in range(size_x * y, size_x * (y + 1), 1)]
+        for y in range(size_y)]
+print(row0)
+
+col1 = col0
+row1 = row0
+
+col1 = [[1, 0, 0], [1, 1, 0], [1, 0, 0]]
+row1 = [[1, 1, 1], [0, 1, 0], [0, 0, 0]]
+col1 = [[-91, 0, 0], [-51, 16, 0], [81, 0, 0]]
+row1 = [[3, -1, 41], [0, 21, 0], [0, 0, 0]]
+
+
+col2 = [1 if any(col1[x]) else 0 for x in range(size_x)]
+print(col2)
+row2 = [1 if any(row1[y]) else 0 for y in range(size_y)]
+print(row2)
+col2 = [any(col1[x]) for x in range(size_x)]
+print(col2)
+row2 = [any(row1[y]) for y in range(size_y)]
+print(row2)
+
+cols = col2
+rows = row2
+bat = [item[1] for item in enumerate(
+    data) if rows[item[0] // size] and cols[item[0] % size]]
+
+print(bat)
+
+
+# faster?
+print("final")
+size_x = 3
+size_y = 3
+
+cols = [any([data[a] for a in range(x, size_x * size_y, size_x)])
+        for x in range(size_x)]
+print(cols)
+rows = [any([data[a] for a in range(size_x * y, size_x * (y + 1), 1)])
+        for y in range(size_y)]
+print(rows)
+
+bat = [item[1] for item in enumerate(
+    data) if rows[item[0] // size] and cols[item[0] % size]]
+
+print(bat)
