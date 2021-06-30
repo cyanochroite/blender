@@ -79,13 +79,13 @@ class tile():
         for item in enumerate(self.data):
             line += '[' + str(item[1]) + ']'
             if item[0] % self.size_x == self.size_x - 1:
-                text = '|' + line + '|' + "\n" + text
+                text = line + "\n" + text
                 line = ''
         print(text, end='')
         text = ''
         line = ''
         for item in enumerate(self.data):
-            out = '.'
+            out = '*'
             if item[1] > 0:
                 out = 'X'
             if item[1] < 0:
@@ -94,6 +94,8 @@ class tile():
             if item[0] % self.size_x == self.size_x - 1:
                 text = '|' + line + '|' + "\n" + text
                 line = ''
+        text = '+' + '-' * self.size_x + '+' + "\n" + text
+        text = text + '+' + '-' * self.size_x + '+' + "\n"
         print(text, end='')
 
 
@@ -657,42 +659,3 @@ a.display()
 a.shrink()
 a.display()
 
-
-D = data
-X = size_x
-Y = size_y
-
-cols = [any([D[i] for i in range(x, X * Y, X)]) for x in range(X)]
-rows = [any([D[i] for i in range(X * y, X * (y + 1), 1)])
-        for y in range(Y)]
-
-bat = [i[1] for i in enumerate(data) if rows[i[0] // X] and cols[i[0] % X]]
-
-print(bat)
-Z = X * Y
-cols = [any([D[i] for i in range(x, Z, X)]) for x in range(X)]
-print([[D[i] for i in range(x, X * Y, X)] for x in range(X)])
-print([[i for i in range(x, X * Y, X)] for x in range(X)])
-print([x for x in range(X)])
-
-
-rows = [any([D[i] for i in range(X * y, X * (y + 1), 1)])
-        for y in range(Y)]
-rows = [any(D[i: i + X]) for i in range(0, Z, X)]
-print([any([D[i] for i in range(X * y, X * (y + 1), 1)])
-       for y in range(Y)])
-print([[D[i] for i in range(X * y, X * (y + 1), 1)]
-       for y in range(Y)])
-print([[D[i] for i in range(X * y, X * (y + 1), 1)]
-       for y in range(Y)])
-
-y = 2
-print([(X * y) + i for i in range(X)])
-print([y for y in range(Y)])
-
-
-print(data)
-print(rows)
-rows = [any([D[i:i + X] for i in range(0, Z, X)]) for y in range(Y)]
-rows = [any(D[i:i + X]) for i in range(0, Z, X)]
-print(rows)
