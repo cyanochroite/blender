@@ -51,9 +51,6 @@ class tile():
         self.data = data
         self.size_x = size_x
         self.size_y = size_y
-        print(self.data)
-        print(self.size_x)
-        print(self.size_y)
 
     def _loop(self, prefix, infix, suffix):
         for y in range(self.size_y - 1, -1, -1):
@@ -63,26 +60,18 @@ class tile():
             suffix()
 
     def shrink(self):
-
-        # faster?
-        print("final")
-        size_x = self.size_x
-        size_y = self.size_y
-        data = self.data
-
-        cols = [any([data[a] for a in range(x, size_x * size_y, size_x)])
-                for x in range(size_x)]
-        print(cols)
-        rows = [any([data[a] for a in range(size_x * y, size_x * (y + 1), 1)])
-                for y in range(size_y)]
-        print(rows)
-
-        bat = [item[1] for item in enumerate(
-            data) if rows[item[0] // size_x] and cols[item[0] % size_x]]
-
-        print(bat)
-
-        self.new(bat, cols.count(True), rows.count(True))
+        # initialize variables
+        D = self.data
+        X = self.size_x
+        Y = self.size_y
+        L = X * Y  # len(self.data)
+        # mark which columns and rows have data
+        C = [any([D[i] for i in range(x, L, X)]) for x in range(X)]
+        R = [any(D[i: i + X]) for i in range(0, L, X)]
+        # delete columns and rows without data
+        F = [i[1] for i in enumerate(D) if C[i[0] % X] and R[i[0] // X]]
+        # save results
+        self.new(F, C.count(True), R.count(True))
 
     def display(self):
         text = ''
@@ -668,3 +657,42 @@ a.display()
 a.shrink()
 a.display()
 
+
+D = data
+X = size_x
+Y = size_y
+
+cols = [any([D[i] for i in range(x, X * Y, X)]) for x in range(X)]
+rows = [any([D[i] for i in range(X * y, X * (y + 1), 1)])
+        for y in range(Y)]
+
+bat = [i[1] for i in enumerate(data) if rows[i[0] // X] and cols[i[0] % X]]
+
+print(bat)
+Z = X * Y
+cols = [any([D[i] for i in range(x, Z, X)]) for x in range(X)]
+print([[D[i] for i in range(x, X * Y, X)] for x in range(X)])
+print([[i for i in range(x, X * Y, X)] for x in range(X)])
+print([x for x in range(X)])
+
+
+rows = [any([D[i] for i in range(X * y, X * (y + 1), 1)])
+        for y in range(Y)]
+rows = [any(D[i: i + X]) for i in range(0, Z, X)]
+print([any([D[i] for i in range(X * y, X * (y + 1), 1)])
+       for y in range(Y)])
+print([[D[i] for i in range(X * y, X * (y + 1), 1)]
+       for y in range(Y)])
+print([[D[i] for i in range(X * y, X * (y + 1), 1)]
+       for y in range(Y)])
+
+y = 2
+print([(X * y) + i for i in range(X)])
+print([y for y in range(Y)])
+
+
+print(data)
+print(rows)
+rows = [any([D[i:i + X] for i in range(0, Z, X)]) for y in range(Y)]
+rows = [any(D[i:i + X]) for i in range(0, Z, X)]
+print(rows)
