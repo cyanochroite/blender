@@ -49,8 +49,12 @@ class tile():
 
     def new(self, data, size_x, size_y):
         self.data = data
-        self.size_x = size_x
-        self.size_y = size_y
+        self.width = size_x
+        self.height = size_y
+        self.area = size_x * size_y
+
+    def populate(self, number):
+        self.data = [number >> i & 1 or -1 for i in range(len(self.data))]
 
     def _loop(self, prefix, infix, suffix):
         for y in range(self.size_y - 1, -1, -1):
@@ -59,17 +63,27 @@ class tile():
                 infix()
             suffix()
 
-    def shrink(self):
-        # initialize variables
+    def rotate(self):
+        A = self.area
         D = self.data
-        X = self.size_x
-        Y = self.size_y
-        L = X * Y  # len(self.data)
+        H = self.height
+        W = self.width
+        # rotate tile
+        self.data = [D[h] for w in range(W) for h in range(A - W + w, -1, -W)]
+        # swap dimensions
+        self.height = W
+        self.width = H
+
+    def shrink(self):
+        A = self.area
+        D = self.data
+        H = self.height
+        W = self.width
         # mark which columns and rows have data
-        C = [any([D[i] for i in range(x, L, X)]) for x in range(X)]
-        R = [any(D[i: i + X]) for i in range(0, L, X)]
+        C = [any([D[i] for i in range(w, A, W)]) for w in range(W)]
+        R = [any(D[i: i + W]) for i in range(0, A, W)]
         # delete columns and rows without data
-        F = [i[1] for i in enumerate(D) if C[i[0] % X] and R[i[0] // X]]
+        F = [b for a, b in enumerate(D) if C[a % W] and R[a // W]]
         # save results
         self.new(F, C.count(True), R.count(True))
 
@@ -78,7 +92,7 @@ class tile():
         line = ''
         for item in enumerate(self.data):
             line += '[' + str(item[1]) + ']'
-            if item[0] % self.size_x == self.size_x - 1:
+            if item[0] % self.width == self.width - 1:
                 text = line + "\n" + text
                 line = ''
         print(text, end='')
@@ -91,11 +105,11 @@ class tile():
             if item[1] < 0:
                 out = 'O'
             line += out
-            if item[0] % self.size_x == self.size_x - 1:
+            if item[0] % self.width == self.width - 1:
                 text = '|' + line + '|' + "\n" + text
                 line = ''
-        text = '+' + '-' * self.size_x + '+' + "\n" + text
-        text = text + '+' + '-' * self.size_x + '+' + "\n"
+        text = '+' + '-' * self.width + '+' + "\n" + text
+        text = text + '+' + '-' * self.width + '+' + "\n"
         print(text, end='')
 
 
@@ -658,4 +672,19 @@ a.new(data, size_x, size_y)
 a.display()
 a.shrink()
 a.display()
+a.rotate()
+a.display()
 
+# a.populate(137)
+# a.display()
+
+X = 4
+Y = 4
+L = X * Y
+a = [y for x in range(5) for y in range(3 - 1, -1, -1)]
+a = [y for x in range(5) for y in range(L - 1, -1, -X)]
+
+a = [y for x in range(X - 1, -1, -1) for y in range(x, L, X)]
+print(a)
+a = [y for x in range(X) for y in range(L - X + x, -1, -X)]
+print(a)
