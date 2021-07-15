@@ -54,14 +54,23 @@ class tile():
         self.area = size_x * size_y
 
     def populate(self, number):
-        self.data = [number >> i & 1 or -1 for i in range(len(self.data))]
+        A = self.area
+        D = self.data
+        N = number
+        # populate tile
+        F = [N >> i & 1 or -1 for i in range(A)]
+        # save
+        self.data = R
 
-    def _loop(self, prefix, infix, suffix):
-        for y in range(self.size_y - 1, -1, -1):
-            prefix()
-            for x in range(self.size_x - 1, -1, -1):
-                infix()
-            suffix()
+    def flip(self):
+        A = self.area
+        D = self.data
+        H = self.height
+        W = self.width
+        # flip tile
+        F = [D[h - 1] for w in range(0, A, W) for h in range(W + w, w, -1)]
+        # save
+        self.data = F
 
     def rotate(self):
         A = self.area
@@ -69,8 +78,9 @@ class tile():
         H = self.height
         W = self.width
         # rotate tile
-        self.data = [D[h] for w in range(W) for h in range(A - W + w, -1, -W)]
+        F = [D[h] for w in range(W) for h in range(A - W + w, -1, -W)]
         # swap dimensions
+        self.data = F
         self.height = W
         self.width = H
 
@@ -674,6 +684,8 @@ a.shrink()
 a.display()
 a.rotate()
 a.display()
+a.flip()
+a.display()
 
 # a.populate(137)
 # a.display()
@@ -681,10 +693,15 @@ a.display()
 X = 4
 Y = 4
 L = X * Y
-a = [y for x in range(5) for y in range(3 - 1, -1, -1)]
-a = [y for x in range(5) for y in range(L - 1, -1, -X)]
+
 
 a = [y for x in range(X - 1, -1, -1) for y in range(x, L, X)]
 print(a)
 a = [y for x in range(X) for y in range(L - X + x, -1, -X)]
+print(a)
+
+
+a = [y - 1 for x in range(0, L, X) for y in range(X + x, x, -1)]
+print(a)
+a = [y for x in range(L - X, -1, -X) for y in range(x, X + x, 1)]
 print(a)
