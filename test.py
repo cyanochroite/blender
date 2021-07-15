@@ -40,12 +40,16 @@ if False:
 
 
 class tile():
-    size_x = 0
-    sizy_y = 0
+    area = 0
     data = []
+    height = 0
+    width = 0
 
-    def __init__(self):
-        pass
+    def __init__(self, width, height):
+        self.area = width * height
+        self.data = [0 for i in range(width * height)]
+        self.height = height
+        self.width = width
 
     def new(self, data, size_x, size_y):
         self.data = data
@@ -60,7 +64,24 @@ class tile():
         # populate tile
         F = [N >> i & 1 or -1 for i in range(A)]
         # save
-        self.data = R
+        self.data = F
+
+    def shift_y(self):
+        S = self.area
+        D = self.data
+        W = self.width
+        # shift tile
+        F = [D[b % S] for a in range(W, S + W, W) for b in range(a, a + W)]
+        # save
+        self.data = F
+
+    def shift_x(self):
+        D = self.data
+        W = self.width
+        # shift tile
+        F = [D[a * W + (b + 1) % W] for a in range(W) for b in range(W)]
+        # save
+        self.data = F
 
     def flip(self):
         A = self.area
@@ -677,14 +698,16 @@ print("<<")
 data = [1, 1, 1, 0, 1, 0, 0, 0, 0]
 size_x = 3
 size_y = 3
-a = tile()
-a.new(data, size_x, size_y)
+a = tile(4, 4)
+a.display()
+a.populate(23)
 a.display()
 a.shrink()
 a.display()
-a.rotate()
+print("MOO")
+a.shift_x()
 a.display()
-a.flip()
+a.shift_y()
 a.display()
 
 # a.populate(137)
@@ -695,13 +718,17 @@ Y = 4
 L = X * Y
 
 
-a = [y for x in range(X - 1, -1, -1) for y in range(x, L, X)]
+a = [y % L for x in range(X, L + X, X) for y in range(x, x + X)]
 print(a)
-a = [y for x in range(X) for y in range(L - X + x, -1, -X)]
+a = [y % L for x in range(1, Y + 1) for y in range((X * x), X + (X * x))]
 print(a)
-
-
-a = [y - 1 for x in range(0, L, X) for y in range(X + x, x, -1)]
+a = [X * y % L for x in range(1, Y + 1) for y in range((x), (x + 1))]
 print(a)
-a = [y for x in range(L - X, -1, -X) for y in range(x, X + x, 1)]
+a = [(x * X + (y % X)) % L for x in range(X) for y in range(1, X + 1)]
+print(a)
+a = [x * X + y % X for x in range(X) for y in range(1, X + 1)]
+print(a)
+a = [x * X + (y + 1) % X for x in range(X) for y in range(X)]
+print(a)
+a = [x + (y + 1) % X for x in range(0, L, X) for y in range(X)]
 print(a)
