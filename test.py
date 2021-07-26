@@ -83,15 +83,29 @@ class tile():
         # save
         self.data = F
 
-    def flip(self):
+    def flip_x(self):
         A = self.area
         D = self.data
         H = self.height
         W = self.width
         # flip tile
-        F = [D[h - 1] for w in range(0, A, W) for h in range(W + w, w, -1)]
+        F = [D[y + x] for x in range(0, L, X) for y in reversed(range(X))]
         # save
         self.data = F
+
+        print(F)
+        print(F)
+
+    def flip_y(self):
+        A = self.area
+        D = self.data
+        H = self.height
+        W = self.width
+        # flip tile
+        F = [D[a + b] for a in reversed(range(0, A, W)) for b in range(X)]
+        # save
+        self.data = F
+        print(a)
 
     def rotate(self):
         A = self.area
@@ -99,7 +113,7 @@ class tile():
         H = self.height
         W = self.width
         # rotate tile
-        F = [D[h] for w in range(W) for h in range(A - W + w, -1, -W)]
+        F = [D[b] for a in range(W) for b in reversed(range(a, A, W))]
         # swap dimensions
         self.data = F
         self.height = W
@@ -716,19 +730,16 @@ a.display()
 X = 4
 Y = 4
 L = X * Y
+A = L
+W = X
 
 
-a = [y % L for x in range(X, L + X, X) for y in range(x, x + X)]
-print(a)
-a = [y % L for x in range(1, Y + 1) for y in range((X * x), X + (X * x))]
-print(a)
-a = [X * y % L for x in range(1, Y + 1) for y in range((x), (x + 1))]
-print(a)
-a = [(x * X + (y % X)) % L for x in range(X) for y in range(1, X + 1)]
-print(a)
-a = [x * X + y % X for x in range(X) for y in range(1, X + 1)]
-print(a)
-a = [x * X + (y + 1) % X for x in range(X) for y in range(X)]
-print(a)
-a = [x + (y + 1) % X for x in range(0, L, X) for y in range(X)]
-print(a)
+F = [y + x for x in range(0, L, X) for y in reversed(range(X))]
+print(F)
+F = [a + b for a in reversed(range(0, A, W)) for b in range(X)]
+print(F)
+
+F = [h for w in range(W) for h in range(A - W + w, -1, -W)]
+print(F)
+F = [b for a in range(W) for b in reversed(range(a, A, W))]
+print(F)
