@@ -66,30 +66,33 @@ class tile():
         # save
         self.data = F
 
+    def wide(self):
+        return range(self.width)
+
     def shift_y(self):
-        S = self.area
         D = self.data
-        W = self.width
+        X = self.width
+        Y = self.area
         # shift tile
-        F = [D[b % S] for a in range(W, S + W, W) for b in range(a, a + W)]
+        F = [D[b % Y] for a in range(X, Y + X, X) for b in range(a, a + X)]
         # save
         self.data = F
 
     def shift_x(self):
         D = self.data
-        W = self.width
+        X = self.width
+        Y = self.area
         # shift tile
-        F = [D[a * W + (b + 1) % W] for a in range(W) for b in range(W)]
+        F = [D[a * X + (b + 1) % X] for a in range(X) for b in range(X)]
         # save
         self.data = F
 
     def flip_x(self):
-        A = self.area
         D = self.data
-        H = self.height
-        W = self.width
+        X = self.width
+        Y = self.area
         # flip tile
-        F = [D[y + x] for x in range(0, L, X) for y in reversed(range(X))]
+        F = [D[y + x] for x in range(0, Y, X) for y in reversed(range(X))]
         # save
         self.data = F
 
@@ -97,38 +100,35 @@ class tile():
         print(F)
 
     def flip_y(self):
-        A = self.area
         D = self.data
-        H = self.height
-        W = self.width
+        X = self.width
+        Y = self.area
         # flip tile
-        F = [D[a + b] for a in reversed(range(0, A, W)) for b in range(X)]
+        F = [D[a + b] for a in reversed(range(0, Y, X)) for b in range(X)]
         # save
         self.data = F
         print(a)
 
     def rotate(self):
-        A = self.area
         D = self.data
-        H = self.height
-        W = self.width
+        X = self.width
+        Y = self.area
         # rotate tile
-        F = [D[b] for a in range(W) for b in reversed(range(a, A, W))]
+        F = [D[b] for a in range(W) for b in reversed(range(a, Y, X))]
         # swap dimensions
         self.data = F
         self.height = W
         self.width = H
 
     def shrink(self):
-        A = self.area
         D = self.data
-        H = self.height
-        W = self.width
+        X = self.width
+        Y = self.area
         # mark which columns and rows have data
-        C = [any([D[i] for i in range(w, A, W)]) for w in range(W)]
-        R = [any(D[i: i + W]) for i in range(0, A, W)]
+        C = [any([D[i] for i in range(w, Y, X)]) for w in range(X)]
+        R = [any(D[i: i + X]) for i in range(0, Y, X)]
         # delete columns and rows without data
-        F = [b for a, b in enumerate(D) if C[a % W] and R[a // W]]
+        F = [b for a, b in enumerate(D) if C[a % X] and R[a // X]]
         # save results
         self.new(F, C.count(True), R.count(True))
 
@@ -597,7 +597,7 @@ def count_blanks():
 sym = [0, 1632, 27030, 28662, 36873, 38505, 63903, 65535]
 X = 8 * 4
 Y = 8 * 4
-Z = len(sym)
+Y = len(sym)
 W = len(sym)
 sim = 0
 x = 0
@@ -729,17 +729,21 @@ a.display()
 
 X = 4
 Y = 4
-L = X * Y
-A = L
-W = X
+Y = 16
 
+D = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+C = D
+R = D
 
-F = [y + x for x in range(0, L, X) for y in reversed(range(X))]
+F = [D[b % Y] for a in range(X, Y + X, X) for b in range(a, a + X)]
 print(F)
-F = [a + b for a in reversed(range(0, A, W)) for b in range(X)]
+F = [D[a * X + (b + 1) % X] for a in range(X) for b in range(X)]
 print(F)
-
-F = [h for w in range(W) for h in range(A - W + w, -1, -W)]
+F = [D[y + x] for x in range(0, Y, X) for y in reversed(range(X))]
 print(F)
-F = [b for a in range(W) for b in reversed(range(a, A, W))]
+F = [D[a + b] for a in reversed(range(0, Y, X)) for b in range(X)]
+print(F)
+F = [D[b] for a in range(W) for b in reversed(range(a, Y, X))]
+print(F)
+F = [b for a, b in enumerate(D) if C[a % W] and R[a // X]]
 print(F)
