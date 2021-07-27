@@ -69,30 +69,49 @@ class tile():
     def wide(self):
         return range(self.width)
 
+    def E(self):
+        X = self.width
+        Y = self.area
+        return range(X)
+
+    def G(self):
+        X = self.width
+        Y = self.area
+        return range(0, Y, X)
+
     def shift_y(self):
         D = self.data
+        E = self.E
+        G = self.G
         X = self.width
         Y = self.area
         # shift tile
         F = [D[b % Y] for a in range(X, Y + X, X) for b in range(a, a + X)]
+        F = [D[(a + b + X) % Y] for a in G() for b in E()]
         # save
         self.data = F
 
     def shift_x(self):
         D = self.data
+        E = self.E
+        G = self.G
         X = self.width
         Y = self.area
         # shift tile
         F = [D[a * X + (b + 1) % X] for a in range(X) for b in range(X)]
+        F = [D[a + (b + 1) % X] for a in G() for b in E()]
         # save
         self.data = F
 
     def flip_x(self):
         D = self.data
+        E = self.E
+        G = self.G
         X = self.width
         Y = self.area
         # flip tile
         F = [D[y + x] for x in range(0, Y, X) for y in reversed(range(X))]
+        F = [D[a + b] for a in G() for b in reversed(E())]
         # save
         self.data = F
 
@@ -101,20 +120,26 @@ class tile():
 
     def flip_y(self):
         D = self.data
+        E = self.E
+        G = self.G
         X = self.width
         Y = self.area
         # flip tile
         F = [D[a + b] for a in reversed(range(0, Y, X)) for b in range(X)]
+        F = [D[a + b] for a in reversed(G()) for b in E()]
         # save
         self.data = F
         print(a)
 
     def rotate(self):
         D = self.data
+        E = self.E
+        G = self.G
         X = self.width
         Y = self.area
         # rotate tile
         F = [D[b] for a in range(W) for b in reversed(range(a, Y, X))]
+        F = [D[a + b] for a in E() for b in reversed(G())]
         # swap dimensions
         self.data = F
         self.height = W
@@ -122,11 +147,15 @@ class tile():
 
     def shrink(self):
         D = self.data
+        E = self.E
+        G = self.G
         X = self.width
         Y = self.area
         # mark which columns and rows have data
         C = [any([D[i] for i in range(w, Y, X)]) for w in range(X)]
+        C = [any([D[a + b] for a in G()]) for b in E()]
         R = [any(D[i: i + X]) for i in range(0, Y, X)]
+        R = [any([D[a + b] for a in E()]) for b in G()]
         # delete columns and rows without data
         F = [b for a, b in enumerate(D) if C[a % X] and R[a // X]]
         # save results
@@ -735,15 +764,25 @@ D = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 C = D
 R = D
 
-F = [D[b % Y] for a in range(X, Y + X, X) for b in range(a, a + X)]
+
+def E():
+    return range(X)
+
+
+def G():
+    return range(0, Y, X)
+
+
+F = [D[(a + b + X) % Y] for a in G() for b in E()]
 print(F)
-F = [D[a * X + (b + 1) % X] for a in range(X) for b in range(X)]
+F = [D[a + (b + 1) % X] for a in G() for b in E()]
 print(F)
-F = [D[y + x] for x in range(0, Y, X) for y in reversed(range(X))]
+F = [D[a + b] for a in G() for b in reversed(E())]
 print(F)
-F = [D[a + b] for a in reversed(range(0, Y, X)) for b in range(X)]
+F = [D[a + b] for a in reversed(G()) for b in E()]
 print(F)
-F = [D[b] for a in range(W) for b in reversed(range(a, Y, X))]
+F = [D[a + b] for a in E() for b in reversed(G())]
 print(F)
-F = [b for a, b in enumerate(D) if C[a % W] and R[a // X]]
-print(F)
+
+
+
