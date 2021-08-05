@@ -756,33 +756,3 @@ a.display()
 # a.populate(137)
 # a.display()
 
-X = 4
-Y = 4
-Y = 16
-
-D = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-C = D
-R = D
-
-
-def E():
-    return range(X)
-
-
-def G():
-    return range(0, Y, X)
-
-
-F = [D[(a + b + X) % Y] for a in G() for b in E()]
-print(F)
-F = [D[a + (b + 1) % X] for a in G() for b in E()]
-print(F)
-F = [D[a + b] for a in G() for b in reversed(E())]
-print(F)
-F = [D[a + b] for a in reversed(G()) for b in E()]
-print(F)
-F = [D[a + b] for a in E() for b in reversed(G())]
-print(F)
-
-
-
