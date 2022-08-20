@@ -273,3 +273,27 @@ for seed in range(10 * 0):
 
 print(mazeit(4))
 draw()
+
+
+def finish():
+    final = []
+    index = 0
+    for cell in maze:
+        final.append(cell == WALL)
+        index += 1
+        if index % width == 0:
+            final.append(None)
+    return final
+
+
+final = finish()
+print(final)
+
+for cell in final:
+    if cell == True:
+        print("0", end="")
+    if cell == False:
+        print("1", end="")
+    if cell == None:
+        print("")
+
