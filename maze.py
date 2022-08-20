@@ -1,5 +1,6 @@
 grid = []
 line = []
+copy = []
 
 cell_width = 5
 cell_height = 4
@@ -50,6 +51,7 @@ for cell in range(size):
     c |= WEST if west else 0
     grid.append(c if space else WALL)
     if space:
+        copy.append(cell)
         line.append(cell)
 
 
@@ -126,19 +128,19 @@ def uncarved_neighbor(cell_start, direction):
     if value & NORTH:
         pick = go_north(cell)
         oppsite = UNNORTH
-        maze[pick] = str(int_from_cell(pick) & oppsite)
+        maze[pick] &= oppsite
     if value & SOUTH:
         pick = go_south(cell)
         oppsite = UNSOUTH
-        maze[pick] = str(int_from_cell(pick) & oppsite)
+        maze[pick] &= oppsite
     if value & EAST:
         pick = go_east(cell)
         oppsite = UNEAST
-        maze[pick] = str(int_from_cell(pick) & oppsite)
+        maze[pick] &= oppsite
     if value & WEST:
         pick = go_west(cell)
         oppsite = UNWEST
-        maze[pick] = str(int_from_cell(pick) & oppsite)
+        maze[pick] &= oppsite
 
 
 def carve(cell, direction, insede=True):
@@ -155,7 +157,7 @@ def carve(cell, direction, insede=True):
         case 8:  # WEST
             pick = frog - 1
     maze[pick] = HOLE
-    if insede and False:
+    if insede:
         uncarved_neighbor(cell, direction)
 
 
@@ -189,13 +191,31 @@ def remove_from_list():
     del line[index]
     return cell
 
-
+fail = 1000
 cat = len(line)
-print(line)
-for index in range(cat):
+
+while fail > 0 and cat > 0:
+    fail -= 1
     cell = remove_from_list()
     carve_random(cell)
+    cat = len(line)
 
-maze = [" " if cell == "0" else cell for cell in maze]
+if fail <= 0:
+    print("FAILFAILFAILFAILFAIL")
 
 draw()
+
+
+def count():
+    count = 0
+    for cell in copy:
+        walls = 0
+        walls += 1 if maze[cell - width] == WALL else 0
+        walls += 1 if maze[cell + width] == WALL else 0
+        walls += 1 if maze[cell + 1] == WALL else 0
+        walls += 1 if maze[cell - 1] == WALL else 0
+        count += 1 if walls == 3 else 0
+    return count
+
+
+print(count())
