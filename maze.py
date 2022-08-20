@@ -1,7 +1,7 @@
 grid = []
 line = []
 
-cell_width = 3
+cell_width = 5
 cell_height = 4
 cell_size = cell_width * cell_height
 
@@ -10,10 +10,23 @@ height = cell_height * 2 + 1
 size = width * height
 
 
+WALL = -1
+HOLE = -2
+
 NORTH = 1 << 0
 SOUTH = 1 << 1
 EAST = 1 << 2
 WEST = 1 << 3
+
+NORTH = 1
+SOUTH = 2
+EAST = 4
+WEST = 8
+
+UNNORTH = 14
+UNSOUTH = 13
+UNEAST = 11
+UNWEST = 7
 
 VERTICAL = 2 * width
 HORIZONTAL = 2
@@ -35,8 +48,7 @@ for cell in range(size):
     c |= SOUTH if south else 0
     c |= EAST if east else 0
     c |= WEST if west else 0
-    f = str(hex(c))[2:3]
-    grid.append(f if space else "#")
+    grid.append(c if space else WALL)
     if space:
         line.append(cell)
 
@@ -47,7 +59,14 @@ maze = grid
 def draw():
     index = 0
     for cell in maze:
-        print(cell, end="")
+        value = str(hex(cell))[2:3]
+        if cell == WALL:
+            value = "#"
+        if cell == HOLE:
+            value = "-"
+        if cell == 0:
+            value = "^"
+        print(value, end="")
         index += 1
         if index % width == 0:
             print("")
@@ -59,37 +78,124 @@ import random
 random.seed(0)
 
 
-def carve(cell, direction):
-    pick = 0
-    frog = line[cell]
+def go_north(cell):
+    value = cell - width - width
+    return value
+
+
+def go_south(cell):
+    value = cell + width + width
+    return value
+
+
+def go_east(cell):
+    value = cell + 1 + 1
+    return value
+
+
+def go_west(cell):
+    value = cell - 1 - 1
+    return value
+
+
+def int_from_cell(cell):
+    if cell == 80:
+        pass
+#    value = int(maze[cell], 16)
+    value = maze[cell]
+    return value
+
+
+def move(cell, direction):
     match direction:
-        case 1:
+        case 1:  # NORTH
+            pick = go_north(cell)
+        case 2:  # SOUTH
+            pick = go_south(cell)
+        case 4:  # EAST
+            pick = go_east(cell)
+        case 8:  # WEST
+            pick = go_west(cell)
+    return pick
+
+
+def uncarved_neighbor(cell_start, direction):
+    cell = move(cell_start, direction)
+    inside = maze[cell]
+    value = int_from_cell(cell)
+    if value & NORTH:
+        pick = go_north(cell)
+        oppsite = UNNORTH
+        maze[pick] = str(int_from_cell(pick) & oppsite)
+    if value & SOUTH:
+        pick = go_south(cell)
+        oppsite = UNSOUTH
+        maze[pick] = str(int_from_cell(pick) & oppsite)
+    if value & EAST:
+        pick = go_east(cell)
+        oppsite = UNEAST
+        maze[pick] = str(int_from_cell(pick) & oppsite)
+    if value & WEST:
+        pick = go_west(cell)
+        oppsite = UNWEST
+        maze[pick] = str(int_from_cell(pick) & oppsite)
+
+
+def carve(cell, direction, insede=True):
+    pick = 0
+    frog = cell
+    oppsite = 0
+    match direction:
+        case 1:  # NORTH
             pick = frog - width
-        case 2:
+        case 2:  # SOUTH
             pick = frog + width
-        case 4:
+        case 4:  # EAST
             pick = frog + 1
-        case 8:
+        case 8:  # WEST
             pick = frog - 1
-    maze[frog] = " "
-    maze[pick] = " "
+    maze[pick] = HOLE
+    if insede and False:
+        uncarved_neighbor(cell, direction)
+
+
+def carve_random(cell):
+    direction = int_from_cell(cell)
+    choice = []
+    if direction & NORTH:
+        choice.append(NORTH)
+    if direction & SOUTH:
+        choice.append(SOUTH)
+    if direction & EAST:
+        choice.append(EAST)
+    if direction & WEST:
+        choice.append(WEST)
+
+    direction = random.choice(choice)
+    carve(cell, direction)
 
 
 enter = random.randrange(0, cell_width)
 exit = random.randrange(cell_size - cell_width, cell_size)
 
-carve(enter, NORTH)
-carve(exit, SOUTH)
+carve(line[enter], NORTH, False)
+carve(line[exit], SOUTH, False)
+
+
+def remove_from_list():
+    length = len(line)
+    index = random.randrange(length)
+    cell = line[index]
+    del line[index]
+    return cell
+
 
 cat = len(line)
 print(line)
 for index in range(cat):
-    cat = len(line)
-    rando = random.randrange(cat)
-    lookup = line[rando]
-    thing = maze[lookup]
-    del line[rando]
-    print(cat, rando, lookup, thing, line)
+    cell = remove_from_list()
+    carve_random(cell)
 
+maze = [" " if cell == "0" else cell for cell in maze]
 
 draw()
