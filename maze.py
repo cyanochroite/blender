@@ -1,5 +1,9 @@
 cell_width = 50
 cell_height = 75
+
+cell_width = 10
+cell_height = 10
+
 cell_size = cell_width * cell_height
 
 width = cell_width * 2 + 1
