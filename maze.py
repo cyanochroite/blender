@@ -3,8 +3,8 @@ grid = []
 line = []
 copy = []
 
-cell_width = 15
-cell_height = 14
+cell_width = 75
+cell_height = 50
 cell_size = cell_width * cell_height
 
 width = cell_width * 2 + 1
@@ -59,11 +59,12 @@ for cell in range(size):
 
 
 def draw():
+    print("=====================")
     index = 0
     for cell in maze:
         value = str(hex(cell))[2:3]
         if cell == WALL:
-            value = "#"
+            value = "@"
         if cell == HOLE:
             value = " "
         if cell == 0:
@@ -74,10 +75,7 @@ def draw():
             print("")
 
 
-print("=====================")
 
-import random
-random.seed(0)
 
 
 def go_north(cell):
@@ -101,9 +99,6 @@ def go_west(cell):
 
 
 def int_from_cell(cell):
-    if cell == 80:
-        pass
-#    value = int(maze[cell], 16)
     value = maze[cell]
     return value
 
@@ -185,11 +180,18 @@ def carve_random(cell):
         choice.append(WEST)
 
     direction = random.choice(choice)
+    #direction = secrets.choice(choice)
+
     return carve(cell, direction)
 
-
+import random
+random.seed(7)
 enter = random.randrange(0, cell_width)
 exit = random.randrange(cell_size - cell_width, cell_size)
+
+#import secrets
+#enter = secrets.randbelow(cell_width)
+#exit = secrets.randbelow(cell_width) + cell_size - cell_width
 
 enter = line[enter]
 exit = line[exit]
@@ -205,7 +207,7 @@ def remove_from_list():
     del line[index]
     return cell
 
-fail = 1000
+fail = 100000
 line = [enter]
 cat = len(line)
 
@@ -216,8 +218,21 @@ def random_from_list():
     cell = line[index]
     return cell
 
+def random_from_list2():
+    length = len(line)
+    change = 8
+    if length > change:
+        index = random.randrange(change)
+    else:
+        index = random.randrange(length)
+
+    index = length - 1
+    cell = line[index]
+    return cell
+
 while fail > 0 and cat > 0:
     fail -= 1
+    #draw()
     
     cell = random_from_list()
     where = carve_random(cell)
