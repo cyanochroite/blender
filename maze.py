@@ -1,9 +1,10 @@
+maze = []
 grid = []
 line = []
 copy = []
 
-cell_width = 5
-cell_height = 4
+cell_width = 15
+cell_height = 14
 cell_size = cell_width * cell_height
 
 width = cell_width * 2 + 1
@@ -50,12 +51,11 @@ for cell in range(size):
     c |= EAST if east else 0
     c |= WEST if west else 0
     grid.append(c if space else WALL)
+    maze.append(c if space else WALL)
     if space:
         copy.append(cell)
         line.append(cell)
 
-
-maze = grid
 
 
 def draw():
@@ -65,9 +65,9 @@ def draw():
         if cell == WALL:
             value = "#"
         if cell == HOLE:
-            value = "-"
+            value = " "
         if cell == 0:
-            value = "^"
+            value = " "
         print(value, end="")
         index += 1
         if index % width == 0:
@@ -123,23 +123,33 @@ def move(cell, direction):
 
 def uncarved_neighbor(cell_start, direction):
     cell = move(cell_start, direction)
-    inside = maze[cell]
-    value = int_from_cell(cell)
+    value = grid[cell] # grid shows neighbors
+
+    if direction & NORTH:
+        maze[cell] &= UNSOUTH
+    if direction & SOUTH:
+        maze[cell] &= UNNORTH
+    if direction & EAST:
+        maze[cell] &= UNWEST
+    if direction & WEST:
+        maze[cell] &= UNEAST
+
+
     if value & NORTH:
         pick = go_north(cell)
-        oppsite = UNNORTH
+        oppsite = UNSOUTH
         maze[pick] &= oppsite
     if value & SOUTH:
         pick = go_south(cell)
-        oppsite = UNSOUTH
+        oppsite = UNNORTH
         maze[pick] &= oppsite
     if value & EAST:
         pick = go_east(cell)
-        oppsite = UNEAST
+        oppsite = UNWEST
         maze[pick] &= oppsite
     if value & WEST:
         pick = go_west(cell)
-        oppsite = UNWEST
+        oppsite = UNEAST
         maze[pick] &= oppsite
 
 
@@ -159,6 +169,7 @@ def carve(cell, direction, insede=True):
     maze[pick] = HOLE
     if insede:
         uncarved_neighbor(cell, direction)
+    return move(cell, direction)
 
 
 def carve_random(cell):
@@ -174,14 +185,17 @@ def carve_random(cell):
         choice.append(WEST)
 
     direction = random.choice(choice)
-    carve(cell, direction)
+    return carve(cell, direction)
 
 
 enter = random.randrange(0, cell_width)
 exit = random.randrange(cell_size - cell_width, cell_size)
 
-carve(line[enter], NORTH, False)
-carve(line[exit], SOUTH, False)
+enter = line[enter]
+exit = line[exit]
+
+carve(enter, NORTH, False)
+carve(exit, SOUTH, False)
 
 
 def remove_from_list():
@@ -192,12 +206,25 @@ def remove_from_list():
     return cell
 
 fail = 1000
+line = [enter]
 cat = len(line)
+
+
+def random_from_list():
+    length = len(line)
+    index = random.randrange(length)
+    cell = line[index]
+    return cell
 
 while fail > 0 and cat > 0:
     fail -= 1
-    cell = remove_from_list()
-    carve_random(cell)
+    
+    cell = random_from_list()
+    where = carve_random(cell)
+    line.append(where)
+
+    line = [item for item in line if maze[item] > 0]
+
     cat = len(line)
 
 if fail <= 0:
@@ -217,5 +244,5 @@ def count():
         count += 1 if walls == 3 else 0
     return count
 
-
+print(fail)
 print(count())
