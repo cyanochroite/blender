@@ -1,10 +1,5 @@
-maze = []
-grid = []
-line = []
-copy = []
-
-cell_width = 75
-cell_height = 50
+cell_width = 50
+cell_height = 75
 cell_size = cell_width * cell_height
 
 width = cell_width * 2 + 1
@@ -33,30 +28,6 @@ UNWEST = 7
 VERTICAL = 2 * width
 HORIZONTAL = 2
 
-for cell in range(size):
-    if cell == 12:
-        pass
-    x = cell % width
-    y = cell // width
-    odd_x = x % 2
-    odd_y = y % 2
-    space = odd_x and odd_y
-    north = cell >= VERTICAL
-    south = VERTICAL < size - cell
-    east = x + HORIZONTAL < width
-    west = x - HORIZONTAL >= 0
-    c = 0
-    c |= NORTH if north else 0
-    c |= SOUTH if south else 0
-    c |= EAST if east else 0
-    c |= WEST if west else 0
-    grid.append(c if space else WALL)
-    maze.append(c if space else WALL)
-    if space:
-        copy.append(cell)
-        line.append(cell)
-
-
 
 def draw():
     print("=====================")
@@ -73,9 +44,6 @@ def draw():
         index += 1
         if index % width == 0:
             print("")
-
-
-
 
 
 def go_north(cell):
@@ -118,7 +86,7 @@ def move(cell, direction):
 
 def uncarved_neighbor(cell_start, direction):
     cell = move(cell_start, direction)
-    value = grid[cell] # grid shows neighbors
+    value = grid[cell]  # grid shows neighbors
 
     if direction & NORTH:
         maze[cell] &= UNSOUTH
@@ -128,7 +96,6 @@ def uncarved_neighbor(cell_start, direction):
         maze[cell] &= UNWEST
     if direction & WEST:
         maze[cell] &= UNEAST
-
 
     if value & NORTH:
         pick = go_north(cell)
@@ -184,20 +151,8 @@ def carve_random(cell):
 
     return carve(cell, direction)
 
+
 import random
-random.seed(7)
-enter = random.randrange(0, cell_width)
-exit = random.randrange(cell_size - cell_width, cell_size)
-
-#import secrets
-#enter = secrets.randbelow(cell_width)
-#exit = secrets.randbelow(cell_width) + cell_size - cell_width
-
-enter = line[enter]
-exit = line[exit]
-
-carve(enter, NORTH, False)
-carve(exit, SOUTH, False)
 
 
 def remove_from_list():
@@ -207,16 +162,13 @@ def remove_from_list():
     del line[index]
     return cell
 
-fail = 100000
-line = [enter]
-cat = len(line)
-
 
 def random_from_list():
     length = len(line)
     index = random.randrange(length)
     cell = line[index]
     return cell
+
 
 def random_from_list2():
     length = len(line)
@@ -230,23 +182,6 @@ def random_from_list2():
     cell = line[index]
     return cell
 
-while fail > 0 and cat > 0:
-    fail -= 1
-    #draw()
-    
-    cell = random_from_list()
-    where = carve_random(cell)
-    line.append(where)
-
-    line = [item for item in line if maze[item] > 0]
-
-    cat = len(line)
-
-if fail <= 0:
-    print("FAILFAILFAILFAILFAIL")
-
-draw()
-
 
 def count():
     count = 0
@@ -259,5 +194,82 @@ def count():
         count += 1 if walls == 3 else 0
     return count
 
-print(fail)
-print(count())
+
+def mazeit(seed):
+    global line
+    global maze
+    global copy
+    global grid
+
+    maze = []
+    grid = []
+    line = []
+    copy = []
+
+    random.seed(seed)
+
+    for cell in range(size):
+        if cell == 12:
+            pass
+        x = cell % width
+        y = cell // width
+        odd_x = x % 2
+        odd_y = y % 2
+        space = odd_x and odd_y
+        north = cell >= VERTICAL
+        south = VERTICAL < size - cell
+        east = x + HORIZONTAL < width
+        west = x - HORIZONTAL >= 0
+        c = 0
+        c |= NORTH if north else 0
+        c |= SOUTH if south else 0
+        c |= EAST if east else 0
+        c |= WEST if west else 0
+        grid.append(c if space else WALL)
+        maze.append(c if space else WALL)
+        if space:
+            copy.append(cell)
+            line.append(cell)
+
+    enter = random.randrange(0, cell_width)
+    exit = random.randrange(cell_size - cell_width, cell_size)
+
+    #import secrets
+    #enter = secrets.randbelow(cell_width)
+    #exit = secrets.randbelow(cell_width) + cell_size - cell_width
+
+    enter = copy[enter]
+    exit = copy[exit]
+
+    carve(enter, NORTH, False)
+    carve(exit, SOUTH, False)
+
+    fail = 100000
+    line = [enter]
+    cat = len(line)
+
+    while fail > 0 and cat > 0:
+        fail -= 1
+        # draw()
+
+        cell = random_from_list()
+        where = carve_random(cell)
+        line.append(where)
+
+        line = [item for item in line if maze[item] > 0]
+
+        cat = len(line)
+
+    if fail <= 0:
+        print("FAILFAILFAILFAILFAIL")
+
+    return count()
+
+
+for seed in range(10 * 0):
+    many = mazeit(seed)
+    draw()
+    print(seed, many)
+
+print(mazeit(4))
+draw()
