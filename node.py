@@ -1,51 +1,42 @@
 import bpy
+import bmesh
 import time
 
-obj = bpy.context.active_object
-node_group = obj.modifiers['GeometryNodes'].node_group
-nodes = node_group.nodes
+for mesh in bpy.data.meshes:
+    bpy.data.meshes.remove(
+        mesh,
+        do_unlink=True,
+        do_id_user=True,
+        do_ui_user=True
+    )
 
-for node in nodes:
-    nodes.remove(node)
 
-geom_out = nodes.get('Group Output')
+def new_mesh(name, location):
+    mesh = bpy.data.meshes.new(name)
+    object = bpy.data.objects.new(name, mesh)
+    bpy.context.scene.collection.objects.link(object)
 
+    bm = bmesh.new()
+    bmesh.ops.create_cube(bm, size=1.0)
+    bm.to_mesh(mesh)
+    bm.free()
 
-join = nodes.new("GeometryNodeJoinGeometry")
-join.location = (3200, 50)
+    object.location = location
+
+    return object
+
 
 maze = [True, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True, True, True, True, None, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, True, None, True, False, True, True, True, False, True, False, True, False, True, False, True, True, True, True, True, True, True, False, True, None, True, False, True, False, False, False, True, False, True, False, True, False, False, False, False, False, False, False, False, False, True, None, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True, True, True, None, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, False, False, True, None, True, False, True, False, True, False, True, False, True, True, True, False, True, True, True, False, True, True, True, False, True, None, True, False, True, False, True, False, True, False, True, False, False, False, False, False, True, False, False, False, True, False, True, None, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True, True, True, False, True, None, True, False, True, False, True, False, True, False, True, False, True, False, True, False, False, False, True, False, False, False, True, None, True, False, True, True, True, False, True, False, True, True, True, True, True, False, True, False, True, True, True, False, True, None, True, False, False, False, True, False, True, False, False, False, True, False, False, False, True, False, True, False, False, False, True, None, True, False, True, True, True, False, True, False, True, False, True, True, True, False, True, False, True, False, True, False, True, None, True, False, False, False, True, False, True, False, True, False, False, False, True, False, True, False, True, False, True, False, True, None, True, False, True, False, True, True, True, False, True, False, True, True, True, False, True, False, True, True, True, False, True, None, True, False, True, False, False, False, True, False, True, False, False, False, True, False, True, False, False, False, True, False, True, None, True, False, True, True, True, True, True, True, True, False, True, False, True, False, True, True, True, True, True, False, True, None, True, False, True, False, False, False, True, False, True, False, True, False, True, False, False, False, True, False, True, False, True, None, True, False, True, False, True, True, True, False, True, False, True, False, True, True, True, True, True, False, True, True, True, None, True, False, False, False, False, False, False, False, True, False, True, False, False, False, False, False, False, False, False, False, True, None, True, True, True, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True, True, None]
+
+
 
 index_x = 0
 index_y = 0
 for cell in maze:
     if cell:
-        transform = nodes.new("GeometryNodeTransform")
-        transform.location = (160 + 320 * index_x, 40 * index_y)
-        transform.hide = True
-        transform.inputs["Translation"].default_value = (index_x, index_y, 0)
-        transform.inputs["Rotation"].default_value = (0, 0, 0)
-        transform.inputs["Scale"].default_value = (1, 1, 1)
-        node_group.links.new(transform.outputs["Geometry"], join.inputs["Geometry"])
-    
-        cube = nodes.new("GeometryNodeMeshCube")
-        cube.location = (320 * index_x, 40 * index_y)
-        cube.hide = True
-        cube.inputs["Size"].default_value = (1, 1, 1)
-        cube.inputs["Vertices X"].default_value = 2
-        cube.inputs["Vertices Y"].default_value = 2
-        cube.inputs["Vertices Z"].default_value = 2
-        node_group.links.new(cube.outputs["Mesh"], transform.inputs["Geometry"])
+        new_mesh(F"{index_x},{index_y}", (index_x, index_y, 0))
     index_x += 1
     if cell is None:
         index_x = 0
         index_y += 1
-    
-    time.sleep(0.05)
 
-group_output = nodes.new("NodeGroupOutput")
-group_output.location = (600, 000)
-
-node_group.links.new(join.outputs["Geometry"], group_output.inputs["Geometry"])
-
-#node_group.links.new(string.outputs['String'], geom_out.inputs[-1])
