@@ -1,8 +1,8 @@
-cell_width = 50
-cell_height = 75
+cell_width = 80
+cell_height = 45
 
-cell_width = 10
-cell_height = 10
+cell_width = 5
+cell_height = 5
 
 cell_size = cell_width * cell_height
 
@@ -270,12 +270,14 @@ def mazeit(seed):
     return count()
 
 
-for seed in range(10 * 0):
+for seed in range(1000 * 0):
     many = mazeit(seed)
-    draw()
-    print(seed, many)
+    if many == 1000:
+        print("HEEEERERERERER", seed)
+        draw()
+    #print(seed, many)
 
-print(mazeit(4))
+print(mazeit(99))
 draw()
 
 
