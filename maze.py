@@ -1,8 +1,8 @@
 cell_width = 80
 cell_height = 45
 
-cell_width = 5
-cell_height = 5
+#cell_width = 5
+#cell_height = 5
 
 cell_size = cell_width * cell_height
 
@@ -151,20 +151,11 @@ def carve_random(cell):
         choice.append(WEST)
 
     direction = random.choice(choice)
-    #direction = secrets.choice(choice)
 
     return carve(cell, direction)
 
 
 import random
-
-
-def remove_from_list():
-    length = len(line)
-    index = random.randrange(length)
-    cell = line[index]
-    del line[index]
-    return cell
 
 
 def random_from_list():
@@ -173,18 +164,6 @@ def random_from_list():
     cell = line[index]
     return cell
 
-
-def random_from_list2():
-    length = len(line)
-    change = 8
-    if length > change:
-        index = random.randrange(change)
-    else:
-        index = random.randrange(length)
-
-    index = length - 1
-    cell = line[index]
-    return cell
 
 
 def count():
@@ -235,18 +214,17 @@ def mazeit(seed):
             copy.append(cell)
             line.append(cell)
 
-    enter = random.randrange(0, cell_width)
-    exit = random.randrange(cell_size - cell_width, cell_size)
+    #enter = random.randrange(0, cell_width)
+    #exit = random.randrange(cell_size - cell_width, cell_size)
+    enter = random.randrange(cell_height) * cell_width
+    exit = random.randrange(cell_height) * cell_width + cell_width - 1
 
-    #import secrets
-    #enter = secrets.randbelow(cell_width)
-    #exit = secrets.randbelow(cell_width) + cell_size - cell_width
 
     enter = copy[enter]
     exit = copy[exit]
 
-    carve(enter, NORTH, False)
-    carve(exit, SOUTH, False)
+    carve(enter, WEST, False)
+    carve(exit, EAST, False)
 
     fail = 100000
     line = [enter]
@@ -277,7 +255,7 @@ for seed in range(1000 * 0):
         draw()
     #print(seed, many)
 
-print(mazeit(99))
+print(mazeit(360))
 draw()
 
 
@@ -285,7 +263,28 @@ def finish():
     final = []
     index = 0
     for cell in maze:
-        final.append(cell == WALL)
+        if cell == WALL:
+            has_north = (index - width) >= 0
+            has_south = (index + width) < size
+            has_east = ((index + 1) % width) != 0
+            has_west = ((index + 0) % width) != 0
+
+            direction = 0
+            if not has_north or maze[index - width] != WALL:
+                direction += 1
+
+            if not has_south or maze[index + width] != WALL:
+                direction += 2
+
+            if not has_east or maze[index + 1] != WALL:
+                direction += 4
+
+            if not has_west or maze[index - 1] != WALL:
+                direction += 8
+
+            final.append(direction)
+        else:
+            final.append(-1)
         index += 1
         if index % width == 0:
             final.append(None)
@@ -294,12 +293,4 @@ def finish():
 
 final = finish()
 print(final)
-
-for cell in final:
-    if cell == True:
-        print("0", end="")
-    if cell == False:
-        print("1", end="")
-    if cell == None:
-        print("")
 
