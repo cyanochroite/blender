@@ -14,18 +14,12 @@ height = cell_height * 2 + 1
 size = width * height
 
 
-WALL = -1
-HOLE = -2
-
-NORTH = 1 << 0
-SOUTH = 1 << 1
-EAST = 1 << 2
-WEST = 1 << 3
-
 NORTH = 1
 SOUTH = 2
 EAST = 4
 WEST = 8
+WALL = -1
+HOLE = -2
 
 UNNORTH = 14
 UNSOUTH = 13
@@ -34,6 +28,11 @@ UNWEST = 7
 
 VERTICAL = 2 * width
 HORIZONTAL = 2
+
+maze = []
+grid = []
+line = []
+copy = []
 
 
 def draw():
@@ -70,23 +69,23 @@ def west_cell(cell):
 
 
 def north_wall(cell):
-    """Return the wall value north of this cell."""
-    return maze[cell - width]
+    """Return the cell north of this cell."""
+    return cell - width
 
 
 def south_wall(cell):
-    """Return the wall value south of this cell."""
-    return maze[cell + width]
+    """Return the cell south of this cell."""
+    return cell + width
 
 
 def east_wall(cell):
-    """Return the wall value east of this cell."""
-    return maze[cell + 1]
+    """Return the cell east of this cell."""
+    return cell + 1
 
 
 def west_wall(cell):
-    """Return the wall value west of this cell."""
-    return maze[cell - 1]
+    """Return the cell west of this cell."""
+    return cell - 1
 
 
 def move(cell, direction):
@@ -136,21 +135,21 @@ def uncarved_neighbor(cell_start, direction):
 
 def carve(cell, direction, inside=True):
     """Carve into a neighobring cell based off the direction."""
-    pick = 0
-    frog = cell
-    oppsite = 0
-    match direction:
-        case 1:  # NORTH
-            pick = frog - width
-        case 2:  # SOUTH
-            pick = frog + width
-        case 4:  # EAST
-            pick = frog + 1
-        case 8:  # WEST
-            pick = frog - 1
-    maze[pick] = HOLE
+    if direction == NORTH:
+        maze[north_wall(cell)] = HOLE
+
+    if direction == SOUTH:
+        maze[south_wall(cell)] = HOLE
+
+    if direction == EAST:
+        maze[east_wall(cell)] = HOLE
+
+    if direction == WEST:
+        maze[west_wall(cell)] = HOLE
+
     if inside:
         uncarved_neighbor(cell, direction)
+
     return move(cell, direction)
 
 
@@ -158,12 +157,16 @@ def carve_random(cell):
     """Pick a random direction to carve from the valid directions."""
     direction = maze[cell]
     choice = []
+
     if direction & NORTH:
         choice.append(NORTH)
+
     if direction & SOUTH:
         choice.append(SOUTH)
+
     if direction & EAST:
         choice.append(EAST)
+
     if direction & WEST:
         choice.append(WEST)
 
@@ -182,28 +185,29 @@ def random_from_list():
 
 def count():
     """Count all the walls in the current maze."""
-    count = 0
+    counted = 0
     # loop over each cell from a copy of cells from the maze
     for cell in copy:
         walls = 0
-        walls += 1 if north_wall(cell) == WALL else 0
-        walls += 1 if south_wall(cell) == WALL else 0
-        walls += 1 if east_wall(cell) == WALL else 0
-        walls += 1 if west_wall(cell) == WALL else 0
-        count += 1 if walls == 3 else 0
-    return count
+        walls += 1 if maze[north_wall(cell)] == WALL else 0
+        walls += 1 if maze[south_wall(cell)] == WALL else 0
+        walls += 1 if maze[east_wall(cell)] == WALL else 0
+        walls += 1 if maze[west_wall(cell)] == WALL else 0
+        counted += 1 if walls == 3 else 0
+    return counted
 
 
 def mazeit(seed):
+    """Generate a maze based off the given seed value."""
     global line
     global maze
     global copy
     global grid
 
-    maze = []
-    grid = []
-    line = []
-    copy = []
+    maze = []  # holds the maze data as it is being built
+    grid = []  # a grid holding all valid neighbors
+    line = []  # a list of positions for cells in the maze
+    copy = []  # a copy of the line list used for counting dead ends
 
     random.seed(seed)
 
@@ -231,37 +235,37 @@ def mazeit(seed):
             line.append(cell)
 
     enter = random.randrange(cell_height) * cell_width
-    exit = random.randrange(cell_height) * cell_width + cell_width - 1
+    finish = random.randrange(cell_height) * cell_width + cell_width - 1
 
     enter = copy[enter]
-    exit = copy[exit]
+    finish = copy[finish]
 
     carve(enter, WEST, False)
-    carve(exit, EAST, False)
+    carve(finish, EAST, False)
 
-    fail = 100000
     line = [enter]
-    cat = len(line)
+    length = len(line)
 
-    while fail > 0 and cat > 0:
-        fail -= 1
-        # draw()
-
-        cell = random_from_list()
-        where = carve_random(cell)
-        line.append(where)
+    while length > 0:
+        line.append(
+            carve_random(
+               random_from_list()
+            )
+        )
 
         line = [item for item in line if maze[item] > 0]
 
-        cat = len(line)
-
-    if fail <= 0:
-        print("FAILFAILFAILFAILFAIL")
+        length = len(line)
 
     return count()
 
 
-def finish():
+def finalize():
+    """
+    Prepare maze for use in blender.
+    Positive numbers indicate which cells have walls.
+    Negative numbers indicate holes.
+    """
     final = []
     index = 0
     for cell in maze:
@@ -272,16 +276,16 @@ def finish():
             has_west_wall = ((index + 0) % width) != 0
 
             direction = 0
-            if not has_north_wall or north_wall(index) != WALL:
+            if not has_north_wall or maze[north_wall(index)] != WALL:
                 direction |= NORTH
 
-            if not has_south_wall or south_wall(index) != WALL:
+            if not has_south_wall or maze[south_wall(index)] != WALL:
                 direction |= SOUTH
 
-            if not has_east_wall or east_wall(index) != WALL:
+            if not has_east_wall or maze[east_wall(index)] != WALL:
                 direction |= EAST
 
-            if not has_west_wall or west_wall(index) != WALL:
+            if not has_west_wall or maze[west_wall(index)] != WALL:
                 direction |= WEST
 
             final.append(direction)
@@ -309,6 +313,5 @@ def find_seed():
 print(mazeit(360))
 draw()
 
-maze = finish()
+maze = finalize()
 print(maze)
-
