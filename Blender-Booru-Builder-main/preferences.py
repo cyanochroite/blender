@@ -1,5 +1,5 @@
 # <pep8-80 compliant>
-import bpy
+import bpy  # pylint: disable=import-error
 
 
 def content():

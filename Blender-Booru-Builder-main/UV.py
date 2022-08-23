@@ -1,5 +1,4 @@
 # <pep8-80 compliant>
-import bpy
 from . import new
 
 # shader

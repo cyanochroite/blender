@@ -1,5 +1,5 @@
 # <pep8-80 compliant>
-import bpy
+import bpy  # pylint: disable=import-error
 
 print(len(bpy.data.actions), "actions")
 print(len(bpy.data.armatures), "armatures")

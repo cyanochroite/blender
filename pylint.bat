@@ -1,1 +1,1 @@
-python -m pylint --output pylint.txt plugin
+python -m pylint --output pylint.txt Blender-Booru-Builder-main

@@ -16,7 +16,7 @@ bl_info = {
 }
 
 
-import bpy
+import bpy  # pylint: disable=import-error
 import bmesh
 from . import data
 from . import make
@@ -42,7 +42,7 @@ class BOORU_mesh_make(bpy.types.Operator):
 
     def execute(self, context):
         print("start")
-        from . import OS
+        from .plugin import OS
         content = preferences.content()
         (path, file) = OS.walk_directory(content.root)
         images = []
