@@ -1,47 +1,51 @@
 # <pep8-80 compliant>
-# 234567890123456789012345678901234567890123456789012345678901234567890123456789
-# 23456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
-bl_info = {
-    "name": "Blender Booru Builder",
-    "description": "Add, tag, and browse images on your computer.",
-    "author": "Mem Dixy",
-    "version": (0, 0, 4),
-    "blender": (2, 91, 0),
-    "location": "View 3D > Sidebar > Viewer",
-    "warning": "Does not work. Work in progress. Not ready for publication.",
-    "wiki_url": "https://mem-dixy.ch/",
-    "tracker_url": "https://github.com/Mem-Dixy/Blender-Booru-Builder",
-    "support": "COMMUNITY",
-    "category": "3D View",
-}
-
-
 import bpy  # pylint: disable=import-error
-import bmesh
+
 from . import data
 from . import make
+from . import mesh
 from . import preferences
 from . import UV
-from . import mesh
 
 
-spot = 0
 ready = False
+Image_Formats = [
+    ".bmp",
+    ".sgi",
+    ".rgb",
+    ".bw",
+    ".png",
+    ".jpg",
+    "jpeg",
+    ".jp2",
+    ".jp2",
+    ".j2c",
+    ".tga",
+    ".cin",
+    ".dpx",
+    ".exr",
+    ".hdr",
+    ".tif",
+    ".tiff"
+]
 
 
 class BOORU_mesh_make(bpy.types.Operator):
     bl_label = "Plane"
     bl_idname = "blenderbooru.mesh_make"
+    
+    def __init__(self):
+        self.spot = 0
 
     def _new_object(self, context, image):
-        global spot
         mush = mesh.image(image)
-        mush.location = (spot, 0, 0)
-        spot += 2.5
+        mush.location = (self.spot, 0, 0)
+        self.spot += 2.5
         return mush
 
     def execute(self, context):
         print("start")
+        self.spot = 0
         from .plugin import OS
         content = preferences.content()
         (path, file) = OS.walk_directory(content.root)
@@ -172,32 +176,6 @@ class BOORU_main(bpy.types.Panel):
                 self.layout.label(text="checkbox is off")
 
 
-def register():
-    bpy.utils.register_class(BOORU_main)
-    bpy.utils.register_class(BOORU_mesh_make)
-    bpy.utils.register_class(BOORU_mesh_delete)
-    bpy.utils.register_class(BOORU_clear_all)
-    bpy.utils.register_class(BOORU_checkers)
-    #
-    bpy.utils.register_class(BOORU_unregister)
-    bpy.utils.register_class(BOORU_register)
-    #
-    preferences.register()
-
-
-def unregister():
-    bpy.utils.unregister_class(BOORU_checkers)
-    bpy.utils.unregister_class(BOORU_mesh_delete)
-    bpy.utils.unregister_class(BOORU_mesh_make)
-    bpy.utils.unregister_class(BOORU_clear_all)
-    bpy.utils.unregister_class(BOORU_main)
-    #
-    bpy.utils.unregister_class(BOORU_register)
-    bpy.utils.unregister_class(BOORU_unregister)
-    #
-    preferences.unregister()
-
-
 class BOORU_register(bpy.types.Operator):
     bl_label = "Startup"
     bl_idname = "blenderbooru.register"
@@ -220,22 +198,23 @@ class BOORU_unregister(bpy.types.Operator):
         return {'FINISHED'}
 
 
-Image_Formats = [
-    ".bmp",
-    ".sgi",
-    ".rgb",
-    ".bw",
-    ".png",
-    ".jpg",
-    "jpeg",
-    ".jp2",
-    ".jp2",
-    ".j2c",
-    ".tga",
-    ".cin",
-    ".dpx",
-    ".exr",
-    ".hdr",
-    ".tif",
-    ".tiff"
-]
+def register():
+    bpy.utils.register_class(BOORU_main)
+    bpy.utils.register_class(BOORU_mesh_make)
+    bpy.utils.register_class(BOORU_mesh_delete)
+    bpy.utils.register_class(BOORU_clear_all)
+    bpy.utils.register_class(BOORU_checkers)
+    #
+    bpy.utils.register_class(BOORU_unregister)
+    bpy.utils.register_class(BOORU_register)
+
+
+def unregister():
+    bpy.utils.unregister_class(BOORU_checkers)
+    bpy.utils.unregister_class(BOORU_mesh_delete)
+    bpy.utils.unregister_class(BOORU_mesh_make)
+    bpy.utils.unregister_class(BOORU_clear_all)
+    bpy.utils.unregister_class(BOORU_main)
+    #
+    bpy.utils.unregister_class(BOORU_register)
+    bpy.utils.unregister_class(BOORU_unregister)
