@@ -1,1 +1,1 @@
-python -m pylint --output pylint.txt blender_booru_builder
+python -m pylint --output pylint.txt booru
