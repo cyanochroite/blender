@@ -5,56 +5,66 @@ from . import new
 from . import make
 
 
-class mesh():
+class Mesh():
+    """Create a mesh in Blender."""
+
     def __init__(self):
         self.bmesh = bmesh.new(use_operators=False)
         self.verts = self.bmesh.verts
         self.edges = self.bmesh.edges
         self.faces = self.bmesh.faces
 
-    def vertex_add(self, x, y, z):
-        coordinate = (x, y, z)
+    def vertex_add(self, position_x, position_y, position_z):
+        """Add 'vertex' to the mesh."""
+        coordinate = (position_x, position_y, position_z)
         self.verts.new(coordinate)
 
     def vertex_finalize(self):
+        """Call this after adding all 'vertex' to mesh."""
         self.verts.ensure_lookup_table()
 
-    def edge_add(self, a, b,):
-        A = self.verts[a]
-        B = self.verts[b]
-        vertices = (A, B)
+    def edge_add(self, vertex_a, vertex_b,):
+        """Add 'edge' to the mesh."""
+        vert_a = self.verts[vertex_a]
+        vert_b = self.verts[vertex_b]
+        vertices = (vert_a, vert_b)
         self.edges.new(vertices)
 
     def edge_finalize(self):
+        """Call this after adding all 'edge' to mesh."""
         self.edges.ensure_lookup_table()
 
-    def face_add(self, a, b, c, d):
-        A = self.verts[a]
-        B = self.verts[b]
-        C = self.verts[c]
-        D = self.verts[d]
-        vertices = (A, B, C, D)
+    def face_add(self, vertex_a, vertex_b, vertex_c, vertex_d):
+        """Add 'face' to the mesh."""
+        vert_a = self.verts[vertex_a]
+        vert_b = self.verts[vertex_b]
+        vert_c = self.verts[vertex_c]
+        vert_d = self.verts[vertex_d]
+        vertices = (vert_a, vert_b, vert_c, vert_d)
         self.faces.new(vertices)
 
     def face_finalize(self):
+        """Call this after adding all 'face' to mesh."""
         self.faces.ensure_lookup_table()
 
-    def uv_add(self, face, loop, x, y):
-        uv = self.bmesh.loops.layers.uv.verify()
-        self.faces[face].loops[loop][uv].uv = (x, y)
+    def uv_add(self, face, loop, position_x, position_y):
+        """Add 'uv' to the mesh."""
+        index_uv = self.bmesh.loops.layers.uv.verify()
+        self.faces[face].loops[loop][index_uv].uv = (position_x, position_y)
 
     def uv_finalize(self):
-        pass
+        """Call this after adding all 'uv' to mesh."""
 
     def finalize(self, name):
+        """Call this after adding all the stuff to mesh."""
         mesh = new.mesh(name)
         self.bmesh.to_mesh(mesh)
         self.bmesh.free()
-        return make.mesh(name, mesh)
+        return mesh
 
 
 def plane():
-    box = mesh()
+    box = Mesh()
 
     box.vertex_add(+1, +1, +0)
     box.vertex_add(-1, +1, +0)
@@ -77,7 +87,8 @@ def plane():
     box.uv_add(0, 3, 1, 0)
     box.uv_finalize()
 
-    return box.finalize("plane")
+    return_ = box.finalize("plane")
+    return make.mesh("plane", return_)  # move this up a level to caller
 
 
 def _offset(numerator, denominator):
@@ -92,7 +103,7 @@ def _offset(numerator, denominator):
 
 
 def image(image):
-    box = mesh()
+    box = Mesh()
 
     box.vertex_add(+1, +1, +0)
     box.vertex_add(-1, +1, +0)
@@ -109,6 +120,7 @@ def image(image):
     box.face_add(0, 1, 2, 3)
     box.face_finalize()
 
+    # why do we have duplicate code above?
     size = image.size
     x = size[0]
     y = size[1]
@@ -122,4 +134,6 @@ def image(image):
     box.uv_add(0, 3, 1 + x, 0 - y)
     box.uv_finalize()
 
-    return box.finalize("plane")
+    return_ = box.finalize("plane")
+    return make.mesh("plane", return_)  # move this up a level to caller
+

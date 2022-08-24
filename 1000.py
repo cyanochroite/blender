@@ -1,5 +1,12 @@
 """Generate a maze in Blender with 1000 dead ends."""
+
 import random
+
+from booru.mesh import Mesh
+
+import booru.data
+
+booru.data.register()
 
 cell_width = 80
 cell_height = 45
@@ -303,64 +310,6 @@ def find_seed():
             print(seed)
             draw()
     print("End of seed search.""")
-
-
-class Mesh():
-    """Create a mesh in Blender."""
-
-    def __init__(self):
-        self.bmesh = bmesh.new(use_operators=False)
-        self.verts = self.bmesh.verts
-        self.edges = self.bmesh.edges
-        self.faces = self.bmesh.faces
-
-    def vertex_add(self, position_x, position_y, position_z):
-        """Add 'vertex' to the mesh."""
-        coordinate = (position_x, position_y, position_z)
-        self.verts.new(coordinate)
-
-    def vertex_finalize(self):
-        """Call this after adding all 'vertex' to mesh."""
-        self.verts.ensure_lookup_table()
-
-    def edge_add(self, vertex_a, vertex_b,):
-        """Add 'edge' to the mesh."""
-        vert_a = self.verts[vertex_a]
-        vert_b = self.verts[vertex_b]
-        vertices = (vert_a, vert_b)
-        self.edges.new(vertices)
-
-    def edge_finalize(self):
-        """Call this after adding all 'edge' to mesh."""
-        self.edges.ensure_lookup_table()
-
-    def face_add(self, vertex_a, vertex_b, vertex_c, vertex_d):
-        """Add 'face' to the mesh."""
-        vert_a = self.verts[vertex_a]
-        vert_b = self.verts[vertex_b]
-        vert_c = self.verts[vertex_c]
-        vert_d = self.verts[vertex_d]
-        vertices = (vert_a, vert_b, vert_c, vert_d)
-        self.faces.new(vertices)
-
-    def face_finalize(self):
-        """Call this after adding all 'face' to mesh."""
-        self.faces.ensure_lookup_table()
-
-    def uv_add(self, face, loop, position_x, position_y):
-        """Add 'uv' to the mesh."""
-        index_uv = self.bmesh.loops.layers.uv.verify()
-        self.faces[face].loops[loop][index_uv].uv = (position_x, position_y)
-
-    def uv_finalize(self):
-        """Call this after adding all 'uv' to mesh."""
-
-    def finalize(self, name):
-        """Call this after adding all the stuff to mesh."""
-        mesh = bpy.data.meshes.new(name)
-        self.bmesh.to_mesh(mesh)
-        self.bmesh.free()
-        return mesh
 
 
 def mesh_remove():

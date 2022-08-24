@@ -33,7 +33,7 @@ Image_Formats = [
 class BOORU_mesh_make(bpy.types.Operator):
     bl_label = "Plane"
     bl_idname = "blenderbooru.mesh_make"
-    
+
     def __init__(self):
         self.spot = 0
 
