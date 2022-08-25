@@ -39,9 +39,10 @@ class BOORU_mesh_make(bpy.types.Operator):
 
     def _new_object(self, context, image):
         mush = mesh.image(image)
-        mush.location = (self.spot, 0, 0)
+        box = make.mesh("image", mush)
+        box.location = (self.spot, 0, 0)
         self.spot += 2.5
-        return mush
+        return box
 
     def execute(self, context):
         print("start")
