@@ -17,8 +17,7 @@ Image_Formats = [
     ".bw",
     ".png",
     ".jpg",
-    "jpeg",
-    ".jp2",
+    ".jpeg",
     ".jp2",
     ".j2c",
     ".tga",
@@ -27,8 +26,10 @@ Image_Formats = [
     ".exr",
     ".hdr",
     ".tif",
-    ".tiff"
+    ".tiff",
+    ".webp",
 ]
+
 
 
 class BOORU_mesh_make(bpy.types.Operator):
@@ -202,10 +203,10 @@ class Image():
     """Holds an image."""
 
     def __init__(self, file):
-        _image = tkinter.PhotoImage(file=file)
-        self.height = _image.height()
+        _image = data.image.load(file)
+        self.height = _image.size[1]
         self.image = _image
-        self.width = _image.width()
+        self.width = _image.size[0]
         self.name = file
 
 
@@ -219,14 +220,31 @@ def file_dialog_load(tag):
     pass
 
 
+spot = 0
+
+
+def _new_object(image):
+    global spot
+    mush = mesh.image(image)
+    box = make.mesh("image", mush)
+    box.location = (spot, 0, 0)
+    spot += 2.5
+    return box
+
+
 def image(tag, _image):
     """pass"""
-    pass
+    image = _image.image
+    material = UV.material("pretty", image)
+    object = _new_object(image)
+    object.data.materials.append(material)
 
 
 def image_load(file):
     """pass"""
-    pass
+    print("convert " + file)
+    return Image(file)
+
 
 
 def label(tag, text):
@@ -260,6 +278,9 @@ def main(session):
     """def main"""
     global item
     item = {}
+
+    global spot
+    spot = 0
 
     register()
 

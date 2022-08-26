@@ -16,8 +16,7 @@ Image_Formats = [
     ".bw",
     ".png",
     ".jpg",
-    "jpeg",
-    ".jp2",
+    ".jpeg",
     ".jp2",
     ".j2c",
     ".tga",
@@ -26,7 +25,8 @@ Image_Formats = [
     ".exr",
     ".hdr",
     ".tif",
-    ".tiff"
+    ".tiff",
+    ".webp",
 ]
 
 
