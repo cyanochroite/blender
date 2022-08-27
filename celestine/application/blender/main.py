@@ -1,10 +1,12 @@
 """Package celestine."""
 # <pep8-80 compliant>
 import bpy  # pylint: disable=import-error
+import bmesh
 
-from . import data
-from . import make
-from . import UV
+
+from blender import data
+from blender import make
+from blender import UV
 
 
 ready = False
@@ -37,9 +39,6 @@ def unregister():
     data.unregister()
 
 
-# <pep8-80 compliant>
-import bpy
-import bmesh
 
 
 def new_image(image):
@@ -65,7 +64,7 @@ def new_image(image):
     ))
     mesh.faces.ensure_lookup_table()
 
-    uv = mesh.loops.layers.uv.verify()
+    uv = mesh.loops.layers.uv.verify()###ANOCE
     (x, y) = image.size
     (x, y) = ((max(y / x, 1) - 1) / 2, (max(x / y, 1) - 1) / 2)
     mesh.faces[0].loops[0][uv].uv = (1 + x, 1 + y)
