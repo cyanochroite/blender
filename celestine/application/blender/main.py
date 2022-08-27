@@ -31,7 +31,6 @@ Image_Formats = [
 ]
 
 
-
 class BOORU_mesh_make(bpy.types.Operator):
     bl_label = "Plane"
     bl_idname = "blenderbooru.mesh_make"
@@ -199,6 +198,49 @@ def unregister():
     bpy.utils.unregister_class(BOORU_main)
 
 
+# <pep8-80 compliant>
+import bpy
+import bmesh
+
+
+def new_image(image):
+    mesh = bmesh.new(use_operators=False)
+
+    mesh.verts.new((+1, +1, +0))
+    mesh.verts.new((-1, +1, +0))
+    mesh.verts.new((-1, -1, +0))
+    mesh.verts.new((+1, -1, +0))
+    mesh.verts.ensure_lookup_table()
+
+    mesh.edges.new((mesh.verts[0], mesh.verts[1]))
+    mesh.edges.new((mesh.verts[1], mesh.verts[2]))
+    mesh.edges.new((mesh.verts[2], mesh.verts[3]))
+    mesh.edges.new((mesh.verts[3], mesh.verts[0]))
+    mesh.edges.ensure_lookup_table()
+
+    mesh.faces.new((
+        mesh.verts[0],
+        mesh.verts[1],
+        mesh.verts[2],
+        mesh.verts[3],
+    ))
+    mesh.faces.ensure_lookup_table()
+
+
+    uv = mesh.loops.layers.uv.verify()
+    (x, y) = image.size
+    (x, y) = ((max(y / x, 1) - 1) / 2, (max(x / y, 1) - 1) / 2)
+    mesh.faces[0].loops[0][uv].uv = (1 + x, 1 + y)
+    mesh.faces[0].loops[1][uv].uv = (0 - x, 1 + y)
+    mesh.faces[0].loops[2][uv].uv = (0 - x, 0 - y)
+    mesh.faces[0].loops[3][uv].uv = (1 + x, 0 - y)
+
+    meshit = bpy.data.meshes.new("name")
+    mesh.to_mesh(meshit)
+    mesh.free()
+    return meshit
+
+
 class Image():
     """Holds an image."""
 
@@ -225,7 +267,7 @@ spot = 0
 
 def _new_object(image):
     global spot
-    mush = mesh.image(image)
+    mush = new_image(image)
     box = make.mesh("image", mush)
     box.location = (spot, 0, 0)
     spot += 2.5
@@ -244,7 +286,6 @@ def image_load(file):
     """pass"""
     print("convert " + file)
     return Image(file)
-
 
 
 def label(tag, text):
