@@ -4,47 +4,27 @@ import celestine.core.os as os
 #image = {}
 image = []
 
-#blender only
-Image_Formats = [
-    ".bmp",
-    ".sgi",
-    ".rgb",
-    ".bw",
-    ".png",
-    ".jpg",
-    ".jpeg",
-    ".jp2",
-    ".j2c",
-    ".tga",
-    ".cin",
-    ".dpx",
-    ".exr",
-    ".hdr",
-    ".tif",
-    ".tiff",
-    ".webp",
-]
 
-def execute(directory):
+def execute(session, directory):
     (path, file) = os.walk_directory(directory)
     images = []
     for (filenames) in file:
         (dirpath, name) = filenames
         ext = os.file_extension(name).lower()
-        if ext in Image_Formats:
+        if ext in session.image_format:
             merge = os.join(dirpath, name)
             images.append(merge)
     return images
 
 
-
 def setup(session):
     global image
     window = session.task
-    directory =  session.directory
-    
+    directory = session.directory
+
     directory = "D:\\file\\"
-    images = execute(directory)
+    directory = "D:\\todo\\"
+    images = execute(session, directory)
     for imaged in images:
         image.append(window.image_load(imaged))
 
@@ -57,6 +37,3 @@ def view(session):
 
     window.label("Settings", "no puppy. File Explorer using Tkinter")
     window.file_dialog("set", "Settings")
-
-
-
