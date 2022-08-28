@@ -1,7 +1,6 @@
 # <pep8-80 compliant>
 from blender import data
 
-import blender.new.texture
 
 
 def camera(name):

@@ -28,6 +28,44 @@ class most(all):
         return cls.object_(name, cls.new(name))
 
 
+class camera(most):
+    """Camera data-block for storing camera settings."""
+    data = bpy.data.cameras
+
+
+class image(most):
+    """Image data-block referencing an external or packed image."""
+    data = bpy.data.images
+
+    @classmethod
+    def new(cls, name, width, height, alpha, float_buffer, stereo3d, is_data,
+            tiled):
+        return super().new(
+            cls.data,
+            name,
+            width,
+            height,
+            alpha,
+            float_buffer,
+            stereo3d,
+            is_data,
+            tiled,
+        )
+
+
+class material(most):
+    """
+    Material data-block to define the appearance of geometric objects for
+    rendering.
+    """
+    data = bpy.data.materials
+
+
+class mesh(most):
+    """Mesh data-block defining geometric surfaces."""
+    data = bpy.data.meshes
+
+
 class light(most):
     """Light data-block for lighting a scene."""
     data = bpy.data.lights
