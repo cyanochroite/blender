@@ -4,20 +4,20 @@ from blender import data
 
 
 def area(name):
-    """Directional area Light."""
+    """Area – Directional area light source."""
     return data.light.new(name, 'AREA')
 
 
 def point(name):
-    """Omnidirectional point Light."""
+    """Point – Omnidirectional point light source."""
     return data.light.new(name, 'POINT')
 
 
 def spot(name):
-    """Directional cone Light."""
+    """Spot – Directional cone light source."""
     return data.light.new(name, 'SPOT')
 
 
 def sun(name):
-    """Constant direction parallel ray Light."""
+    """Sun – Constant direction parallel ray light source."""
     return data.light.new(name, 'SUN')

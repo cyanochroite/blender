@@ -1,7 +1,5 @@
 ************* Module 1000
 addons\1000.py:1:0: C0103: Module name "1000" doesn't conform to snake_case naming style (invalid-name)
-addons\1000.py:5:0: E0401: Unable to import 'booru.mesh' (import-error)
-addons\1000.py:7:0: E0401: Unable to import 'booru.data' (import-error)
 addons\1000.py:11:0: C0103: Constant name "cell_width" doesn't conform to UPPER_CASE naming style (invalid-name)
 addons\1000.py:12:0: C0103: Constant name "cell_height" doesn't conform to UPPER_CASE naming style (invalid-name)
 addons\1000.py:14:0: C0103: Constant name "cell_size" doesn't conform to UPPER_CASE naming style (invalid-name)
@@ -23,6 +21,22 @@ addons\1000.py:231:8: C0103: Variable name "c" doesn't conform to snake_case nam
 addons\1000.py:232:8: C0103: Variable name "c" doesn't conform to snake_case naming style (invalid-name)
 addons\1000.py:233:8: C0103: Variable name "c" doesn't conform to snake_case naming style (invalid-name)
 addons\1000.py:234:8: C0103: Variable name "c" doesn't conform to snake_case naming style (invalid-name)
+addons\1000.py:330:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:331:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:332:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:333:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:334:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:335:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:336:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:337:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:372:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:373:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:374:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:375:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:377:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:378:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:379:4: E1121: Too many positional arguments for method call (too-many-function-args)
+addons\1000.py:380:4: E1121: Too many positional arguments for method call (too-many-function-args)
 addons\1000.py:419:0: E0401: Unable to import 'bpy' (import-error)
 addons\1000.py:419:0: C0413: Import "import bpy" should be placed at the top of the module (wrong-import-position)
 addons\1000.py:420:0: E0401: Unable to import 'bmesh' (import-error)
@@ -402,34 +416,1385 @@ addons\blender\UV.py:56:4: C0103: Variable name "bb" doesn't conform to snake_ca
 addons\blender\UV.py:59:4: C0103: Variable name "cc" doesn't conform to snake_case naming style (invalid-name)
 ************* Module blender.new
 addons\blender\new\__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-addons\blender\new\__init__.py:41:0: W0622: Redefining built-in 'object' (redefined-builtin)
-addons\blender\new\__init__.py:5:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:9:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:12:11: E1120: No value for argument 'height' in classmethod call (no-value-for-parameter)
-addons\blender\new\__init__.py:15:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\new\__init__.py:15:0: C0103: Class name "light" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\new\__init__.py:17:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:21:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:25:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:29:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:33:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:37:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:41:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:45:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\new\__init__.py:45:0: C0103: Class name "texture" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\new\__init__.py:47:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:51:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:55:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:59:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:63:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:67:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:71:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:75:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:79:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:83:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:87:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\new\__init__.py:91:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\blender\new\__init__.py:49:0: W0622: Redefining built-in 'object' (redefined-builtin)
+addons\blender\new\__init__.py:13:0: R0913: Too many arguments (8/5) (too-many-arguments)
+addons\blender\new\__init__.py:51:11: E1101: Module 'blender.data' has no 'Object' member; maybe 'object'? (no-member)
+************* Module booru.data
+addons\booru\data.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\booru\data.py:6:0: W0622: Redefining built-in 'all' (redefined-builtin)
+addons\booru\data.py:83:0: W0622: Redefining built-in 'object' (redefined-builtin)
+addons\booru\data.py:6:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\data.py:6:0: C0103: Class name "all" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\data.py:10:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:14:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:23:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:28:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:32:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\data.py:32:0: C0103: Class name "camera" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\data.py:34:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:38:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\data.py:38:0: C0103: Class name "image" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\data.py:40:4: W0221: Number of parameters was 2 in 'all.new' and is now 9 in overridden 'image.new' method (arguments-differ)
+addons\booru\data.py:40:4: W0221: Variadics removed in overridden 'image.new' method (arguments-differ)
+addons\booru\data.py:40:4: R0913: Too many arguments (9/5) (too-many-arguments)
+addons\booru\data.py:45:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:45:28: W0613: Unused argument 'check_existing' (unused-argument)
+addons\booru\data.py:49:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:53:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\data.py:53:0: C0103: Class name "light" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\data.py:55:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:59:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\data.py:59:0: C0103: Class name "material" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\data.py:61:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:61:4: C0202: Class method create_gpencil_data should have 'cls' as first argument (bad-classmethod-argument)
+addons\booru\data.py:61:28: W0621: Redefining name 'material' from outer scope (line 59) (redefined-outer-name)
+addons\booru\data.py:65:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:65:4: C0202: Class method remove_gpencil_data should have 'cls' as first argument (bad-classmethod-argument)
+addons\booru\data.py:65:28: W0621: Redefining name 'material' from outer scope (line 59) (redefined-outer-name)
+addons\booru\data.py:69:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:73:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\data.py:73:0: C0103: Class name "mesh" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\data.py:75:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:75:4: C0202: Class method new_from_object should have 'cls' as first argument (bad-classmethod-argument)
+addons\booru\data.py:75:24: W0621: Redefining name 'object' from outer scope (line 83) (redefined-outer-name)
+addons\booru\data.py:79:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:83:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\data.py:83:0: C0103: Class name "object" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\data.py:85:4: W0221: Number of parameters was 2 in 'all.new' and is now 3 in overridden 'object.new' method (arguments-differ)
+addons\booru\data.py:85:4: W0221: Variadics removed in overridden 'object.new' method (arguments-differ)
+addons\booru\data.py:86:8: W0621: Redefining name 'object' from outer scope (line 83) (redefined-outer-name)
+addons\booru\data.py:91:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:95:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\data.py:95:0: C0103: Class name "texture" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\data.py:97:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:101:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\data.py:111:0: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module booru.main
+addons\booru\main.py:54:0: C0325: Unnecessary parens after 'for' keyword (superfluous-parens)
+addons\booru\main.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\booru\main.py:11:0: C0103: Constant name "ready" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\booru\main.py:33:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\main.py:33:0: C0103: Class name "BOORU_mesh_make" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\main.py:40:26: W0613: Unused argument 'context' (unused-argument)
+addons\booru\main.py:47:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\main.py:64:12: W0622: Redefining built-in 'object' (redefined-builtin)
+addons\booru\main.py:50:8: C0415: Import outside toplevel (plugin.OS) (import-outside-toplevel)
+addons\booru\main.py:52:9: W0612: Unused variable 'path' (unused-variable)
+addons\booru\main.py:33:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\booru\main.py:70:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\main.py:70:0: C0103: Class name "BOORU_mesh_delete" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\main.py:74:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\main.py:76:8: W0622: Redefining built-in 'object' (redefined-builtin)
+addons\booru\main.py:74:22: W0613: Unused argument 'context' (unused-argument)
+addons\booru\main.py:70:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\booru\main.py:85:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\main.py:85:0: C0103: Class name "BOORU_clear_all" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\main.py:89:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\main.py:98:12: W0621: Redefining name 'mesh' from outer scope (line 6) (redefined-outer-name)
+addons\booru\main.py:89:22: W0613: Unused argument 'context' (unused-argument)
+addons\booru\main.py:85:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\booru\main.py:111:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\main.py:111:0: C0103: Class name "BOORU_checkers" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\main.py:115:19: C0103: Argument name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\main.py:115:22: C0103: Argument name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\main.py:115:25: C0103: Argument name "z" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\main.py:120:21: C0103: Argument name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\main.py:120:24: C0103: Argument name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\main.py:120:27: C0103: Argument name "z" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\main.py:125:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\main.py:125:22: W0613: Unused argument 'context' (unused-argument)
+addons\booru\main.py:111:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\booru\main.py:132:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\main.py:132:0: C0103: Class name "BOORU_main" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\main.py:159:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\main.py:160:8: C0103: Constant name "ready" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\booru\main.py:160:8: W0602: Using global for 'ready' but no assignment is done (global-variable-not-assigned)
+addons\booru\main.py:159:19: W0613: Unused argument 'context' (unused-argument)
+addons\booru\main.py:132:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\booru\main.py:180:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\main.py:180:0: C0103: Class name "BOORU_register" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\main.py:184:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\main.py:185:8: C0103: Constant name "ready" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\booru\main.py:185:8: W0603: Using the global statement (global-statement)
+addons\booru\main.py:184:22: W0613: Unused argument 'context' (unused-argument)
+addons\booru\main.py:180:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\booru\main.py:191:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\main.py:191:0: C0103: Class name "BOORU_unregister" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\main.py:195:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\main.py:196:8: C0103: Constant name "ready" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\booru\main.py:196:8: W0603: Using the global statement (global-statement)
+addons\booru\main.py:195:22: W0613: Unused argument 'context' (unused-argument)
+addons\booru\main.py:191:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\booru\main.py:202:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\main.py:213:0: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module booru.make
+addons\booru\make.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\booru\make.py:5:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\make.py:9:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\make.py:9:0: C0103: Class name "image" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\make.py:11:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\make.py:12:19: E0602: Undefined variable 'bpy' (undefined-variable)
+addons\booru\make.py:15:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\make.py:16:15: E0602: Undefined variable 'bpy' (undefined-variable)
+addons\booru\make.py:19:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\make.py:20:15: E0602: Undefined variable 'bpy' (undefined-variable)
+addons\booru\make.py:20:36: E0602: Undefined variable 'filepath' (undefined-variable)
+addons\booru\make.py:20:46: E0602: Undefined variable 'check_existing' (undefined-variable)
+addons\booru\make.py:19:13: W0613: Unused argument 'name' (unused-argument)
+addons\booru\make.py:19:19: W0613: Unused argument 'width' (unused-argument)
+addons\booru\make.py:19:26: W0613: Unused argument 'height' (unused-argument)
+addons\booru\make.py:24:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\make.py:24:0: C0103: Class name "light" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\make.py:26:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\make.py:30:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\make.py:34:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\make.py:38:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\make.py:42:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\make.py:42:15: W0621: Redefining name 'mesh' from outer scope (line 42) (redefined-outer-name)
+************* Module booru.mesh
+addons\booru\mesh.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\booru\mesh.py:2:0: E0401: Unable to import 'bmesh' (import-error)
+addons\booru\mesh.py:3:0: E0401: Unable to import 'mathutils' (import-error)
+addons\booru\mesh.py:66:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\mesh.py:67:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\mesh.py:74:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\mesh.py:81:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\mesh.py:85:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\mesh.py:85:4: C0103: Method name "uv" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\mesh.py:93:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\mesh.py:98:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\mesh.py:106:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\mesh.py:107:4: W0221: Number of parameters was 5 in 'Quadrilateral.vertex' and is now 2 in overridden 'Plane.vertex' method (arguments-differ)
+addons\booru\mesh.py:128:4: W0221: Number of parameters was 5 in 'Quadrilateral.uv' and is now 3 in overridden 'Plane.uv' method (arguments-differ)
+addons\booru\mesh.py:136:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\mesh.py:157:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\mesh.py:157:10: W0621: Redefining name 'image' from outer scope (line 157) (redefined-outer-name)
+addons\booru\mesh.py:159:4: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\mesh.py:160:4: C0103: Variable name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\mesh.py:163:5: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\mesh.py:163:8: C0103: Variable name "y" doesn't conform to snake_case naming style (invalid-name)
+************* Module booru.new
+addons\booru\new.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\booru\new.py:41:0: W0622: Redefining built-in 'object' (redefined-builtin)
+addons\booru\new.py:5:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:9:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:12:11: E1120: No value for argument 'height' in classmethod call (no-value-for-parameter)
+addons\booru\new.py:15:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\new.py:15:0: C0103: Class name "light" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\new.py:17:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:21:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:25:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:29:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:33:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:37:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:41:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:45:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\new.py:45:0: C0103: Class name "texture" doesn't conform to PascalCase naming style (invalid-name)
+addons\booru\new.py:47:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:51:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:55:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:59:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:63:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:67:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:71:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:75:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:79:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:83:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:87:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\new.py:91:4: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module booru.preferences
+addons\booru\preferences.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\booru\preferences.py:5:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\preferences.py:9:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\preferences.py:49:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\preferences.py:49:19: W0613: Unused argument 'context' (unused-argument)
+addons\booru\preferences.py:9:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\booru\preferences.py:60:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\preferences.py:64:0: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module booru.UV
+addons\booru\UV.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\booru\UV.py:1:0: C0103: Module name "UV" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\UV.py:7:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\UV.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\UV.py:32:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\UV.py:45:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\UV.py:46:4: W0621: Redefining name 'material' from outer scope (line 45) (redefined-outer-name)
+addons\booru\UV.py:53:4: C0103: Variable name "aa" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\UV.py:56:4: C0103: Variable name "bb" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\UV.py:59:4: C0103: Variable name "cc" doesn't conform to snake_case naming style (invalid-name)
+************* Module booru.plugin.hashlib
+addons\booru\plugin\hashlib.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\booru\plugin\hashlib.py:7:0: C0115: Missing class docstring (missing-class-docstring)
+addons\booru\plugin\hashlib.py:15:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\plugin\hashlib.py:7:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module booru.plugin.OS
+addons\booru\plugin\OS.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\booru\plugin\OS.py:1:0: C0103: Module name "OS" doesn't conform to snake_case naming style (invalid-name)
+addons\booru\plugin\OS.py:5:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\plugin\OS.py:6:5: W0612: Unused variable 'root' (unused-variable)
+addons\booru\plugin\OS.py:10:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\plugin\OS.py:14:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\plugin\OS.py:18:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\plugin\OS.py:23:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\plugin\OS.py:28:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\plugin\OS.py:30:28: W0621: Redefining name 'filenames' from outer scope (line 28) (redefined-outer-name)
+addons\booru\plugin\OS.py:30:18: W0612: Unused variable 'dirnames' (unused-variable)
+addons\booru\plugin\OS.py:43:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\plugin\OS.py:46:28: W0621: Redefining name 'filenames' from outer scope (line 28) (redefined-outer-name)
+addons\booru\plugin\OS.py:56:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\booru\plugin\OS.py:61:0: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module celestine
+addons\celestine\__init__.py:19:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\__init__.py:21:4: W0621: Redefining name 'main' from outer scope (line 19) (redefined-outer-name)
+************* Module celestine.application.blender.main
+addons\celestine\application\blender\main.py:4:0: E0401: Unable to import 'bmesh' (import-error)
+addons\celestine\application\blender\main.py:12:0: C0103: Constant name "ready" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\blender\main.py:34:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\blender\main.py:38:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\blender\main.py:44:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\blender\main.py:44:14: W0621: Redefining name 'image' from outer scope (line 114) (redefined-outer-name)
+addons\celestine\application\blender\main.py:67:4: C0103: Variable name "uv" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\blender\main.py:68:5: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\blender\main.py:68:8: C0103: Variable name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\blender\main.py:69:5: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\blender\main.py:69:8: C0103: Variable name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\blender\main.py:81:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\application\blender\main.py:94:4: W0107: Unnecessary pass statement (unnecessary-pass)
+addons\celestine\application\blender\main.py:92:16: W0613: Unused argument 'tag' (unused-argument)
+addons\celestine\application\blender\main.py:92:21: W0613: Unused argument 'bind' (unused-argument)
+addons\celestine\application\blender\main.py:99:4: W0107: Unnecessary pass statement (unnecessary-pass)
+addons\celestine\application\blender\main.py:97:21: W0613: Unused argument 'tag' (unused-argument)
+addons\celestine\application\blender\main.py:102:0: C0103: Constant name "spot" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\blender\main.py:105:16: W0621: Redefining name 'image' from outer scope (line 114) (redefined-outer-name)
+addons\celestine\application\blender\main.py:106:4: C0103: Constant name "spot" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\blender\main.py:106:4: W0603: Using the global statement (global-statement)
+addons\celestine\application\blender\main.py:116:4: W0621: Redefining name 'image' from outer scope (line 114) (redefined-outer-name)
+addons\celestine\application\blender\main.py:118:4: W0622: Redefining built-in 'object' (redefined-builtin)
+addons\celestine\application\blender\main.py:114:10: W0613: Unused argument 'tag' (unused-argument)
+addons\celestine\application\blender\main.py:130:4: W0107: Unnecessary pass statement (unnecessary-pass)
+addons\celestine\application\blender\main.py:128:10: W0613: Unused argument 'tag' (unused-argument)
+addons\celestine\application\blender\main.py:128:15: W0613: Unused argument 'text' (unused-argument)
+addons\celestine\application\blender\main.py:144:8: W0621: Redefining name 'image' from outer scope (line 114) (redefined-outer-name)
+addons\celestine\application\blender\main.py:157:4: C0103: Constant name "item" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\blender\main.py:157:4: W0601: Global variable 'item' undefined at the module level (global-variable-undefined)
+addons\celestine\application\blender\main.py:160:4: C0103: Constant name "spot" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\blender\main.py:160:4: W0603: Using the global statement (global-statement)
+************* Module celestine.application.blender
+addons\celestine\application\blender\__init__.py:4:13: W0621: Redefining name 'argument' from outer scope (line 4) (redefined-outer-name)
+addons\celestine\application\blender\__init__.py:19:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\blender\__init__.py:41:0: W0105: String statement has no effect (pointless-string-statement)
+addons\celestine\application\blender\__init__.py:46:0: C0413: Import "from . import main" should be placed at the top of the module (wrong-import-position)
+addons\celestine\application\blender\__init__.py:47:0: C0413: Import "from blender import preferences" should be placed at the top of the module (wrong-import-position)
+addons\celestine\application\blender\__init__.py:47:0: C0411: third party import "from blender import preferences" should be placed before "from . import main" (wrong-import-order)
+************* Module celestine.application.celestine.configure
+addons\celestine\application\celestine\configure.py:16:4: W0621: Redefining name 'application' from outer scope (line 8) (redefined-outer-name)
+addons\celestine\application\celestine\configure.py:17:4: W0621: Redefining name 'language' from outer scope (line 9) (redefined-outer-name)
+addons\celestine\application\celestine\configure.py:18:4: W0621: Redefining name 'python' from outer scope (line 10) (redefined-outer-name)
+addons\celestine\application\celestine\configure.py:16:18: W0212: Access to a protected member _application of a client class (protected-access)
+addons\celestine\application\celestine\configure.py:23:25: W0621: Redefining name 'application' from outer scope (line 8) (redefined-outer-name)
+addons\celestine\application\celestine\configure.py:23:38: W0621: Redefining name 'language' from outer scope (line 9) (redefined-outer-name)
+addons\celestine\application\celestine\configure.py:23:48: W0621: Redefining name 'python' from outer scope (line 10) (redefined-outer-name)
+addons\celestine\application\celestine\configure.py:8:0: W0611: Unused application imported from celestine.keyword.main (unused-import)
+addons\celestine\application\celestine\configure.py:9:0: W0611: Unused language imported from celestine.keyword.main (unused-import)
+addons\celestine\application\celestine\configure.py:10:0: W0611: Unused python imported from celestine.keyword.main (unused-import)
+************* Module celestine.application.celestine
+addons\celestine\application\celestine\__init__.py:25:13: W0621: Redefining name 'argument' from outer scope (line 25) (redefined-outer-name)
+************* Module celestine.application.curses.main
+addons\celestine\application\curses\main.py:9:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\application\curses\main.py:13:8: C0103: Attribute name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\curses\main.py:14:8: C0103: Attribute name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\curses\main.py:18:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\curses\main.py:21:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\curses\main.py:22:9: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\curses\main.py:22:12: C0103: Variable name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\curses\main.py:32:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\curses\main.py:32:21: W0613: Unused argument 'bind' (unused-argument)
+addons\celestine\application\curses\main.py:37:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\curses\main.py:37:15: W0621: Redefining name 'image' from outer scope (line 37) (redefined-outer-name)
+addons\celestine\application\curses\main.py:42:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\curses\main.py:46:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\curses\main.py:46:15: W0613: Unused argument 'text' (unused-argument)
+addons\celestine\application\curses\main.py:56:11: E1101: Module 'curses' has no 'newwin' member (no-member)
+addons\celestine\application\curses\main.py:68:4: C0103: Constant name "line" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\curses\main.py:68:4: W0601: Global variable 'line' undefined at the module level (global-variable-undefined)
+addons\celestine\application\curses\main.py:70:4: C0103: Variable name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\curses\main.py:70:8: E0601: Using variable 'line' before assignment (used-before-assignment)
+addons\celestine\application\curses\main.py:71:4: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\curses\main.py:78:4: C0103: Constant name "item" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\curses\main.py:78:4: W0601: Global variable 'item' undefined at the module level (global-variable-undefined)
+addons\celestine\application\curses\main.py:81:4: C0103: Constant name "line" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\curses\main.py:81:4: W0601: Global variable 'line' undefined at the module level (global-variable-undefined)
+addons\celestine\application\curses\main.py:84:4: C0103: Constant name "quote_window" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\curses\main.py:84:4: W0601: Global variable 'quote_window' undefined at the module level (global-variable-undefined)
+addons\celestine\application\curses\main.py:87:4: C0103: Constant name "quote_text_window" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\curses\main.py:87:4: W0601: Global variable 'quote_text_window' undefined at the module level (global-variable-undefined)
+addons\celestine\application\curses\main.py:91:4: E1101: Module 'curses' has no 'noecho' member (no-member)
+addons\celestine\application\curses\main.py:92:4: E1101: Module 'curses' has no 'cbreak' member (no-member)
+addons\celestine\application\curses\main.py:115:8: E1101: Module 'curses' has no 'doupdate' member (no-member)
+addons\celestine\application\curses\main.py:127:8: E1101: Module 'curses' has no 'nocbreak' member (no-member)
+addons\celestine\application\curses\main.py:128:8: E1101: Module 'curses' has no 'echo' member (no-member)
+addons\celestine\application\curses\main.py:129:8: E1101: Module 'curses' has no 'endwin' member (no-member)
+************* Module celestine.application.curses
+addons\celestine\application\curses\__init__.py:4:13: W0621: Redefining name 'argument' from outer scope (line 4) (redefined-outer-name)
+************* Module celestine.application.dearpygui.main
+addons\celestine\application\dearpygui\main.py:10:8: W0621: Redefining name 'image' from outer scope (line 71) (redefined-outer-name)
+addons\celestine\application\dearpygui\main.py:6:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\application\dearpygui\main.py:27:17: W0613: Unused argument 'sender' (unused-argument)
+addons\celestine\application\dearpygui\main.py:27:25: W0613: Unused argument 'app_data' (unused-argument)
+addons\celestine\application\dearpygui\main.py:35:4: W0621: Redefining name 'item' from outer scope (line 91) (redefined-outer-name)
+addons\celestine\application\dearpygui\main.py:32:18: W0613: Unused argument 'sender' (unused-argument)
+addons\celestine\application\dearpygui\main.py:71:15: W0621: Redefining name 'image' from outer scope (line 71) (redefined-outer-name)
+addons\celestine\application\dearpygui\main.py:90:4: C0103: Constant name "item" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\dearpygui\main.py:90:4: W0601: Global variable 'item' undefined at the module level (global-variable-undefined)
+************* Module celestine.application.dearpygui
+addons\celestine\application\dearpygui\__init__.py:4:13: W0621: Redefining name 'argument' from outer scope (line 4) (redefined-outer-name)
+************* Module celestine.application.language.keyword
+addons\celestine\application\language\keyword.py:2:0: W0611: Unused APPLICATION imported from celestine.keyword.main (unused-import)
+addons\celestine\application\language\keyword.py:3:0: W0611: Unused CELESTINE imported from celestine.keyword.main (unused-import)
+addons\celestine\application\language\keyword.py:4:0: W0611: Unused LANGUAGE imported from celestine.keyword.main (unused-import)
+addons\celestine\application\language\keyword.py:5:0: W0611: Unused language imported from celestine.keyword.main (unused-import)
+************* Module celestine.application.language.main
+addons\celestine\application\language\main.py:88:4: C0103: Constant name "session" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\language\main.py:88:4: W0601: Global variable 'session' undefined at the module level (global-variable-undefined)
+addons\celestine\application\language\main.py:90:4: C0103: Constant name "moose" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\language\main.py:90:4: W0601: Global variable 'moose' undefined at the module level (global-variable-undefined)
+addons\celestine\application\language\main.py:15:0: W0611: Unused SESSION imported from celestine.application.language.keyword (unused-import)
+************* Module celestine.application.language
+addons\celestine\application\language\__init__.py:19:13: W0621: Redefining name 'argument' from outer scope (line 19) (redefined-outer-name)
+addons\celestine\application\language\__init__.py:44:4: W0612: Unused variable 'report' (unused-variable)
+addons\celestine\application\language\__init__.py:49:4: W0612: Unused variable 'translate' (unused-variable)
+************* Module celestine.application.star.hashlib
+addons\celestine\application\star\hashlib.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\application\star\hashlib.py:5:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\application\star\hashlib.py:5:0: C0103: Class name "hashlib" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\application\star\hashlib.py:13:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\hashlib.py:5:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module celestine.application.star.image
+addons\celestine\application\star\image.py:107:0: C0301: Line too long (109/100) (line-too-long)
+addons\celestine\application\star\image.py:165:0: C0305: Trailing newlines (trailing-newlines)
+addons\celestine\application\star\image.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\application\star\image.py:8:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\application\star\image.py:28:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:28:23: C0103: Argument name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\star\image.py:28:26: C0103: Argument name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\star\image.py:29:8: W0127: Assigning the same variable 'mode' to itself (self-assigning-variable)
+addons\celestine\application\star\image.py:35:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:36:8: C0103: Variable name "fp" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\star\image.py:41:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:46:8: C2801: Unnecessarily calls dunder method __init__. Instantiate class directly. (unnecessary-dunder-call)
+addons\celestine\application\star\image.py:49:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:75:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:80:8: C2801: Unnecessarily calls dunder method __init__. Instantiate class directly. (unnecessary-dunder-call)
+addons\celestine\application\star\image.py:82:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:87:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:92:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:99:8: C2801: Unnecessarily calls dunder method __init__. Instantiate class directly. (unnecessary-dunder-call)
+addons\celestine\application\star\image.py:101:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:104:20: C0103: Argument name "fp" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\star\image.py:104:24: W0622: Redefining built-in 'format' (redefined-builtin)
+addons\celestine\application\star\image.py:107:62: C0103: Argument name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\star\image.py:107:65: C0103: Argument name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\star\image.py:107:4: R0913: Too many arguments (11/5) (too-many-arguments)
+addons\celestine\application\star\image.py:109:8: W0622: Redefining built-in 'format' (redefined-builtin)
+addons\celestine\application\star\image.py:108:8: C0103: Variable name "fp" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\star\image.py:123:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:127:14: E0602: Undefined variable 'breakybreaky' (undefined-variable)
+addons\celestine\application\star\image.py:129:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:129:27: C0103: Argument name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\star\image.py:129:32: C0103: Argument name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\star\image.py:130:8: C0103: Variable name "im" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\star\image.py:138:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\image.py:140:16: E1101: Class 'Image' has no 'from_input' member (no-member)
+************* Module celestine.application.star.os
+addons\celestine\application\star\os.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\application\star\os.py:5:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\application\star\os.py:5:0: C0103: Class name "os" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\application\star\os.py:7:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\os.py:11:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\os.py:15:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\os.py:20:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\os.py:25:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\os.py:27:22: W0612: Unused variable 'dirnames' (unused-variable)
+addons\celestine\application\star\os.py:33:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\os.py:44:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\star\os.py:49:4: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module celestine.application.star
+addons\celestine\application\star\__init__.py:13:13: W0621: Redefining name 'argument' from outer scope (line 13) (redefined-outer-name)
+************* Module celestine.application.terminal.keyword
+addons\celestine\application\terminal\keyword.py:9:0: C0413: Import "from celestine.keyword import main" should be placed at the top of the module (wrong-import-position)
+addons\celestine\application\terminal\keyword.py:18:0: W0404: Reimport 'main' (imported line 9) (reimported)
+addons\celestine\application\terminal\keyword.py:18:0: C0413: Import "from celestine.keyword import main" should be placed at the top of the module (wrong-import-position)
+addons\celestine\application\terminal\keyword.py:2:0: W0611: Unused CELESTINE imported from celestine.keyword.main (unused-import)
+addons\celestine\application\terminal\keyword.py:3:0: W0611: Unused APPLICATION imported from celestine.keyword.main (unused-import)
+addons\celestine\application\terminal\keyword.py:4:0: W0611: Unused TERMINAL imported from celestine.keyword.main (unused-import)
+************* Module celestine.application.terminal.main
+addons\celestine\application\terminal\main.py:4:9: W0613: Unused argument 'session' (unused-argument)
+addons\celestine\application\terminal\main.py:2:0: W0611: Unused load imported from celestine.core (unused-import)
+************* Module celestine.application.terminal
+addons\celestine\application\terminal\__init__.py:4:13: W0621: Redefining name 'argument' from outer scope (line 4) (redefined-outer-name)
+************* Module celestine.application.tkinter.main
+addons\celestine\application\tkinter\main.py:10:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\application\tkinter\main.py:72:4: C0103: Constant name "item" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\tkinter\main.py:72:4: W0601: Global variable 'item' undefined at the module level (global-variable-undefined)
+addons\celestine\application\tkinter\main.py:75:4: C0103: Constant name "root" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\tkinter\main.py:75:4: W0601: Global variable 'root' undefined at the module level (global-variable-undefined)
+************* Module celestine.application.tkinter
+addons\celestine\application\tkinter\__init__.py:4:13: W0621: Redefining name 'argument' from outer scope (line 4) (redefined-outer-name)
+************* Module celestine.application.verify
+addons\celestine\application\verify\__init__.py:15:13: W0621: Redefining name 'argument' from outer scope (line 15) (redefined-outer-name)
+************* Module celestine.application.verify.core.test_text
+addons\celestine\application\verify\core\test_text.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\application\verify\core\test_text.py:3:0: W0401: Wildcard import celestine.core.text (wildcard-import)
+addons\celestine\application\verify\core\test_text.py:6:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\application\verify\core\test_text.py:6:0: C0103: Class name "test_text" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\application\verify\core\test_text.py:7:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\core\test_text.py:10:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\core\test_text.py:13:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\core\test_text.py:16:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\core\test_text.py:19:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\core\test_text.py:22:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\core\test_text.py:25:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\core\test_text.py:28:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\core\test_text.py:3:0: W0614: Unused import(s) fatal, error, notice, warning, alert, debug, info and trace from wildcard import of celestine.core.text (unused-wildcard-import)
+************* Module celestine.application.verify.extension.test_more_itertools
+addons\celestine\application\verify\extension\test_more_itertools.py:8:0: C0325: Unnecessary parens after 'assert' keyword (superfluous-parens)
+addons\celestine\application\verify\extension\test_more_itertools.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\application\verify\extension\test_more_itertools.py:3:0: W0401: Wildcard import celestine.extension.more_itertools (wildcard-import)
+addons\celestine\application\verify\extension\test_more_itertools.py:6:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\application\verify\extension\test_more_itertools.py:6:0: C0103: Class name "test_more_itertools" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\application\verify\extension\test_more_itertools.py:7:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\extension\test_more_itertools.py:3:0: W0614: Unused import(s) split_when, filter_true and first_true from wildcard import of celestine.extension.more_itertools (unused-wildcard-import)
+************* Module celestine.application.verify.parser.test_operator
+addons\celestine\application\verify\parser\test_operator.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\application\verify\parser\test_operator.py:3:0: W0401: Wildcard import celestine.parser.operator (wildcard-import)
+addons\celestine\application\verify\parser\test_operator.py:4:0: W0401: Wildcard import celestine.data.alphabet (wildcard-import)
+addons\celestine\application\verify\parser\test_operator.py:5:0: W0401: Wildcard import celestine.parser.translator (wildcard-import)
+addons\celestine\application\verify\parser\test_operator.py:8:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:14:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\application\verify\parser\test_operator.py:14:0: C0103: Class name "test_digit" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\application\verify\parser\test_operator.py:15:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:19:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\application\verify\parser\test_operator.py:19:0: C0103: Class name "test_unary" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\application\verify\parser\test_operator.py:20:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:26:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:33:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:41:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:47:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:54:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:60:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:68:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\application\verify\parser\test_operator.py:68:0: C0103: Class name "test_comparison" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\application\verify\parser\test_operator.py:69:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:75:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:83:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:90:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:97:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:103:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:111:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:118:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:125:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:131:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:139:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:146:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:153:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:159:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:168:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:176:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_operator.py:177:8: W0612: Unused variable 'token' (unused-variable)
+addons\celestine\application\verify\parser\test_operator.py:3:0: W0614: Unused import(s) Operator, tab, word, number, join, tab_parse, word_parse, number_parse, unary_parse, comparison_parse and Divider from wildcard import of celestine.parser.operator (unused-wildcard-import)
+addons\celestine\application\verify\parser\test_operator.py:4:0: W0614: Unused import(s) enum and Letter from wildcard import of celestine.data.alphabet (unused-wildcard-import)
+addons\celestine\application\verify\parser\test_operator.py:5:0: W0614: Unused import(s) log_unicode, decode, maps, translator, encoding, split_when and filter_true from wildcard import of celestine.parser.translator (unused-wildcard-import)
+************* Module celestine.application.verify.parser.test_translator
+addons\celestine\application\verify\parser\test_translator.py:147:0: C0301: Line too long (343/100) (line-too-long)
+addons\celestine\application\verify\parser\test_translator.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\application\verify\parser\test_translator.py:3:0: W0401: Wildcard import celestine.parser.translator (wildcard-import)
+addons\celestine\application\verify\parser\test_translator.py:4:0: W0401: Wildcard import celestine.parser.operator (wildcard-import)
+addons\celestine\application\verify\parser\test_translator.py:7:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\application\verify\parser\test_translator.py:7:0: C0103: Class name "test_translator" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\application\verify\parser\test_translator.py:8:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_translator.py:22:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_translator.py:30:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_translator.py:39:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_translator.py:68:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_translator.py:128:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\verify\parser\test_translator.py:3:0: W0614: Unused import(s) log_unicode, decode, maps, encoding, split_when, filter_true, Unary, comparison_parse, number_parse, tab_parse, word_parse and unary_parse from wildcard import of celestine.parser.translator (unused-wildcard-import)
+addons\celestine\application\verify\parser\test_translator.py:4:0: W0614: Unused import(s) Operator, eq, ge, gt, le, nn, nu, add, div, mul, sub and join from wildcard import of celestine.parser.operator (unused-wildcard-import)
+************* Module celestine.core.hashlib
+addons\celestine\core\hashlib.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\core\hashlib.py:7:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\core\hashlib.py:15:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\hashlib.py:7:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module celestine.core.os
+addons\celestine\core\os.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\core\os.py:5:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\os.py:6:5: W0612: Unused variable 'root' (unused-variable)
+addons\celestine\core\os.py:10:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\os.py:14:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\os.py:18:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\os.py:23:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\os.py:28:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\os.py:30:28: W0621: Redefining name 'filenames' from outer scope (line 28) (redefined-outer-name)
+addons\celestine\core\os.py:30:18: W0612: Unused variable 'dirnames' (unused-variable)
+addons\celestine\core\os.py:43:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\os.py:46:28: W0621: Redefining name 'filenames' from outer scope (line 28) (redefined-outer-name)
+addons\celestine\core\os.py:56:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\os.py:61:0: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module celestine.core.text
+addons\celestine\core\text.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\core\text.py:1:0: C0103: Constant name "fatal" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\core\text.py:2:0: C0103: Constant name "error" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\core\text.py:3:0: C0103: Constant name "notice" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\core\text.py:4:0: C0103: Constant name "warning" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\core\text.py:5:0: C0103: Constant name "alert" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\core\text.py:6:0: C0103: Constant name "debug" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\core\text.py:7:0: C0103: Constant name "info" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\core\text.py:8:0: C0103: Constant name "trace" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\core\text.py:14:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\core\text.py:14:0: C0103: Class name "log" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\core\text.py:16:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\text.py:21:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\text.py:26:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\text.py:31:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\text.py:36:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\text.py:41:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\text.py:46:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\text.py:51:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\core\text.py:56:0: W0105: String statement has no effect (pointless-string-statement)
+************* Module celestine.parser.operator
+addons\celestine\parser\operator.py:322:0: C0305: Trailing newlines (trailing-newlines)
+addons\celestine\parser\operator.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\parser\operator.py:6:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\operator.py:7:38: W0613: Unused argument 'secondary' (unused-argument)
+addons\celestine\parser\operator.py:16:15: C0209: Formatting a regular string which could be a f-string (consider-using-f-string)
+addons\celestine\parser\operator.py:22:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:37:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:52:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:67:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:82:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:97:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:112:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:128:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:152:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:164:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:180:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:194:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:225:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\operator.py:225:0: C0103: Class name "tab" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\parser\operator.py:226:23: W0613: Unused argument 'iterable' (unused-argument)
+addons\celestine\parser\operator.py:225:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:237:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\operator.py:237:0: C0103: Class name "word" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\parser\operator.py:241:12: R1721: Unnecessary use of a comprehension, use list(iterable) instead. (unnecessary-comprehension)
+addons\celestine\parser\operator.py:237:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:246:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\operator.py:246:0: C0103: Class name "number" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\parser\operator.py:250:12: R1721: Unnecessary use of a comprehension, use list(iterable) instead. (unnecessary-comprehension)
+addons\celestine\parser\operator.py:246:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\operator.py:285:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\operator.py:289:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\operator.py:293:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\operator.py:297:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\operator.py:301:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\operator.py:311:0: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module celestine.parser.text
+addons\celestine\parser\text.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\parser\text.py:11:0: E0401: Unable to import 'celestine.tag.alphabet' (import-error)
+addons\celestine\parser\text.py:11:0: E0611: No name 'tag' in module 'celestine' (no-name-in-module)
+addons\celestine\parser\text.py:12:0: E0401: Unable to import 'celestine.tag.alphabet' (import-error)
+addons\celestine\parser\text.py:12:0: E0611: No name 'tag' in module 'celestine' (no-name-in-module)
+addons\celestine\parser\text.py:13:0: E0401: Unable to import 'celestine.tag.alphabet' (import-error)
+addons\celestine\parser\text.py:13:0: E0611: No name 'tag' in module 'celestine' (no-name-in-module)
+addons\celestine\parser\text.py:14:0: E0401: Unable to import 'celestine.tag.alphabet' (import-error)
+addons\celestine\parser\text.py:14:0: E0611: No name 'tag' in module 'celestine' (no-name-in-module)
+addons\celestine\parser\text.py:15:0: E0401: Unable to import 'celestine.tag.alphabet' (import-error)
+addons\celestine\parser\text.py:15:0: E0611: No name 'tag' in module 'celestine' (no-name-in-module)
+addons\celestine\parser\text.py:16:0: E0401: Unable to import 'celestine.unicode.u0000' (import-error)
+addons\celestine\parser\text.py:16:0: E0611: No name 'unicode' in module 'celestine' (no-name-in-module)
+addons\celestine\parser\text.py:19:0: E0401: Unable to import 'celestine.enum' (import-error)
+addons\celestine\parser\text.py:19:0: E0611: No name 'enum' in module 'celestine' (no-name-in-module)
+addons\celestine\parser\text.py:22:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\text.py:22:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\parser\text.py:31:9: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+addons\celestine\parser\text.py:39:0: C0103: Constant name "bird" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\parser\text.py:44:0: C0103: Constant name "state_now" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\parser\text.py:45:0: C0103: Constant name "state_past" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\parser\text.py:51:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\text.py:58:8: W0621: Redefining name 'character' from outer scope (line 36) (redefined-outer-name)
+addons\celestine\parser\text.py:52:4: C0103: Constant name "tigger" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\parser\text.py:52:4: W0603: Using the global statement (global-statement)
+addons\celestine\parser\text.py:53:4: C0103: Constant name "mouse" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\parser\text.py:53:4: W0602: Using global for 'mouse' but no assignment is done (global-variable-not-assigned)
+addons\celestine\parser\text.py:65:10: E0602: Undefined variable 'Atag' (undefined-variable)
+addons\celestine\parser\text.py:71:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\text.py:71:10: W0621: Redefining name 'string' from outer scope (line 31) (redefined-outer-name)
+addons\celestine\parser\text.py:76:8: W0621: Redefining name 'character' from outer scope (line 36) (redefined-outer-name)
+addons\celestine\parser\text.py:105:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\text.py:105:0: C0103: Class name "translator" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\parser\text.py:107:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\text.py:107:18: W0621: Redefining name 'string' from outer scope (line 31) (redefined-outer-name)
+addons\celestine\parser\text.py:105:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\celestine\parser\text.py:116:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\text.py:116:0: C0103: Class name "tokenizer" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\parser\text.py:118:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\text.py:118:17: W0621: Redefining name 'string' from outer scope (line 31) (redefined-outer-name)
+addons\celestine\parser\text.py:116:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\celestine\parser\text.py:121:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\text.py:121:0: C0103: Class name "parser" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\parser\text.py:123:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\text.py:123:14: W0621: Redefining name 'string' from outer scope (line 31) (redefined-outer-name)
+addons\celestine\parser\text.py:121:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\celestine\parser\text.py:126:0: C0103: Constant name "string" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\parser\text.py:127:0: C0103: Constant name "string" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\parser\text.py:1:0: W0611: Unused import sys (unused-import)
+************* Module celestine.parser.translator
+addons\celestine\parser\translator.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\parser\translator.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\translator.py:26:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\translator.py:40:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\translator.py:54:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\translator.py:54:0: C0103: Class name "translator" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\parser\translator.py:56:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\translator.py:54:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\celestine\parser\translator.py:60:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\translator.py:60:0: C0103: Class name "tokenizer" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\parser\translator.py:62:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\translator.py:60:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+addons\celestine\parser\translator.py:66:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\parser\translator.py:66:0: C0103: Class name "parser" doesn't conform to PascalCase naming style (invalid-name)
+addons\celestine\parser\translator.py:68:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\parser\translator.py:66:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module celestine.session.__init__
+addons\celestine\session\__init__.py:140:49: C0303: Trailing whitespace (trailing-whitespace)
+************* Module celestine.session
+addons\celestine\session\__init__.py:2:0: W0105: String statement has no effect (pointless-string-statement)
+addons\celestine\session\__init__.py:4:0: C0413: Import "import sys" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:5:0: C0413: Import "import configparser" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:8:0: C0413: Import "from celestine.keyword.main import APPLICATION" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:9:0: C0413: Import "from celestine.keyword.main import LANGUAGE" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:10:0: C0413: Import "from celestine.keyword.main import TASK" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:12:0: C0413: Import "from celestine.keyword.main import CELESTINE" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:15:0: W0105: String statement has no effect (pointless-string-statement)
+addons\celestine\session\__init__.py:16:0: W0404: Reimport 'configparser' (imported line 5) (reimported)
+addons\celestine\session\__init__.py:16:0: C0413: Import "import configparser" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:18:0: C0413: Import "from celestine.core import load" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:20:0: W0404: Reimport 'CELESTINE' (imported line 12) (reimported)
+addons\celestine\session\__init__.py:20:0: C0413: Import "from celestine.keyword.main import CELESTINE" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:21:0: C0413: Import "from celestine.keyword.main import CONFIGURATION" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:22:0: C0413: Import "from celestine.keyword.main import WRITE" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:23:0: C0413: Import "from celestine.keyword.main import UTF_8" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:25:0: W0105: String statement has no effect (pointless-string-statement)
+addons\celestine\session\__init__.py:26:0: C0413: Import "import argparse" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:27:0: C0413: Import "import dataclasses" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:29:0: W0404: Reimport 'APPLICATION' (imported line 8) (reimported)
+addons\celestine\session\__init__.py:29:0: C0413: Import "from celestine.keyword.main import APPLICATION" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:30:0: W0404: Reimport 'CELESTINE' (imported line 12) (reimported)
+addons\celestine\session\__init__.py:30:0: C0413: Import "from celestine.keyword.main import CELESTINE" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:31:0: W0404: Reimport 'LANGUAGE' (imported line 9) (reimported)
+addons\celestine\session\__init__.py:31:0: C0413: Import "from celestine.keyword.main import LANGUAGE" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:32:0: W0404: Reimport 'TASK' (imported line 10) (reimported)
+addons\celestine\session\__init__.py:32:0: C0413: Import "from celestine.keyword.main import TASK" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:33:0: C0413: Import "from celestine.keyword.main import application" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:34:0: C0413: Import "from celestine.keyword.main import language" should be placed at the top of the module (wrong-import-position)
+addons\celestine\session\__init__.py:48:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\session\__init__.py:98:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\session\__init__.py:99:4: W0231: __init__ method from base class 'Configuration' is not called (super-init-not-called)
+addons\celestine\session\__init__.py:115:0: C0115: Missing class docstring (missing-class-docstring)
+addons\celestine\session\__init__.py:115:0: R0902: Too many instance attributes (8/7) (too-many-instance-attributes)
+addons\celestine\session\__init__.py:127:42: E1101: Instance of 'Attribute' has no 'application' member (no-member)
+addons\celestine\session\__init__.py:132:12: E1101: Instance of 'Attribute' has no 'application' member (no-member)
+addons\celestine\session\__init__.py:137:12: E1101: Instance of 'Attribute' has no 'application' member (no-member)
+addons\celestine\session\__init__.py:143:12: E1101: Instance of 'Attribute' has no 'language' member (no-member)
+addons\celestine\session\__init__.py:149:12: E1101: Instance of 'Attribute' has no 'application' member (no-member)
+addons\celestine\session\__init__.py:150:12: E1101: Instance of 'Attribute' has no 'task' member (no-member)
+addons\celestine\session\__init__.py:157:55: W0621: Redefining name 'application' from outer scope (line 33) (redefined-outer-name)
+addons\celestine\session\__init__.py:169:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\session\__init__.py:169:4: E0202: An attribute defined in celestine.session line 145 hides this method (method-hidden)
+addons\celestine\session\__init__.py:181:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\session\__init__.py:16:0: C0411: standard import "import configparser" should be placed before "from celestine.keyword.main import APPLICATION" (wrong-import-order)
+addons\celestine\session\__init__.py:26:0: C0411: standard import "import argparse" should be placed before "from celestine.keyword.main import APPLICATION" (wrong-import-order)
+addons\celestine\session\__init__.py:27:0: C0411: standard import "import dataclasses" should be placed before "from celestine.keyword.main import APPLICATION" (wrong-import-order)
+************* Module celestine.window.main
+addons\celestine\window\main.py:11:0: C0325: Unnecessary parens after 'for' keyword (superfluous-parens)
+addons\celestine\window\main.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\celestine\window\main.py:1:0: R0402: Use 'from celestine.core import load' instead (consider-using-from-import)
+addons\celestine\window\main.py:2:0: R0402: Use 'from celestine.core import os' instead (consider-using-from-import)
+addons\celestine\window\main.py:8:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\window\main.py:9:5: W0612: Unused variable 'path' (unused-variable)
+addons\celestine\window\main.py:20:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\window\main.py:21:4: C0103: Constant name "image" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\window\main.py:21:4: W0602: Using global for 'image' but no assignment is done (global-variable-not-assigned)
+addons\celestine\window\main.py:32:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\window\main.py:33:4: C0103: Constant name "image" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\window\main.py:33:4: W0602: Using global for 'image' but no assignment is done (global-variable-not-assigned)
+addons\celestine\window\main.py:1:0: W0611: Unused celestine.core.load imported as load (unused-import)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==blender.mesh:[7:165]
+==booru.mesh:[7:165]
+class Mesh():
+    """Create a mesh in Blender."""
+
+    def __init__(self):
+        self.bmesh = bmesh.new(use_operators=False)
+        self.verts = self.bmesh.verts
+        self.edges = self.bmesh.edges
+        self.faces = self.bmesh.faces
+
+    def vertex_add(self, vector):
+        """Add 'vertex' to the mesh."""
+        coordinate = (vector.x, vector.y, vector.z)
+        self.verts.new(coordinate)
+
+    def vertex_finalize(self):
+        """Call this after adding all 'vertex' to mesh."""
+        self.verts.ensure_lookup_table()
+
+    def edge_add(self, vertex_a, vertex_b,):
+        """Add 'edge' to the mesh."""
+        vert_a = self.verts[vertex_a]
+        vert_b = self.verts[vertex_b]
+        vertices = (vert_a, vert_b)
+        self.edges.new(vertices)
+
+    def edge_finalize(self):
+        """Call this after adding all 'edge' to mesh."""
+        self.edges.ensure_lookup_table()
+
+    def face_add(self, vertex_a, vertex_b, vertex_c, vertex_d):
+        """Add 'face' to the mesh."""
+        vert_a = self.verts[vertex_a]
+        vert_b = self.verts[vertex_b]
+        vert_c = self.verts[vertex_c]
+        vert_d = self.verts[vertex_d]
+        vertices = (vert_a, vert_b, vert_c, vert_d)
+        self.faces.new(vertices)
+
+    def face_finalize(self):
+        """Call this after adding all 'face' to mesh."""
+        self.faces.ensure_lookup_table()
+
+    def uv_add(self, face, loop, point):
+        """Add 'uv' to the mesh."""
+        index_uv = self.bmesh.loops.layers.uv.verify()
+        self.faces[face].loops[loop][index_uv].uv = (point.x, point.y)
+
+    def uv_finalize(self):
+        """Call this after adding all 'uv' to mesh."""
+
+    def finalize(self, name):
+        """Call this after adding all the stuff to mesh."""
+        mesh = new.mesh(name)
+        self.bmesh.to_mesh(mesh)
+        self.bmesh.free()
+        return mesh
+
+
+class Quadrilateral(Mesh):
+    def vertex(self, zero, one, two, three):
+        self.vertex_add(zero)
+        self.vertex_add(one)
+        self.vertex_add(two)
+        self.vertex_add(three)
+        self.vertex_finalize()
+
+    def edge(self):
+        self.edge_add(0, 1)
+        self.edge_add(1, 2)
+        self.edge_add(2, 3)
+        self.edge_add(3, 0)
+        self.edge_finalize()
+
+    def face(self):
+        self.face_add(0, 1, 2, 3)
+        self.face_finalize()
+
+    def uv(self, zero, one, two, three):
+        self.uv_add(0, 0, zero)
+        self.uv_add(0, 1, one)
+        self.uv_add(0, 2, two)
+        self.uv_add(0, 3, three)
+        self.uv_finalize()
+
+
+class Planar(Quadrilateral):
+    def __init__(self):
+        super().__init__()
+        self.normal = mathutils.Vector((+0, +0, +1))
+
+    def vertex_new(self, vector, normal):
+        vector = mathutils.Vector(vector)
+        vector.resize_3d()
+        rotation = self.normal.rotation_difference(normal)
+        vector.rotate(rotation)
+        return vector
+
+
+class Plane(Planar):
+    def vertex(self, normal=(+1, +1, +1)):
+        normal = mathutils.Vector(normal)
+
+        vector_a = self.vertex_new((+1, +1), normal)
+        vector_b = self.vertex_new((-1, +1), normal)
+        vector_c = self.vertex_new((-1, -1), normal)
+        vector_d = self.vertex_new((+1, -1), normal)
+
+        super().vertex(vector_a, vector_b, vector_c, vector_d)
+
+    def edge(self):
+        self.edge_add(0, 1)
+        self.edge_add(1, 2)
+        self.edge_add(2, 3)
+        self.edge_add(3, 0)
+        self.edge_finalize()
+
+    def face(self):
+        self.face_add(0, 1, 2, 3)
+        self.face_finalize()
+
+    def uv(self, uv_x=0, uv_y=0):
+        self.uv_add(0, 0, mathutils.Vector((1 + uv_x, 1 + uv_y)))
+        self.uv_add(0, 1, mathutils.Vector((0 - uv_x, 1 + uv_y)))
+        self.uv_add(0, 2, mathutils.Vector((0 - uv_x, 0 - uv_y)))
+        self.uv_add(0, 3, mathutils.Vector((1 + uv_x, 0 - uv_y)))
+        self.uv_finalize()
+
+
+def plane(uv_x=0, uv_y=0):
+    box = Plane()
+    box.vertex()
+    box.edge()
+    box.face()
+    box.uv(uv_x, uv_y)
+    name = "Plane"
+    return box.finalize(name)
+
+
+def _offset(numerator, denominator):
+    ratio = numerator / denominator
+    unit = 1
+    maximum = max(ratio, unit)
+    normalization = maximum - unit
+    half = 1 / 2
+    halving = normalization * half
+    return halving
+    #  return (max(numerator / denominator, 1) - 1) / 2
+
+
+def image(image):
+    size = image.size
+    x = size[0]
+    y = size[1]
+    y_to_x = _offset(y, x)
+    x_to_y = _offset(x, y)
+    (x, y) = (y_to_x, x_to_y)
+
+    return plane(x, y) (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==blender.data:[5:118]
+==booru.data:[5:118]
+class all():
+    data = None
+
+    @classmethod
+    def new(cls, *args):
+        return cls.data.new(*args)
+
+    @classmethod
+    def remove(cls, item):
+        cls.data.remove(
+            item,
+            do_unlink=True,
+            do_id_user=True,
+            do_ui_user=True
+        )
+
+    @classmethod
+    def tag(cls, value):
+        # no idea what this does
+        return cls.data.tag(value)
+
+    @classmethod
+    def unregister(cls):
+        cls.data = None
+
+
+class camera(all):
+    @classmethod
+    def register(cls):
+        cls.data = bpy.data.cameras
+
+
+class image(all):  # incomplete
+    @classmethod
+    def new(cls, name, width, height, alpha=False, float_buffer=False,
+            stereo3d=False, is_data=False, tiled=False):
+        pass
+
+    @classmethod
+    def load(cls, filepath, check_existing=False):
+        return cls.data.load(filepath, check_existing=False)
+
+    @classmethod
+    def register(cls):
+        cls.data = bpy.data.images
+
+
+class light(all):
+    @classmethod
+    def register(cls):
+        cls.data = bpy.data.lights
+
+
+class material(all):
+    @classmethod
+    def create_gpencil_data(material):
+        pass
+
+    @classmethod
+    def remove_gpencil_data(material):
+        pass
+
+    @classmethod
+    def register(cls):
+        cls.data = bpy.data.materials
+
+
+class mesh(all):
+    @classmethod
+    def new_from_object(object, preserve_all_data_layers=False, depsgraph=None):
+        pass
+
+    @classmethod
+    def register(cls):
+        cls.data = bpy.data.meshes
+
+
+class object(all):
+    @classmethod
+    def new(cls, name, object_data):
+        object = super().new(name, object_data)
+        bpy.context.scene.collection.objects.link(object)
+        return object
+
+    @classmethod
+    def register(cls):
+        cls.data = bpy.data.objects
+
+
+class texture(all):
+    @classmethod
+    def register(cls):
+        cls.data = bpy.data.textures
+
+
+def register():
+    camera.register()
+    image.register()
+    light.register()
+    material.register()
+    mesh.register()
+    object.register()
+    texture.register()
+
+
+def unregister():
+    camera.unregister()
+    image.unregister()
+    light.unregister()
+    material.unregister()
+    mesh.unregister()
+    object.unregister()
+    texture.unregister() (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==blender.preferences:[5:65]
+==booru.preferences:[5:65]
+    return bpy.context.preferences.addons[__package__].preferences
+
+
+class BooruAddonPreferences(bpy.types.AddonPreferences):
+    bl_idname = __package__
+
+    root: bpy.props.StringProperty(
+        name="Root Image Folder",
+        description="Location of your image collection.",
+        subtype='DIR_PATH'
+    )
+
+    filepath: bpy.props.StringProperty(
+        name="Example File Path",
+        description="Location of your image collection.",
+        subtype='FILE_PATH',
+    )
+
+    number: bpy.props.IntProperty(
+        name="Example Number",
+        description="Location of your image collection.",
+        default=4
+    )
+
+    change: bpy.props.IntProperty(
+        name="Prove this worked",
+        description="Location of you.",
+        default=4
+    )
+
+    boolean: bpy.props.BoolProperty(
+        name="Example Boolean",
+        description="Location of your image collection.",
+        default=False
+    )
+
+    blender_id_password: bpy.props.StringProperty(
+        name='Password',
+        default='',
+        options={'HIDDEN', 'SKIP_SAVE'},
+        subtype='PASSWORD'
+    )
+
+    def draw(self, context):
+        layout = self.layout
+        layout.label(text="This is a preferences view for our add-on")
+        layout.prop(self, "root")
+        # unused
+        layout.prop(self, "filepath")
+        layout.prop(self, "change")
+        layout.prop(self, "number")
+        layout.prop(self, "boolean")
+
+
+def register():
+    bpy.utils.register_class(BooruAddonPreferences)
+
+
+def unregister():
+    bpy.utils.unregister_class(BooruAddonPreferences) (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==booru.plugin.OS:[5:66]
+==celestine.core.os:[5:66]
+    (root, ext) = os.path.splitext(path)
+    return ext
+
+
+def working_directory():
+    return os.getcwd()
+
+
+def join(path, *paths):
+    return os.path.join(path, *paths)
+
+
+def remove(path):
+    if os.path.isfile(path):
+        os.remove(path)
+
+
+def rename(source, destination):
+    if not os.path.isfile(destination):
+        os.rename(source, destination)
+
+
+def filenames(path):
+    file = []
+    for (dirpath, dirnames, filenames) in os.walk(path):
+        for name in filenames:
+            file.append(os.path.join(dirpath, name))
+    return file
+
+
+def _image_save(image, path):
+    if os.path.isfile(path):
+        os.remove(path)
+    with open(path, "wb") as file:
+        image.save(file, "PNG", optimize=True)
+
+
+def walk_directory(top='.'):
+    path = []
+    file = []
+    for (dirpath, dirnames, filenames) in os.walk(top):
+        for dirname in dirnames:
+            #path.append(os.path.join(dirpath, dirname))
+            path.append((dirpath, dirname))
+        for filename in filenames:
+            #file.append(os.path.join(dirpath, filename))
+            file.append((dirpath, filename))
+    return (path, file)
+
+
+def makedirs(paths):
+    for path in paths:
+        os.mkdir(path)
+
+
+def chdir(path, call, *args):
+    cwd = os.getcwd()
+    os.chdir(path)
+    ring = call(*args)
+    os.chdir(cwd)
+    return ring (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==blender.UV:[12:65]
+==booru.UV:[12:65]
+    node = nodes.new('ShaderNodeTexImage')
+    node.image = image
+    node.interpolation = 'Cubic'
+    node.projection = 'FLAT'
+    node.extension = 'CLIP'
+    return node
+
+
+def shader_diffuse(nodes):
+    # inputs
+    # "Color"
+    # "Roughness"
+    # "Normal"
+    # outputs
+    # "BSDF"
+    node = nodes.new('ShaderNodeBsdfDiffuse')
+    return node
+
+
+def shader_output(nodes):
+    # inputs
+    # "Surface"
+    # "Volume"
+    # "Displacement"
+    # outputs
+    node = nodes.new('ShaderNodeOutputMaterial')
+    node.target = 'ALL'
+    return node
+
+# material
+
+
+def material(name, image):
+    material = new.material(name)
+    material.use_nodes = True
+
+    tree = material.node_tree
+    nodes = tree.nodes
+    nodes.clear()
+
+    aa = shader_image(nodes, image)
+    aa.location = (000, 000)
+
+    bb = shader_diffuse(nodes)
+    bb.location = (300, 000)
+
+    cc = shader_output(nodes)
+    cc.location = (500, 000)
+
+    tree.links.new(aa.outputs["Color"], bb.inputs["Color"])
+    tree.links.new(bb.outputs["BSDF"], cc.inputs["Surface"])
+
+    return material (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==booru.main:[10:32]
+==celestine.application.blender.main:[11:34]
+ready = False
+Image_Formats = [
+    ".bmp",
+    ".sgi",
+    ".rgb",
+    ".bw",
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".jp2",
+    ".j2c",
+    ".tga",
+    ".cin",
+    ".dpx",
+    ".exr",
+    ".hdr",
+    ".tif",
+    ".tiff",
+    ".webp",
+]
+
+ (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==booru.main:[12:32]
+==celestine.application.blender.__init__:[20:49]
+    ".bmp",
+    ".sgi",
+    ".rgb",
+    ".bw",
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".jp2",
+    ".j2c",
+    ".tga",
+    ".cin",
+    ".dpx",
+    ".exr",
+    ".hdr",
+    ".tif",
+    ".tiff",
+    ".webp",
+]
+
+ (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==booru.__init__:[9:40]
+==celestine.application.blender.__init__:[49:80]
+bl_info = {
+    "name": "Blender Booru Builder",
+    "description": "Add, tag, and browse images on your computer.",
+    "author": "Mem Dixy",
+    "version": (0, 0, 4),
+    "blender": (2, 91, 0),
+    "location": "View 3D > Sidebar > Viewer",
+    "warning": "Does not work. Work in progress. Not ready for publication.",
+    "wiki_url": "https://mem-dixy.ch/",
+    "tracker_url": "https://github.com/Mem-Dixy/Blender-Booru-Builder",
+    "support": "COMMUNITY",
+    "category": "3D View",
+}
+
+
+def register():
+    """
+    This is a function which only runs when enabling the add-on,
+    this means the module can be loaded without activating the add-on.
+    """
+    main.register()
+    preferences.register()
+
+
+def unregister():
+    """
+    This is a function to unload anything setup by register,
+    this is called when the add-on is disabled.
+    """
+    preferences.unregister()
+    main.unregister() (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==blender.make:[5:45]
+==booru.make:[5:45]
+    return new.object(name, new.camera(name))
+
+
+class image():  # incomplete
+    @classmethod
+    def register(cls):
+        cls.data = bpy.data.images
+
+    @staticmethod
+    def new(name, width, height):
+        return bpy.data.images.new(name, width, height)
+
+    @staticmethod
+    def load(name, width, height):
+        return bpy.data.images.load(filepath, check_existing)
+#    return bpy.data.images.load(filepath, check_existing=check_existing)
+
+
+class light():
+    @staticmethod
+    def area(name):
+        return new.object(name, new.light.area(name))
+
+    @staticmethod
+    def point(name):
+        return new.object(name, new.light.point(name))
+
+    @staticmethod
+    def spot(name):
+        return new.object(name, new.light.spot(name))
+
+    @staticmethod
+    def sun(name):
+        return new.object(name, new.light.sun(name))
+
+
+def mesh(name, mesh=None):
+    if not mesh:
+        mesh = new.mesh(name)
+    return new.object(name, mesh) (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==booru.main:[91:103]
+==celestine.application.blender.main:[135:148]
+    for camera in bpy.data.cameras:
+        data.camera.remove(camera)
+    for light in bpy.data.lights:
+        data.light.remove(light)
+    for material in bpy.data.materials:
+        data.material.remove(material)
+    for mesh in bpy.data.meshes:
+        data.mesh.remove(mesh)
+    for image in bpy.data.images:
+        data.image.remove(image)
+    for texture in bpy.data.textures:
+        data.texture.remove(texture)
+ (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==celestine.keyword.main:[154:163]
+==celestine.session.__init__:[36:46]
+PYTHON = "python"
+
+PYTHON_3_6 = "python_3_6"
+PYTHON_3_7 = "python_3_7"
+PYTHON_3_8 = "python_3_8"
+PYTHON_3_9 = "python_3_9"
+PYTHON_3_10 = "python_3_10"
+PYTHON_3_11 = "python_3_11"
+
+ (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==blender.mesh:[117:128]
+==booru.mesh:[74:85]
+        self.edge_add(0, 1)
+        self.edge_add(1, 2)
+        self.edge_add(2, 3)
+        self.edge_add(3, 0)
+        self.edge_finalize()
+
+    def face(self):
+        self.face_add(0, 1, 2, 3)
+        self.face_finalize()
+
+    def uv(self, uv_x=0, uv_y=0): (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==blender.mesh:[74:85]
+==booru.mesh:[117:128]
+        self.edge_add(0, 1)
+        self.edge_add(1, 2)
+        self.edge_add(2, 3)
+        self.edge_add(3, 0)
+        self.edge_finalize()
+
+    def face(self):
+        self.face_add(0, 1, 2, 3)
+        self.face_finalize()
+
+    def uv(self, zero, one, two, three): (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==celestine.__init__:[10:19]
+==celestine.core.load:[27:37]
+    iterable = [CELESTINE, *paths]
+    name = FULL_STOP.join(iterable)
+    file = __import__(name)
+    for _path in paths:
+        file = getattr(file, _path)
+    return file
+
+
+def main(directory, argv): (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==booru.plugin.hashlib:[6:16]
+==celestine.core.hashlib:[6:16]
+class Hash:
+    @classmethod
+    def _cypher(cls, path, cypher):
+        with open(path, "rb") as file:
+            cypher.update(file.read())
+        return cypher.hexdigest().upper()
+
+    @classmethod
+    def sha3_512(cls, path):
+        return cls._cypher(path, hashlib.sha3_512()) (duplicate-code)
 
 ------------------------------------------------------------------
-Your code has been rated at 6.11/10 (previous run: 6.04/10, +0.07)
+Your code has been rated at 6.83/10 (previous run: 6.83/10, +0.00)
 

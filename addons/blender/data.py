@@ -37,8 +37,8 @@ class camera(all):
 
 class image(all):  # incomplete
     @classmethod
-    def new(cls, name, width, height, alpha=False, float_buffer=False,
-            stereo3d=False, is_data=False, tiled=False):
+    def new(cls, name, width, height, alpha, float_buffer, stereo3d, is_data,
+            tiled):
         pass
 
     @classmethod
