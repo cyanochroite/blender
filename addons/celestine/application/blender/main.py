@@ -4,6 +4,8 @@ import bpy  # pylint: disable=import-error
 import bmesh
 
 
+from blender import light as flame
+
 from blender import data
 from blender import make
 from blender import UV
@@ -146,7 +148,8 @@ def _startup_clear():
     for texture in bpy.data.textures:
         data.texture.remove(texture)
 
-    light = make.light.sun("light")
+    #light = make.light.sun("light")
+    light = flame.sun.make("light")
     light.location = (0, 0, 1)
     camera = make.camera("camera")
     camera.location = (0, 0, 10)

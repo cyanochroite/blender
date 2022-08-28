@@ -21,23 +21,6 @@ class image():  # incomplete
 #    return bpy.data.images.load(filepath, check_existing=check_existing)
 
 
-class light():
-    @staticmethod
-    def area(name):
-        return new.object(name, new.light.area(name))
-
-    @staticmethod
-    def point(name):
-        return new.object(name, new.light.point(name))
-
-    @staticmethod
-    def spot(name):
-        return new.object(name, new.light.spot(name))
-
-    @staticmethod
-    def sun(name):
-        return new.object(name, new.light.sun(name))
-
 
 def mesh(name, mesh=None):
     if not mesh:
