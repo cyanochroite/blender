@@ -1,5 +1,5 @@
 # <pep8-80 compliant>
-from . import data
+from blender import data
 
 
 def camera(name):
