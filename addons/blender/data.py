@@ -1,14 +1,18 @@
 # <pep8-80 compliant>
-import bpy  # pylint: disable=import-error
-# blend data
+# <pep8-80 compliant>
+import bpy
 
 
 class all():
-    data = None
-
     @classmethod
     def new(cls, *args):
         return cls.data.new(*args)
+
+    @classmethod
+    def object_(cls, name, object_data):
+        object = bpy.data.objects.new(name, object_data)
+        bpy.context.scene.collection.objects.link(object)
+        return object
 
     @classmethod
     def remove(cls, item):
@@ -20,99 +24,167 @@ class all():
         )
 
     @classmethod
-    def tag(cls, value):
-        # no idea what this does
-        return cls.data.tag(value)
+    def make(cls, name):
+        return cls.object_(name, cls.new(name))
+
+
+class most(all):
+    """Light data-block for lighting a scene."""
+    type_ = None
 
     @classmethod
-    def unregister(cls):
-        cls.data = None
+    def new(cls, name):
+        return super().new(name, cls.type_)
+
 
 
 class camera(all):
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.cameras
+    """Camera data-block for storing camera settings."""
+    data = bpy.data.cameras
 
 
-class image(all):  # incomplete
-    @classmethod
-    def new(cls, name, width, height, alpha, float_buffer, stereo3d, is_data,
-            tiled):
-        pass
-
-    @classmethod
-    def load(cls, filepath, check_existing=False):
-        return cls.data.load(filepath, check_existing=False)
-
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.images
-
-
-class light(all):
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.lights
 
 
 class material(all):
-    @classmethod
-    def create_gpencil_data(material):
-        pass
-
-    @classmethod
-    def remove_gpencil_data(material):
-        pass
-
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.materials
+    """
+    Material data-block to define the appearance of geometric objects for
+    rendering.
+    """
+    data = bpy.data.materials
 
 
 class mesh(all):
-    @classmethod
-    def new_from_object(object, preserve_all_data_layers=False, depsgraph=None):
-        pass
+    """Mesh data-block defining geometric surfaces."""
+    data = bpy.data.meshes
 
     @classmethod
-    def register(cls):
-        cls.data = bpy.data.meshes
+    def make(cls, name, mesh=None):
+        if not mesh:
+            mesh = cls.new(name)
+        return cls.object_(name, mesh)
 
 
-class object(all):
+class light(most):
+    """Light data-block for lighting a scene."""
+    data = bpy.data.lights
+
+
+class area(light):
+    """Area – Directional area light source."""
+    type_ = 'AREA'
+
+
+class point(light):
+    """Point – Omnidirectional point light source."""
+    type_ = 'POINT'
+
+
+class spot(light):
+    """Spot – Directional cone light source."""
+    type_ = 'SPOT'
+
+
+class sun(light):
+    """Sun – Constant direction parallel ray light source."""
+    type_ = 'SUN'
+
+
+class texture(most):
+    """Light data-block for lighting a scene."""
+    data = bpy.data.lights
+
+
+class none(texture):
+    """None."""
+    type_ = 'NONE'
+
+
+class blend(texture):
+    """Blend – Procedural - create a ramp texture."""
+    type_ = 'BLEND'
+
+
+class clouds(texture):
+    """Clouds – Procedural - create a cloud-like fractal noise texture."""
+    type_ = 'CLOUDS'
+
+
+class distorted_noise(texture):
+    """
+    Distorted Noise – Procedural - noise texture distorted by two noise
+    algorithms.
+    """
+    type_ = 'DISTORTED_NOISE'
+
+
+class image(texture):
+    """Image or Movie – Allow for images or movies to be used as textures."""
+    type_ = 'IMAGE'
+
+
+class magic(texture):
+    """Magic – Procedural - color texture based on trigonometric functions."""
+    type_ = 'MAGIC'
+
+
+class marble(texture):
+    """
+    Marble – Procedural - marble-like noise texture with wave generated bands.
+    """
+    type_ = 'MARBLE'
+
+
+class musgrave(texture):
+    """Musgrave – Procedural - highly flexible fractal noise texture."""
+    type_ = 'MUSGRAVE'
+
+
+class noise(texture):
+    """
+    Noise – Procedural - random noise, gives a different result every time, for
+    every frame, for every pixel.
+    """
+    type_ = 'NOISE'
+
+
+class stucci(texture):
+    """Stucci – Procedural - create a fractal noise texture."""
+    type_ = 'STUCCI'
+
+
+class voronoi(texture):
+    """
+    Voronoi – Procedural - create cell-like patterns based on Worley noise.
+    """
+    type_ = 'VORONOI'
+
+
+class wood(texture):
+    """
+    Wood – Procedural - wave generated bands or rings, with optional noise.
+    """
+    type_ = 'WOOD'
+
+
+class image(all):
+    """Image data-block referencing an external or packed image."""
+    data = bpy.data.images
+
     @classmethod
-    def new(cls, name, object_data):
-        object = super().new(name, object_data)
-        bpy.context.scene.collection.objects.link(object)
-        return object
-
+    def new(cls, name, width, height, alpha, float_buffer, stereo3d, is_data,
+            tiled):
+        return super().new(
+            cls.data,
+            name,
+            width,
+            height,
+            alpha,
+            float_buffer,
+            stereo3d,
+            is_data,
+            tiled,
+        )
+    
     @classmethod
-    def register(cls):
-        cls.data = bpy.data.objects
-
-
-class texture(all):
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.textures
-
-
-def register():
-    camera.register()
-    image.register()
-    light.register()
-    material.register()
-    mesh.register()
-    object.register()
-    texture.register()
-
-
-def unregister():
-    camera.unregister()
-    image.unregister()
-    light.unregister()
-    material.unregister()
-    mesh.unregister()
-    object.unregister()
-    texture.unregister()
+    def load(cls, filepath, check_existing=False):
+        return cls.data.load(filepath, check_existing=False)    

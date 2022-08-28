@@ -4,10 +4,7 @@ import bpy  # pylint: disable=import-error
 import bmesh
 
 
-from blender import light as flame
-
 from blender import data
-from blender import make
 from blender import UV
 
 
@@ -33,16 +30,6 @@ Image_Formats = [
 ]
 
 
-def register():
-    data.register()
-
-
-def unregister():
-    data.unregister()
-
-
-
-
 def new_image(image):
     mesh = bmesh.new(use_operators=False)
 
@@ -66,7 +53,7 @@ def new_image(image):
     ))
     mesh.faces.ensure_lookup_table()
 
-    uv = mesh.loops.layers.uv.verify()###ANOCE
+    uv = mesh.loops.layers.uv.verify()  # ANOCE
     (x, y) = image.size
     (x, y) = ((max(y / x, 1) - 1) / 2, (max(x / y, 1) - 1) / 2)
     mesh.faces[0].loops[0][uv].uv = (1 + x, 1 + y)
@@ -107,7 +94,7 @@ spot = 0
 def _new_object(image):
     global spot
     mush = new_image(image)
-    box = make.mesh("image", mush)
+    box = data.mesh.make("image", mush)
     box.location = (spot, 0, 0)
     spot += 2.5
     return box
@@ -149,9 +136,9 @@ def _startup_clear():
         data.texture.remove(texture)
 
     #light = make.light.sun("light")
-    light = flame.sun.make("light")
+    light = data.sun.make("light")
     light.location = (0, 0, 1)
-    camera = make.camera("camera")
+    camera = data.camera.make("camera")
     camera.location = (0, 0, 10)
 
 
@@ -163,10 +150,6 @@ def main(session):
     global spot
     spot = 0
 
-    register()
-
     _startup_clear()
     session.window.setup(session)
     session.window.view(session)
-
-    unregister()
