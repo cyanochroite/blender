@@ -1,30 +1,31 @@
 # <pep8-80 compliant>
-import bpy
+"""bpy.types.Texture"""
+import bpy  # pylint: disable=import-error
 
 from blender.data.most import most
 
 
-class texture(most):
+class _texture(most):
     """Light data-block for lighting a scene."""
-    data = bpy.data.lights
+    data = bpy.data.textures
 
 
-class none(texture):
+class _none(_texture):
     """None."""
     type_ = 'NONE'
 
 
-class blend(texture):
+class _blend(_texture):
     """Blend – Procedural - create a ramp texture."""
     type_ = 'BLEND'
 
 
-class clouds(texture):
+class _clouds(_texture):
     """Clouds – Procedural - create a cloud-like fractal noise texture."""
     type_ = 'CLOUDS'
 
 
-class distorted_noise(texture):
+class _distorted(_texture):
     """
     Distorted Noise – Procedural - noise texture distorted by two noise
     algorithms.
@@ -32,29 +33,29 @@ class distorted_noise(texture):
     type_ = 'DISTORTED_NOISE'
 
 
-class image(texture):
+class _image(_texture):
     """Image or Movie – Allow for images or movies to be used as textures."""
     type_ = 'IMAGE'
 
 
-class magic(texture):
+class _magic(_texture):
     """Magic – Procedural - color texture based on trigonometric functions."""
     type_ = 'MAGIC'
 
 
-class marble(texture):
+class _marble(_texture):
     """
     Marble – Procedural - marble-like noise texture with wave generated bands.
     """
     type_ = 'MARBLE'
 
 
-class musgrave(texture):
+class _musgrave(_texture):
     """Musgrave – Procedural - highly flexible fractal noise texture."""
     type_ = 'MUSGRAVE'
 
 
-class noise(texture):
+class _noise(_texture):
     """
     Noise – Procedural - random noise, gives a different result every time, for
     every frame, for every pixel.
@@ -62,34 +63,34 @@ class noise(texture):
     type_ = 'NOISE'
 
 
-class stucci(texture):
+class _stucci(_texture):
     """Stucci – Procedural - create a fractal noise texture."""
     type_ = 'STUCCI'
 
 
-class voronoi(texture):
+class _voronoi(_texture):
     """
     Voronoi – Procedural - create cell-like patterns based on Worley noise.
     """
     type_ = 'VORONOI'
 
 
-class wood(texture):
+class _wood(_texture):
     """
     Wood – Procedural - wave generated bands or rings, with optional noise.
     """
     type_ = 'WOOD'
 
 
-texture.none = none
-texture.blend = blend
-texture.clouds = clouds
-texture.distorted_noise = distorted_noise
-texture.image = image
-texture.magic = magic
-texture.marble = marble
-texture.musgrave = musgrave
-texture.noise = noise
-texture.stucci = stucci
-texture.voronoi = voronoi
-texture.wood = wood
+_texture.none = _none
+_texture.blend = _blend
+_texture.clouds = _clouds
+_texture.distorted_noise = _distorted
+_texture.image = _image
+_texture.magic = _magic
+_texture.marble = _marble
+_texture.musgrave = _musgrave
+_texture.noise = _noise
+_texture.stucci = _stucci
+_texture.voronoi = _voronoi
+_texture.wood = _wood

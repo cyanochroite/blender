@@ -1,35 +1,36 @@
 # <pep8-80 compliant>
-import bpy
+""" bpy.types.Light"""
+import bpy  # pylint: disable=import-error
 
 from blender.data.most import most
 
 
-class light(most):
+class _light(most):
     """Light data-block for lighting a scene."""
     data = bpy.data.lights
 
 
-class area(light):
+class _area(_light):
     """Area – Directional area light source."""
     type_ = 'AREA'
 
 
-class point(light):
+class _point(_light):
     """Point – Omnidirectional point light source."""
     type_ = 'POINT'
 
 
-class spot(light):
+class _spot(_light):
     """Spot – Directional cone light source."""
     type_ = 'SPOT'
 
 
-class sun(light):
+class _sun(_light):
     """Sun – Constant direction parallel ray light source."""
     type_ = 'SUN'
 
 
-light.area = area
-light.point = point
-light.spot = spot
-light.sun = sun
+_light.area = _area
+_light.point = _point
+_light.spot = _spot
+_light.sun = _sun

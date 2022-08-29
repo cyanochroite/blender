@@ -295,75 +295,6 @@ addons\test.py:733:0: C0103: Function name "a" doesn't conform to snake_case nam
 addons\test.py:733:0: E0102: function already defined line 711 (function-redefined)
 addons\test.py:742:0: C0103: Constant name "size_x" doesn't conform to UPPER_CASE naming style (invalid-name)
 addons\test.py:743:0: C0103: Constant name "size_y" doesn't conform to UPPER_CASE naming style (invalid-name)
-************* Module blender.data
-addons\blender\data.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-addons\blender\data.py:6:0: W0622: Redefining built-in 'all' (redefined-builtin)
-addons\blender\data.py:83:0: W0622: Redefining built-in 'object' (redefined-builtin)
-addons\blender\data.py:6:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\data.py:6:0: C0103: Class name "all" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\data.py:10:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:14:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:23:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:28:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:32:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\data.py:32:0: C0103: Class name "camera" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\data.py:34:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:38:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\data.py:38:0: C0103: Class name "image" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\data.py:40:4: W0221: Number of parameters was 2 in 'all.new' and is now 9 in overridden 'image.new' method (arguments-differ)
-addons\blender\data.py:40:4: W0221: Variadics removed in overridden 'image.new' method (arguments-differ)
-addons\blender\data.py:40:4: R0913: Too many arguments (9/5) (too-many-arguments)
-addons\blender\data.py:45:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:45:28: W0613: Unused argument 'check_existing' (unused-argument)
-addons\blender\data.py:49:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:53:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\data.py:53:0: C0103: Class name "light" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\data.py:55:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:59:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\data.py:59:0: C0103: Class name "material" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\data.py:61:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:61:4: C0202: Class method create_gpencil_data should have 'cls' as first argument (bad-classmethod-argument)
-addons\blender\data.py:61:28: W0621: Redefining name 'material' from outer scope (line 59) (redefined-outer-name)
-addons\blender\data.py:65:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:65:4: C0202: Class method remove_gpencil_data should have 'cls' as first argument (bad-classmethod-argument)
-addons\blender\data.py:65:28: W0621: Redefining name 'material' from outer scope (line 59) (redefined-outer-name)
-addons\blender\data.py:69:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:73:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\data.py:73:0: C0103: Class name "mesh" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\data.py:75:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:75:4: C0202: Class method new_from_object should have 'cls' as first argument (bad-classmethod-argument)
-addons\blender\data.py:75:24: W0621: Redefining name 'object' from outer scope (line 83) (redefined-outer-name)
-addons\blender\data.py:79:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:83:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\data.py:83:0: C0103: Class name "object" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\data.py:85:4: W0221: Number of parameters was 2 in 'all.new' and is now 3 in overridden 'object.new' method (arguments-differ)
-addons\blender\data.py:85:4: W0221: Variadics removed in overridden 'object.new' method (arguments-differ)
-addons\blender\data.py:86:8: W0621: Redefining name 'object' from outer scope (line 83) (redefined-outer-name)
-addons\blender\data.py:91:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:95:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\data.py:95:0: C0103: Class name "texture" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\data.py:97:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:101:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\data.py:111:0: C0116: Missing function or method docstring (missing-function-docstring)
-************* Module blender.make
-addons\blender\make.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-addons\blender\make.py:2:0: E0611: No name 'new' in module '' (no-name-in-module)
-addons\blender\make.py:5:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\make.py:9:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\make.py:9:0: C0103: Class name "image" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\make.py:11:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\make.py:12:19: E0602: Undefined variable 'bpy' (undefined-variable)
-addons\blender\make.py:15:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\make.py:16:15: E0602: Undefined variable 'bpy' (undefined-variable)
-addons\blender\make.py:19:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\make.py:20:15: E0602: Undefined variable 'bpy' (undefined-variable)
-addons\blender\make.py:20:36: E0602: Undefined variable 'filepath' (undefined-variable)
-addons\blender\make.py:20:46: E0602: Undefined variable 'check_existing' (undefined-variable)
-addons\blender\make.py:19:13: W0613: Unused argument 'name' (unused-argument)
-addons\blender\make.py:19:19: W0613: Unused argument 'width' (unused-argument)
-addons\blender\make.py:19:26: W0613: Unused argument 'height' (unused-argument)
-addons\blender\make.py:25:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\make.py:25:15: W0621: Redefining name 'mesh' from outer scope (line 25) (redefined-outer-name)
 ************* Module blender.mesh
 addons\blender\mesh.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 addons\blender\mesh.py:2:0: E0401: Unable to import 'bmesh' (import-error)
@@ -399,7 +330,6 @@ addons\blender\preferences.py:64:0: C0116: Missing function or method docstring 
 ************* Module blender.UV
 addons\blender\UV.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 addons\blender\UV.py:1:0: C0103: Module name "UV" doesn't conform to snake_case naming style (invalid-name)
-addons\blender\UV.py:2:0: E0611: No name 'new' in module '' (no-name-in-module)
 addons\blender\UV.py:7:0: C0116: Missing function or method docstring (missing-function-docstring)
 addons\blender\UV.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
 addons\blender\UV.py:32:0: C0116: Missing function or method docstring (missing-function-docstring)
@@ -408,56 +338,46 @@ addons\blender\UV.py:46:4: W0621: Redefining name 'material' from outer scope (l
 addons\blender\UV.py:53:4: C0103: Variable name "aa" doesn't conform to snake_case naming style (invalid-name)
 addons\blender\UV.py:56:4: C0103: Variable name "bb" doesn't conform to snake_case naming style (invalid-name)
 addons\blender\UV.py:59:4: C0103: Variable name "cc" doesn't conform to snake_case naming style (invalid-name)
-************* Module blender.light.area
-addons\blender\light\area.py:6:0: W0622: Redefining built-in 'object' (redefined-builtin)
-addons\blender\light\area.py:3:0: E0401: Unable to import 'bpy' (import-error)
-addons\blender\light\area.py:6:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\area.py:7:4: W0621: Redefining name 'object' from outer scope (line 6) (redefined-outer-name)
-addons\blender\light\area.py:12:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\area.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\area.py:25:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\area.py:29:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\area.py:33:0: C0116: Missing function or method docstring (missing-function-docstring)
-************* Module blender.light.point
-addons\blender\light\point.py:6:0: W0622: Redefining built-in 'object' (redefined-builtin)
-addons\blender\light\point.py:3:0: E0401: Unable to import 'bpy' (import-error)
-addons\blender\light\point.py:6:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\point.py:7:4: W0621: Redefining name 'object' from outer scope (line 6) (redefined-outer-name)
-addons\blender\light\point.py:12:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\point.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\point.py:25:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\point.py:29:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\point.py:33:0: C0116: Missing function or method docstring (missing-function-docstring)
-************* Module blender.light.spot
-addons\blender\light\spot.py:6:0: W0622: Redefining built-in 'object' (redefined-builtin)
-addons\blender\light\spot.py:3:0: E0401: Unable to import 'bpy' (import-error)
-addons\blender\light\spot.py:6:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\spot.py:7:4: W0621: Redefining name 'object' from outer scope (line 6) (redefined-outer-name)
-addons\blender\light\spot.py:12:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\spot.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\spot.py:25:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\spot.py:29:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\spot.py:33:0: C0116: Missing function or method docstring (missing-function-docstring)
-************* Module blender.light
-addons\blender\light\__init__.py:6:0: W0622: Redefining built-in 'all' (redefined-builtin)
-addons\blender\light\__init__.py:3:0: E0401: Unable to import 'bpy' (import-error)
-addons\blender\light\__init__.py:6:0: C0115: Missing class docstring (missing-class-docstring)
-addons\blender\light\__init__.py:6:0: C0103: Class name "all" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\light\__init__.py:8:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\__init__.py:12:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\__init__.py:13:8: W0622: Redefining built-in 'object' (redefined-builtin)
-addons\blender\light\__init__.py:18:0: C0103: Class name "light" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\light\__init__.py:23:4: W0237: Parameter 'data' has been renamed to 'name' in overridden 'light.new' method (arguments-renamed)
-addons\blender\light\__init__.py:23:4: W0221: Variadics removed in overridden 'light.new' method (arguments-differ)
-addons\blender\light\__init__.py:27:4: C0116: Missing function or method docstring (missing-function-docstring)
-addons\blender\light\__init__.py:31:0: C0103: Class name "area" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\light\__init__.py:36:0: C0103: Class name "point" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\light\__init__.py:41:0: C0103: Class name "spot" doesn't conform to PascalCase naming style (invalid-name)
-addons\blender\light\__init__.py:46:0: C0103: Class name "sun" doesn't conform to PascalCase naming style (invalid-name)
-************* Module blender.new
-addons\blender\new\__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-addons\blender\new\__init__.py:48:0: W0622: Redefining built-in 'object' (redefined-builtin)
-addons\blender\new\__init__.py:12:0: R0913: Too many arguments (8/5) (too-many-arguments)
+************* Module blender.data.most
+addons\blender\data\most.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\blender\data\most.py:3:0: E0401: Unable to import 'bpy' (import-error)
+addons\blender\data\most.py:5:0: C0115: Missing class docstring (missing-class-docstring)
+addons\blender\data\most.py:5:0: C0103: Class name "all_stuff" doesn't conform to PascalCase naming style (invalid-name)
+addons\blender\data\most.py:7:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\blender\data\most.py:8:15: E1101: Class 'all_stuff' has no 'data' member (no-member)
+addons\blender\data\most.py:11:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\blender\data\most.py:12:8: W0622: Redefining built-in 'object' (redefined-builtin)
+addons\blender\data\most.py:17:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\blender\data\most.py:18:8: E1101: Class 'all_stuff' has no 'data' member (no-member)
+addons\blender\data\most.py:26:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\blender\data\most.py:30:0: C0103: Class name "most" doesn't conform to PascalCase naming style (invalid-name)
+addons\blender\data\most.py:35:4: W0221: Number of parameters was 2 in 'all_stuff.new' and is now 2 in overridden 'most.new' method (arguments-differ)
+addons\blender\data\most.py:35:4: W0221: Variadics removed in overridden 'most.new' method (arguments-differ)
+************* Module blender.data
+addons\blender\data\__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+addons\blender\data\__init__.py:3:0: E0401: Unable to import 'bpy' (import-error)
+addons\blender\data\__init__.py:9:0: C0115: Missing class docstring (missing-class-docstring)
+addons\blender\data\__init__.py:9:0: C0103: Class name "all_stuff" doesn't conform to PascalCase naming style (invalid-name)
+addons\blender\data\__init__.py:11:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\blender\data\__init__.py:12:15: E1101: Class 'all_stuff' has no 'data' member (no-member)
+addons\blender\data\__init__.py:15:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\blender\data\__init__.py:16:8: W0622: Redefining built-in 'object' (redefined-builtin)
+addons\blender\data\__init__.py:21:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\blender\data\__init__.py:22:8: E1101: Class 'all_stuff' has no 'data' member (no-member)
+addons\blender\data\__init__.py:30:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\blender\data\__init__.py:34:0: C0103: Class name "most" doesn't conform to PascalCase naming style (invalid-name)
+addons\blender\data\__init__.py:39:4: W0221: Number of parameters was 2 in 'all_stuff.new' and is now 2 in overridden 'most.new' method (arguments-differ)
+addons\blender\data\__init__.py:39:4: W0221: Variadics removed in overridden 'most.new' method (arguments-differ)
+addons\blender\data\__init__.py:43:0: C0103: Class name "camera" doesn't conform to PascalCase naming style (invalid-name)
+addons\blender\data\__init__.py:48:0: C0103: Class name "material" doesn't conform to PascalCase naming style (invalid-name)
+addons\blender\data\__init__.py:56:0: C0103: Class name "mesh" doesn't conform to PascalCase naming style (invalid-name)
+addons\blender\data\__init__.py:61:24: W0621: Redefining name 'mesh' from outer scope (line 56) (redefined-outer-name)
+addons\blender\data\__init__.py:67:0: C0103: Class name "image" doesn't conform to PascalCase naming style (invalid-name)
+addons\blender\data\__init__.py:72:4: W0221: Number of parameters was 2 in 'all_stuff.new' and is now 9 in overridden 'image.new' method (arguments-differ)
+addons\blender\data\__init__.py:72:4: W0221: Variadics removed in overridden 'image.new' method (arguments-differ)
+addons\blender\data\__init__.py:72:4: R0913: Too many arguments (9/5) (too-many-arguments)
+addons\blender\data\__init__.py:87:4: C0116: Missing function or method docstring (missing-function-docstring)
+addons\blender\data\__init__.py:87:28: W0613: Unused argument 'check_existing' (unused-argument)
 ************* Module booru.data
 addons\booru\data.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 addons\booru\data.py:6:0: W0622: Redefining built-in 'all' (redefined-builtin)
@@ -686,44 +606,43 @@ addons\booru\plugin\OS.py:61:0: C0116: Missing function or method docstring (mis
 addons\celestine\__init__.py:19:0: C0116: Missing function or method docstring (missing-function-docstring)
 addons\celestine\__init__.py:21:4: W0621: Redefining name 'main' from outer scope (line 19) (redefined-outer-name)
 ************* Module celestine.application.blender.main
-addons\celestine\application\blender\main.py:4:0: E0401: Unable to import 'bmesh' (import-error)
-addons\celestine\application\blender\main.py:14:0: C0103: Constant name "ready" doesn't conform to UPPER_CASE naming style (invalid-name)
-addons\celestine\application\blender\main.py:36:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\celestine\application\blender\main.py:40:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\celestine\application\blender\main.py:46:0: C0116: Missing function or method docstring (missing-function-docstring)
-addons\celestine\application\blender\main.py:46:14: W0621: Redefining name 'image' from outer scope (line 116) (redefined-outer-name)
-addons\celestine\application\blender\main.py:69:4: C0103: Variable name "uv" doesn't conform to snake_case naming style (invalid-name)
-addons\celestine\application\blender\main.py:70:5: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
-addons\celestine\application\blender\main.py:70:8: C0103: Variable name "y" doesn't conform to snake_case naming style (invalid-name)
-addons\celestine\application\blender\main.py:71:5: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
-addons\celestine\application\blender\main.py:71:8: C0103: Variable name "y" doesn't conform to snake_case naming style (invalid-name)
-addons\celestine\application\blender\main.py:83:0: R0903: Too few public methods (0/2) (too-few-public-methods)
-addons\celestine\application\blender\main.py:96:4: W0107: Unnecessary pass statement (unnecessary-pass)
-addons\celestine\application\blender\main.py:94:16: W0613: Unused argument 'tag' (unused-argument)
-addons\celestine\application\blender\main.py:94:21: W0613: Unused argument 'bind' (unused-argument)
-addons\celestine\application\blender\main.py:101:4: W0107: Unnecessary pass statement (unnecessary-pass)
-addons\celestine\application\blender\main.py:99:21: W0613: Unused argument 'tag' (unused-argument)
-addons\celestine\application\blender\main.py:104:0: C0103: Constant name "spot" doesn't conform to UPPER_CASE naming style (invalid-name)
-addons\celestine\application\blender\main.py:107:16: W0621: Redefining name 'image' from outer scope (line 116) (redefined-outer-name)
-addons\celestine\application\blender\main.py:108:4: C0103: Constant name "spot" doesn't conform to UPPER_CASE naming style (invalid-name)
-addons\celestine\application\blender\main.py:108:4: W0603: Using the global statement (global-statement)
-addons\celestine\application\blender\main.py:118:4: W0621: Redefining name 'image' from outer scope (line 116) (redefined-outer-name)
-addons\celestine\application\blender\main.py:120:4: W0622: Redefining built-in 'object' (redefined-builtin)
+addons\celestine\application\blender\main.py:10:0: C0103: Constant name "ready" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\blender\main.py:32:0: C0116: Missing function or method docstring (missing-function-docstring)
+addons\celestine\application\blender\main.py:32:14: W0621: Redefining name 'image' from outer scope (line 102) (redefined-outer-name)
+addons\celestine\application\blender\main.py:55:4: C0103: Variable name "uv" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\blender\main.py:56:5: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\blender\main.py:56:8: C0103: Variable name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\blender\main.py:57:5: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\blender\main.py:57:8: C0103: Variable name "y" doesn't conform to snake_case naming style (invalid-name)
+addons\celestine\application\blender\main.py:69:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+addons\celestine\application\blender\main.py:82:4: W0107: Unnecessary pass statement (unnecessary-pass)
+addons\celestine\application\blender\main.py:80:16: W0613: Unused argument 'tag' (unused-argument)
+addons\celestine\application\blender\main.py:80:21: W0613: Unused argument 'bind' (unused-argument)
+addons\celestine\application\blender\main.py:87:4: W0107: Unnecessary pass statement (unnecessary-pass)
+addons\celestine\application\blender\main.py:85:21: W0613: Unused argument 'tag' (unused-argument)
+addons\celestine\application\blender\main.py:90:0: C0103: Constant name "spot" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\blender\main.py:93:16: W0621: Redefining name 'image' from outer scope (line 102) (redefined-outer-name)
+addons\celestine\application\blender\main.py:94:4: C0103: Constant name "spot" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\blender\main.py:94:4: W0603: Using the global statement (global-statement)
+addons\celestine\application\blender\main.py:104:4: W0621: Redefining name 'image' from outer scope (line 102) (redefined-outer-name)
+addons\celestine\application\blender\main.py:106:4: W0622: Redefining built-in 'object' (redefined-builtin)
+addons\celestine\application\blender\main.py:102:10: W0613: Unused argument 'tag' (unused-argument)
+addons\celestine\application\blender\main.py:118:4: W0107: Unnecessary pass statement (unnecessary-pass)
 addons\celestine\application\blender\main.py:116:10: W0613: Unused argument 'tag' (unused-argument)
-addons\celestine\application\blender\main.py:132:4: W0107: Unnecessary pass statement (unnecessary-pass)
-addons\celestine\application\blender\main.py:130:10: W0613: Unused argument 'tag' (unused-argument)
-addons\celestine\application\blender\main.py:130:15: W0613: Unused argument 'text' (unused-argument)
-addons\celestine\application\blender\main.py:146:8: W0621: Redefining name 'image' from outer scope (line 116) (redefined-outer-name)
-addons\celestine\application\blender\main.py:160:4: C0103: Constant name "item" doesn't conform to UPPER_CASE naming style (invalid-name)
-addons\celestine\application\blender\main.py:160:4: W0601: Global variable 'item' undefined at the module level (global-variable-undefined)
-addons\celestine\application\blender\main.py:163:4: C0103: Constant name "spot" doesn't conform to UPPER_CASE naming style (invalid-name)
-addons\celestine\application\blender\main.py:163:4: W0603: Using the global statement (global-statement)
+addons\celestine\application\blender\main.py:116:15: W0613: Unused argument 'text' (unused-argument)
+addons\celestine\application\blender\main.py:132:8: W0621: Redefining name 'image' from outer scope (line 102) (redefined-outer-name)
+addons\celestine\application\blender\main.py:146:4: C0103: Constant name "item" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\blender\main.py:146:4: W0601: Global variable 'item' undefined at the module level (global-variable-undefined)
+addons\celestine\application\blender\main.py:149:4: C0103: Constant name "spot" doesn't conform to UPPER_CASE naming style (invalid-name)
+addons\celestine\application\blender\main.py:149:4: W0603: Using the global statement (global-statement)
 ************* Module celestine.application.blender
 addons\celestine\application\blender\__init__.py:4:13: W0621: Redefining name 'argument' from outer scope (line 4) (redefined-outer-name)
 addons\celestine\application\blender\__init__.py:19:0: C0116: Missing function or method docstring (missing-function-docstring)
 addons\celestine\application\blender\__init__.py:41:0: W0105: String statement has no effect (pointless-string-statement)
 addons\celestine\application\blender\__init__.py:46:0: C0413: Import "from . import main" should be placed at the top of the module (wrong-import-position)
 addons\celestine\application\blender\__init__.py:47:0: C0413: Import "from blender import preferences" should be placed at the top of the module (wrong-import-position)
+addons\celestine\application\blender\__init__.py:70:4: E1101: Module 'celestine.application.blender.main' has no 'register' member (no-member)
+addons\celestine\application\blender\__init__.py:80:4: E1101: Module 'celestine.application.blender.main' has no 'unregister' member (no-member)
 addons\celestine\application\blender\__init__.py:47:0: C0411: third party import "from blender import preferences" should be placed before "from . import main" (wrong-import-order)
 ************* Module celestine.application.celestine.configure
 addons\celestine\application\celestine\configure.py:16:4: W0621: Redefining name 'application' from outer scope (line 8) (redefined-outer-name)
@@ -1328,122 +1247,6 @@ def image(image):
 
     return plane(x, y) (duplicate-code)
 addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
-==blender.data:[5:118]
-==booru.data:[5:118]
-class all():
-    data = None
-
-    @classmethod
-    def new(cls, *args):
-        return cls.data.new(*args)
-
-    @classmethod
-    def remove(cls, item):
-        cls.data.remove(
-            item,
-            do_unlink=True,
-            do_id_user=True,
-            do_ui_user=True
-        )
-
-    @classmethod
-    def tag(cls, value):
-        # no idea what this does
-        return cls.data.tag(value)
-
-    @classmethod
-    def unregister(cls):
-        cls.data = None
-
-
-class camera(all):
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.cameras
-
-
-class image(all):  # incomplete
-    @classmethod
-    def new(cls, name, width, height, alpha, float_buffer, stereo3d, is_data,
-            tiled):
-        pass
-
-    @classmethod
-    def load(cls, filepath, check_existing=False):
-        return cls.data.load(filepath, check_existing=False)
-
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.images
-
-
-class light(all):
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.lights
-
-
-class material(all):
-    @classmethod
-    def create_gpencil_data(material):
-        pass
-
-    @classmethod
-    def remove_gpencil_data(material):
-        pass
-
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.materials
-
-
-class mesh(all):
-    @classmethod
-    def new_from_object(object, preserve_all_data_layers=False, depsgraph=None):
-        pass
-
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.meshes
-
-
-class object(all):
-    @classmethod
-    def new(cls, name, object_data):
-        object = super().new(name, object_data)
-        bpy.context.scene.collection.objects.link(object)
-        return object
-
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.objects
-
-
-class texture(all):
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.textures
-
-
-def register():
-    camera.register()
-    image.register()
-    light.register()
-    material.register()
-    mesh.register()
-    object.register()
-    texture.register()
-
-
-def unregister():
-    camera.unregister()
-    image.unregister()
-    light.unregister()
-    material.unregister()
-    mesh.unregister()
-    object.unregister()
-    texture.unregister() (duplicate-code)
-addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
 ==blender.preferences:[5:65]
 ==booru.preferences:[5:65]
     return bpy.context.preferences.addons[__package__].preferences
@@ -1571,64 +1374,8 @@ def chdir(path, call, *args):
     os.chdir(cwd)
     return ring (duplicate-code)
 addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
-==blender.UV:[12:65]
-==booru.UV:[12:65]
-    node = nodes.new('ShaderNodeTexImage')
-    node.image = image
-    node.interpolation = 'Cubic'
-    node.projection = 'FLAT'
-    node.extension = 'CLIP'
-    return node
-
-
-def shader_diffuse(nodes):
-    # inputs
-    # "Color"
-    # "Roughness"
-    # "Normal"
-    # outputs
-    # "BSDF"
-    node = nodes.new('ShaderNodeBsdfDiffuse')
-    return node
-
-
-def shader_output(nodes):
-    # inputs
-    # "Surface"
-    # "Volume"
-    # "Displacement"
-    # outputs
-    node = nodes.new('ShaderNodeOutputMaterial')
-    node.target = 'ALL'
-    return node
-
-# material
-
-
-def material(name, image):
-    material = new.material(name)
-    material.use_nodes = True
-
-    tree = material.node_tree
-    nodes = tree.nodes
-    nodes.clear()
-
-    aa = shader_image(nodes, image)
-    aa.location = (000, 000)
-
-    bb = shader_diffuse(nodes)
-    bb.location = (300, 000)
-
-    cc = shader_output(nodes)
-    cc.location = (500, 000)
-
-    tree.links.new(aa.outputs["Color"], bb.inputs["Color"])
-    tree.links.new(bb.outputs["BSDF"], cc.inputs["Surface"])
-
-    return material (duplicate-code)
-addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
 ==booru.main:[10:32]
-==celestine.application.blender.main:[13:36]
+==celestine.application.blender.main:[9:32]
 ready = False
 Image_Formats = [
     ".bmp",
@@ -1650,8 +1397,7 @@ Image_Formats = [
     ".webp",
 ]
 
-
-def register(): (duplicate-code)
+ (duplicate-code)
 addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
 ==booru.main:[12:32]
 ==celestine.application.blender.__init__:[20:49]
@@ -1710,8 +1456,67 @@ def unregister():
     preferences.unregister()
     main.unregister() (duplicate-code)
 addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==blender.data.__init__:[8:42]
+==blender.data.most:[4:36]
+class all_stuff():
+    @classmethod
+    def new(cls, *args):
+        return cls.data.new(*args)
+
+    @classmethod
+    def object_(cls, name, object_data):
+        object = bpy.data.objects.new(name, object_data)
+        bpy.context.scene.collection.objects.link(object)
+        return object
+
+    @classmethod
+    def remove(cls, item):
+        cls.data.remove(
+            item,
+            do_unlink=True,
+            do_id_user=True,
+            do_ui_user=True
+        )
+
+    @classmethod
+    def make(cls, name):
+        return cls.object_(name, cls.new(name))
+
+
+class most(all_stuff):
+    """Light data-block for lighting a scene."""
+    type_ = None
+
+    @classmethod
+    def new(cls, name):
+        return super().new(name, cls.type_)
+
+ (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==blender.UV:[46:65]
+==booru.UV:[46:65]
+    material.use_nodes = True
+
+    tree = material.node_tree
+    nodes = tree.nodes
+    nodes.clear()
+
+    aa = shader_image(nodes, image)
+    aa.location = (000, 000)
+
+    bb = shader_diffuse(nodes)
+    bb.location = (300, 000)
+
+    cc = shader_output(nodes)
+    cc.location = (500, 000)
+
+    tree.links.new(aa.outputs["Color"], bb.inputs["Color"])
+    tree.links.new(bb.outputs["BSDF"], cc.inputs["Surface"])
+
+    return material (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
 ==booru.main:[91:103]
-==celestine.application.blender.main:[137:151]
+==celestine.application.blender.main:[123:137]
     for camera in bpy.data.cameras:
         data.camera.remove(camera)
     for light in bpy.data.lights:
@@ -1727,31 +1532,41 @@ addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
 
     #light = make.light.sun("light") (duplicate-code)
 addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
-==blender.light.area:[6:29]
-==blender.light.point:[6:29]
-    object = bpy.data.objects.new(name, object_data)
-    bpy.context.scene.collection.objects.link(object)
-    return object
+==blender.UV:[12:45]
+==booru.UV:[12:45]
+    node = nodes.new('ShaderNodeTexImage')
+    node.image = image
+    node.interpolation = 'Cubic'
+    node.projection = 'FLAT'
+    node.extension = 'CLIP'
+    return node
 
 
-def all_remove(data, item):
-    data.remove(
-        item,
-        do_unlink=True,
-        do_id_user=True,
-        do_ui_user=True
-    )
+def shader_diffuse(nodes):
+    # inputs
+    # "Color"
+    # "Roughness"
+    # "Normal"
+    # outputs
+    # "BSDF"
+    node = nodes.new('ShaderNodeBsdfDiffuse')
+    return node
 
 
-def all_new(data, *args):
-    return data.new(*args)
+def shader_output(nodes):
+    # inputs
+    # "Surface"
+    # "Volume"
+    # "Displacement"
+    # outputs
+    node = nodes.new('ShaderNodeOutputMaterial')
+    node.target = 'ALL'
+    return node
+
+# material
 
 
-def light_new(*args):
-    return all_new(bpy.data.lights, *args)
-
-
-def new(name): (duplicate-code)
+def material(name, image): (duplicate-code)
 addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
 ==celestine.keyword.main:[154:163]
 ==celestine.session.__init__:[36:46]
@@ -1807,6 +1622,18 @@ addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
 def directory(_path):
     """Load file contents from a directory.""" (duplicate-code)
 addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
+==blender.data.most:[17:26]
+==booru.data:[14:24]
+        cls.data.remove(
+            item,
+            do_unlink=True,
+            do_id_user=True,
+            do_ui_user=True
+        )
+
+    @classmethod
+    def make(cls, name): (duplicate-code)
+addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
 ==booru.plugin.hashlib:[6:16]
 ==celestine.core.hashlib:[6:16]
 class Hash:
@@ -1819,28 +1646,7 @@ class Hash:
     @classmethod
     def sha3_512(cls, path):
         return cls._cypher(path, hashlib.sha3_512()) (duplicate-code)
-addons\celestine\window\main.py:1:0: R0801: Similar lines in 2 files
-==blender.make:[5:25]
-==booru.make:[5:23]
-    return new.object(name, new.camera(name))
-
-
-class image():  # incomplete
-    @classmethod
-    def register(cls):
-        cls.data = bpy.data.images
-
-    @staticmethod
-    def new(name, width, height):
-        return bpy.data.images.new(name, width, height)
-
-    @staticmethod
-    def load(name, width, height):
-        return bpy.data.images.load(filepath, check_existing)
-#    return bpy.data.images.load(filepath, check_existing=check_existing)
-
- (duplicate-code)
 
 ------------------------------------------------------------------
-Your code has been rated at 6.76/10 (previous run: 6.74/10, +0.02)
+Your code has been rated at 6.91/10 (previous run: 6.91/10, +0.01)
 

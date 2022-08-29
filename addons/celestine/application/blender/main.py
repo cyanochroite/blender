@@ -1,13 +1,11 @@
-"""Package celestine."""
 # <pep8-80 compliant>
+"""Package celestine."""
 import bpy  # pylint: disable=import-error
-import bmesh
-
+import bmesh  # pylint: disable=import-error
 
 from blender import data
 from blender import UV
 
-import blender.data
 
 ready = False
 Image_Formats = [

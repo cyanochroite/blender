@@ -2,8 +2,8 @@
 # <pep8-80 compliant>
 import bpy
 
-from blender.data.light import light
-from blender.data.texture import texture
+from blender.data.light import _light as light
+from blender.data.texture import _texture as texture
 
 
 class all_stuff():
