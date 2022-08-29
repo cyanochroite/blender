@@ -7,6 +7,7 @@ import bmesh
 from blender import data
 from blender import UV
 
+import blender.data
 
 ready = False
 Image_Formats = [
@@ -136,7 +137,7 @@ def _startup_clear():
         data.texture.remove(texture)
 
     #light = make.light.sun("light")
-    light = data.sun.make("light")
+    light = data.light.sun.make("light")
     light.location = (0, 0, 1)
     camera = data.camera.make("camera")
     camera.location = (0, 0, 10)
