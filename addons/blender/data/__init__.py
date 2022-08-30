@@ -40,9 +40,12 @@ class most(all_stuff):
         return super().new(name, cls.type_)
 
 
+class object(all_stuff):
+    pass
+
 class camera(all_stuff):
     """Camera data-block for storing camera settings."""
-    data = bpy.data.cameras
+    #data = bpy.data.cameras
 
 
 class material(all_stuff):
@@ -50,12 +53,12 @@ class material(all_stuff):
     Material data-block to define the appearance of geometric objects for
     rendering.
     """
-    data = bpy.data.materials
+    #data = bpy.data.materials
 
 
 class mesh(all_stuff):
     """Mesh data-block defining geometric surfaces."""
-    data = bpy.data.meshes
+    #data = bpy.data.meshes
 
     @classmethod
     def make(cls, name, mesh=None):
@@ -66,7 +69,7 @@ class mesh(all_stuff):
 
 class image(all_stuff):
     """Image data-block referencing an external or packed image."""
-    data = bpy.data.images
+    #data = bpy.data.images
 
     @classmethod
     def new(cls, name, width, height, alpha, float_buffer, stereo3d, is_data,
@@ -86,3 +89,24 @@ class image(all_stuff):
     @classmethod
     def load(cls, filepath, check_existing=False):
         return cls.data.load(filepath, check_existing=False)
+
+
+def register():
+    """
+    This is a function which only runs when enabling the add-on,
+    this means the module can be loaded without activating the add-on.
+    """
+    object.data = bpy.data.objects
+    camera.data = bpy.data.cameras
+    material.data = bpy.data.materials
+    mesh.data = bpy.data.meshes
+    image.data = bpy.data.images
+    light.data = bpy.data.lights
+    texture.data = bpy.data.textures
+
+
+def unregister():
+    """
+    This is a function to unload anything setup by register,
+    this is called when the add-on is disabled.
+    """

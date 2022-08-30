@@ -1,11 +1,10 @@
 # <pep8-80 compliant>
 import bpy  # pylint: disable=import-error
 
-from . import data
-from . import make
-from . import mesh
-from . import preferences
-from . import UV
+from blender import data
+from blender import mesh
+from booru import preferences
+from blender import UV
 
 
 ready = False
@@ -39,7 +38,7 @@ class BOORU_mesh_make(bpy.types.Operator):
 
     def _new_object(self, context, image):
         mush = mesh.image(image)
-        box = make.mesh("image", mush)
+        box = data.mesh.make("image", mush)
         box.location = (self.spot, 0, 0)
         self.spot += 2.5
         return box
@@ -101,9 +100,9 @@ class BOORU_clear_all(bpy.types.Operator):
             data.image.remove(image)
         for texture in bpy.data.textures:
             data.texture.remove(texture)
-        light = make.light.sun("lili")
+        light = data.light.sun.make("lili")
         light.location = (0, 0, 1)
-        camera = make.camera("cool cat")
+        camera = data.camera.make("cool cat")
         camera.location = (0, 0, 10)
         return {'FINISHED'}
 
@@ -113,12 +112,12 @@ class BOORU_checkers(bpy.types.Operator):
     bl_idname = "blenderbooru.checkers"
 
     def _red(self, x, y, z):
-        mush = mesh.plane()
+        mush = data.all_stuff.object_("red", mesh.plane())
         mush.location = (x, y, z)
         return mush
 
     def _green(self, x, y, z):
-        mush = mesh.plane()
+        mush = data.all_stuff.object_("green", mesh.plane())
         mush.location = (x, y, z)
         return mush
 

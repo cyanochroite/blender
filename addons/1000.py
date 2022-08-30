@@ -1,8 +1,9 @@
 """Generate a maze in Blender with 1000 dead ends."""
 
 import random
+import mathutils
 
-from booru.mesh import Mesh
+from blender.mesh import Mesh
 
 import booru.data
 
@@ -327,14 +328,14 @@ def make_cube(position_x, position_y, wall):
     """Make a cube with optional walls."""
     mesh = Mesh()
 
-    mesh.vertex_add(position_x + 1, position_y + 1, +1)
-    mesh.vertex_add(position_x - 1, position_y + 1, +1)
-    mesh.vertex_add(position_x - 1, position_y - 1, +1)
-    mesh.vertex_add(position_x + 1, position_y - 1, +1)
-    mesh.vertex_add(position_x + 1, position_y + 1, -1)
-    mesh.vertex_add(position_x - 1, position_y + 1, -1)
-    mesh.vertex_add(position_x - 1, position_y - 1, -1)
-    mesh.vertex_add(position_x + 1, position_y - 1, -1)
+    mesh.vertex_add(mathutils.Vector((position_x + 1, position_y + 1, +1)))
+    mesh.vertex_add(mathutils.Vector((position_x - 1, position_y + 1, +1)))
+    mesh.vertex_add(mathutils.Vector((position_x - 1, position_y - 1, +1)))
+    mesh.vertex_add(mathutils.Vector((position_x + 1, position_y - 1, +1)))
+    mesh.vertex_add(mathutils.Vector((position_x + 1, position_y + 1, -1)))
+    mesh.vertex_add(mathutils.Vector((position_x - 1, position_y + 1, -1)))
+    mesh.vertex_add(mathutils.Vector((position_x - 1, position_y - 1, -1)))
+    mesh.vertex_add(mathutils.Vector((position_x + 1, position_y - 1, -1)))
 
     mesh.vertex_finalize()
 
@@ -368,16 +369,6 @@ def make_cube(position_x, position_y, wall):
         mesh.face_add(3, 7, 4, 0)
 
     mesh.face_finalize()
-
-    mesh.uv_add(0, 0, 1, 1)
-    mesh.uv_add(0, 1, 0, 1)
-    mesh.uv_add(0, 2, 0, 0)
-    mesh.uv_add(0, 3, 1, 0)
-
-    mesh.uv_add(1, 0, 1, 1)
-    mesh.uv_add(1, 1, 0, 1)
-    mesh.uv_add(1, 2, 0, 0)
-    mesh.uv_add(1, 3, 1, 0)
 
     return mesh.finalize("cube")
 

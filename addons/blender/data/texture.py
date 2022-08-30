@@ -7,7 +7,7 @@ from blender.data.most import most
 
 class _texture(most):
     """Light data-block for lighting a scene."""
-    data = bpy.data.textures
+    #data = bpy.data.textures
 
 
 class _none(_texture):

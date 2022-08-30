@@ -7,7 +7,10 @@ from blender.data.most import most
 
 class _light(most):
     """Light data-block for lighting a scene."""
-    data = bpy.data.lights
+#    try:
+#        data = bpy.data.lights
+#    except AttributeError:
+#        pass
 
 
 class _area(_light):
