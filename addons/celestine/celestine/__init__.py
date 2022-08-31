@@ -5,9 +5,9 @@ import configparser
 from celestine.keyword.main import CELESTINE
 
 
-from celestine.application.terminal.keyword import APPLICATION
-from celestine.application.terminal.keyword import LANGUAGE
-from celestine.application.terminal.keyword import PYTHON
+from .keyword import APPLICATION
+from .keyword import LANGUAGE
+from .keyword import PYTHON
 
 from celestine.keyword.main import application
 from celestine.keyword.main import language

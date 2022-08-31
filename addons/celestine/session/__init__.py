@@ -96,11 +96,9 @@ class Configuration():
 
 
 class Attribute(Configuration):
-    def __init__(self, argument, directory, section):
+    def __init__(self, argument, directory, module, section):
         configuration = Configuration(directory)
         configuration = configuration.load()
-
-        module = load.module(APPLICATION, section)
 
         attribute = module.attribute()
         default = module.default()
@@ -121,6 +119,7 @@ class Session():
         attribute = Attribute(
             argument.parser.parse_args(args),
             directory,
+            load.module(CELESTINE),
             CELESTINE,
         )
 
@@ -134,10 +133,11 @@ class Session():
         self.attribute = Attribute(
             argument.parser.parse_args(args),
             directory,
+            module,
             attribute.application,
         )
         self.directory = directory  # me no like
-        self.image_format = module.image_format() 
+        self.image_format = module.image_format()
         self.language = load.module(
             LANGUAGE,
             attribute.language,
