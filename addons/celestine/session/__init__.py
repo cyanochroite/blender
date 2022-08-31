@@ -45,10 +45,32 @@ PYTHON_3_11 = "python_3_11"
 
 
 @dataclasses.dataclass
-class Argument():
+class Argument1():
     def __init__(self):
         self.parser = argparse.ArgumentParser(
-            prog=CELESTINE
+            prog=CELESTINE,
+            exit_on_error = False,
+        )
+
+        self.parser.add_argument(
+            APPLICATION,
+            choices=application,
+            help="Select which application to run.",
+        )
+
+        self.parser.add_argument(
+            "ignore",
+            nargs="*",
+            help="Select which application to run.",
+        )
+
+
+@dataclasses.dataclass
+class Argument2():
+    def __init__(self):
+        self.parser = argparse.ArgumentParser(
+            prog=CELESTINE,
+            exit_on_error = False,
         )
 
         self.parser.add_argument(
@@ -114,17 +136,27 @@ class Session():
     def __init__(self, directory, args):
         args = args or ["tkinter"]
 
-        argument = Argument()
+        argument = Argument1()
 
         attribute = Attribute(
             argument.parser.parse_args(args),
             directory,
-            load.module(CELESTINE),
+            load.module("internal"),
             CELESTINE,
         )
 
         module = load.module(APPLICATION, attribute.application)
+
+
+        argument = Argument2()
         argument = module.argument(argument)
+        attribute = Attribute(
+            argument.parser.parse_args(args),
+            directory,
+            load.module("internal"),
+            CELESTINE,
+        )
+
 
         self.application = load.module(
             APPLICATION,
