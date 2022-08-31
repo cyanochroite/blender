@@ -3,6 +3,8 @@
 import bpy  # pylint: disable=import-error
 import bmesh  # pylint: disable=import-error
 
+import blender
+
 from blender import data
 from blender import UV
 
@@ -149,6 +151,10 @@ def main(session):
     global spot
     spot = 0
 
+    blender.register()
+
     _startup_clear()
     session.window.setup(session)
     session.window.view(session)
+
+    blender.unregister()
