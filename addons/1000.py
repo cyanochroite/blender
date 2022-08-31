@@ -5,9 +5,9 @@ import mathutils
 
 from blender.mesh import Mesh
 
-import booru.data
+import blender.data
 
-booru.data.register()
+blender.data.register()
 
 cell_width = 80
 cell_height = 45
