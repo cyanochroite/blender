@@ -1,13 +1,14 @@
 # <pep8-80 compliant>
 import bpy  # pylint: disable=import-error
 
+CELESTINE = "celestine"
 
 def content():
-    return bpy.context.preferences.addons[__package__].preferences
+    return bpy.context.preferences.addons[CELESTINE].preferences
 
 
 class BooruAddonPreferences(bpy.types.AddonPreferences):
-    bl_idname = __package__
+    bl_idname = CELESTINE
 
     root: bpy.props.StringProperty(
         name="Root Image Folder",

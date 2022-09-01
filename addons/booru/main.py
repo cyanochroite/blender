@@ -1,10 +1,11 @@
 # <pep8-80 compliant>
 import bpy  # pylint: disable=import-error
 
-from blender import data
-from blender import mesh
+from celestine.application.blender import data
+from celestine.application.blender import mesh
+from celestine.application.blender import UV
+
 from booru import preferences
-from blender import UV
 
 
 ready = False

@@ -6,11 +6,12 @@ import bmesh  # pylint: disable=import-error
 import mathutils  # pylint: disable=import-error
 
 
-from blender.mesh import Mesh
+from celestine.application.blender.mesh import Mesh
 
-import blender.data
+from celestine.application.blender.data import register
+from celestine.application.blender.data import unregister
 
-blender.data.register()
+register()
 
 CELL_WIDTH = 80
 CELL_HEIGHT = 45
@@ -410,3 +411,5 @@ MAZE = finalize()  # get the MAZE ready for blender
 mesh_remove()  # remove all meshes from the scene
 
 main()  # draw the MAZE into the scene
+
+unregister()

@@ -3,9 +3,8 @@ An add-on is simply a Python module with some additional requirements so
 Blender can display it in a list with useful information.
 """
 # <pep8-80 compliant>
-from . import main
-from . import preferences
-
+from booru import preferences
+from booru import main
 
 bl_info = {
     "name": "Blender Booru Builder",
