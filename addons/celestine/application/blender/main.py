@@ -3,10 +3,11 @@
 import bpy  # pylint: disable=import-error
 import bmesh  # pylint: disable=import-error
 
-import blender
+from celestine.application.blender import register
+from celestine.application.blender import unregister
 
-from blender import data
-from blender import UV
+from celestine.application.blender import data
+from celestine.application.blender import UV
 
 
 ready = False
@@ -151,10 +152,10 @@ def main(session):
     global spot
     spot = 0
 
-    blender.register()
+    register()
 
     _startup_clear()
     session.window.setup(session)
     session.window.view(session)
 
-    blender.unregister()
+    unregister()

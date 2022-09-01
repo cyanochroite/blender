@@ -2,7 +2,7 @@
 import bmesh
 import mathutils
 
-from blender import data
+from celestine.application.blender import data
 
 
 class Mesh():
