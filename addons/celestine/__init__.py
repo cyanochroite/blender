@@ -7,6 +7,7 @@ from celestine.session import Session
 from celestine.keyword.main import CELESTINE
 from celestine.keyword.unicode import FULL_STOP
 
+from celestine import blender
 
 bl_info = {
     "name": "Celestine Image Viewer",
@@ -28,24 +29,20 @@ def register():
     This is a function which only runs when enabling the add-on, this means the
     module can be loaded without activating the add-on.
     """
-    argv = ["blender", "main"]
-    main(sys.path[0], argv)
+    blender.register()
+
 
 def unregister():
     """
     This is a function to unload anything setup by register, this is called
     when the add-on is disabled.
     """
+    blender.unregister()
 
 
 def module(*paths):
     """Load an internal module from anywhere in the application."""
-    iterable = [CELESTINE, *paths]
-    name = FULL_STOP.join(iterable)
-    file = __import__(name)
-    for _path in paths:
-        file = getattr(file, _path)
-    return file
+    return load.module(*paths)
 
 
 def main(directory, argv):

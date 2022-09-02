@@ -26,25 +26,6 @@ def unregister():
     data.unregister()
 
 ready = False
-Image_Formats = [
-    ".bmp",
-    ".sgi",
-    ".rgb",
-    ".bw",
-    ".png",
-    ".jpg",
-    ".jpeg",
-    ".jp2",
-    ".j2c",
-    ".tga",
-    ".cin",
-    ".dpx",
-    ".exr",
-    ".hdr",
-    ".tif",
-    ".tiff",
-    ".webp",
-]
 
 
 def new_image(image):
