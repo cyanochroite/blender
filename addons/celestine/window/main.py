@@ -1,14 +1,10 @@
-import celestine.core.load as load
-import celestine.core.os as os
-
-#image = {}
-image = []
+from celestine.core import os
 
 
 def execute(session, directory):
     (path, file) = os.walk_directory(directory)
     images = []
-    for (filenames) in file:
+    for filenames in file:
         (dirpath, name) = filenames
         ext = os.file_extension(name).lower()
         if ext in session.image_format:
@@ -17,23 +13,29 @@ def execute(session, directory):
     return images
 
 
-def setup(session):
-    global image
-    window = session.task
-    directory = session.directory
-
+def setup(window):
+    directory = window.session.directory
     directory = "D:\\file\\"
     directory = "D:\\todo\\"
-    images = execute(session, directory)
-    for imaged in images:
-        image.append(window.image_load(imaged))
+    directory = "D:\\grid\\"
+    image = execute(window.session, directory)
+    return image
 
 
-def view(session):
-    global image
-    window = session.task
-    for imaged in image:
-        window.image("00", imaged)
+def main(window):
+    image = setup(window)
 
-    window.label("Settings", "no puppy. File Explorer using Tkinter")
-    window.file_dialog("set", "Settings")
+    with window.frame() as frame:
+        with frame.row("head") as row:
+            row.label("Settings", "no puppy. File Explorer using Tkinter")
+            #row.file_dialog("set", "Settings")
+
+        with frame.row("body") as row:
+            index = 8
+            for imaged in image:
+                x = index % 4
+                y = index // 4
+                row.image(F"{x}-{y}", imaged)
+                index += 1
+
+

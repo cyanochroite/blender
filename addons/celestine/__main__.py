@@ -1,4 +1,3 @@
-"""This is the main file. It runs first."""
 import os
 import sys
 
@@ -9,6 +8,6 @@ sys.path.append(directory)
 
 
 module = __import__("celestine")
-args = sys.argv[1:]
-main = module.main(directory, args)
+argv = sys.argv[1:]
+main = module.main(directory, argv, True)
 sys.exit(main)
