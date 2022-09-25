@@ -85,7 +85,6 @@ def image_load(file):
     return Image(file)
 
 
-
 class Widget():
     def __init__(self, name, mesh, location):
         self.item = data.mesh.make(name, mesh)
@@ -205,6 +204,7 @@ class Frame():
     def __init__(self, window):
         self.window = window
         self.item = {}
+        self.frame = 0
 
     def __enter__(self):
         # clear
@@ -222,14 +222,17 @@ class Frame():
         return False
 
     def row(self, tag):
-        return self.item_set(tag, Row(self, tag))
+        item = Row(self, tag, self.frame)
+        self.frame -= 2.5
+        return self.item_set(tag, item)
 
 
 class Row():
-    def __init__(self, frame, tag):
+    def __init__(self, frame, tag, offset_y):
         self.frame = frame
         self.tag = tag
-        self.row = 0
+        self.cord_x = 0
+        self.cord_y = offset_y
 
     def __enter__(self):
         return self
@@ -238,8 +241,8 @@ class Row():
         return False
 
     def draw(self):
-        location = (self.row, 0, 0)
-        self.row += 2.5
+        location = (self.cord_x, self.cord_y, 0)
+        self.cord_x += 2.5
         return location
 
     def button(self, tag, label, action):
@@ -310,7 +313,7 @@ class Window(Window_):
         light.location = (0, 0, 1)
 
         camera = data.camera.make("camera")
-        camera.location = (0, 0, 10)
+        camera.location = (+20, -10, +60)
 
         for window in self.session.window:
             window.main(self)
