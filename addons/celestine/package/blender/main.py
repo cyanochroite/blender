@@ -1,9 +1,9 @@
 # <pep8-80 compliant>
 import bpy  # pylint: disable=import-error
 
-from celestine.application.blender import data
-from celestine.application.blender import mesh
-from celestine.application.blender import UV
+from .package import data
+from .package import mesh
+from .package import UV
 
 from booru import preferences
 
@@ -123,3 +123,11 @@ def unregister():
     #
     bpy.utils.unregister_class(BOORU_register)
     bpy.utils.unregister_class(BOORU_unregister)
+
+
+def register():
+    pass
+
+
+def unregister():
+    pass

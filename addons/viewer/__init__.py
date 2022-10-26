@@ -1,3 +1,4 @@
+import os
 import sys
 
 import celestine
@@ -25,8 +26,8 @@ def register():
     This is a function which only runs when enabling the add-on, this means the
     module can be loaded without activating the add-on.
     """
-
-    directory = sys.path[0]
+    path = sys.path[0]
+    directory = os.path.dirname(path)
     argv = ["blender", "main"]
     main(directory, argv, False)
 
