@@ -3,12 +3,13 @@ from celestine.session.argument import Argument
 from celestine.session.attribute import Attribute
 from celestine.session import python
 
-from celestine.core import load
+from celestine.session import load
 
 from celestine.keyword.all import APPLICATION
 from celestine.keyword.all import CELESTINE
 from celestine.keyword.all import LANGUAGE
 
+APPLICATION = "package"
 
 class Session():
     def __init__(self, directory, args, exit_on_error):
@@ -53,13 +54,7 @@ class Session():
         self.task = load.module(
             APPLICATION,
             attribute.application,
-            attribute.task,
         )
-        self.window = []
-        #self.window.append(load.module("window", "main"))
-        self.window.append(load.module("window", "zero"))
-        self.window.append(load.module("window", "one"))
-        self.window.append(load.module("window", "two"))
 
     def add_configuration(self, configuration, module, application):
         """Build up the configuration file."""
@@ -72,7 +67,3 @@ class Session():
             configuration.set(application, name, value)
 
         return configuration
-
-    def main(self):
-        window = self.task.Window(self)
-        return window.main()
