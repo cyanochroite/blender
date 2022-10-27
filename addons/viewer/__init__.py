@@ -28,6 +28,7 @@ def register():
     """
     path = sys.path[0]
     directory = os.path.dirname(path)
+    sys.path.append(path)
     argv = ["blender", "main"]
     main(directory, argv, False)
 
@@ -37,6 +38,7 @@ def unregister():
     This is a function to unload anything setup by register, this is called
     when the add-on is disabled.
     """
+    del sys.path[-1]
 
 
 def main(directory, argv, exit_on_error):
