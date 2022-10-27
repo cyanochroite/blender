@@ -5,24 +5,23 @@ from .line import Line
 
 
 class Page(master):
-    def cords_y(self):
-        value = self.cord_y
-        self.cord_y += 1
-        return value
-
     def line(self, tag):
-        return self.item_set(tag, Line(self, tag))
-
-    def __init__(self, window, **kwargs):
-        super().__init__(**kwargs)
-        self.window = window
-        self.height = 24
-        self.width = 80
-        self.frame = package.window(
-            1,
-            1,
-            self.width - 1,
-            self.height - 2,
+        return self.item_set(
+            tag,
+            Line(
+                self,
+                tag,
+                self.spawn(),
+            ),
         )
-        self.cord_x = 0
-        self.cord_y = 0
+
+    def __init__(self, window, rectangle, **kwargs):
+        super().__init__(
+            cord_x_min=rectangle.cord_x_min,
+            cord_y_min=rectangle.cord_y_min,
+            cord_x_max=rectangle.cord_x_max,
+            cord_y_max=rectangle.cord_y_max,
+            col=True,
+            ** kwargs,
+        )
+        self.turn = window.turn

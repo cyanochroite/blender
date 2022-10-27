@@ -59,7 +59,7 @@ class material(all_stuff):
 
 class mesh(all_stuff):
     """Mesh data-block defining geometric surfaces."""
-    #data = bpy.data.meshes
+    # data = bpy.data.meshes
 
     @classmethod
     def make(cls, name, mesh=None):
@@ -89,7 +89,7 @@ class image(all_stuff):
 
     @classmethod
     def load(cls, filepath, check_existing=False):
-        return cls.data.load(filepath, check_existing=False)
+        return cls.data.load(filepath, check_existing=check_existing)
 
 
 def register():

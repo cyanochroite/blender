@@ -2,6 +2,7 @@
 # <pep8-80 compliant>
 import bpy
 
+
 class all_stuff():
     @classmethod
     def new(cls, *args):
@@ -29,7 +30,7 @@ class all_stuff():
 
 class most(all_stuff):
     """Light data-block for lighting a scene."""
-    type_ = None
+    type_ = ""
 
     @classmethod
     def new(cls, name):
