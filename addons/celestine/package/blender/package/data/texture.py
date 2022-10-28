@@ -1,8 +1,8 @@
 """bpy.types.Texture"""
-from celestine.package.blender.package.data.most import most
+from celestine.package.blender.package.data.spawn import _imaginary
 
 
-class _texture(most):
+class _texture(_imaginary):
     """Light data-block for lighting a scene."""
 
 

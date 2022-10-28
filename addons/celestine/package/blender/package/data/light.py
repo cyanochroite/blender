@@ -1,8 +1,8 @@
 """ bpy.types.Light"""
-from celestine.package.blender.package.data.most import most
+from celestine.package.blender.package.data.spawn import _real
 
 
-class _light(most):
+class _light(_real):
     """Light data-block for lighting a scene."""
 
 
