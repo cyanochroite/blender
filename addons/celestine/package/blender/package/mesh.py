@@ -1,59 +1,51 @@
 # <pep8-80 compliant>
-import bmesh
+import bmesh as bmesh_
 import mathutils
 
 from celestine.package.blender.package import data
 
 
-class Mesh():
-    def main(self, verts, edges, faces, layers):
-        for vert in verts:
-            self.verts.new(vert)
-        self.verts.ensure_lookup_table()
+def mesh(name, verts, edges, faces, layers):
+    bmesh = bmesh_.new(use_operators=False)
 
-        for (one, two) in edges:
-            self.edges.new((self.verts[one], self.verts[two]))
-        self.edges.ensure_lookup_table()
+    for vert in verts:
+        bmesh.verts.new(vert)
+    bmesh.verts.ensure_lookup_table()
 
-        for face in faces:
-            self.faces.new(map(lambda vert: self.verts[vert], face))
-        self.faces.ensure_lookup_table()
+    for (one, two) in edges:
+        bmesh.edges.new((bmesh.verts[one], bmesh.verts[two]))
+    bmesh.edges.ensure_lookup_table()
 
-        layer = self.bmesh.loops.layers.uv.verify()
-        for (face, loop, one, two) in layers:
-            self.faces[face].loops[loop][layer].uv = (one, two)
+    for face in faces:
+        bmesh.faces.new(map(lambda vert: bmesh.verts[vert], face))
+    bmesh.faces.ensure_lookup_table()
 
-    def __init__(self):
-        self.bmesh = bmesh.new(use_operators=False)
-        self.verts = self.bmesh.verts
-        self.edges = self.bmesh.edges
-        self.faces = self.bmesh.faces
+    layer = bmesh.loops.layers.uv.verify()
+    for (face, loop, one, two) in layers:
+        bmesh.faces[face].loops[loop][layer].uv = (one, two)
 
-    def finalize(self, name):
-        """Call this after adding all the stuff to mesh."""
-        mesh = data.mesh.new(name)
-        self.bmesh.to_mesh(mesh)
-        self.bmesh.free()
-        return mesh
+    mesh_ = data.mesh.new(name)
+    bmesh.to_mesh(mesh_)
+    bmesh.free()
+    return mesh_
 
 
-class Quadrilateral(Mesh):
-    def mymain(self, verts, layers):
-        edges = [
-            (0, 1),
-            (1, 2),
-            (2, 3),
-            (3, 0),
-        ]
+def quadrilateral(name, verts, layers):
+    edges = [
+        (0, 1),
+        (1, 2),
+        (2, 3),
+        (3, 0),
+    ]
 
-        faces = [
-            (0, 1, 2, 3),
-        ]
+    faces = [
+        (0, 1, 2, 3),
+    ]
 
-        self.main(verts, edges, faces, layers)
+    return mesh(name, verts, edges, faces, layers)
 
 
-class Planar(Quadrilateral):
+class Planar():
     def __init__(self):
         super().__init__()
         self.normal = mathutils.Vector((+0, +0, +1))
@@ -67,33 +59,29 @@ class Planar(Quadrilateral):
 
 
 class Plane(Planar):
-    def verts_list(self, normal=(+1, +1, +1)):
+    def make(self, name, normal=(+1, +1, +1), uv_x=0, uv_y=0):
         normal = mathutils.Vector(normal)
 
-        vector_a = self.vertex_new((+1, +1), normal)
-        vector_b = self.vertex_new((-1, +1), normal)
-        vector_c = self.vertex_new((-1, -1), normal)
-        vector_d = self.vertex_new((+1, -1), normal)
+        verts = [
+            self.vertex_new((+1, +1), normal),
+            self.vertex_new((-1, +1), normal),
+            self.vertex_new((-1, -1), normal),
+            self.vertex_new((+1, -1), normal),
+        ]
 
-        return [vector_a, vector_b, vector_c, vector_d]
-
-    def layers_list(self, uv_x=0, uv_y=0):
-        return [
+        layers = [
             (0, 0, 1 + uv_x, 1 + uv_y),
             (0, 1, 0 - uv_x, 1 + uv_y),
             (0, 2, 0 - uv_x, 0 - uv_y),
             (0, 3, 1 + uv_x, 0 - uv_y),
         ]
 
+        return quadrilateral(name, verts, layers)
+
 
 def plane(uv_x=0, uv_y=0):
     box = Plane()
-    verts = box.verts_list()
-    layers = box.layers_list(uv_x, uv_y)
-    box.mymain(verts, layers)
-
-    name = "Plane"
-    return box.finalize(name)
+    return box.make("Plane")
 
 
 def _offset(numerator, denominator):
