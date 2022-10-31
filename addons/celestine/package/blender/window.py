@@ -10,13 +10,13 @@ class Window(master):
     def page(self, document):
         index = len(self.item)
         self.item_set(index, document)
-        rectangle = Rectangle(0, 0, 640, 480, 0, 0)
+        rectangle = Rectangle(0, 0, 20, 10, 0, 0)
         page = Page(self, rectangle)
         self.frame = page
         return page
 
     def turn(self, page):
-        rectangle = Rectangle(0, 0, 640, 480, 0, 0)
+        rectangle = Rectangle(0, 0, 20, 10, 0, 0)
         page2 = Page(self, rectangle)
         self.frame = page2
         self.item_get(page)(page2)
@@ -32,5 +32,5 @@ class Window(master):
     def __init__(self, session, **kwargs):
         super().__init__(session, **kwargs)
         self.frame = None
-        self.width = 640
-        self.height = 480
+        self.width = 20
+        self.height = 10

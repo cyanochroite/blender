@@ -21,7 +21,7 @@ class Page(master):
             cord_y_min=rectangle.cord_y_min,
             cord_x_max=rectangle.cord_x_max,
             cord_y_max=rectangle.cord_y_max,
-            col=True,
+            offset_y=-2.5,
             ** kwargs,
         )
         self.turn = window.turn

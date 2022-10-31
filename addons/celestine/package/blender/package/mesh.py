@@ -59,7 +59,7 @@ class Planar():
 
 
 class Plane(Planar):
-    def make(self, name, normal=(+1, +1, +1), uv_x=0, uv_y=0):
+    def make(self, name, normal=(+0, +0, +1), uv_x=0, uv_y=0):
         normal = mathutils.Vector(normal)
 
         verts = [

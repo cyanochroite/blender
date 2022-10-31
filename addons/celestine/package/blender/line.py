@@ -60,7 +60,7 @@ class Line(Rectangle):
             cord_y_min=rectangle.cord_y_min,
             cord_x_max=rectangle.cord_x_max,
             cord_y_max=rectangle.cord_y_max,
-            row=True,
+            offset_x=2.5,
         )
         self.tag = tag
         self.turn = page.turn
