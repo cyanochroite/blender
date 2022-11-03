@@ -1,9 +1,21 @@
 from celestine.package.master.window import Window as master
 
 from celestine.package.master.collection import Rectangle
+from celestine.package.blender.package import data
+
+import bpy
 
 from . import package
 from .page import Page
+
+
+def context():
+    for area in bpy.context.screen.areas:
+        if area.type == 'VIEW_3D':
+            override = bpy.context.copy()
+            override['area'] = area
+            return override
+    return None
 
 
 class Window(master):
@@ -23,6 +35,26 @@ class Window(master):
 
     def __enter__(self):
         super().__enter__()
+        for camera in bpy.data.cameras:
+            data.camera.remove(camera)
+        for light in bpy.data.lights:
+            data.light.remove(light)
+        for material in bpy.data.materials:
+            data.material.remove(material)
+        for mesh in bpy.data.meshes:
+            data.mesh.remove(mesh)
+        for image in bpy.data.images:
+            data.image.remove(image)
+        for texture in bpy.data.textures:
+            data.texture.remove(texture)
+
+        camera = data.camera.make("camera")
+        camera.location = (+20, -10, +60)
+
+        override = context()
+        bpy.ops.view3d.toggle_shading(override, type='RENDERED')
+        bpy.ops.view3d.view_camera(override)
+
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
