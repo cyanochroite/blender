@@ -18,21 +18,6 @@ class Page(master):
             ),
         )
 
-    def __enter__(self):
-        # clear
-        for material in bpy.data.materials:
-            data.material.remove(material)
-        for mesh in bpy.data.meshes:
-            data.mesh.remove(mesh)
-        for image in bpy.data.images:
-            data.image.remove(image)
-        for texture in bpy.data.textures:
-            data.texture.remove(texture)
-        return self
-
-    def __exit__(self, *_):
-        return False
-
     def __init__(self, window, rectangle, **kwargs):
         super().__init__(
             cord_x_min=rectangle.cord_x_min,
