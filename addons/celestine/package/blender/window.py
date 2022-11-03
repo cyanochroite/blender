@@ -51,6 +51,9 @@ class Window(master):
         camera = data.camera.make("camera")
         camera.location = (+20, -10, +60)
 
+        light = data.light.sun.make("light")
+        light.location = (0, 0, 1)
+
         override = context()
         bpy.ops.view3d.toggle_shading(override, type='RENDERED')
         bpy.ops.view3d.view_camera(override)

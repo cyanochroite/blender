@@ -8,10 +8,10 @@ class _imaginary():
     data = None
 
     @classmethod
-    def new(cls, *args):
+    def new(cls, name):
         if cls.type_:
-            return cls.data.new(cls.type_, *args)
-        return cls.data.new(*args)
+            return cls.data.new(name, cls.type_)
+        return cls.data.new(name)
 
     @classmethod
     def remove(cls, item):

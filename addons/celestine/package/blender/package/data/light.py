@@ -4,6 +4,10 @@ from celestine.package.blender.package.data.spawn import _real
 
 class _light(_real):
     """Light data-block for lighting a scene."""
+    area = None
+    point = None
+    spot = None
+    sun = None
 
 
 class _area(_light):
