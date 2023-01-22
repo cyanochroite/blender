@@ -1,33 +1,74 @@
+""""""
+
 import configparser
 
-from celestine.session import load
+from celestine import load
 
-from celestine.keyword.all import CELESTINE
-from celestine.keyword.all import CONFIGURATION
-from celestine.keyword.all import WRITE
-from celestine.keyword.all import UTF_8
+from celestine.text.directory import APPLICATION
+from celestine.text.stream import UTF_8
+from celestine.text.stream import WRITE_TEXT
+
+from celestine.typed import N
+from celestine.typed import S
+
+from celestine.unicode import EQUALS_SIGN
+from celestine.unicode import NONE
+from celestine.unicode import POUND_SIGN
+
+from .text import FILE
 
 
 class Configuration():
     """parse configuration stuff."""
 
-    def __init__(self, directory):
-        self.directory = directory
-        self.path = load.path(directory, CELESTINE, CONFIGURATION)
+    def __init__(self) -> N:
+        """"""
+        self.path = load.pathway(FILE)
 
-    def load(self, path=None):
+        self.configuration = configparser.ConfigParser(
+            delimiters=(EQUALS_SIGN),
+            comment_prefixes=(POUND_SIGN),
+            strict=True,
+            empty_lines_in_values=False,
+            default_section=APPLICATION,
+        )
+
+    def load(self) -> N:
         """Load the configuration file."""
-        configuration = configparser.ConfigParser()
-        configuration.read(path or self.path, encoding=UTF_8)
-        return configuration
+        self.configuration.read(self.path, encoding=UTF_8)
 
-    @staticmethod
-    def make(directory):
-        """Make a new configuration file."""
-        configuration = Configuration(directory)
-        return configuration.load()
-
-    def save(self, configuration, path=None):
+    def save(self) -> N:
         """Save the configuration file."""
-        with open(path or self.path, WRITE, encoding=UTF_8) as file:
-            configuration.write(file, True)
+        with open(self.path, WRITE_TEXT, encoding=UTF_8) as file:
+            self.configuration.write(file, True)
+
+    def get(self, section: S, option: S) -> S:
+        """"""
+        has_section = self.configuration.has_section(section)
+
+        if option == APPLICATION:
+            section = APPLICATION
+
+        if section == APPLICATION:
+            has_section = True
+
+        if has_section:
+            if self.configuration.has_option(section, option):
+                return self.configuration[section][option]
+
+        return NONE
+
+    def set(self, section: S, option: S, value: S) -> N:
+        """"""
+        has_section = self.configuration.has_section(section)
+
+        if option == APPLICATION:
+            section = APPLICATION
+
+        if section == APPLICATION:
+            has_section = True
+
+        if not has_section:
+            self.configuration.add_section(section)
+
+        self.configuration[section][option] = value
