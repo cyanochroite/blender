@@ -1,3 +1,5 @@
+import bpy
+
 from .window import Window
 
 
