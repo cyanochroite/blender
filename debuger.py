@@ -1,3 +1,5 @@
+""""""
+
 import os
 import sys
 
@@ -14,5 +16,7 @@ wingdbstub.Ensure()
 
 bpy.ops.celestine.register('INVOKE_DEFAULT')
 
-viewer = __import__("viewer")
-viewer.main(sys.path[0], ["blender", "main"], False)
+celestine = __import__("celestine")
+celestine.main(["-a", "demo", "-i", "blender", "main"], False)
+
+bpy.ops.celestine.click('INVOKE_DEFAULT')

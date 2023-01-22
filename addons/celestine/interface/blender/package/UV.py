@@ -1,5 +1,5 @@
 # <pep8-80 compliant>
-from .package import data
+from . import data
 
 # shader
 
