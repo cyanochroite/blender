@@ -1,5 +1,4 @@
 # <pep8-80 compliant>
-# <pep8-80 compliant>
 import bpy
 
 

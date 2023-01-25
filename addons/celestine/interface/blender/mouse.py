@@ -1,3 +1,9 @@
+from .package.data import mesh as make_mesh
+from .package import mesh as _mesh
+
+from .widget import Widget
+
+
 from math import radians
 
 from .widget import Widget
@@ -5,8 +11,11 @@ from .widget import Widget
 
 class Mouse(Widget):
     def __init__(self, rectangle):
+        text = "mouse"
+        mesh = make_mesh.make(text, _mesh.plane(text))
+
         super().__init__(
-            "mouse",
+            mesh,
             rectangle,
         )
         self.mesh.location = (1, 1, 1)
