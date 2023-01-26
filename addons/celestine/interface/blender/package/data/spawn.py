@@ -25,9 +25,9 @@ class _imaginary():
 class _real(_imaginary):
     @classmethod
     def make(cls, name, item=None):
-        fake = item or cls.new(name)
-        real = cls.object_(name, fake)
-        return _real(real, fake)
+        soul = item or cls.new(name)
+        body = cls.object_(name, soul)
+        return _real(body, soul)
 
     @classmethod
     def object_(cls, name, object_data):
@@ -35,18 +35,32 @@ class _real(_imaginary):
         bpy.context.scene.collection.objects.link(object_)
         return object_
 
-    def __init__(self, real, fake):
-        self.__dict__["real"] = real
-        self.__dict__["fake"] = fake
-        self.__dict__["data"] = ["location", "rotation_euler", "scale"]
+    def __init__(self, body, soul):
+        self.__dict__["body"] = body
+        self.__dict__["soul"] = soul
 
     def __getattr__(self, name):
-        if name in self.__dict__["data"]:
-            return getattr(self.__dict__["real"], name)
-        return getattr(self.__dict__["fake"], name)
+        match name:
+            case "location":
+                getattr(self.body, name)
+            case "parent":
+                getattr(self.body, name)
+            case "rotation_euler":
+                getattr(self.body, name)
+            case "scale":
+                getattr(self.body, name)
+            case _:
+                getattr(self.soul, name)
 
     def __setattr__(self, name, value):
-        if name in self.__dict__["data"]:
-            setattr(self.real, name, value)
-        else:
-            setattr(self.fake, name, value)
+        match name:
+            case "location":
+                setattr(self.body, name, value)
+            case "parent":
+                setattr(self.body, name, value.body)
+            case "rotation_euler":
+                setattr(self.body, name, value)
+            case "scale":
+                setattr(self.body, name, value)
+            case _:
+                setattr(self.soul, name, value)

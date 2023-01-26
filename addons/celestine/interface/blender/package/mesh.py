@@ -84,8 +84,9 @@ def plane(text, uv_x=0, uv_y=0):
     return box.make(text)
 
 
-def text():
-    font_curve = data.curves.font.make("Font Curve", "my big text")
+def text(text):
+    font_curve = data.curves.font.make("Font Curve", text)
+    return font_curve
 
 
 def _offset(numerator, denominator):

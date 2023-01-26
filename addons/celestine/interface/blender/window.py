@@ -21,17 +21,17 @@ def context():
 
 class Window(master):
     def page(self, name, document):
-        self.item_set(name, document)
         rectangle = Rectangle(0, 0, 20, 10, 0, 0)
         page = Page(self, rectangle)
-        self.frame = page
-        return page
+        document(page)
+        self.item_set(name, page)
 
     def turn(self, page):
-        rectangle = Rectangle(0, 0, 20, 10, 0, 0)
-        page2 = Page(self, rectangle)
-        self.frame = page2
-        self.item_get(page)(page2)
+        #  put all the windows in "collections" and hide and show
+        #  them as needed.
+        #  new
+        frame = self.item_get(page)
+        # frame.frame.tkraise()
 
     def __enter__(self):
         super().__enter__()
