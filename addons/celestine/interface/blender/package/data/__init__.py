@@ -1,7 +1,8 @@
 import bpy
 
 from .camera import _camera as camera
-from .curves import _curves as curves
+from .collection import _collection as collection
+from .curve import _curve as curve
 from .image import _image as image
 from .light import _light as light
 from .material import _material as material
@@ -16,7 +17,8 @@ def register():
     this means the module can be loaded without activating the add-on.
     """
     camera.data = bpy.data.cameras
-    curves.data = bpy.data.curves
+    collection.data = bpy.data.collections
+    curve.data = bpy.data.curves
     image.data = bpy.data.images
     light.data = bpy.data.lights
     material.data = bpy.data.materials

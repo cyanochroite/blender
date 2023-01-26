@@ -22,6 +22,14 @@ class _imaginary():
         )
 
 
+class _group(_imaginary):
+    @classmethod
+    def make(cls, name, item=None):
+        soul = item or cls.new(name)
+        bpy.context.scene.collection.children.link(soul)
+        return soul
+
+
 class _real(_imaginary):
     @classmethod
     def make(cls, name, item=None):
@@ -64,3 +72,19 @@ class _real(_imaginary):
                 setattr(self.body, name, value)
             case _:
                 setattr(self.soul, name, value)
+
+
+class _text(_real):
+    @classmethod
+    def new(cls, name, text):
+        soul = super().new(name)
+        soul.body = text
+        return soul
+
+    @classmethod
+    def make(cls, name, text, item=None):
+        soul = item or cls.new(name, text)
+        body = cls.object_(name, soul)
+        return _real(body, soul)
+
+

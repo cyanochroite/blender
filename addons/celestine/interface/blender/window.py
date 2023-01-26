@@ -37,14 +37,18 @@ class Window(master):
         super().__enter__()
         for camera in bpy.data.cameras:
             data.camera.remove(camera)
+        for collection in bpy.data.collections:
+            data.collection.remove(collection)
+        for curve in bpy.data.curves:
+            data.curve.remove(curve)
+        for image in bpy.data.images:
+            data.image.remove(image)
         for light in bpy.data.lights:
             data.light.remove(light)
         for material in bpy.data.materials:
             data.material.remove(material)
         for mesh in bpy.data.meshes:
             data.mesh.remove(mesh)
-        for image in bpy.data.images:
-            data.image.remove(image)
         for texture in bpy.data.textures:
             data.texture.remove(texture)
 
