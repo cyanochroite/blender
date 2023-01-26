@@ -22,14 +22,6 @@ class _imaginary():
         )
 
 
-class _group(_imaginary):
-    @classmethod
-    def make(cls, name, item=None):
-        soul = item or cls.new(name)
-        bpy.context.scene.collection.children.link(soul)
-        return soul
-
-
 class _real(_imaginary):
     @classmethod
     def make(cls, name, item=None):

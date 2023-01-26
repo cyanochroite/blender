@@ -22,16 +22,16 @@ def context():
 class Window(master):
     def page(self, name, document):
         rectangle = Rectangle(0, 0, 20, 10, 0, 0)
-        page = Page(self, rectangle)
+        page = Page(self, rectangle, name)
         document(page)
         self.item_set(name, page)
 
+        self.frame = page.frame
+
     def turn(self, page):
-        #  put all the windows in "collections" and hide and show
-        #  them as needed.
-        #  new
-        frame = self.item_get(page)
-        # frame.frame.tkraise()
+        self.frame.hide()
+        self.frame = self.item_get(page).frame
+        self.frame.show()
 
     def __enter__(self):
         super().__enter__()
@@ -59,6 +59,10 @@ class Window(master):
 
         light = data.light.sun.make("light")
         light.location = (0, 0, 1)
+
+        collection = data.collection.make("window")
+        collection.link(camera)
+        collection.link(light)
 
         self.mouse = Mouse(Rectangle())
 
