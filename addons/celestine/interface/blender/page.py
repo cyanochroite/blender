@@ -19,11 +19,12 @@ class Page(master):
         )
 
     def __init__(self, window, rectangle, name, **kwargs):
-        collection = data.collection.make(name)
-        collection.hide()
+        self.collection = data.collection.make(name)
+        self.collection.hide()
+        self.turn = window.turn
         super().__init__(
             session=window.session,
-            frame=collection,
+            frame=self.collection,
             cord_x_min=rectangle.cord_x_min,
             cord_y_min=rectangle.cord_y_min,
             cord_x_max=rectangle.cord_x_max,
@@ -31,4 +32,3 @@ class Page(master):
             offset_y=-2.5,
             ** kwargs,
         )
-        self.turn = window.turn

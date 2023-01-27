@@ -52,17 +52,15 @@ class Window(master):
         for texture in bpy.data.textures:
             data.texture.remove(texture)
 
-        camera = data.camera.make("camera")
+        collection = data.collection.make("window")
+
+        camera = data.camera.make(collection, "camera")
         camera.location = (+16.0, -08.5, +60.0)
         camera.ortho_scale = +35.0
         camera.type = 'ORTHO'
 
-        light = data.light.sun.make("light")
+        light = data.light.sun.make(collection, "light")
         light.location = (0, 0, 1)
-
-        collection = data.collection.make("window")
-        collection.link(camera)
-        collection.link(light)
 
         self.mouse = Mouse(Rectangle())
 

@@ -3,6 +3,8 @@ import bpy
 
 
 class _imaginary():
+    """Objects that only exist in spirit."""
+
     type_ = ""
     data = None
 
@@ -23,17 +25,20 @@ class _imaginary():
 
 
 class _real(_imaginary):
-    @classmethod
-    def make(cls, name, item=None):
-        soul = item or cls.new(name)
-        body = cls.object_(name, soul)
-        return _real(body, soul)
+    """Objects that exist in the real world."""
 
     @classmethod
-    def object_(cls, name, object_data):
-        object_ = bpy.data.objects.new(name, object_data)
-        bpy.context.scene.collection.objects.link(object_)
-        return object_
+    def bind(cls, collection, name, soul):
+        """Give an existing soul a body."""
+        body = bpy.data.objects.new(name, soul)
+        collection.objects.link(body)
+        return cls(body, soul)
+
+    @classmethod
+    def make(cls, collection, name):
+        """Create a new soul and give it a body."""
+        soul = cls.new(name)
+        return cls.bind(collection, name, soul)
 
     def __init__(self, body, soul):
         self.__dict__["body"] = body
@@ -74,9 +79,7 @@ class _text(_real):
         return soul
 
     @classmethod
-    def make(cls, name, text, item=None):
-        soul = item or cls.new(name, text)
-        body = cls.object_(name, soul)
-        return _real(body, soul)
-
-
+    def make(cls, collection, name, text):
+        """Create a new soul and give it a body."""
+        soul = cls.new(name, text)
+        return cls.bind(collection, name, soul)

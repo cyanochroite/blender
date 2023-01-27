@@ -21,6 +21,7 @@ class Line(Rectangle):
         return self.item_set(
             tag,
             Button(
+                self.collection,
                 text,
                 lambda: self.turn(action),
                 self.spawn(),
@@ -29,6 +30,7 @@ class Line(Rectangle):
 
     def image(self, tag, label):
         item = Image(
+            self.collection,
             self.row,
             label,
         )
@@ -43,6 +45,7 @@ class Line(Rectangle):
         return self.item_set(
             tag,
             Label(
+                self.collection,
                 text,
                 self.spawn(),
             ),
@@ -62,5 +65,6 @@ class Line(Rectangle):
             cord_y_max=rectangle.cord_y_max,
             offset_x=2.5,
         )
+        self.collection = page.collection
         self.tag = tag
         self.turn = page.turn

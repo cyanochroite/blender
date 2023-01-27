@@ -84,8 +84,8 @@ def plane(text, uv_x=0, uv_y=0):
     return box.make(text)
 
 
-def text(text):
-    font_curve = data.curve.font.make("Font Curve", text)
+def text(collection, name, text):
+    font_curve = data.curve.font.make(collection, name, text)
     return font_curve
 
 
