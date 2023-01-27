@@ -28,18 +28,15 @@ class Line(Rectangle):
             ),
         )
 
-    def image(self, tag, label):
-        item = Image(
-            self.collection,
-            self.row,
-            label,
+    def image(self, tag, image):
+        return self.item_set(
+            tag,
+            Image(
+                self.collection,
+                image,
+                self.spawn(),
+            ),
         )
-        item.grid(self.frame.cord_x, self.frame.cords_y())
-
-        package.draw.line(self.row, (255, 255, 255),
-                          (400, 20), (400, 580), 5)
-
-        return item
 
     def label(self, tag, text):
         return self.item_set(
@@ -63,7 +60,7 @@ class Line(Rectangle):
             cord_y_min=rectangle.cord_y_min,
             cord_x_max=rectangle.cord_x_max,
             cord_y_max=rectangle.cord_y_max,
-            offset_x=2.5,
+            offset_x=10.0,
         )
         self.collection = page.collection
         self.tag = tag

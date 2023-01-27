@@ -7,7 +7,7 @@ from .widget import Widget
 class Button(Widget):
     def __init__(self, collection, text, action, rectangle):
         width = len(text) / 4
-        height = 0.5
+        height = 1 / 20
 
         mesh = make_mesh.bind(collection, text, _mesh.plane(text))
         mesh.scale = (width, height, 1)

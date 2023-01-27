@@ -79,9 +79,9 @@ class Plane(Planar):
         return quadrilateral(name, verts, layers)
 
 
-def plane(text, uv_x=0, uv_y=0):
+def plane(name, uv_x=0, uv_y=0):
     box = Plane()
-    return box.make(text)
+    return box.make(name)
 
 
 def text(collection, name, text):
@@ -108,4 +108,4 @@ def image(image):
     x_to_y = _offset(x, y)
     (x, y) = (y_to_x, x_to_y)
 
-    return plane(x, y)
+    return plane(image.name, x, y)
