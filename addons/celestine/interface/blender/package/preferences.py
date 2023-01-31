@@ -66,9 +66,22 @@ class CelestineAddonPreferences(bpy.types.AddonPreferences):
         layout.prop(self, "boolean")
 
 
+class CelestinePropertyGroup(bpy.types.PropertyGroup):
+    page: bpy.props.StringProperty(
+        name="Page",
+        description="Which page of the book to show.",
+        default="main",
+    )
+
+
 def register():
     bpy.utils.register_class(CelestineAddonPreferences)
+    bpy.utils.register_class(CelestinePropertyGroup)
+    bpy.types.Scene.celestine = bpy.props.PointerProperty(
+        type=CelestinePropertyGroup
+    )
 
 
 def unregister():
+    bpy.utils.unregister_class(CelestinePropertyGroup)
     bpy.utils.unregister_class(CelestineAddonPreferences)

@@ -28,10 +28,14 @@ class Window(master):
 
         self.frame = page.frame
 
-    def turn(self, page):
+    def turn(self, name):
+        page = self.item_get(name)
+
         self.frame.hide()
-        self.frame = self.item_get(page).frame
+        self.frame = page.frame
         self.frame.show()
+
+        bpy.context.scene.celestine.page = page.name
 
     def __enter__(self):
         super().__enter__()

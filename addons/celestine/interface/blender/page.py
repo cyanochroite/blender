@@ -21,6 +21,7 @@ class Page(master):
     def __init__(self, window, rectangle, name, **kwargs):
         self.collection = data.collection.make(name)
         self.collection.hide()
+        self.name = name
         self.turn = window.turn
         super().__init__(
             session=window.session,

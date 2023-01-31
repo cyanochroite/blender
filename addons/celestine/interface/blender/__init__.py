@@ -37,6 +37,23 @@ def window(session):
 
 # <pep8-80 compliant>
 
+def find_object(name):
+    return next(obj for obj in bpy.data.objects if obj.name == name)
+
+
+def find_collection(name):
+    for collection in bpy.data.collections:
+        if collection.name == name:
+            return collection
+    return None
+
+
+def find_in_collection(collection, name):
+    for item in collection.all_objects:
+        if item.name == name:
+            return item
+    return None
+
 
 class celestine_click(bpy.types.Operator):
     bl_label = "Mouse Click"
@@ -44,12 +61,19 @@ class celestine_click(bpy.types.Operator):
 
     def execute(self, context):
         print("start")
-        mouse = next(obj for obj in bpy.data.objects if obj.name == "mouse")
+        mouse = find_object("mouse")
         location = mouse.location
         x = round(location.x / 2.5) * 2.5
         y = round(location.y / 2.5) * 2.5
         z = 1
         mouse.location = (x, y, z)
+
+        page = bpy.context.scene.celestine.page
+        collection = find_collection(page)
+
+        for item in collection.all_objects:
+            print(item.location)
+
         print("done")
         return {'FINISHED'}
 

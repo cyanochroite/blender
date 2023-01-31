@@ -81,7 +81,7 @@ class Plane(Planar):
 
 def plane(name, uv_x=0, uv_y=0):
     box = Plane()
-    return box.make(name)
+    return box.make(name, (+0, +0, +1), uv_x, uv_y)
 
 
 def text(collection, name, text):
