@@ -1,5 +1,3 @@
-""""""
-
 import os
 import sys
 
@@ -14,9 +12,7 @@ if WINGHOME not in sys.path:
 wingdbstub = __import__("wingdbstub")
 wingdbstub.Ensure()
 
-bpy.ops.celestine.register('INVOKE_DEFAULT')
+bpy.ops.celestine.start('INVOKE_DEFAULT')
 
 celestine = __import__("celestine")
 celestine.main(["-a", "demo", "-i", "blender", "main"], False)
-
-bpy.ops.celestine.click('INVOKE_DEFAULT')

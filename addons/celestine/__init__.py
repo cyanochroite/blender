@@ -5,15 +5,16 @@ from celestine import load
 from celestine.session.parser import start_session
 
 bl_info = {
-    "name": "celestine",
-    "description": "The Celestine Image Viewer.",
+    "name": "Célestine (Framework)",
+    "description": "A python framework for desktop applications.",
     "author": "mem_dixy",
     "version": (0, 4, 0),
     "blender": (3, 3, 0),
-    "location": "View3D > Sidebar > Celestine",
-    "wiki_url": "https://celestine.readthedocs.io/en/latest/",
-    "tracker_url": "https://github.com/mem-dixy/celestine/",
+    "location": "View3D > Properties > Object Properties > Celestine",
+    "warning": "",
     "support": "COMMUNITY",
+    "doc_url": "https://celestine.readthedocs.io/en/latest/",
+    "tracker_url": "https://github.com/mem-dixy/celestine/",
     "category": "3D View",
 }
 

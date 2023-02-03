@@ -79,26 +79,39 @@ class celestine_click(bpy.types.Operator):
 
 
 class celestine_main(bpy.types.Panel):
-    bl_category = "Celestine"
-    bl_context = ""
-    bl_idname = "CELESTINE_PT_main"
-    bl_label = "Main Panel"
+    bl_category = "celestine"
+    bl_context = "object"
+    bl_description = "Celestine Tab"
+    bl_idname = "OBJECT_PT_celestine"
+    bl_label = "Célestine"
     bl_options = {"HEADER_LAYOUT_EXPAND"}
     bl_order = 0
     bl_owner_id = ""
     bl_parent_id = ""
-    bl_region_type = "UI"
-    bl_space_type = "VIEW_3D"
+    bl_region_type = "WINDOW"
+    bl_space_type = "PROPERTIES"
     bl_translation_context = "*"
     bl_ui_units_x = 0
 
-    def draw(self, _):
+    text = ""
+    use_pin = False
+
+    def draw(self, context):
+        self.layout.operator(SimpleOperator.bl_idname)
+        self.layout.label(text=str(SimpleOperator.run))
+
         content = preferences.content()
         if content.ready:
             self.layout.operator("celestine.start")
             self.layout.operator("celestine.click")
         else:
             self.layout.operator("celestine.finish")
+
+    def draw_header(self, context):
+        pass
+
+    def draw_header_preset(self, context):
+        pass
 
 
 class celestine_start(bpy.types.Operator):
@@ -133,7 +146,38 @@ class celestine_finish(bpy.types.Operator):
         return {'FINISHED'}
 
 
+class HelloWorldPanel(bpy.types.Panel):
+    """Creates a Panel in the Object properties window"""
+    bl_label = "Hello World Panel"
+    bl_idname = "OBJECT_PT_hello"
+    bl_space_type = 'PROPERTIES'
+    bl_region_type = 'WINDOW'
+    bl_context = "scene"
+
+    def draw(self, context):
+        layout = self.layout
+
+        layout.operator(SimpleOperator.bl_idname)
+        layout.label(text=str(SimpleOperator.run))
+
+
+class SimpleOperator(bpy.types.Operator):
+    """Tooltip"""
+    bl_idname = "object.simple_operator"
+    bl_label = "Simple Object Operator"
+
+    run = 0
+
+    def execute(self, context):
+        self.__class__.run += 1
+        self.report({'INFO'}, str(self.__class__.run))
+        return {'FINISHED'}
+
+
 def register():
+    bpy.utils.register_class(HelloWorldPanel)
+    bpy.utils.register_class(SimpleOperator)
+
     preferences.register()
     bpy.utils.register_class(celestine_start)
     bpy.utils.register_class(celestine_finish)
@@ -142,6 +186,9 @@ def register():
 
 
 def unregister():
+    bpy.utils.unregister_class(SimpleOperator)
+    bpy.utils.unregister_class(HelloWorldPanel)
+
     bpy.utils.unregister_class(celestine_main)
     bpy.utils.unregister_class(celestine_click)
     bpy.utils.unregister_class(celestine_finish)
