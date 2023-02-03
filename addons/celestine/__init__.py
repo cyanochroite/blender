@@ -10,7 +10,7 @@ bl_info = {
     "author": "mem_dixy",
     "version": (0, 4, 0),
     "blender": (3, 3, 0),
-    "location": "View 3D > Sidebar > Viewer",
+    "location": "View3D > Sidebar > Celestine",
     "wiki_url": "https://celestine.readthedocs.io/en/latest/",
     "tracker_url": "https://github.com/mem-dixy/celestine/",
     "support": "COMMUNITY",

@@ -85,3 +85,13 @@ def register():
 def unregister():
     bpy.utils.unregister_class(CelestinePropertyGroup)
     bpy.utils.unregister_class(CelestineAddonPreferences)
+
+
+def start():
+    state = content()
+    state.ready = True
+
+
+def finish():
+    state = content()
+    state.ready = False

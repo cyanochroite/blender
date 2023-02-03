@@ -60,7 +60,7 @@ class celestine_click(bpy.types.Operator):
     bl_idname = "celestine.click"
 
     def execute(self, context):
-        print("start")
+        print("click")
         mouse = find_object("mouse")
         location = mouse.location
         x = round(location.x / 2.5) * 2.5
@@ -79,7 +79,7 @@ class celestine_click(bpy.types.Operator):
 
 
 class celestine_main(bpy.types.Panel):
-    bl_category = "celestine"
+    bl_category = "Celestine"
     bl_context = ""
     bl_idname = "CELESTINE_PT_main"
     bl_label = "Main Panel"
@@ -95,45 +95,55 @@ class celestine_main(bpy.types.Panel):
     def draw(self, _):
         content = preferences.content()
         if content.ready:
-            self.layout.operator("celestine.unregister")
+            self.layout.operator("celestine.start")
             self.layout.operator("celestine.click")
         else:
-            self.layout.operator("celestine.register")
+            self.layout.operator("celestine.finish")
 
 
-class celestine_register(bpy.types.Operator):
+class celestine_start(bpy.types.Operator):
+
+    bl_description = "whati ti do"
+
     bl_label = "Startup"
-    bl_idname = "celestine.register"
+    bl_idname = "celestine.start"
 
     def execute(self, _):
-        data.register()
-        content = preferences.content()
-        content.ready = True
+        print("start")
+        car = bpy.context.preferences.addons["celestine"].preferences
+        print(car)
+        print(car.ready)
+        data.start()
+        preferences.start()
+        print(car.ready)
+        car.ready = True
+        print(car.ready)
+        print("dane")
         return {'FINISHED'}
 
 
-class celestine_unregister(bpy.types.Operator):
+class celestine_finish(bpy.types.Operator):
     bl_label = "Shutdown"
-    bl_idname = "celestine.unregister"
+    bl_idname = "celestine.finish"
 
     def execute(self, _):
-        content = preferences.content()
-        content.ready = False
-        data.unregister()
+        print("finish")
+        preferences.finish()
+        data.finish()
         return {'FINISHED'}
 
 
 def register():
-    bpy.utils.register_class(celestine_unregister)
     preferences.register()
-    bpy.utils.register_class(celestine_main)
+    bpy.utils.register_class(celestine_start)
+    bpy.utils.register_class(celestine_finish)
     bpy.utils.register_class(celestine_click)
-    bpy.utils.register_class(celestine_register)
+    bpy.utils.register_class(celestine_main)
 
 
 def unregister():
-    bpy.utils.unregister_class(celestine_register)
-    bpy.utils.unregister_class(celestine_click)
     bpy.utils.unregister_class(celestine_main)
+    bpy.utils.unregister_class(celestine_click)
+    bpy.utils.unregister_class(celestine_finish)
+    bpy.utils.unregister_class(celestine_start)
     preferences.unregister()
-    bpy.utils.unregister_class(celestine_unregister)
