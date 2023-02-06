@@ -12,14 +12,16 @@ from .widget import Widget
 
 class Mouse(Widget):
     def __init__(self, rectangle):
-        text = "mouse"
-        collection = data.collection.scene()
-        mesh = make_mesh.bind(collection, text, _mesh.plane(text))
+        self.collection = data.collection.scene()
+        self.text = "mouse"
+        super().__init__(rectangle)
+        self.draw()
 
-        super().__init__(
-            mesh,
-            rectangle,
-        )
-        self.mesh.location = (1, 1, 1)
-        self.mesh.rotation_euler = (0, 0, radians(45))
-        self.mesh.scale = (0.5, 0.5, 0.5)
+    def draw(self):
+        plane = _mesh.plane(self.text)
+        mesh = make_mesh.bind(self.collection, self.text, plane)
+        super().draw(mesh)
+        mesh.location = (1, 1, 1)
+        mesh.rotation_euler = (0, 0, radians(45))
+        mesh.scale = (0.5, 0.5, 0.5)
+

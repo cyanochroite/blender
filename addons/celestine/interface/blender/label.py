@@ -6,9 +6,12 @@ from .widget import Widget
 
 class Label(Widget):
     def __init__(self, collection, text, rectangle):
-        mesh = _mesh.text(collection, text, text)
-        super().__init__(
-            mesh,
-            rectangle,
-        )
+        self.collection = collection
+        self.text = text
+        super().__init__(rectangle)
+        self.draw()
+
+    def draw(self):
+        mesh = _mesh.text(self.collection, self.text, self.text)
+        super().draw(mesh)
 

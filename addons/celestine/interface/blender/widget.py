@@ -2,13 +2,11 @@ from .package import mesh as _mesh
 
 
 class Widget():
-    def __init__(self, mesh, rectangle):
+    def __init__(self, rectangle):
         self.cord_x_min = rectangle.cord_x_min
         self.cord_y_min = rectangle.cord_y_min
         self.cord_x_max = rectangle.cord_x_max
         self.cord_y_max = rectangle.cord_y_max
-        self.mesh = mesh
-        self.mesh.location = (rectangle.cord_x_min, rectangle.cord_y_min, 0)
 
     def inside(self, cord_x, cord_y):
         aaa = self.cord_x_min < cord_x
@@ -19,6 +17,9 @@ class Widget():
 
     def action(self):
         pass
+
+    def draw(self, mesh):
+        mesh.location = (self.cord_x_min, self.cord_y_min, 0)
 
     def select(self, cord_x, cord_y):
         if self.inside(cord_x, cord_y):
