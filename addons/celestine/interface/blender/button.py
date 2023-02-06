@@ -1,10 +1,10 @@
 from .package.data import mesh as make_mesh
 from .package import mesh as _mesh
 
-from .widget import Widget
+from .element import Element
 
 
-class Button(Widget):
+class Button(Element):
     def __init__(self, collection, text, action, rectangle):
         self.collection = collection
         self.text = text

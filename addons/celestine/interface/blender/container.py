@@ -6,10 +6,8 @@ from .button import Button
 from .image import Image
 from .label import Label
 
-from .container import Container
 
-
-class Line(Container):
+class Container(Rectangle):
     def action(self):
         pass
 
@@ -56,5 +54,15 @@ class Line(Container):
     def __exit__(self, *_):
         return False
 
-    def __init__(self, page, tag, rectangle):
-        super().__init__(page, tag, rectangle, 10, 0)
+    def __init__(self, page, tag, rectangle, offset_x, offset_y):
+        super().__init__(
+            cord_x_min=rectangle.cord_x_min,
+            cord_y_min=rectangle.cord_y_min,
+            cord_x_max=rectangle.cord_x_max,
+            cord_y_max=rectangle.cord_y_max,
+            offset_x=offset_x,
+            offset_y=offset_y,
+        )
+        self.collection = page.collection
+        self.tag = tag
+        self.turn = page.turn

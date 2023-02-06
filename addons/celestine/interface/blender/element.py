@@ -1,7 +1,7 @@
 from .package import mesh as _mesh
 
 
-class Widget():
+class Element():
     def __init__(self, rectangle):
         self.cord_x_min = rectangle.cord_x_min
         self.cord_y_min = rectangle.cord_y_min

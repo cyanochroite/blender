@@ -1,10 +1,10 @@
 from .package.data import mesh as make_mesh
 from .package import mesh as _mesh
 
-from .widget import Widget
+from .element import Element
 
 
-class Label(Widget):
+class Label(Element):
     def __init__(self, collection, text, rectangle):
         self.collection = collection
         self.text = text

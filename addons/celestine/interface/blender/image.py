@@ -1,4 +1,4 @@
-from .widget import Widget
+from .element import Element
 
 from .package import data
 from .package import UV
@@ -6,7 +6,7 @@ from .package.data import mesh as make_mesh
 from .package import mesh as _mesh
 
 
-class Image(Widget):
+class Image(Element):
     def __init__(self, collection, name, rectangle):
         self.collection = collection
         self.name = name

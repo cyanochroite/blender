@@ -1,16 +1,14 @@
 from .package.data import mesh as make_mesh
 from .package import mesh as _mesh
 
-from .widget import Widget
+from .element import Element
 
 from .package import data
 
 from math import radians
 
-from .widget import Widget
 
-
-class Mouse(Widget):
+class Mouse(Element):
     def __init__(self, rectangle):
         self.collection = data.collection.scene()
         self.text = "mouse"
