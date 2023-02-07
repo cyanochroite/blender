@@ -5,11 +5,11 @@ from .element import Element
 
 
 class Button(Element):
-    def __init__(self, collection, text, action, rectangle):
+    def __init__(self, collection, text, action, **kwargs):
         self.collection = collection
         self.text = text
 
-        super().__init__(rectangle)
+        super().__init__(**kwargs)
 
         self.action = action
 

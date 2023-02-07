@@ -1,13 +1,41 @@
-from celestine.window.line import Line as master
+""""""
+
 from celestine.window.collection import Rectangle
 
-from . import package
 from .button import Button
 from .image import Image
 from .label import Label
 
 
 class Container(Rectangle):
+    """"""
+
+    def make(self, tag, offset_x, offset_y, **kwargs):
+        """Make a new Container."""
+        return Container(
+            self.page,
+            tag,
+            x_min=self.get_x_min(),
+            y_min=self.get_y_min(),
+            x_max=self.get_x_max(),
+            y_max=self.get_y_max(),
+            offset_x=offset_x,
+            offset_y=offset_y,
+            **kwargs,
+        )
+
+    def drop(self, tag, **kwargs):
+        """Elements go down. Like a <div> tag."""
+        return self.make(tag, 0, -2.5, **kwargs)
+
+    def grid(self, tag, **kwargs):
+        """Elements go in a grid. Like the <table> tag."""
+        return self.make(tag, 10, -2.5, **kwargs)
+
+    def span(self, tag, **kwargs):
+        """Elements go sideways. Like a <span> tag."""
+        return self.make(tag, 10, 0, **kwargs)
+
     def action(self):
         pass
 
@@ -24,7 +52,10 @@ class Container(Rectangle):
                 self.collection,
                 text,
                 lambda: self.turn(action),
-                self.spawn(),
+                x_min=self.get_x_min(),
+                y_min=self.get_y_min(),
+                x_max=self.get_x_max(),
+                y_max=self.get_y_max(),
             ),
         )
 
@@ -34,7 +65,10 @@ class Container(Rectangle):
             Image(
                 self.collection,
                 image,
-                self.spawn(),
+                x_min=self.get_x_min(),
+                y_min=self.get_y_min(),
+                x_max=self.get_x_max(),
+                y_max=self.get_y_max(),
             ),
         )
 
@@ -44,7 +78,10 @@ class Container(Rectangle):
             Label(
                 self.collection,
                 text,
-                self.spawn(),
+                x_min=self.get_x_min(),
+                y_min=self.get_y_min(),
+                x_max=self.get_x_max(),
+                y_max=self.get_y_max(),
             ),
         )
 
@@ -54,15 +91,9 @@ class Container(Rectangle):
     def __exit__(self, *_):
         return False
 
-    def __init__(self, page, tag, rectangle, offset_x, offset_y):
-        super().__init__(
-            cord_x_min=rectangle.cord_x_min,
-            cord_y_min=rectangle.cord_y_min,
-            cord_x_max=rectangle.cord_x_max,
-            cord_y_max=rectangle.cord_y_max,
-            offset_x=offset_x,
-            offset_y=offset_y,
-        )
+    def __init__(self, page, name, **kwargs):
+        self.page = page
         self.collection = page.collection
-        self.tag = tag
+        self.tag = name
         self.turn = page.turn
+        super().__init__(**kwargs)

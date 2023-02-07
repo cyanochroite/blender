@@ -5,10 +5,10 @@ from .element import Element
 
 
 class Label(Element):
-    def __init__(self, collection, text, rectangle):
+    def __init__(self, collection, text, **kwargs):
         self.collection = collection
         self.text = text
-        super().__init__(rectangle)
+        super().__init__(**kwargs)
         self.draw()
 
     def draw(self):

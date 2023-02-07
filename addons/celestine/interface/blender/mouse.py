@@ -9,10 +9,10 @@ from math import radians
 
 
 class Mouse(Element):
-    def __init__(self, rectangle):
+    def __init__(self):
         self.collection = data.collection.scene()
         self.text = "mouse"
-        super().__init__(rectangle)
+        super().__init__()
         self.draw()
 
     def draw(self):

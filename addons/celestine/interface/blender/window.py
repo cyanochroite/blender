@@ -21,8 +21,16 @@ def context():
 
 class Window(master):
     def page(self, name, document):
-        rectangle = Rectangle(0, 0, 20, 10, 0, 0)
-        page = Page(self, rectangle, name)
+        page = Page(
+            self,
+            name,
+            x_min=0,
+            y_min=0,
+            x_max=20,
+            y_max=20,
+            offset_x=0,
+            offset_y=-2.5,
+        )
         document(page)
         self.item_set(name, page)
 
@@ -66,7 +74,7 @@ class Window(master):
         light = data.light.sun.make(collection, "light")
         light.location = (0, 0, 1)
 
-        self.mouse = Mouse(Rectangle())
+        self.mouse = Mouse()
 
         override = context()
         bpy.ops.view3d.toggle_shading(override, type='RENDERED')

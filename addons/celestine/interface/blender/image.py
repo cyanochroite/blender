@@ -7,10 +7,10 @@ from .package import mesh as _mesh
 
 
 class Image(Element):
-    def __init__(self, collection, name, rectangle):
+    def __init__(self, collection, name, **kwargs):
         self.collection = collection
         self.name = name
-        super().__init__(rectangle)
+        super().__init__(**kwargs)
         self.draw()
 
     def draw(self):
