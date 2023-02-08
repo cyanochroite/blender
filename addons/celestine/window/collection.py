@@ -11,7 +11,13 @@ class Object:
 class Box(Object):
     """"""
 
-    def center(self):
+    def center_float(self):
+        """"""
+        x_dot = (self.x_min + self.x_max) / 2
+        y_dot = (self.y_min + self.y_max) / 2
+        return (x_dot, y_dot)
+
+    def center_int(self):
         """"""
         x_dot = (self.x_min + self.x_max) // 2
         y_dot = (self.y_min + self.y_max) // 2
@@ -60,27 +66,18 @@ class Rectangle(Box, Collection):
         """"""
         raise NotImplementedError()
 
-    def get_x_max(self):
+    def get_next(self):
         """"""
-        # only works if you call get_x_min first
-        return self.move_x_min if self.offset_x else self.x_max
-
-    def get_x_min(self):
-        """"""
-        value = self.move_x_min
+        x_min = self.move_x_min
         self.move_x_min += self.offset_x
-        return value
 
-    def get_y_max(self):
-        """"""
-        # only works if you call get_y_min first
-        return self.move_y_min if self.offset_y else self.y_max
-
-    def get_y_min(self):
-        """"""
-        value = self.move_y_min
+        y_min = self.move_y_min
         self.move_y_min += self.offset_y
-        return value
+
+        x_max = self.move_x_min if self.offset_x else self.x_max
+        y_max = self.move_y_min if self.offset_y else self.y_max
+
+        return (x_min, y_min, x_max, y_max)
 
     def select(self, x_dot, y_dot):
         """"""
@@ -91,11 +88,12 @@ class Rectangle(Box, Collection):
 
     def spawn(self):
         """"""
+        (x_min, y_min, x_max, y_max) = self.get_next()
         return Rectangle(
-            x_min=self.get_x_min(),
-            y_min=self.get_y_min(),
-            x_max=self.get_x_max(),
-            y_max=self.get_y_max(),
+            x_min=x_min,
+            y_min=y_min,
+            x_max=x_max,
+            y_max=y_max,
             offset_x=self.offset_x,
             offset_y=self.offset_y,
         )
@@ -106,9 +104,16 @@ class Rectangle(Box, Collection):
             offset_x = 300
         if "col" in kwargs:
             offset_y = 50
+
+        self.start_x_min = self.x_min
+        self.start_y_min = self.y_min
+        self.start_x_max = self.x_max
+        self.start_y_max = self.y_max
+
         self.move_x_min = self.x_min
         self.move_y_min = self.y_min
         self.move_x_max = self.x_max
         self.move_y_max = self.y_max
+
         self.offset_x = offset_x
         self.offset_y = offset_y

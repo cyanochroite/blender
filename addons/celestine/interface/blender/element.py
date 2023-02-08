@@ -12,7 +12,7 @@ class Element(Box):
 
     def draw(self, mesh):
         """"""
-        (x_dot, y_dot) = self.center()
+        (x_dot, y_dot) = self.center_float()
         mesh.location = (x_dot, y_dot, 0)
 
     def select(self, x_dot, y_dot):
