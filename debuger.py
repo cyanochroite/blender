@@ -1,3 +1,5 @@
+""""""
+
 import os
 import sys
 
@@ -15,4 +17,4 @@ wingdbstub.Ensure()
 bpy.ops.celestine.start('INVOKE_DEFAULT')
 
 celestine = __import__("celestine")
-celestine.main(["-a", "demo", "-i", "blender", "main"], False)
+celestine.blender()
