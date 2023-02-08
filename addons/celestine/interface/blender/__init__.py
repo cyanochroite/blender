@@ -62,24 +62,10 @@ class celestine_click(bpy.types.Operator):
     bl_idname = "celestine.click"
 
     def execute(self, context):
-        print("click")
         mouse = find_object("mouse")
-        location = mouse.location
-        x_dot = round(location.x / 2.5) * 2.5
-        y_dot = round(location.y / 2.5) * 2.5
-        z_dot = 1
-        mouse.location = (x_dot, y_dot, z_dot)
-
-        page = bpy.context.scene.celestine.page
-        collection = find_collection(page)
-
-        task = "poke"
-        celestine.blender(task, x_dot, y_dot)
-
-        for item in collection.all_objects:
-            print(item.location)
-
-        print("done")
+        x_dot = mouse.location.x
+        y_dot = mouse.location.y
+        celestine.blender2(task="poke", x_dot=x_dot, y_dot=y_dot)
         return {'FINISHED'}
 
 
@@ -102,13 +88,10 @@ class celestine_main(bpy.types.Panel):
     use_pin = False
 
     def draw(self, context):
-        self.layout.operator(SimpleOperator.bl_idname)
-        self.layout.label(text=str(SimpleOperator.run))
-
         content = preferences.content()
+        self.layout.operator("celestine.click")
         if content.ready:
             self.layout.operator("celestine.start")
-            self.layout.operator("celestine.click")
         else:
             self.layout.operator("celestine.finish")
 
@@ -129,14 +112,9 @@ class celestine_start(bpy.types.Operator):
     def execute(self, _):
         print("start")
         car = bpy.context.preferences.addons["celestine"].preferences
-        print(car)
-        print(car.ready)
         data.start()
         preferences.start()
-        print(car.ready)
         car.ready = True
-        print(car.ready)
-        print("dane")
         return {'FINISHED'}
 
 
@@ -151,38 +129,7 @@ class celestine_finish(bpy.types.Operator):
         return {'FINISHED'}
 
 
-class HelloWorldPanel(bpy.types.Panel):
-    """Creates a Panel in the Object properties window"""
-    bl_label = "Hello World Panel"
-    bl_idname = "OBJECT_PT_hello"
-    bl_space_type = 'PROPERTIES'
-    bl_region_type = 'WINDOW'
-    bl_context = "scene"
-
-    def draw(self, context):
-        layout = self.layout
-
-        layout.operator(SimpleOperator.bl_idname)
-        layout.label(text=str(SimpleOperator.run))
-
-
-class SimpleOperator(bpy.types.Operator):
-    """Tooltip"""
-    bl_idname = "object.simple_operator"
-    bl_label = "Simple Object Operator"
-
-    run = 0
-
-    def execute(self, context):
-        self.__class__.run += 1
-        self.report({'INFO'}, str(self.__class__.run))
-        return {'FINISHED'}
-
-
 def register():
-    bpy.utils.register_class(HelloWorldPanel)
-    bpy.utils.register_class(SimpleOperator)
-
     preferences.register()
     bpy.utils.register_class(celestine_start)
     bpy.utils.register_class(celestine_finish)
@@ -191,9 +138,6 @@ def register():
 
 
 def unregister():
-    bpy.utils.unregister_class(SimpleOperator)
-    bpy.utils.unregister_class(HelloWorldPanel)
-
     bpy.utils.unregister_class(celestine_main)
     bpy.utils.unregister_class(celestine_click)
     bpy.utils.unregister_class(celestine_finish)

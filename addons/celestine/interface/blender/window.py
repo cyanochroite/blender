@@ -20,6 +20,16 @@ def context():
 
 
 class Window(master):
+    def draw(self, **kwargs):
+        page = bpy.context.scene.celestine.page
+        item = self.item_get(page)
+        item.draw(**kwargs)
+
+    def poke(self, **kwargs):
+        page = bpy.context.scene.celestine.page
+        item = self.item_get(page)
+        item.poke(**kwargs)
+
     def page(self, name, document):
         collection = data.collection.make(name)
         collection.hide()
@@ -42,6 +52,7 @@ class Window(master):
 
     def turn(self, name):
         """"""
+        self.turn_page = name
         page = self.item_get(name)
 
         self.frame.hide()
@@ -90,6 +101,7 @@ class Window(master):
 
     def __exit__(self, exc_type, exc_value, traceback):
         super().__exit__(exc_type, exc_value, traceback)
+        self.draw()
         return False
 
     def __init__(self, session, **kwargs):
