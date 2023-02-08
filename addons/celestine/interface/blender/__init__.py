@@ -8,6 +8,8 @@ import bpy
 
 from .window import Window
 
+import celestine
+
 
 def image_format():
     return [
@@ -63,13 +65,16 @@ class celestine_click(bpy.types.Operator):
         print("click")
         mouse = find_object("mouse")
         location = mouse.location
-        x = round(location.x / 2.5) * 2.5
-        y = round(location.y / 2.5) * 2.5
-        z = 1
-        mouse.location = (x, y, z)
+        x_dot = round(location.x / 2.5) * 2.5
+        y_dot = round(location.y / 2.5) * 2.5
+        z_dot = 1
+        mouse.location = (x_dot, y_dot, z_dot)
 
         page = bpy.context.scene.celestine.page
         collection = find_collection(page)
+
+        task = "poke"
+        celestine.blender(task, x_dot, y_dot)
 
         for item in collection.all_objects:
             print(item.location)

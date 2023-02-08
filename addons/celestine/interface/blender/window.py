@@ -80,6 +80,7 @@ class Window(master):
         light.location = (0, 0, 1)
 
         self.mouse = Mouse()
+        self.mouse.draw()
 
         override = context()
         bpy.ops.view3d.toggle_shading(override, type='RENDERED')

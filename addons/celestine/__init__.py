@@ -50,7 +50,7 @@ def main(argv: list[str], exit_on_error: bool) -> None:
             window.page(name, document)
 
 
-def blender(task="draw") -> None:
+def blender(task="draw", **kwargs) -> None:
     """Run the main program."""
     preferences = load.module(INTERFACE, BLENDER, PACKAGE, PREFERENCES)
     content = preferences.content()
@@ -66,5 +66,5 @@ def blender(task="draw") -> None:
 
         # TODO: only call visible one
         for (name, item) in window.item.items():
-            item.call(task)
-
+            call = getattr(item, task)
+            call(**kwargs)

@@ -28,3 +28,7 @@ class Button(Element):
         self.mesh = mesh
         super().draw()
 
+    def poke(self, x_dot, y_dot):
+        """"""
+        if super().poke(x_dot, y_dot):
+            self.action()

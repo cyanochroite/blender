@@ -71,18 +71,13 @@ class Container(Rectangle):
             )
         )
 
-    def action(self):
-        pass
-
-    def call(self, task):
+    def draw(self):
         for (name, item) in self.item.items():
-            item.call(task)
+            item.draw()
 
-    def select(self, cord_x, cord_y):
-        if self.inside(cord_x, cord_y):
-            self.action()
-            for child in self.children():
-                child.select(cord_x, cord_y)
+    def poke(self, x_dot, y_dot):
+        for (name, item) in self.item.items():
+            item.poke(x_dot, y_dot)
 
     def button(self, tag, text, action):
         (x_min, y_min, x_max, y_max) = self.get_next()
