@@ -10,12 +10,16 @@ class Element(Box):
         """"""
         raise NotImplementedError()
 
-    def draw(self, mesh):
+    def draw(self):
         """"""
         (x_dot, y_dot) = self.center_float()
-        mesh.location = (x_dot, y_dot, 0)
+        self.mesh.location = (x_dot, y_dot, 0)
 
     def select(self, x_dot, y_dot):
         """"""
         if self.inside(x_dot, y_dot):
             self.action()
+
+    def call(self, task):
+        function = getattr(self, task)
+        function()

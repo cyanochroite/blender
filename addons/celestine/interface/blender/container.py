@@ -74,6 +74,10 @@ class Container(Rectangle):
     def action(self):
         pass
 
+    def call(self, task):
+        for (name, item) in self.item.items():
+            item.call(task)
+
     def select(self, cord_x, cord_y):
         if self.inside(cord_x, cord_y):
             self.action()

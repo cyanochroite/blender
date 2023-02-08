@@ -13,13 +13,12 @@ class Mouse(Element):
         self.collection = data.collection.scene()
         self.text = "mouse"
         super().__init__()
-        self.draw()
 
     def draw(self):
         plane = _mesh.plane(self.text)
-        mesh = make_mesh.bind(self.collection, self.text, plane)
-        super().draw(mesh)
-        mesh.location = (0, 0, 1)
-        mesh.rotation_euler = (0, 0, radians(45))
-        mesh.scale = (0.5, 0.5, 0.5)
+        self.mesh = make_mesh.bind(self.collection, self.text, plane)
+        super().draw()
+        self.mesh.location = (0, 0, 1)
+        self.mesh.rotation_euler = (0, 0, radians(45))
+        self.mesh.scale = (0.5, 0.5, 0.5)
 

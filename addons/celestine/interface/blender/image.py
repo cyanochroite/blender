@@ -11,7 +11,6 @@ class Image(Element):
         self.collection = collection
         self.name = name
         super().__init__(**kwargs)
-        self.draw()
 
     def draw(self):
         image = data.image.load(self.name)
@@ -19,4 +18,5 @@ class Image(Element):
         plane = _mesh.image(image)
         mesh = make_mesh.bind(self.collection, self.name, plane)
         mesh.body.data.materials.append(material)
-        super().draw(mesh)
+        self.mesh = mesh
+        super().draw()

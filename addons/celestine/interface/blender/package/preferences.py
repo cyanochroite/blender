@@ -13,8 +13,8 @@ class CelestineAddonPreferences(bpy.types.AddonPreferences):
 
     argument: bpy.props.StringProperty(
         name="Command Line Arguments",
-        description="The stuff that goes after 'python -m celestine'.",
-        default="-i blender -a demo main",
+        description="Interface already accounted for.",
+        default="-a demo main -l en",
         maxlen=256,
     )
 

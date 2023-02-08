@@ -50,11 +50,11 @@ def main(argv: list[str], exit_on_error: bool) -> None:
             window.page(name, document)
 
 
-def blender() -> None:
+def blender(task="draw") -> None:
     """Run the main program."""
     preferences = load.module(INTERFACE, BLENDER, PACKAGE, PREFERENCES)
     content = preferences.content()
-    argument = content.argument
+    argument = F"-i blender {content.argument}"
     argv = argument.split()
     exit_on_error = False
 
@@ -63,3 +63,8 @@ def blender() -> None:
         function = load.function(session.application)
         for (name, document) in function.items():
             window.page(name, document)
+
+        # TODO: only call visible one
+        for (name, item) in window.item.items():
+            item.call(task)
+

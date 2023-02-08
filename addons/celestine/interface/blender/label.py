@@ -9,9 +9,7 @@ class Label(Element):
         self.collection = collection
         self.text = text
         super().__init__(**kwargs)
-        self.draw()
 
     def draw(self):
-        mesh = _mesh.text(self.collection, self.text, self.text)
-        super().draw(mesh)
-
+        self.mesh = _mesh.text(self.collection, self.text, self.text)
+        super().draw()

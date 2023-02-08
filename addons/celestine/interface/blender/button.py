@@ -8,12 +8,8 @@ class Button(Element):
     def __init__(self, collection, text, action, **kwargs):
         self.collection = collection
         self.text = text
-
         super().__init__(**kwargs)
-
         self.action = action
-
-        self.draw()
 
     def draw(self):
         width = len(self.text) / 4
@@ -29,5 +25,6 @@ class Button(Element):
 
         word.parent = mesh
 
-        super().draw(mesh)
+        self.mesh = mesh
+        super().draw()
 
