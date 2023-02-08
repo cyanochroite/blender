@@ -6,7 +6,7 @@ from .package import data
 import bpy
 
 from . import package
-from .page import Page
+from .container import Drop
 from .mouse import Mouse
 
 
@@ -21,9 +21,13 @@ def context():
 
 class Window(master):
     def page(self, name, document):
-        page = Page(
-            self,
+        collection = data.collection.make(name)
+        collection.hide()
+        page = Drop(
+            self.session,
+            collection,
             name,
+            self.turn,
             x_min=0,
             y_min=0,
             x_max=20,
@@ -34,16 +38,17 @@ class Window(master):
         document(page)
         self.item_set(name, page)
 
-        self.frame = page.frame
+        self.frame = page.collection
 
     def turn(self, name):
+        """"""
         page = self.item_get(name)
 
         self.frame.hide()
-        self.frame = page.frame
+        self.frame = page.collection
         self.frame.show()
 
-        bpy.context.scene.celestine.page = page.name
+        bpy.context.scene.celestine.page = page.tag
 
     def __enter__(self):
         super().__enter__()
