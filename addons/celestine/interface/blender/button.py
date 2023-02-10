@@ -5,28 +5,27 @@ from .element import Element
 
 
 class Button(Element):
-    def __init__(self, collection, text, action, **kwargs):
-        self.collection = collection
+    def __init__(self, text, action, **kwargs):
         self.text = text
         super().__init__(**kwargs)
         self.action = action
 
-    def draw(self):
+    def draw(self, collection):
         width = len(self.text) / 4
         height = 1 / 20
 
         plane = _mesh.plane(self.text)
-        mesh = make_mesh.bind(self.collection, self.text, plane)
+        mesh = make_mesh.bind(collection, self.text, plane)
         mesh.scale = (width, height, 1)
 
-        word = _mesh.text(self.collection, self.text, self.text)
+        word = _mesh.text(collection, self.text, self.text)
         word.scale = (1 / width, 1 / height, 1)
         word.location = (- width / 4, - height, 0.1)
 
         word.parent = mesh
 
         self.mesh = mesh
-        super().draw()
+        super().draw(collection)
 
     def poke(self, x_dot, y_dot):
         """"""

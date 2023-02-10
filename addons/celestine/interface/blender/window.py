@@ -26,11 +26,8 @@ class Window(master):
         item.poke(**kwargs)
 
     def page(self, name, document):
-        collection = data.collection.make(name)
-        collection.hide()
         page = Drop(
             self.session,
-            collection,
             name,
             self.turn,
             x_min=0,
@@ -43,18 +40,25 @@ class Window(master):
         document(page)
         self.item_set(name, page)
 
-        self.frame = page.collection
+        self.frame = name
 
-    def turn(self, name):
+    def item_find(self, page):
         """"""
-        self.turn_page = name
-        page = self.item_get(name)
+        for (name, item) in bpy.data.collections.items():
+            if page == name:
+                return item
 
-        self.frame.hide()
-        self.frame = page.collection
-        self.frame.show()
+    def turn(self, page):
+        """"""
+        name = bpy.context.scene.celestine.page
+        item = self.item_find(name)
+        item.hide_render = True
+        item.hide_viewport = True
 
-        bpy.context.scene.celestine.page = page.tag
+        item = self.item_find(page)
+        item.hide_render = False
+        item.hide_viewport = False
+        bpy.context.scene.celestine.page = page
 
     def __enter__(self):
         super().__enter__()
@@ -88,7 +92,8 @@ class Window(master):
         light.rotation = (180, 0, 0)
 
         self.mouse = Mouse()
-        self.mouse.draw()
+        collection = data.collection.scene()
+        self.mouse.draw(collection)
 
         override = context()
         bpy.ops.view3d.toggle_shading(override, type='RENDERED')
@@ -97,9 +102,12 @@ class Window(master):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
+        for name, item in self.item.items():
+            collection = data.collection.make(name)
+            collection.hide()
+            item.draw(collection)
+        # yes super must go after
         super().__exit__(exc_type, exc_value, traceback)
-        for _, item in self.item.items():
-            item.draw()
         return False
 
     def __init__(self, session, **kwargs):

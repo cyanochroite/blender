@@ -10,15 +10,14 @@ from math import radians
 
 class Mouse(Element):
     def __init__(self):
-        self.collection = data.collection.scene()
         self.text = "mouse"
         super().__init__()
 
-    def draw(self):
+    def draw(self, collection):
         plane = _mesh.plane(self.text)
-        self.mesh = make_mesh.bind(self.collection, self.text, plane)
-        super().draw()
-        self.mesh.location = (0, 0, 1)
+        self.mesh = make_mesh.bind(collection, self.text, plane)
+        super().draw(collection)
+        self.mesh.location = (0, 0, -1)
         self.mesh.rotation_euler = (0, 0, radians(45))
         self.mesh.scale = (0.5, 0.5, 0.5)
 

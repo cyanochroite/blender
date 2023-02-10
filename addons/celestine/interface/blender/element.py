@@ -6,7 +6,7 @@ from celestine.window.collection import Box
 class Element(Box):
     """"""
 
-    def draw(self):
+    def draw(self, collection):
         """"""
         (x_dot, y_dot) = self.center_float()
         # child sets mesh and then calls this

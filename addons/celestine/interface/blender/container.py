@@ -17,7 +17,6 @@ class Container(Rectangle):
             tag,
             Drop(
                 self.session,
-                self.collection,
                 tag,
                 self.turn,
                 x_min=x_min,
@@ -37,7 +36,6 @@ class Container(Rectangle):
             tag,
             Grid(
                 self.session,
-                self.collection,
                 tag,
                 self.turn,
                 width,
@@ -58,7 +56,6 @@ class Container(Rectangle):
             tag,
             Span(
                 self.session,
-                self.collection,
                 tag,
                 self.turn,
                 x_min=x_min,
@@ -71,20 +68,22 @@ class Container(Rectangle):
             )
         )
 
-    def draw(self):
-        for (name, item) in self.item.items():
-            item.draw()
+    def draw(self, collection):
+        """"""
+        for (_, item) in self.item.items():
+            item.draw(collection)
 
     def poke(self, x_dot, y_dot):
-        for (name, item) in self.item.items():
+        """"""
+        for (_, item) in self.item.items():
             item.poke(x_dot, y_dot)
 
     def button(self, tag, text, action):
+        """"""
         (x_min, y_min, x_max, y_max) = self.get_next()
         return self.item_set(
             tag,
             Button(
-                self.collection,
                 text,
                 lambda: self.turn(action),
                 x_min=x_min,
@@ -95,11 +94,11 @@ class Container(Rectangle):
         )
 
     def image(self, tag, image):
+        """"""
         (x_min, y_min, x_max, y_max) = self.get_next()
         return self.item_set(
             tag,
             Image(
-                self.collection,
                 image,
                 x_min=x_min,
                 y_min=y_min,
@@ -109,11 +108,11 @@ class Container(Rectangle):
         )
 
     def label(self, tag, text):
+        """"""
         (x_min, y_min, x_max, y_max) = self.get_next()
         return self.item_set(
             tag,
             Label(
-                self.collection,
                 text,
                 x_min=x_min,
                 y_min=y_min,
@@ -128,9 +127,8 @@ class Container(Rectangle):
     def __exit__(self, *_):
         return False
 
-    def __init__(self, session, collection, name, turn, **kwargs):
+    def __init__(self, session, name, turn, **kwargs):
         self.session = session
-        self.collection = collection
         self.tag = name
         self.turn = turn
         super().__init__(**kwargs)
@@ -160,11 +158,11 @@ class Grid(Container):
         """"""
         return F"{name}_{self.index_x}-{self.index_y}"
 
-    def __init__(self, session, collection, name, turn, width, **kwargs):
+    def __init__(self, session, name, turn, width, **kwargs):
         self.index_x = 0
         self.index_y = 0
         self.width = width
-        super().__init__(session, collection, name, turn, **kwargs)
+        super().__init__(session, name, turn, **kwargs)
 
 
 class Drop(Container):
