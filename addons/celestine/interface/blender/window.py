@@ -20,11 +20,6 @@ def context():
 
 
 class Window(master):
-    def draw(self, **kwargs):
-        page = bpy.context.scene.celestine.page
-        item = self.item_get(page)
-        item.draw(**kwargs)
-
     def poke(self, **kwargs):
         page = bpy.context.scene.celestine.page
         item = self.item_get(page)
@@ -43,7 +38,7 @@ class Window(master):
             x_max=20,
             y_max=20,
             offset_x=0,
-            offset_y=-2.5,
+            offset_y=2.5,
         )
         document(page)
         self.item_set(name, page)
@@ -83,12 +78,14 @@ class Window(master):
         collection = data.collection.make("window")
 
         camera = data.camera.make(collection, "camera")
-        camera.location = (+16.0, -08.5, +60.0)
+        camera.location = (+17.5, +10.0, -60.0)
+        camera.rotation = (180, 0, 0)
         camera.ortho_scale = +35.0
         camera.type = 'ORTHO'
 
         light = data.light.sun.make(collection, "light")
-        light.location = (0, 0, 1)
+        light.location = (00.0, 00.0, -60.0)
+        light.rotation = (180, 0, 0)
 
         self.mouse = Mouse()
         self.mouse.draw()
@@ -101,7 +98,8 @@ class Window(master):
 
     def __exit__(self, exc_type, exc_value, traceback):
         super().__exit__(exc_type, exc_value, traceback)
-        self.draw()
+        for _, item in self.item.items():
+            item.draw()
         return False
 
     def __init__(self, session, **kwargs):

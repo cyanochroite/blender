@@ -25,7 +25,7 @@ class Container(Rectangle):
                 x_max=x_max,
                 y_max=y_max,
                 offset_x=0,
-                offset_y=-2.5,
+                offset_y=2.5,
                 **kwargs,
             )
         )
@@ -45,8 +45,8 @@ class Container(Rectangle):
                 y_min=y_min,
                 x_max=x_max,
                 y_max=y_max,
-                offset_x=+2.5,
-                offset_y=-2.5,
+                offset_x=2.5,
+                offset_y=2.5,
                 **kwargs,
             )
         )

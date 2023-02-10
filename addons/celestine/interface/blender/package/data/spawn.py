@@ -1,6 +1,11 @@
 # <pep8-80 compliant>
 import bpy
 
+import math
+
+
+DEGREE_TO_RADIAN = math.pi / 180
+
 
 class _imaginary():
     """Objects that only exist in spirit."""
@@ -61,6 +66,13 @@ class _real(_imaginary):
         match name:
             case "location":
                 setattr(self.body, name, value)
+            case "rotation":
+                (x_dot, y_dot, z_dot) = value
+                x_dot *= DEGREE_TO_RADIAN
+                y_dot *= DEGREE_TO_RADIAN
+                z_dot *= DEGREE_TO_RADIAN
+                value = (x_dot, y_dot, z_dot)
+                setattr(self.body, "rotation_euler", value)
             case "parent":
                 setattr(self.body, name, value.body)
             case "rotation_euler":
