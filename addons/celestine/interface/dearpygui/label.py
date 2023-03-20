@@ -1,12 +1,21 @@
+""""""
+
+from celestine.window.label import Label as label
+
 from . import package
-from .widget import Widget
+from .element import Element
 
 
-class Label(Widget):
-    def __init__(self, tag, text, label):
+class Label(label, Element):
+    """"""
+
+    def draw(self, collection, **star):
+        """"""
+        label = "Label"
         package.add_text(
-            text,
-            tag=tag,
-            label=F"{tag}{label}",
+            self.text,
+            tag=self.tag,
+            label=f"{self.tag}{label}",
             show_label=True,
         )
+        super().draw(collection, **star)

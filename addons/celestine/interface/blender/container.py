@@ -1,13 +1,17 @@
 """"""
 
 from celestine.window.collection import Rectangle
+from celestine.window.container import Container as container
+from celestine.window.container import Drop as drop
+from celestine.window.container import Grid as grid
+from celestine.window.container import Span as span
 
 from .button import Button
 from .image import Image
 from .label import Label
 
 
-class Container(Rectangle):
+class Container(container):
     """"""
 
     def drop(self, tag, **kwargs):
@@ -26,7 +30,7 @@ class Container(Rectangle):
                 offset_x=0,
                 offset_y=2.5,
                 **kwargs,
-            )
+            ),
         )
 
     def grid(self, tag, width, **kwargs):
@@ -46,7 +50,7 @@ class Container(Rectangle):
                 offset_x=2.5,
                 offset_y=2.5,
                 **kwargs,
-            )
+            ),
         )
 
     def span(self, tag, **kwargs):
@@ -65,17 +69,17 @@ class Container(Rectangle):
                 offset_x=10,
                 offset_y=0,
                 **kwargs,
-            )
+            ),
         )
 
     def draw(self, collection):
         """"""
-        for (_, item) in self.item.items():
+        for _, item in self.item.items():
             item.draw(collection)
 
     def poke(self, x_dot, y_dot):
         """"""
-        for (_, item) in self.item.items():
+        for _, item in self.item.items():
             item.poke(x_dot, y_dot)
 
     def button(self, tag, text, action):
@@ -134,7 +138,11 @@ class Container(Rectangle):
         super().__init__(**kwargs)
 
 
-class Grid(Container):
+class Drop(Container, drop):
+    """"""
+
+
+class Grid(Container, grid):
     """"""
 
     def get_next(self):
@@ -156,7 +164,7 @@ class Grid(Container):
 
     def get_tag(self, name):
         """"""
-        return F"{name}_{self.index_x}-{self.index_y}"
+        return f"{name}_{self.index_x}-{self.index_y}"
 
     def __init__(self, session, name, turn, width, **kwargs):
         self.index_x = 0
@@ -165,10 +173,5 @@ class Grid(Container):
         super().__init__(session, name, turn, **kwargs)
 
 
-class Drop(Container):
+class Span(Container, span):
     """"""
-
-
-class Span(Container):
-    """"""
-

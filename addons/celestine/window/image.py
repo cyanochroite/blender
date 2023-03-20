@@ -1,6 +1,11 @@
-from .widget import Widget
+""""""
+
+from .element import Element
 
 
-class Image(Widget):
-    def __init__(self, frame, text):
-        super().__init__()
+class Image(Element):
+    """"""
+
+    def __init__(self, tag, image, **star):
+        self.image = image
+        super().__init__(tag, **star)

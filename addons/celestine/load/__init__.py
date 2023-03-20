@@ -4,24 +4,19 @@ import os
 import sys
 
 from celestine.text import CELESTINE
-
 from celestine.text.stream import FILE_NAME_EXTENSION
-
-from celestine.typed import B
-from celestine.typed import D
-from celestine.typed import L
-from celestine.typed import MT
-from celestine.typed import S
-
-from celestine.unicode import FULL_STOP
-from celestine.unicode import LOW_LINE
-from celestine.unicode import NONE
-
-from celestine.window.page import Page
-
-from .function import function
-from .function import function_name
-from .function import function_value
+from celestine.typed import (
+    MT,
+    B,
+    D,
+    L,
+    S,
+)
+from celestine.unicode import (
+    FULL_STOP,
+    LOW_LINE,
+    NONE,
+)
 
 
 def attempt(*path: S) -> B:
@@ -42,7 +37,7 @@ def module(*path: S) -> MT:
     for _path in path:
         file = getattr(file, _path)
     if "from" not in repr(file):
-        raise ModuleNotFoundError(F"Module failed to load: {name}")
+        raise ModuleNotFoundError(f"Module failed to load: {name}")
     return file
 
 
@@ -65,8 +60,7 @@ def dictionary(*path: S) -> D[S, S]:
     _dictionary = vars(_module)
     mapping = {
         key: value
-        for key, value
-        in _dictionary.items()
+        for key, value in _dictionary.items()
         if not key.startswith(LOW_LINE)
     }
     return mapping
@@ -103,7 +97,7 @@ def argument_default(path: S) -> S:
         except ModuleNotFoundError:
             pass
     if not result:
-        message = F"Failed to load any package in '{path}' directory."
+        message = f"Failed to load any package in '{path}' directory."
         raise ReferenceError(message)
     return result
 

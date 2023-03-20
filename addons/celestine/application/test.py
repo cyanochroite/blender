@@ -2,17 +2,13 @@
 
 import unittest
 
-from celestine.text import CELESTINE
-from celestine.text.directory import APPLICATION
-
 from celestine import load
 from celestine.load import directory
-
 from celestine.session.session import SuperSession
-
+from celestine.text import CELESTINE
+from celestine.text.directory import APPLICATION
 from celestine.typed import N
-
-from celestine.window.page import Page
+from celestine.window.container import Container as Page
 
 ERROR = "error"
 MODULE = "module"
@@ -30,7 +26,7 @@ def main(_: Page) -> N:
     paths = directory.find(TARGET)
     for path in paths:
         dictionary = load.dictionary(*path)
-        for (item, value) in dictionary.items():
+        for item, value in dictionary.items():
             setattr(module, item, value)
 
     unittest.main(

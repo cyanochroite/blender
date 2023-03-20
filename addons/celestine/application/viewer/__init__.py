@@ -4,15 +4,13 @@
 import os
 
 from celestine.session.argument import Optional
-
-from celestine.session.session import SuperSession
-from celestine.session.session import AD
-
+from celestine.session.session import (
+    AD,
+    SuperSession,
+)
 from celestine.typed import S
 
 from .text import DIRECTORY
-
-from .main import _setup
 
 
 class Session(SuperSession):
@@ -28,11 +26,3 @@ class Session(SuperSession):
                 self._language.VIEWER_SESSION_DIRECTORY,
             ),
         }
-
-
-def main(page):
-    """"""
-    images = _setup(page)
-    with page.grid("grid", 6) as grid:
-        for image in images:
-            grid.image(grid.get_tag("image"), image)

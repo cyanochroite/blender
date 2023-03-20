@@ -1,3 +1,4 @@
+""""""
 # <pep8-80 compliant>
 from . import data
 
@@ -5,44 +6,49 @@ from . import data
 
 
 def shader_image(nodes, image):
+    """"""
     # inputs
     # "Vector"
     # outputs
     # "Color"
     # "Alpha"
-    node = nodes.new('ShaderNodeTexImage')
+    node = nodes.new("ShaderNodeTexImage")
     node.image = image
-    node.interpolation = 'Cubic'
-    node.projection = 'FLAT'
-    node.extension = 'CLIP'
+    node.interpolation = "Cubic"
+    node.projection = "FLAT"
+    node.extension = "CLIP"
     return node
 
 
 def shader_diffuse(nodes):
+    """"""
     # inputs
     # "Color"
     # "Roughness"
     # "Normal"
     # outputs
     # "BSDF"
-    node = nodes.new('ShaderNodeBsdfDiffuse')
+    node = nodes.new("ShaderNodeBsdfDiffuse")
     return node
 
 
 def shader_output(nodes):
+    """"""
     # inputs
     # "Surface"
     # "Volume"
     # "Displacement"
     # outputs
-    node = nodes.new('ShaderNodeOutputMaterial')
-    node.target = 'ALL'
+    node = nodes.new("ShaderNodeOutputMaterial")
+    node.target = "ALL"
     return node
+
 
 # material
 
 
 def material(name, image):
+    """"""
     material = data.material.new(name)
     material.use_nodes = True
 

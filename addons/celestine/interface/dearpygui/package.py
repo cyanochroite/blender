@@ -5,7 +5,6 @@ Putting alias here to contain errors to this file only.
 # https://dearpygui.readthedocs.io/en/latest/
 import dearpygui.dearpygui
 
-
 add_button = dearpygui.dearpygui.add_button
 add_file_extension = dearpygui.dearpygui.add_file_extension
 add_image = dearpygui.dearpygui.add_image
@@ -34,6 +33,8 @@ window = dearpygui.dearpygui.window
 group = dearpygui.dearpygui.group
 
 
-def item_key(frame, tag):
-    return F"_{frame}__{tag}"
-
+def tag_root(tag):
+    """"""
+    root = tag.split("_")[0]
+    combine = f"{root}"
+    return combine

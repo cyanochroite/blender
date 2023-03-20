@@ -1,19 +1,38 @@
-from celestine.window.window import Window as master
+""""""
+
+from celestine.window.window import Window as window
 
 from . import package
-from .page import Page
+from .button import Button
+from .container import (
+    Container,
+    Drop,
+    Grid,
+    Span,
+)
+from .image import Image
+from .label import Label
 
 
-class Window(master):
+class Window(window):
+    """"""
+
     def page(self, name, document):
-        page = Page(self)
-        page.frame.grid(row=0, column=0, sticky="nsew")
+        page = self.container.drop(name)
+        page.data = package.Frame(
+            self.root,
+            padx=5,
+            pady=5,
+            bg="skyblue",
+        )
+        page.data.grid(row=0, column=0, sticky="nsew")
         document(page)
+        page.draw(page.data)
         self.item_set(name, page)
 
-    def turn(self, page):
+    def turn(self, page, **star):
         frame = self.item_get(page)
-        frame.frame.tkraise()
+        frame.data.tkraise()
 
     def __enter__(self):
         super().__enter__()
@@ -22,6 +41,26 @@ class Window(master):
         self.root.minsize(640, 480)
         self.root.maxsize(3840, 2160)
         self.root.config(bg="blue")
+
+        self.container = Container(
+            self.session,
+            "window",
+            self,
+            None,
+            Button,
+            Image,
+            Label,
+            Drop,
+            Grid,
+            Span,
+            x_min=0,
+            y_min=0,
+            x_max=640,
+            y_max=2160,
+            offset_x=0,
+            offset_y=0,
+        )
+
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
@@ -30,5 +69,6 @@ class Window(master):
         return False
 
     def __init__(self, session, **kwargs):
+        self.container = None
         super().__init__(session, **kwargs)
         self.root = package.Tk()

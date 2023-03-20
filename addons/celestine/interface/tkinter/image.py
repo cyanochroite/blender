@@ -1,17 +1,17 @@
+""""""
+
+from celestine.window.image import Image as image
+
 from . import package
-from .widget import Widget
+from .element import Element
 
 
-class Image(Widget):
-    def __init__(self, frame, file):
-        image = package.PhotoImage(file=file)
-        self.height = image.height()
-        self.image = image
-        self.width = image.width()
-        self.name = file
-        super().__init__(
-            package.Label(
-                frame,
-                image=image,
-            )
-        )
+class Image(image, Element):
+    """"""
+
+    def draw(self, collection, **star):
+        """"""
+        self.hold = package.PhotoImage(file=self.image)
+        self.item = package.Label
+        star.update(image=self.hold)
+        super().draw(collection, **star)

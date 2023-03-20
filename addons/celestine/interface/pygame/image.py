@@ -1,12 +1,16 @@
-from .widget import Widget
+""""""
 
 import pygame
 
+from celestine.window.image import Image as image
 
-class Image(Widget):
-    def __init__(self, window, image, rectangle):
-        super().__init__(
-            window,
-            pygame.image.load(image),
-            rectangle,
-        )
+from .element import Element
+
+
+class Image(image, Element):
+    """"""
+
+    def draw(self, frame, **star):
+        """"""
+        self.item = pygame.image.load(self.image)
+        super().draw(frame, **star)

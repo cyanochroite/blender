@@ -1,14 +1,14 @@
-from .package.data import mesh as make_mesh
-from .package import mesh as _mesh
+""""""
+
+from celestine.window.button import Button as button
 
 from .element import Element
+from .package import mesh as _mesh
+from .package.data import mesh as make_mesh
 
 
-class Button(Element):
-    def __init__(self, text, action, **kwargs):
-        self.text = text
-        super().__init__(**kwargs)
-        self.action = action
+class Button(button, Element):
+    """"""
 
     def draw(self, collection):
         width = len(self.text) / 4
@@ -20,14 +20,13 @@ class Button(Element):
 
         word = _mesh.text(collection, self.text, self.text)
         word.scale = (1 / width, 1 / height, 1)
-        word.location = (- width / 4, - height, 0.1)
+        word.location = (-width / 4, -height, 0.1)
 
         word.parent = mesh
 
         self.mesh = mesh
         super().draw(collection)
 
-    def poke(self, x_dot, y_dot):
-        """"""
-        if super().poke(x_dot, y_dot):
-            self.action()
+    def __init__(self, text, action, **kwargs):
+        self.text = text
+        super().__init__(action=action, **kwargs)

@@ -1,13 +1,13 @@
+""""""
 # <pep8-80 compliant>
-import bpy
-
 import math
 
+import bpy
 
 DEGREE_TO_RADIAN = math.pi / 180
 
 
-class _imaginary():
+class _imaginary:
     """Objects that only exist in spirit."""
 
     type_ = ""
@@ -15,17 +15,16 @@ class _imaginary():
 
     @classmethod
     def new(cls, name):
+        """"""
         if cls.type_:
             return cls.data.new(name, cls.type_)
         return cls.data.new(name)
 
     @classmethod
     def remove(cls, item):
+        """"""
         cls.data.remove(
-            item,
-            do_unlink=True,
-            do_id_user=True,
-            do_ui_user=True
+            item, do_unlink=True, do_id_user=True, do_ui_user=True
         )
 
 

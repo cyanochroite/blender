@@ -1,7 +1,7 @@
 """"""
 
 from celestine import load
-
+from celestine.load import function
 from celestine.session.parser import start_session
 
 INTERFACE = "interface"
@@ -45,8 +45,12 @@ def main(argv: list[str], exit_on_error: bool) -> None:
     """Run the main program."""
     session = start_session(argv, exit_on_error)
     with session.interface.window(session) as window:
-        function = load.function(session.application)
-        for (name, document) in function.items():
+        call = function.load(session.call)
+        for name, document in call.items():
+            window.task.set(name, document)
+
+        view = function.load(session.view)
+        for name, document in view.items():
             window.page(name, document)
 
 
@@ -54,14 +58,14 @@ def blender1():
     """Run the main program."""
     preferences = load.module(INTERFACE, BLENDER, PACKAGE, PREFERENCES)
     content = preferences.content()
-    argument = F"-i blender {content.argument}"
+    argument = f"-i blender {content.argument}"
     argv = argument.split()
     exit_on_error = False
 
     session = start_session(argv, exit_on_error)
     with session.interface.window(session) as window:
-        function = load.function(session.application)
-        for (name, document) in function.items():
+        function1 = load.function(session.application)
+        for name, document in function1.items():
             window.page(name, document)
 
 
@@ -69,15 +73,15 @@ def blender2(task="draw", **kwargs):
     """Run the main program."""
     preferences = load.module(INTERFACE, BLENDER, PACKAGE, PREFERENCES)
     content = preferences.content()
-    argument = F"-i blender {content.argument}"
+    argument = f"-i blender {content.argument}"
     argv = argument.split()
     exit_on_error = False
 
     session = start_session(argv, exit_on_error)
     window = session.interface.window(session)
 
-    function = load.function(session.application)
-    for (name, document) in function.items():
+    function1 = load.function(session.application)
+    for name, document in function1.items():
         window.page(name, document)
 
     call = getattr(window, task)
