@@ -61,12 +61,7 @@ def blender1():
     argument = f"-i blender {content.argument}"
     argv = argument.split()
     exit_on_error = False
-
-    session = start_session(argv, exit_on_error)
-    with session.interface.window(session) as window:
-        function1 = load.function(session.application)
-        for name, document in function1.items():
-            window.page(name, document)
+    main(argv, exit_on_error)
 
 
 def blender2(task="draw", **kwargs):
@@ -80,8 +75,12 @@ def blender2(task="draw", **kwargs):
     session = start_session(argv, exit_on_error)
     window = session.interface.window(session)
 
-    function1 = load.function(session.application)
-    for name, document in function1.items():
+    call = function.load(session.call)
+    for name, document in call.items():
+        window.task.set(name, document)
+
+    view = function.load(session.view)
+    for name, document in view.items():
         window.page(name, document)
 
     call = getattr(window, task)

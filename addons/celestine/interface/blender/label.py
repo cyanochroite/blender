@@ -12,7 +12,3 @@ class Label(label, Element):
     def draw(self, collection):
         self.mesh = _mesh.text(collection, self.text, self.text)
         super().draw(collection)
-
-    def __init__(self, text, **kwargs):
-        self.text = text
-        super().__init__(**kwargs)

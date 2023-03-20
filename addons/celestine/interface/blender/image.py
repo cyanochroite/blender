@@ -17,6 +17,3 @@ class Image(image, Element):
         self.mesh = mesh
         super().draw(collection)
 
-    def __init__(self, name, **kwargs):
-        self.name = name
-        super().__init__(**kwargs)

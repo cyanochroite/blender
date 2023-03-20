@@ -8,6 +8,16 @@ from .container import Drop
 from .mouse import Mouse
 from .package import data
 
+from .container import (
+    Container,
+    Drop,
+    Grid,
+    Span,
+)
+from .image import Image
+from .label import Label
+from .button import Button
+
 
 def context():
     for area in bpy.context.screen.areas:
@@ -25,18 +35,10 @@ class Window(master):
         item.poke(**kwargs)
 
     def page(self, name, document):
-        page = Drop(
-            self.session,
-            name,
-            self.turn,
-            x_min=0,
-            y_min=0,
-            x_max=20,
-            y_max=20,
-            offset_x=0,
-            offset_y=2.5,
-        )
+        page = self.container.drop(name)
         document(page)
+        page.spot(0, 0, self.width, self.height)
+
         self.item_set(name, page)
 
         self.frame = name
@@ -47,7 +49,7 @@ class Window(master):
             if page == name:
                 return item
 
-    def turn(self, page):
+    def turn(self, page, **star):
         """"""
         name = bpy.context.scene.celestine.page
         item = self.item_find(name)
@@ -61,6 +63,7 @@ class Window(master):
 
     def __enter__(self):
         super().__enter__()
+
         for camera in bpy.data.cameras:
             data.camera.remove(camera)
         for collection in bpy.data.collections:
@@ -118,5 +121,24 @@ class Window(master):
         super().__init__(session, **kwargs)
         self.frame = None
         self.width = 20
-        self.height = 10
+        self.height = 20
         self.mouse = None
+
+        self.container = Container(
+            self.session,
+            "window",
+            self,
+            None,
+            Button,
+            Image,
+            Label,
+            Drop,
+            Grid,
+            Span,
+            x_min=0,
+            y_min=0,
+            x_max=self.width,
+            y_max=self.height,
+            offset_x=0,
+            offset_y=2.5,
+        )
