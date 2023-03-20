@@ -1,14 +1,11 @@
 """"""
 
-from celestine.window.collection import Rectangle
+import math
+
 from celestine.window.container import Container as container
 from celestine.window.container import Drop as drop
 from celestine.window.container import Grid as grid
 from celestine.window.container import Span as span
-
-from .button import Button
-from .image import Image
-from .label import Label
 
 
 class Container(container):
@@ -81,12 +78,6 @@ class Grid(Container, grid):
     def get_tag(self, name):
         """"""
         return f"{name}_{self.index_x}-{self.index_y}"
-
-    def __init__(self, session, name, turn, width, **star):
-        self.index_x = 0
-        self.index_y = 0
-        self.width = width
-        super().__init__(session, name, turn, **star)
 
 
 class Span(Container, span):

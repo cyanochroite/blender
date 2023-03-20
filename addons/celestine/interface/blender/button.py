@@ -24,6 +24,6 @@ class Button(button, Element):
 
         word.parent = mesh
 
-        self.mesh = mesh
+        self.item = mesh
         super().draw(collection)
 
