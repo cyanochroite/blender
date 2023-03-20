@@ -4,6 +4,11 @@ from celestine import load
 from celestine.load import function
 from celestine.session.parser import start_session
 
+from celestine.typed import N
+from celestine.typed import B
+from celestine.typed import S
+from celestine.typed import L
+
 INTERFACE = "interface"
 BLENDER = "blender"
 PACKAGE = "package"
@@ -25,7 +30,7 @@ bl_info = {
 }
 
 
-def register() -> None:
+def register() -> N:
     """
     This is a function which only runs when enabling the add-on,
     this means the module can be loaded without activating the add-on.
@@ -33,7 +38,7 @@ def register() -> None:
     load.module(INTERFACE, BLENDER).register()
 
 
-def unregister() -> None:
+def unregister() -> N:
     """
     This is a function to unload anything setup by register,
     this is called when the add-on is disabled.
@@ -41,10 +46,10 @@ def unregister() -> None:
     load.module(INTERFACE, BLENDER).unregister()
 
 
-def main(argv: list[str], exit_on_error: bool) -> None:
+def main(argv: L[S], exit_on_error: B, **star) -> N:
     """Run the main program."""
     session = start_session(argv, exit_on_error)
-    with session.interface.window(session) as window:
+    with session.interface.window(session, **star) as window:
         call = function.load(session.call)
         for name, document in call.items():
             window.task.set(name, document)
@@ -61,27 +66,18 @@ def blender1():
     argument = f"-i blender {content.argument}"
     argv = argument.split()
     exit_on_error = False
-    main(argv, exit_on_error)
+    wrap = True
+
+    main(argv, exit_on_error, skip=False)
 
 
-def blender2(task="draw", **kwargs):
+def blender2(task="draw", **star):
     """Run the main program."""
     preferences = load.module(INTERFACE, BLENDER, PACKAGE, PREFERENCES)
     content = preferences.content()
     argument = f"-i blender {content.argument}"
     argv = argument.split()
     exit_on_error = False
+    wrap = False
 
-    session = start_session(argv, exit_on_error)
-    window = session.interface.window(session)
-
-    call = function.load(session.call)
-    for name, document in call.items():
-        window.task.set(name, document)
-
-    view = function.load(session.view)
-    for name, document in view.items():
-        window.page(name, document)
-
-    call = getattr(window, task)
-    call(**kwargs)
+    main(argv, exit_on_error, skip=True, **star)

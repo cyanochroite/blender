@@ -82,11 +82,11 @@ class Grid(Container, grid):
         """"""
         return f"{name}_{self.index_x}-{self.index_y}"
 
-    def __init__(self, session, name, turn, width, **kwargs):
+    def __init__(self, session, name, turn, width, **star):
         self.index_x = 0
         self.index_y = 0
         self.width = width
-        super().__init__(session, name, turn, **kwargs)
+        super().__init__(session, name, turn, **star)
 
 
 class Span(Container, span):

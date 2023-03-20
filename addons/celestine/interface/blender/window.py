@@ -29,10 +29,10 @@ def context():
 
 
 class Window(master):
-    def poke(self, **kwargs):
+    def poke(self, **star):
         page = bpy.context.scene.celestine.page
         item = self.item_get(page)
-        item.poke(**kwargs)
+        item.poke(**star)
 
     def page(self, name, document):
         page = self.container.drop(name)
@@ -62,6 +62,9 @@ class Window(master):
         bpy.context.scene.celestine.page = page
 
     def __enter__(self):
+        if self.call:
+            return self
+
         super().__enter__()
 
         for camera in bpy.data.cameras:
@@ -110,6 +113,11 @@ class Window(master):
         return collection
 
     def __exit__(self, exc_type, exc_value, traceback):
+        if self.call:
+            call = getattr(self, self.call)
+            call(**self.star)
+            return False
+
         for name, item in self.item.items():
             collection = self.collection(name)
             item.draw(collection)
@@ -117,8 +125,8 @@ class Window(master):
         super().__exit__(exc_type, exc_value, traceback)
         return False
 
-    def __init__(self, session, **kwargs):
-        super().__init__(session, **kwargs)
+    def __init__(self, session, *, call=None, **star):
+        super().__init__(session, **star)
         self.frame = None
         self.width = 20
         self.height = 20
@@ -142,3 +150,6 @@ class Window(master):
             offset_x=0,
             offset_y=2.5,
         )
+
+        self.call = call
+        self.star = star

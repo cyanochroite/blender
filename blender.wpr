@@ -12,7 +12,7 @@ proj.directory-list = [{'dirloc': loc('.'),
                         'watch_for_changes': True}]
 proj.file-type = 'shared'
 proj.launch-config = {loc('addons/celestine/__main__.py'): ('project',
-        ('-i blender',
+        ('-i pygame',
          '')),
                       loc('celestine/__main__.py'): ('project',
         ('-a test',
