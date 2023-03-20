@@ -11,8 +11,6 @@ from celestine.typed import L
 
 INTERFACE = "interface"
 BLENDER = "blender"
-PACKAGE = "package"
-PREFERENCES = "preferences"
 
 
 bl_info = {
@@ -30,25 +28,9 @@ bl_info = {
 }
 
 
-def register() -> N:
-    """
-    This is a function which only runs when enabling the add-on,
-    this means the module can be loaded without activating the add-on.
-    """
-    load.module(INTERFACE, BLENDER).register()
-
-
-def unregister() -> N:
-    """
-    This is a function to unload anything setup by register,
-    this is called when the add-on is disabled.
-    """
-    load.module(INTERFACE, BLENDER).unregister()
-
-
-def main(argv: L[S], exit_on_error: B, **star) -> N:
+def main(argument_list: L[S], exit_on_error: B, **star) -> N:
     """Run the main program."""
-    session = start_session(argv, exit_on_error)
+    session = start_session(argument_list, exit_on_error)
     with session.interface.window(session, **star) as window:
         call = function.load(session.call)
         for name, document in call.items():
@@ -59,25 +41,19 @@ def main(argv: L[S], exit_on_error: B, **star) -> N:
             window.page(name, document)
 
 
-def blender1():
-    """Run the main program."""
-    preferences = load.module(INTERFACE, BLENDER, PACKAGE, PREFERENCES)
-    content = preferences.content()
-    argument = f"-i blender {content.argument}"
-    argv = argument.split()
-    exit_on_error = False
-    wrap = True
-
-    main(argv, exit_on_error, skip=False)
+def register() -> N:
+    """
+    This is a function which only runs when enabling the add-on,
+    this means the module can be loaded without activating the add-on.
+    """
+    blender = load.module(INTERFACE, BLENDER)
+    blender.register()
 
 
-def blender2(task="draw", **star):
-    """Run the main program."""
-    preferences = load.module(INTERFACE, BLENDER, PACKAGE, PREFERENCES)
-    content = preferences.content()
-    argument = f"-i blender {content.argument}"
-    argv = argument.split()
-    exit_on_error = False
-    wrap = False
-
-    main(argv, exit_on_error, skip=True, **star)
+def unregister() -> N:
+    """
+    This is a function to unload anything setup by register,
+    this is called when the add-on is disabled.
+    """
+    blender = load.module(INTERFACE, BLENDER)
+    blender.unregister()

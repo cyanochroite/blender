@@ -158,6 +158,9 @@ class celestine_start(bpy.types.Operator):
         data.start()
         preferences.start()
         car.ready = True
+
+        main(None)
+
         return {"FINISHED"}
 
 

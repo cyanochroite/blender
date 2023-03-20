@@ -14,7 +14,4 @@ if WINGHOME not in sys.path:
 wingdbstub = __import__("wingdbstub")
 wingdbstub.Ensure()
 
-bpy.ops.celestine.start('INVOKE_DEFAULT')
-
-celestine = __import__("celestine")
-celestine.blender()
+bpy.ops.celestine.click("INVOKE_DEFAULT")
