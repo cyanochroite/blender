@@ -4,15 +4,17 @@ from celestine import load
 from celestine.window.window import Window as master
 
 from . import package
-from .button import Button
 from .container import (
     Container,
     Drop,
     Grid,
     Span,
 )
-from .image import Image
-from .label import Label
+from .element import (
+    Button,
+    Image,
+    Label,
+)
 
 
 class Window(master):
@@ -26,7 +28,7 @@ class Window(master):
         self.item_get(page)(self.frame)
         self.frame.spot(0, 0, self.width, self.height)
         self.book.fill((0, 0, 0))
-        self.frame.draw(self.book)
+        self.frame.draw(self.book, font=self.font)
         package.display.flip()
 
     def __enter__(self):
@@ -42,7 +44,7 @@ class Window(master):
             self.session,
             "window",
             self,
-            self.font,
+            None,
             Button,
             Image,
             Label,

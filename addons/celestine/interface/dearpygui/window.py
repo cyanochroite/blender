@@ -3,15 +3,17 @@
 from celestine.window.window import Window as master
 
 from . import package
-from .button import Button
 from .container import (
     Container,
     Drop,
     Grid,
     Span,
 )
-from .image import Image
-from .label import Label
+from .element import (
+    Button,
+    Image,
+    Label,
+)
 
 
 class Window(master):
@@ -24,6 +26,7 @@ class Window(master):
         with value.data:
             package.configure_item(value.tag, show=False)
             document(value)
+            value.spot(0, 0, 1920, 1080)
             value.draw(None)
 
     def turn(self, page, **star):
