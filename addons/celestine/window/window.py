@@ -21,12 +21,13 @@ class Window:
         document(container)
         container.spot(0, 0, self.width, self.height)
         self._view.set(name, container)
+        self.page = container
+        self.draw(make=True)
 
     def turn(self, page, **star):
         """"""
         self.page = self._view.get(page)
         self.turn_page = page
-        self.draw(make=True)
 
     def work(self, task, **star):
         """"""
@@ -72,4 +73,3 @@ class Window:
             offset_x=0,
             offset_y=0,
         )
-        super().__init__(**star)

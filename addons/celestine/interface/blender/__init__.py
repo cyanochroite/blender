@@ -1,4 +1,5 @@
 """"""
+
 import bpy  # pylint: disable=import-error
 
 import celestine
@@ -7,11 +8,17 @@ from celestine.typed import (
     N,
 )
 
+from .element import (
+    Button,
+    Image,
+    Label,
+)
+from .window import Window
+
 from .package import (
     data,
     preferences,
 )
-from .window import Window
 
 INTERFACE = "interface"
 BLENDER = "blender"
@@ -44,7 +51,13 @@ def image_format():
 
 def window(session, **star):
     """"""
-    return Window(session, **star)
+    element = {
+        "button": Button,
+        "image": Image,
+        "label": Label,
+    }
+    size = (20, 20)
+    return Window(session, element, size, **star)
 
 
 def main(call: B, **star) -> N:

@@ -25,10 +25,16 @@ def context():
 class Window(window):
     """"""
 
+    def data(self, container):
+        """"""
+        collection = data.collection.make(container.tag)
+        collection.hide()
+        container.data = collection
+
     def poke(self, **star):
         """"""
         page = bpy.context.scene.celestine.page
-        item = self.item_get(page)
+        item = self._view.get(page)
         item.poke(**star)
 
     def page(self, name, document):
@@ -104,46 +110,20 @@ class Window(window):
 
         return self
 
-    def collection(self, name):
-        """"""
-        collection = data.collection.make(name)
-        collection.hide()
-        return collection
-
     def __exit__(self, exc_type, exc_value, traceback):
         if self.call:
             call = getattr(self, self.call)
             call(**self.star)
             return False
 
-        for name, item in self.item.items():
-            collection = self.collection(name)
-            item.draw(collection)
         # yes super must go after
         super().__exit__(exc_type, exc_value, traceback)
         return False
 
-    def __init__(self, session, *, call=None, **star):
-        super().__init__(session, **star)
+    def __init__(self, session, element, size, *, call=None, **star):
+        super().__init__(session, element, size, **star)
         self.frame = None
-        self.width = 20
-        self.height = 20
         self.mouse = None
-
-        self.container = Container(
-            self.session,
-            "window",
-            self,
-            Button,
-            Image,
-            Label,
-            x_min=0,
-            y_min=0,
-            x_max=self.width,
-            y_max=self.height,
-            offset_x=0,
-            offset_y=2.5,
-        )
 
         self.call = call
         self.star = star

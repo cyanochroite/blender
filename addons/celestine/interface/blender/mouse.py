@@ -17,7 +17,9 @@ class Mouse(Abstract):
         """"""
         plane = _mesh.plane(self.text)
         self.item = make_mesh.bind(collection, self.text, plane)
-        super().draw(collection)
+
+        self.render()
+
         self.item.location = (0, 0, -1)
         self.item.rotation_euler = (0, 0, radians(45))
         self.item.scale = (0.5, 0.5, 0.5)
