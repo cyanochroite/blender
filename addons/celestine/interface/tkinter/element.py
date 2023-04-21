@@ -1,23 +1,24 @@
 """"""
 
-
-from celestine.window.element import Abstract as abstract
-from celestine.window.element import Button as button
-from celestine.window.element import Image as image
-from celestine.window.element import Label as label
+from celestine import load
+from celestine.window.element import Abstract as Abstract_
+from celestine.window.element import Button as Button_
+from celestine.window.element import Image as Image_
+from celestine.window.element import Label as Label_
 
 from . import package
 
 
-class Abstract(abstract):
+class Abstract(Abstract_):
     """"""
 
-    def render(self, collection, item, **star):
+    def render(self, view, item, **star):
         """"""
-        pack = item(collection, **star)
+        self.item = item(view, **star)
+
         width = self.x_max - self.x_min
         height = self.y_max - self.y_min
-        pack.place(
+        self.item.place(
             x=self.x_min,
             y=self.y_min,
             width=width,
@@ -25,41 +26,62 @@ class Abstract(abstract):
         )
 
 
-class Button(Abstract, button):
+class Button(Abstract, Button_):
     """"""
 
     def callback(self):
         """"""
         self.call(self.action, **self.argument)
 
-    def draw(self, collection, **star):
+    def draw(self, view, *, make, **star):
         """"""
+
+        if not make:
+            return
+
         item = package.Button
         star.update(command=self.callback)
         star.update(text=f"button:{self.text}")
-        self.render(collection, item, **star)
+        self.render(view, item, **star)
 
 
-class Image(Abstract, image):
+class Image(Abstract, Image_):
     """"""
 
-    def draw(self, collection, **star):
+    def draw(self, view, *, make, **star):
         """"""
-        self.item = package.PhotoImage(file=self.image)
+        file = self.image or load.asset("null.png")
+
+        if not make:
+            return
 
         item = package.Label
-        star.update(image=self.item)
-        self.render(collection, item, **star)
+        self.cache = package.PhotoImage(file=file)
+        star.update(image=self.cache)
+        self.render(view, item, **star)
+
+    def update(self, *, image, **star):
+        """"""
+        if not super().update(image=image, **star):
+            return False
+
+        self.cache = package.PhotoImage(file=self.image)
+        self.item.configure(image=self.cache)
+        self.item.image = self.cache
+        return True
 
 
-class Label(Abstract, label):
+class Label(Abstract, Label_):
     """"""
 
-    def draw(self, collection, **star):
+    def draw(self, view, *, make, **star):
         """"""
+        if not make:
+            return
+
         item = package.Label
         star.update(fg="blue")
         star.update(height=4)
         star.update(text=f"label:{self.text}")
         star.update(width=100)
-        self.render(collection, item, **star)
+        self.render(view, item, **star)

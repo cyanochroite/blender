@@ -1,5 +1,6 @@
 """"""
 
+from celestine import load
 from celestine.window.element import Abstract as abstract
 from celestine.window.element import Button as button
 from celestine.window.element import Image as image
@@ -20,27 +21,29 @@ class Abstract(abstract):
 class Button(Abstract, button):
     """"""
 
-    def draw(self, collection, *, font, **star):
+    def draw(self, view, *, font, **star):
         """"""
         text = f"Button{self.text}"
 
         item = font.render(text, True, (255, 255, 255))
-        self.render(collection, item, **star)
+        self.render(view, item, **star)
 
 
 class Image(Abstract, image):
     """"""
 
-    def draw(self, collection, **star):
+    def draw(self, view, **star):
         """"""
-        item = package.image.load(self.image)
-        self.render(collection, item, **star)
+        path = self.image or load.asset("null.png")
+        item = package.image.load(path)
+        item = item.convert_alpha()
+        self.render(view, item, **star)
 
 
 class Label(Abstract, label):
     """"""
 
-    def draw(self, collection, *, font, **star):
+    def draw(self, view, *, font, **star):
         """"""
         item = font.render(self.text, True, (255, 255, 255))
-        self.render(collection, item, **star)
+        self.render(view, item, **star)

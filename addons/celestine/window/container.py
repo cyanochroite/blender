@@ -10,14 +10,15 @@ class Container(Rectangle):
 
     def call(self, tag, text, action, **star):
         """"""
-        item = self._button(
-            tag,
-            text,
-            call=self.window.work,
-            action=action,
-            argument=star,
+        self.save(
+            self._button(
+                tag,
+                text,
+                call=self.window.work,
+                action=action,
+                argument=star,
+            )
         )
-        return self.save(item)
 
     def drop(self, tag, **star):
         """"""
@@ -27,9 +28,7 @@ class Container(Rectangle):
                 self.session,
                 tag,
                 self.window,
-                self._button,
-                self._image,
-                self._label,
+                self.element,
                 **star,
             ),
         )
@@ -42,9 +41,7 @@ class Container(Rectangle):
                 self.session,
                 tag,
                 self.window,
-                self._button,
-                self._image,
-                self._label,
+                self.element,
                 width=width,
                 **star,
             ),
@@ -58,27 +55,33 @@ class Container(Rectangle):
                 self.session,
                 tag,
                 self.window,
-                self._button,
-                self._image,
-                self._label,
+                self.element,
                 **star,
             ),
         )
 
     def image(self, tag, image):
         """"""
-        item = self._image(tag, image)
-        return self.save(item)
+        self.save(
+            self._image(
+                tag,
+                image,
+            )
+        )
 
     def label(self, tag, text):
         """"""
-        item = self._label(tag, text)
-        return self.save(item)
+        self.save(
+            self._label(
+                tag,
+                text,
+            )
+        )
 
-    def draw(self, collection, **star):
+    def draw(self, view, **star):
         """"""
         for _, item in self.item.items():
-            item.draw(collection, **star)
+            item.draw(view, **star)
 
     def poke(self, x_dot, y_dot, **star):
         """"""
@@ -108,20 +111,20 @@ class Container(Rectangle):
         session,
         name,
         window,
-        _button,
-        _image,
-        _label,
+        element,
         **star,
     ):
         self.session = session
+
         self.tag = name
         self.window = window
 
         self.data = None
         #
-        self._button = _button
-        self._image = _image
-        self._label = _label
+        self.element = element
+        self._button = element["button"]
+        self._image = element["image"]
+        self._label = element["label"]
 
         self.turn = window.turn
         super().__init__(**star)
@@ -184,9 +187,7 @@ class Grid(Container):
         session,
         name,
         window,
-        _button,
-        _image,
-        _label,
+        element,
         *,
         width,
         **star,
@@ -196,9 +197,7 @@ class Grid(Container):
             session,
             name,
             window,
-            _button,
-            _image,
-            _label,
+            element,
             **star,
         )
 
