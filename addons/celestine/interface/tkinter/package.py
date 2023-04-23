@@ -13,6 +13,3 @@ Label = tkinter.Label
 PhotoImage = tkinter.PhotoImage
 Tk = tkinter.Tk
 filedialog = tkinter.filedialog
-
-
-LEFT = tkinter.LEFT

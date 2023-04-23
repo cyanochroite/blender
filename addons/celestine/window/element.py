@@ -1,11 +1,20 @@
 """"""
 
-
+from celestine.typed import (
+    A,
+    B,
+    N,
+)
 from celestine.window.collection import Box
 
 
 class Abstract(Box):
     """"""
+
+    def draw(self, view: A, *, draw: B, **star) -> N:
+        """"""
+        if not draw:
+            return
 
     def poke(self, x_dot, y_dot):
         """"""

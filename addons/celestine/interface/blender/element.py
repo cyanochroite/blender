@@ -1,5 +1,12 @@
 """"""
 
+from celestine import load
+from celestine.typed import (
+    CA,
+    TA,
+    B,
+    N,
+)
 from celestine.window.element import Abstract as abstract
 from celestine.window.element import Button as button
 from celestine.window.element import Image as image
@@ -11,6 +18,8 @@ from .package import (
 )
 from .package import mesh as _mesh
 from .package.data import mesh as make_mesh
+
+FN: TA = CA[[N], N]
 
 
 class Abstract(abstract):
@@ -33,9 +42,9 @@ class Abstract(abstract):
 class Button(Abstract, button):
     """"""
 
-    def draw(self, view, *, make, **star):
+    def draw(self, view: FN, *, draw: B, **star) -> N:
         """"""
-        if not make:
+        if not draw:
             return
 
         width = len(self.text) / 4
@@ -58,26 +67,38 @@ class Button(Abstract, button):
 class Image(Abstract, image):
     """"""
 
-    def draw(self, view, *, make, **star):
+    def draw(self, view: FN, *, draw: B, **star) -> N:
         """"""
-        if not make:
+        if not draw:
             return
 
-        _image = data.image.load(self.image)
+        path = self.image or load.asset("null.png")
+        _image = data.image.load(path)
         material = UV.material("pretty", _image)
         plane = _mesh.image(_image)
-        mesh = make_mesh.bind(view, self.image, plane)
+        mesh = make_mesh.bind(view, path, plane)
         mesh.body.data.materials.append(material)
         self.item = mesh
         self.render()
+
+    def update(self, *, image, **star):
+        """"""
+        if not super().update(image=image, **star):
+            return False
+
+        _image = data.image.load(self.image)
+        material = UV.material("pretty", _image)
+        self.item.body.data.materials.clear()
+        self.item.body.data.materials.append(material)
+        return True
 
 
 class Label(Abstract, label):
     """"""
 
-    def draw(self, view, *, make, **star):
+    def draw(self, view: FN, *, draw: B, **star) -> N:
         """"""
-        if not make:
+        if not draw:
             return
 
         self.item = _mesh.text(view, self.text, self.text)

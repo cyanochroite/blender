@@ -1,5 +1,6 @@
 """Define types here."""
 
+import typing
 from types import ModuleType as MT  # noqa: F401 pylint: disable=W0611
 
 # Generator[YieldType, SendType, ReturnType]
@@ -20,3 +21,11 @@ N: TA = None
 O: TA = object
 S: TA = str
 Z: TA = int
+
+
+class Magic(typing.Protocol):
+    """"""
+
+    def draw(self, view: A, *, draw: typing.Optional[B]) -> N:
+        """"""
+        raise NotImplementedError

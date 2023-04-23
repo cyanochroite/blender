@@ -1,10 +1,9 @@
 """Central place for loading and importing external files."""
 
-from typing import TypeAlias as TA
-
 from celestine.typed import (
     CA,
     MT,
+    TA,
     D,
     L,
     N,

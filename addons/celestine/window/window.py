@@ -22,7 +22,7 @@ class Window:
         container.spot(0, 0, self.width, self.height)
         self._view.set(name, container)
         self.page = container
-        self.draw(make=True)
+        self.draw(draw=True)
 
     def turn(self, page, **star):
         """"""
@@ -33,7 +33,7 @@ class Window:
         """"""
         call = self.task.get(task)
         call(**star)
-        self.draw(make=False)
+        self.draw(draw=False)
 
     def __enter__(self):
         return self

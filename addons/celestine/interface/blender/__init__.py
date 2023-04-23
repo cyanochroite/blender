@@ -13,12 +13,11 @@ from .element import (
     Image,
     Label,
 )
-from .window import Window
-
 from .package import (
     data,
     preferences,
 )
+from .window import Window
 
 INTERFACE = "interface"
 BLENDER = "blender"
