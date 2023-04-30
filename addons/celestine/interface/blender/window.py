@@ -11,6 +11,8 @@ from .element import (
 from .mouse import Mouse
 from .package import data
 
+import math
+
 
 def context():
     """"""
@@ -97,12 +99,24 @@ class Window(window):
         camera.type = "ORTHO"
 
         light = data.light.sun.make(collection, "light")
-        light.location = (00.0, 00.0, -60.0)
+        light.location = (0, 0, -60)
         light.rotation = (180, 0, 0)
 
-        self.mouse = Mouse()
-        collection = data.collection.scene()
-        self.mouse.draw(collection)
+        mesh = data.mesh.make(collection, "mouse")
+        mesh.location = (0, 0, -1)
+        mesh.rotation_euler = (0, 0, math.radians(45))
+        mesh.scale = (0.5, 0.5, 0.5)
+
+        # self.mouse = Mouse()
+        # collection = data.collection.scene()
+        # self.mouse.draw(collection)
+
+        @classmethod
+        def bind(cls, collection, name, soul):
+            """Give an existing soul a body."""
+            body = bpy.data.objects.new(name, soul)
+            collection.objects.link(body)
+            return cls(body, soul)
 
         override = context()
         bpy.ops.view3d.toggle_shading(override, type="RENDERED")

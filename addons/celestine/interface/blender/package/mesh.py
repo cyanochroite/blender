@@ -6,7 +6,7 @@ import mathutils
 from . import data
 
 
-def mesh(name, verts, edges, faces, layers):
+def make(mesh, verts, edges, faces, layers):
     """"""
     bmesh = bmesh_.new(use_operators=False)
 
@@ -26,13 +26,11 @@ def mesh(name, verts, edges, faces, layers):
     for face, loop, one, two in layers:
         bmesh.faces[face].loops[loop][layer].uv = (one, two)
 
-    mesh_ = data.mesh.new(name)
-    bmesh.to_mesh(mesh_)
+    bmesh.to_mesh(mesh)
     bmesh.free()
-    return mesh_
 
 
-def quadrilateral(name, verts, layers):
+def quadrilateral(mesh, verts, layers):
     """"""
     edges = [
         (0, 1),
@@ -45,7 +43,7 @@ def quadrilateral(name, verts, layers):
         (0, 1, 2, 3),
     ]
 
-    return mesh(name, verts, edges, faces, layers)
+    make(mesh, verts, edges, faces, layers)
 
 
 class Planar:
@@ -67,7 +65,7 @@ class Planar:
 class Plane(Planar):
     """"""
 
-    def make(self, name, normal=(+0, +0, +1), uv_x=0, uv_y=0):
+    def make(self, mesh, normal=(+0, +0, +1), uv_x=0, uv_y=0):
         """"""
         normal = mathutils.Vector(normal)
 
@@ -85,13 +83,15 @@ class Plane(Planar):
             (0, 3, 1 + uv_x, 0 - uv_y),
         ]
 
-        return quadrilateral(name, verts, layers)
+        quadrilateral(mesh, verts, layers)
 
 
 def plane(name, uv_x=0, uv_y=0):
     """"""
     box = Plane()
-    return box.make(name, (+0, +0, +1), uv_x, uv_y)
+    mesh = data.mesh.new(name)
+    box.make(mesh, (+0, +0, +1), uv_x, uv_y)
+    return mesh
 
 
 def text(collection, name, text):

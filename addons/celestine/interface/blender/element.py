@@ -2,15 +2,16 @@
 
 from celestine import load
 from celestine.typed import (
-    CA,
-    TA,
     B,
+    S,
     N,
+    T,
+    F
 )
-from celestine.window.element import Abstract as abstract
-from celestine.window.element import Button as button
-from celestine.window.element import Image as image
-from celestine.window.element import Label as label
+from celestine.window.element import Abstract as Abstract_
+from celestine.window.element import Button as Button_
+from celestine.window.element import Image as Image_
+from celestine.window.element import Label as Label_
 
 from .package import (
     UV,
@@ -18,20 +19,21 @@ from .package import (
 )
 from .package import mesh as _mesh
 from .package.data import mesh as make_mesh
+from .package.data.collection import _collection
 
-FN: TA = CA[[N], N]
+COLLECTION = _collection
 
 
-class Abstract(abstract):
+class Abstract(Abstract_):
     """"""
 
-    def center_float(self):
+    def center_float(self) -> T[F, F]:
         """"""
         x_dot = (self.x_min + self.x_max) / 2
         y_dot = (self.y_min + self.y_max) / 2
         return (x_dot, y_dot)
 
-    def render(self):
+    def render(self) -> N:
         """"""
         (x_dot, y_dot) = self.center_float()
         # child sets mesh and then calls this
@@ -39,10 +41,10 @@ class Abstract(abstract):
         self.item.rotation = (180, 0, 0)
 
 
-class Button(Abstract, button):
+class Button(Abstract, Button_):
     """"""
 
-    def draw(self, view: FN, *, draw: B, **star) -> N:
+    def draw(self, view: COLLECTION, *, draw: B, **star) -> N:
         """"""
         if not draw:
             return
@@ -64,10 +66,10 @@ class Button(Abstract, button):
         self.render()
 
 
-class Image(Abstract, image):
+class Image(Abstract, Image_):
     """"""
 
-    def draw(self, view: FN, *, draw: B, **star) -> N:
+    def draw(self, view: COLLECTION, *, draw: B, **star) -> N:
         """"""
         if not draw:
             return
@@ -81,7 +83,7 @@ class Image(Abstract, image):
         self.item = mesh
         self.render()
 
-    def update(self, *, image, **star):
+    def update(self, *, image: S, **star) -> B:
         """"""
         if not super().update(image=image, **star):
             return False
@@ -93,10 +95,10 @@ class Image(Abstract, image):
         return True
 
 
-class Label(Abstract, label):
+class Label(Abstract, Label_):
     """"""
 
-    def draw(self, view: FN, *, draw: B, **star) -> N:
+    def draw(self, view: COLLECTION, *, draw: B, **star) -> N:
         """"""
         if not draw:
             return

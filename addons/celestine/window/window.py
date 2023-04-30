@@ -1,5 +1,7 @@
 """"""
 
+from celestine.typed import N
+
 from .collection import Collection2
 from .container import Container
 
@@ -7,10 +9,13 @@ from .container import Container
 class Window:
     """"""
 
+    page: Container
+
     def data(self, container):
         """"""
+        return NotImplementedError(container)
 
-    def draw(self, **star):
+    def draw(self, **star) -> N:
         """"""
         self.page.draw(self.page.data, **star)
 
