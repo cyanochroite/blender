@@ -6,7 +6,7 @@ import mathutils
 from . import data
 
 
-def make(mesh, verts, edges, faces, layers):
+def mesh(name, verts, edges, faces, layers):
     """"""
     bmesh = bmesh_.new(use_operators=False)
 
@@ -26,11 +26,13 @@ def make(mesh, verts, edges, faces, layers):
     for face, loop, one, two in layers:
         bmesh.faces[face].loops[loop][layer].uv = (one, two)
 
-    bmesh.to_mesh(mesh)
+    mesh_ = data.mesh.new(name)
+    bmesh.to_mesh(mesh_)
     bmesh.free()
+    return mesh_
 
 
-def quadrilateral(mesh, verts, layers):
+def quadrilateral(name, verts, layers):
     """"""
     edges = [
         (0, 1),
@@ -43,7 +45,7 @@ def quadrilateral(mesh, verts, layers):
         (0, 1, 2, 3),
     ]
 
-    make(mesh, verts, edges, faces, layers)
+    return mesh(name, verts, edges, faces, layers)
 
 
 class Planar:
@@ -65,7 +67,7 @@ class Planar:
 class Plane(Planar):
     """"""
 
-    def make(self, mesh, normal=(+0, +0, +1), uv_x=0, uv_y=0):
+    def make(self, name, normal=(+0, +0, +1), uv_x=0, uv_y=0):
         """"""
         normal = mathutils.Vector(normal)
 
@@ -83,40 +85,13 @@ class Plane(Planar):
             (0, 3, 1 + uv_x, 0 - uv_y),
         ]
 
-        quadrilateral(mesh, verts, layers)
-
-
-class Diamond(Planar):
-    """"""
-
-    def make(self, mesh):
-        """"""
-        normal = mathutils.Vector((+0, +0, +1))
-
-        verts = [
-            self.vertex_new((+1, +0), normal),
-            self.vertex_new((-0, +1), normal),
-            self.vertex_new((-1, -0), normal),
-            self.vertex_new((+0, -1), normal),
-        ]
-
-        layers = [
-            (0, 0, 1, 1),
-            (0, 1, 0, 1),
-            (0, 2, 0, 0),
-            (0, 3, 1, 0),
-        ]
-
-        mesh = data.mesh.make(collection, "mouse")
-        quadrilateral(mesh, verts, layers)
+        return quadrilateral(name, verts, layers)
 
 
 def plane(name, uv_x=0, uv_y=0):
     """"""
     box = Plane()
-    mesh = data.mesh.new(name)
-    box.make(mesh, (+0, +0, +1), uv_x, uv_y)
-    return mesh
+    return box.make(name, (+0, +0, +1), uv_x, uv_y)
 
 
 def text(collection, name, text):
